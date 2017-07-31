@@ -26,7 +26,7 @@ const menuItems = [
 ];
 
 const Logo = g.div({
-  backgroundImage: `url("http://placekitten.com/200/50")`,
+  backgroundImage: `url("//placekitten.com/200/50")`,
   width: "200px",
   height: "50px",
 }, space)

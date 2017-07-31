@@ -24,7 +24,7 @@ const Panel = g.div({
 }, color)
 
 const ImagePanel = g(Panel)({
-  backgroundImage: `url("http://placekitten.com/1024/768")`,
+  backgroundImage: `url("//placekitten.com/1024/768")`,
   backgroundSize: "cover",
   color: "#fff",
 }, space)
