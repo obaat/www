@@ -39,7 +39,7 @@ const IndexPage = () => (
       <Banner fontSize={8}>ONE BRICK AT A TIME</Banner>
       <Banner fontSize={5}>Skills Exchange and Building Schools in Uganda</Banner>
       <Mission my={4}>
-        To ensure the long term viability of One Brick at a Time, as a social enterprise, to continue delivering locally identified construction initiatives that positively impact upon the education, health and well-being of the communities of the Rwenzori Region and beyond.
+        We believe that by building and refurbishing, we are building brighter future. From schools to medical facilities, One Brick at a Time is dedicated to alleviating poverty in marginalised areas in Uganda. We partner up with community-based NGOs to develop network of mutual support and we recruit volunteers to maintain these projects. This is allowing for social investment in the regional economy in the Rwenzori Region and beyond. We provide project and programme management, well-trained local builders and all the equipment which result in strong, sustainable and important facilities helping to break the cycle of poverty. 
       </Mission>
       <Button isColor="info">Learn More</Button>
     </Panel>
