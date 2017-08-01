@@ -31,8 +31,8 @@ const Button = g.button(
   space
 )
 
-export default ({ children, type = 'normal', icon }) =>
-  <Button px={2} py={1} color={`${type}.1`} bg={`${type}.0`}>
+export default ({ children, context = 'normal', icon, ...passProps }) =>
+  <Button px={2} py={1} color={`${context}.1`} bg={`${context}.0`} { ...passProps }>
     {icon && <Icon className={`fa fa-${icon}`} aria-hidden="true" />}
     {children}
   </Button>

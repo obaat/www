@@ -8,8 +8,9 @@ import { ThemeProvider } from 'glamorous'
 
 const theme = {
   colors: {
-    blue: ['#0074d9', 'whit'],
+    blue: ['#0074d9', 'white'],
     normal: ['tomato', 'white'],
+    info: ['#39cccc', 'white'],
     danger: ['#ff4136', 'white'],
   },
 }
@@ -41,6 +42,8 @@ const TemplateWrapper = ({ children }) =>
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"
         />
+
+        <link rel="stylesheet" href="https://unpkg.com/tachyons-box-sizing@3.1.7/css/tachyons-box-sizing.min.css" />
       </Helmet>
       <Header />
       {children()}

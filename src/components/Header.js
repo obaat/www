@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import g from 'glamorous'
 import Button from './Button'
+import StripeCheckout from 'react-stripe-checkout';
 import { space, width, fontSize } from 'styled-system'
 import { animation } from 'polished'
 import Link from 'gatsby-link'
@@ -57,11 +58,23 @@ const MenuItem = g(Link)(
   space
 )
 
+const Small = g.span({ paddingRight: "15px", fontSize: ".8em", textDecoration: "underline dashed"})
+
 const Donate = g(props =>
   <div className={props.className}>
-    <Button type="danger" icon="heart">
-      DONATE
-    </Button>
+    <StripeCheckout
+      token={props.onToken}
+      name="One Brick"
+      description="Donate to One Brick at a Time"
+      amount={ 1500 }
+      panelLabel="Donate Now"
+      currency="GBP"
+      stripeKey="pk_test_mo8Ebe00P1A7xtRsUYBR0Mxq"
+    >
+      <Button type="submit" context="danger" icon="heart">
+        DONATE
+      </Button>
+    </StripeCheckout>
   </div>
 )({
   flex: 1,
@@ -123,6 +136,9 @@ export default class Header extends Component {
     this.setState({ scrolled: scrollTop > 100 })
   }
 
+  onToken = () => {
+  }
+
   render() {
     return (
       <Container>
@@ -134,7 +150,7 @@ export default class Header extends Component {
                 {title}
               </MenuItem>
             )}
-            <Donate />
+            <Donate onToken={ this.onToken }/>
           </HeaderContainer>
         </Fixed>
       </Container>

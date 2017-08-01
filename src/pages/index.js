@@ -68,9 +68,11 @@ const IndexPage = () =>
           important facilities helping to break the cycle of poverty.
         </p>
       </Mission>
-      <Button isColor="info">Learn More</Button>
+      <Button type="info">Learn More</Button>
     </Panel>
-    <Panel bg="blue" />
+    <Panel bg="blue.0">
+      Our Impact since 2005
+    </Panel>
   </div>
 
 export default IndexPage
