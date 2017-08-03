@@ -4,17 +4,18 @@
   "version": "1.0.0",
   "author": "Simon Elliott <simon@papercreatures.com>",
   "dependencies": {
+    "bulma": "^0.5.0",
     "classnames": "^2.2.5",
-    "gatsby": "^1.6.0",
-    "gatsby-link": "^1.5.2",
+    "gatsby": "^1.6.5",
+    "gatsby-link": "^1.6.4",
     "gatsby-plugin-react-helmet": "^1.0.1",
-    "glamor": "^2.20.37",
-    "glamorous": "^3.25.0",
+    "glamor": "^2.20.38",
+    "glamorous": "^4.0.0",
     "polished": "^1.3.0",
     "react-lorem-component": "^0.12.2",
     "react-modal": "^2.2.2",
     "react-stripe-checkout": "^2.6.3",
-    "styled-system": "^1.0.0-11"
+    "styled-system": "^1.0.0-12"
   },
   "keywords": [
     "gatsby"
@@ -28,6 +29,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
     "prettier": "^1.5.2"
   }
 }

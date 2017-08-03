@@ -1,29 +1,12 @@
 import React, { Component } from 'react'
 import g from 'glamorous'
-import Button from './Button'
-import StripeCheckout from 'react-stripe-checkout';
+import Donate from './Donate'
 import { space, width, fontSize } from 'styled-system'
 import { animation } from 'polished'
 import Link from 'gatsby-link'
 import { css } from 'glamor'
 import _ReactModal from 'react-modal';
-
-const ReactModal = g(_ReactModal)({
-  backgroundColor: "red",
-});
-
-const backdropStyle = {
-  backgroundColor: "rgba(0,0,0,0.5)",
-};
-
-const modalStyle = {
-  margin: "0 auto",
-  maxWidth: "400px",
-};
-
-const ModalContainer = g.div({
-  backgroundColor: '#fff',
-});
+import Modal from './Modal';
 
 const menuHeightDocked = '100px'
 const menuHeightScrolled = '50px'
@@ -76,29 +59,6 @@ const MenuItem = g(Link)(
   space
 )
 
-const Small = g.span({ paddingRight: "15px", fontSize: ".8em", textDecoration: "underline dashed"})
-
-const Donate = g(props =>
-  <div className={props.className}>
-    <StripeCheckout
-      token={props.onToken}
-      name="One Brick"
-      description="Donate to One Brick at a Time"
-      amount={ 1500 }
-      panelLabel="Donate Now"
-      currency="GBP"
-      stripeKey="pk_test_mo8Ebe00P1A7xtRsUYBR0Mxq"
-    >
-      <Button type="submit" context="danger" icon="heart">
-        DONATE
-      </Button>
-    </StripeCheckout>
-  </div>
-)({
-  flex: 1,
-  fontWeight: 'bold',
-  textAlign: 'right',
-})
 
 const Container = g.div({})
 
@@ -136,10 +96,29 @@ const HeaderContainer = g.div(
   space
 )
 
+const Wait = (props) => (
+  <div>
+    Wait
+  </div>
+);
+
+const Success = (props) => (
+  <div>
+    Success
+  </div>
+);
+
+const Failure = (props) => (
+  <div>
+    Failure
+  </div>
+);
+
 export default class Header extends Component {
   state = {
     scrolled: false,
-    showModal: true,
+    showModal: null,
+    componentProps: {},
   }
 
   componentDidMount() {
@@ -155,45 +134,27 @@ export default class Header extends Component {
     this.setState({ scrolled: scrollTop > 100 })
   }
 
-  onToken = (token) => {
-    fetch("https://zgpvitxqrb.execute-api.eu-west-1.amazonaws.com/dev/donation/charge", {
-      method: 'POST',
-      body: JSON.stringify({
-        token,
-        charge: {
-          amount: 1500,
-          currency: "GBP",
-        },
-      }),
-    }).then(res => {
-      res.json().then(data => {
-        console.log(data);
-      });
-    });
-  }
-
-  renderModal() {
+  renderModal(content, canClose=true) {
     return (
-      <ReactModal
-        isOpen={this.state.showModal}
-        onRequestClose={ () => this.setState({showModal: false}) }
-        style={{
-          overlay: backdropStyle,
-          content: modalStyle,
-        }}
-      >
-        <ModalContainer>
-          <h4>Text in a modal</h4>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-        </ModalContainer>
-      </ReactModal>
+      <Modal canClose={canClose} isOpen onRequestClose={ () => this.setState({showModal: null}) }>
+        { content }
+      </Modal>
     );
   }
 
+  renderWait = () => this.renderModal(<Wait />, false)
+  renderComplete = (props) => this.renderModal(<Success { ...props } />)
+  renderFailure = (props) => this.renderModal(<Failure { ...props } />)
+
+  showModal = name => props => this.setState({ showModal: name, componentProps: props })
+
   render() {
+    const {showModal} = this.state;
     return (
       <Container>
-        { this.renderModal() }
+        { showModal === 'complete' && this.renderComplete() }
+        { showModal === 'failure' && this.renderFailure() }
+        { showModal === 'wait' && this.renderWait() }
         <Fixed>
           <HeaderContainer px={3} scrolled={this.state.scrolled}>
             <Logo mr={3} />
@@ -202,7 +163,12 @@ export default class Header extends Component {
                 {title}
               </MenuItem>
             )}
-            <Donate onToken={ this.onToken }/>
+            <Donate
+              amount={ 1500 }
+              onRequestCharge={ this.showModal('wait') }
+              onComplete={ this.showModal('complete') }
+              onFailure={ this.showModal('failure') }
+            />
           </HeaderContainer>
         </Fixed>
       </Container>
