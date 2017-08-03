@@ -22,7 +22,6 @@ const Panel = g.div(
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    flex: '0 0 100%',
     width: '100VW',
     minHeight: '100VH',
   },
@@ -68,7 +67,7 @@ const IndexPage = () =>
           important facilities helping to break the cycle of poverty.
         </p>
       </Mission>
-      <Button type="info">Learn More</Button>
+      <Button context="info">Learn More</Button>
     </Panel>
     <Panel bg="blue.0">
       Our Impact since 2005

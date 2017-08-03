@@ -6,6 +6,24 @@ import { space, width, fontSize } from 'styled-system'
 import { animation } from 'polished'
 import Link from 'gatsby-link'
 import { css } from 'glamor'
+import _ReactModal from 'react-modal';
+
+const ReactModal = g(_ReactModal)({
+  backgroundColor: "red",
+});
+
+const backdropStyle = {
+  backgroundColor: "rgba(0,0,0,0.5)",
+};
+
+const modalStyle = {
+  margin: "0 auto",
+  maxWidth: "400px",
+};
+
+const ModalContainer = g.div({
+  backgroundColor: '#fff',
+});
 
 const menuHeightDocked = '100px'
 const menuHeightScrolled = '50px'
@@ -121,6 +139,7 @@ const HeaderContainer = g.div(
 export default class Header extends Component {
   state = {
     scrolled: false,
+    showModal: true,
   }
 
   componentDidMount() {
@@ -136,12 +155,45 @@ export default class Header extends Component {
     this.setState({ scrolled: scrollTop > 100 })
   }
 
-  onToken = () => {
+  onToken = (token) => {
+    fetch("https://zgpvitxqrb.execute-api.eu-west-1.amazonaws.com/dev/donation/charge", {
+      method: 'POST',
+      body: JSON.stringify({
+        token,
+        charge: {
+          amount: 1500,
+          currency: "GBP",
+        },
+      }),
+    }).then(res => {
+      res.json().then(data => {
+        console.log(data);
+      });
+    });
+  }
+
+  renderModal() {
+    return (
+      <ReactModal
+        isOpen={this.state.showModal}
+        onRequestClose={ () => this.setState({showModal: false}) }
+        style={{
+          overlay: backdropStyle,
+          content: modalStyle,
+        }}
+      >
+        <ModalContainer>
+          <h4>Text in a modal</h4>
+          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+        </ModalContainer>
+      </ReactModal>
+    );
   }
 
   render() {
     return (
       <Container>
+        { this.renderModal() }
         <Fixed>
           <HeaderContainer px={3} scrolled={this.state.scrolled}>
             <Logo mr={3} />
