@@ -11,6 +11,7 @@
     "gatsby-plugin-react-helmet": "^1.0.1",
     "glamor": "^2.20.38",
     "glamorous": "^4.0.0",
+    "grid-styled": "^2.0.0-10",
     "polished": "^1.3.0",
     "react-lorem-component": "^0.12.2",
     "react-modal": "^2.2.2",

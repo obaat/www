@@ -7,6 +7,7 @@ export default {
     normal: ['tomato', white],
     info: ['#39cccc', white],
     danger: ['#ff4136', white],
+    success: ['#23d160', white],
   },
 };
 

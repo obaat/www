@@ -7,6 +7,8 @@ import Link from 'gatsby-link'
 import { css } from 'glamor'
 import _ReactModal from 'react-modal';
 import Modal from './Modal';
+import Icon from './Icon';
+import { Flex, Box } from 'grid-styled'
 
 const menuHeightDocked = '100px'
 const menuHeightScrolled = '50px'
@@ -97,27 +99,45 @@ const HeaderContainer = g.div(
 )
 
 const Wait = (props) => (
-  <div>
-    Wait
-  </div>
+  <Flex justify="center" align="center">
+    <Box width={100} px={2}>
+      <Icon name="check" fontSize={ 36 } color="success.0" />
+    </Box>
+    <Box flex={1}>
+      <h3>Many Thanks!</h3>
+      We've received your donation. It will appear on your statement as <code>{ props.description }</code>.
+    </Box>
+  </Flex>
 );
 
 const Success = (props) => (
-  <div>
-    Success
-  </div>
+  <Flex justify="center" align="center">
+    <Box width={100} px={2}>
+      <Icon name="check" fontSize={ 36 } color="success.0" />
+    </Box>
+    <Box flex={1}>
+      <h3>Many Thanks!</h3>
+      We've received your donation. It will appear on your statement as <code>{ props.description }</code>.
+    </Box>
+  </Flex>
 );
 
 const Failure = (props) => (
-  <div>
-    Failure
-  </div>
+  <Flex justify="center" align="center">
+    <Box width={100} px={2}>
+      <Icon name="times" fontSize={ 36 } color="danger.0" />
+    </Box>
+    <Box flex={1}>
+      <h3>Something's Wrong</h3>
+      We had an issue processing your donation.
+    </Box>
+  </Flex>
 );
 
 export default class Header extends Component {
   state = {
     scrolled: false,
-    showModal: null,
+    showModal: "failure",
     componentProps: {},
   }
 

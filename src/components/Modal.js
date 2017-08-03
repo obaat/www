@@ -1,10 +1,8 @@
 import g from 'glamorous'
 import { space, width, fontSize } from 'styled-system'
 import React, {Component} from 'react';
-
-const Icon = g(({name, className, onClick}) => <i onClick={ onClick } className={`fa fa-${name} ${className}`} aria-hidden="true" />)({
-  cursor: "pointer",
-},space);
+import Icon from './Icon';
+import {show} from '../styleHelpers';
 
 const ModalIcon = g(Icon)({
   background: "none",
@@ -12,8 +10,6 @@ const ModalIcon = g(Icon)({
   right: 0,
   top: 0,
 });
-
-const hidden = ({isOpen}) => isOpen || ({ display: "none" });
 
 const overlay = (offset = 0) => props => ({
   bottom: offset,
@@ -30,7 +26,7 @@ const ModalWrapper = g.div(overlay(0), {
   position: "fixed",
   zIndex: 9999999,
   display: "flex",
-}, hidden);
+}, show);
 
 const ModalBackground = g.div(overlay(0), {
   backgroundColor: "rgba(0,0,0, 0.6)",
@@ -53,7 +49,7 @@ export default class Modal extends Component {
   render() {
     const {canClose} = this.props;
     return (
-      <ModalWrapper isOpen={ this.props.isOpen}>
+      <ModalWrapper show={ this.props.isOpen}>
         <ModalBackground onClick={ this.props.onRequestClose } />
         <ModalContent>
           { canClose && <ModalIcon name="close" m={2} onClick={ this.props.onRequestClose } /> }
