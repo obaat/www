@@ -25,7 +25,8 @@
     "react-typography": "^0.15.10",
     "slash": "^1.0.0",
     "styled-system": "^1.0.0-12",
-    "typography": "^0.16.0"
+    "typography": "^0.16.0",
+    "typography-breakpoint-constants": "^0.15.10"
   },
   "keywords": [
     "gatsby"
