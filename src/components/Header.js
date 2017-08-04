@@ -9,6 +9,8 @@ import Modal from './Modal';
 import Icon from './Icon';
 import { Flex, Box } from 'grid-styled'
 
+const dockedBackground = "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)";
+
 const dockedColor = "rgba(255,255,255,0.4)";
 const undockedColor = "#fff";
 
@@ -17,18 +19,18 @@ const menuHeightScrolled = '50px'
 
 const menuScrolled = css.keyframes({
   from: {
-    backgroundColor: dockedColor,
-    color: "#000",
+    background: dockedBackground,
+    color: "#fff",
     height: menuHeightDocked,
   },
-  to: { backgroundColor: undockedColor, color: '#000', height: menuHeightScrolled },
+  to: { background: undockedColor, color: '#000', height: menuHeightScrolled },
 })
 
 const menuDocked = css.keyframes({
   from: { backgroundColor: undockedColor, color: '#000', height: menuHeightScrolled },
   to: {
-    backgroundColor: dockedColor,
-    color: "#000",
+    backgroundColor: dockedBackground,
+    color: "#fff",
     height: menuHeightDocked,
   },
 })
@@ -83,8 +85,8 @@ const scrolled = ({ scrolled }) =>
         ...animation([menuScrolled, '0.2s']),
       }
     : {
-        color: '#000',
-        backgroundColor: dockedColor,
+        color: '#fff',
+        background: dockedBackground,
         height: menuHeightDocked,
         ...animation([menuDocked, '0.2s']),
       }
