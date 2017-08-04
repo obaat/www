@@ -7,6 +7,12 @@ import g from 'glamorous'
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 
+import image1 from '../images/front_1.jpg';
+import image2 from '../images/front_2.jpg';
+import image3 from '../images/front_3.jpg';
+import image4 from '../images/front_4.jpg';
+import image5 from '../images/front_5.jpg';
+
 const AutoPlaySwipeableViews = autoPlay(g(SwipeableViews)({
   width: "100%",
   height: "100%",
@@ -38,8 +44,8 @@ const Panel = g.div(
   space
 )
 
-const backgroundImage = props => ({
-  backgroundImage: `url("${props.image}")`,
+const backgroundImage = ({image}) => ({
+  backgroundImage: `url("${image}")`,
   backgroundSize: 'cover',
 });
 
@@ -55,7 +61,7 @@ const ImagePanel = g.div({
 
 const slideConfig = {
   duration: '0.5s',
-  easeFunction: 'ease-in-out',
+  easeFunction: 'cubic-bezier(0.860, 0.000, 0.070, 1.000)',
   delay: '0s'
 };
 
@@ -63,25 +69,25 @@ const IndexPage = () =>
   <div>
     <Panel>
       <AutoPlaySwipeableViews enableMouseEvents  duration={ 5000 } springConfig={slideConfig}>
-        <ImagePanel image="/static/img/front_1.jpg">
+        <ImagePanel image={ image1 }>
           <Banner fontSize={8}>Make an Impact</Banner>
           <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
-        <ImagePanel image="/static/img/front_2.jpg">
+        <ImagePanel image={ image2 }>
           <Banner fontSize={8}>Make an Impact</Banner>
           <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
-        <ImagePanel image="/static/img/front_3.jpg">
-          <Banner fontSize={8}>We Love Kittens</Banner>
-          <Banner fontSize={5}>Do You?</Banner>
+        <ImagePanel image={ image3 }>
+          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
-        <ImagePanel image="/static/img/front_4.jpg">
-          <Banner fontSize={8}>We Love Kittens</Banner>
-          <Banner fontSize={5}>Do You?</Banner>
+        <ImagePanel image={ image4 }>
+          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
-        <ImagePanel image="/static/img/front_5.jpg">
-          <Banner fontSize={8}>We Love Kittens</Banner>
-          <Banner fontSize={5}>Do You?</Banner>
+        <ImagePanel image={ image5 }>
+          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
       </AutoPlaySwipeableViews>
     </Panel>
