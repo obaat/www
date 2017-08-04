@@ -3,15 +3,6 @@ import * as PropTypes from "prop-types"
 import { TypographyStyle, GoogleFont } from "react-typography"
 import typography from "./utils/typography"
 
-let stylesStr
-if (process.env.NODE_ENV === `production`) {
-  try {
-    stylesStr = require(`!raw-loader!../public/styles.css`)
-  } catch (e) {
-    console.log(e)
-  }
-}
-
 const propTypes = {
   headComponents: PropTypes.node.isRequired,
   body: PropTypes.node.isRequired,
@@ -20,18 +11,9 @@ const propTypes = {
 
 class Html extends Component {
   render() {
-    let css
-    if (process.env.NODE_ENV === `production`) {
-      css = (
-        <style
-          id="gatsby-inlined-css"
-          dangerouslySetInnerHTML={{ __html: stylesStr }}
-        />
-      )
-    }
 
     return (
-      <html op="news" lang="en">
+      <html op="charity" lang="en">
         <head>
           <title>One Brick at a Time</title>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -40,12 +22,11 @@ class Html extends Component {
           <link rel="stylesheet" href="https://unpkg.com/tachyons-box-sizing@3.1.7/css/tachyons-box-sizing.min.css" />
           <TypographyStyle typography={typography} />
           <GoogleFont typography={typography} />
-          {css}
           {this.props.headComponents}
 
           <meta name="referrer" content="origin" />
           <meta charSet="utf-8" />
-          <meta name="description" content="Gatsby example site using Glamor" />
+          <meta name="description" content="" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
             name="viewport"
@@ -65,5 +46,4 @@ class Html extends Component {
 }
 
 Html.propTypes = propTypes
-
 module.exports = Html
