@@ -31,8 +31,8 @@ const TemplateWrapper = ({ children }) =>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
         <link rel="stylesheet" href="https://unpkg.com/tachyons-box-sizing@3.1.7/css/tachyons-box-sizing.min.css" />
       </Helmet>
-      <Header />
       {children()}
+      <Header />
     </Container>
   </ThemeProvider>
 

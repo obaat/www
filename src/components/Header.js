@@ -5,28 +5,30 @@ import { space, width, fontSize } from 'styled-system'
 import { animation } from 'polished'
 import Link from 'gatsby-link'
 import { css } from 'glamor'
-import _ReactModal from 'react-modal';
 import Modal from './Modal';
 import Icon from './Icon';
 import { Flex, Box } from 'grid-styled'
+
+const dockedColor = "rgba(255,255,255,0.4)";
+const undockedColor = "#fff";
 
 const menuHeightDocked = '100px'
 const menuHeightScrolled = '50px'
 
 const menuScrolled = css.keyframes({
   from: {
-    backgroundColor: 'transparent',
-    color: '#fff',
+    backgroundColor: dockedColor,
+    color: "#000",
     height: menuHeightDocked,
   },
-  to: { backgroundColor: '#fff', color: '#000', height: menuHeightScrolled },
+  to: { backgroundColor: undockedColor, color: '#000', height: menuHeightScrolled },
 })
 
 const menuDocked = css.keyframes({
-  from: { backgroundColor: '#fff', color: '#000', height: menuHeightScrolled },
+  from: { backgroundColor: undockedColor, color: '#000', height: menuHeightScrolled },
   to: {
-    backgroundColor: 'transparent',
-    color: '#fff',
+    backgroundColor: dockedColor,
+    color: "#000",
     height: menuHeightDocked,
   },
 })
@@ -62,7 +64,7 @@ const MenuItem = g(Link)(
 )
 
 
-const Container = g.div({})
+const Container = g.div({ })
 
 const Fixed = g.div({
   position: 'fixed',
@@ -75,14 +77,14 @@ const scrolled = ({ scrolled }) =>
   scrolled
     ? {
         color: '#000',
-        backgroundColor: '#fff',
+        backgroundColor: undockedColor,
         height: menuHeightScrolled,
         boxShadow: '0 2px 0 0 rgba(40,40,40, .2)',
         ...animation([menuScrolled, '0.2s']),
       }
     : {
-        color: '#fff',
-        backgroundColor: 'transparent',
+        color: '#000',
+        backgroundColor: dockedColor,
         height: menuHeightDocked,
         ...animation([menuDocked, '0.2s']),
       }
@@ -101,7 +103,7 @@ const HeaderContainer = g.div(
 const Wait = (props) => (
   <Flex justify="center" align="center">
     <Box width={100} px={2}>
-      <Icon name="check" fontSize={ 36 } color="success.0" />
+      <Icon name="check" fontSize={ 36 } color="normal.0" />
     </Box>
     <Box flex={1}>
       <h3>Many Thanks!</h3>
@@ -137,7 +139,7 @@ const Failure = (props) => (
 export default class Header extends Component {
   state = {
     scrolled: false,
-    showModal: "failure",
+    showModal: null,
     componentProps: {},
   }
 

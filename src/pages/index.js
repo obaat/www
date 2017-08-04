@@ -4,8 +4,17 @@ import Lorem from 'react-lorem-component'
 import { space, color, fontSize } from 'styled-system'
 import Button from '../components/Button'
 import g from 'glamorous'
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
 
-const Banner = g.div(fontSize)
+const AutoPlaySwipeableViews = autoPlay(g(SwipeableViews)({
+  width: "100%",
+  height: "100%",
+}));
+
+const Banner = g.div({
+  textShadow: "0px 0px 10px rgba(0,0,0,0.5)",
+},fontSize)
 
 const Mission = g.div(
   {
@@ -22,28 +31,60 @@ const Panel = g.div(
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    width: '100VW',
+    width: '100%',
     minHeight: '100VH',
   },
   color,
   space
 )
 
-const ImagePanel = g(Panel)(
-  {
-    backgroundImage: `url("//placekitten.com/1024/768")`,
-    backgroundSize: 'cover',
-    color: '#fff',
-  },
-  space
-)
+const backgroundImage = props => ({
+  backgroundImage: `url("${props.image}")`,
+  backgroundSize: 'cover',
+});
+
+const ImagePanel = g.div({
+  color: '#fff',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  width: '100%',
+  height: '100VH',
+}, space, backgroundImage);
+
+const slideConfig = {
+  duration: '0.5s',
+  easeFunction: 'ease-in-out',
+  delay: '0s'
+};
 
 const IndexPage = () =>
   <div>
-    <ImagePanel p={4}>
-      <Banner fontSize={8}>We Love Kittens</Banner>
-      <Banner fontSize={5}>Do You?</Banner>
-    </ImagePanel>
+    <Panel>
+      <AutoPlaySwipeableViews enableMouseEvents  duration={ 5000 } springConfig={slideConfig}>
+        <ImagePanel image="/static/img/front_1.jpg">
+          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={5}>One Brick at a time</Banner>
+        </ImagePanel>
+        <ImagePanel image="/static/img/front_2.jpg">
+          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={5}>One Brick at a time</Banner>
+        </ImagePanel>
+        <ImagePanel image="/static/img/front_3.jpg">
+          <Banner fontSize={8}>We Love Kittens</Banner>
+          <Banner fontSize={5}>Do You?</Banner>
+        </ImagePanel>
+        <ImagePanel image="/static/img/front_4.jpg">
+          <Banner fontSize={8}>We Love Kittens</Banner>
+          <Banner fontSize={5}>Do You?</Banner>
+        </ImagePanel>
+        <ImagePanel image="/static/img/front_5.jpg">
+          <Banner fontSize={8}>We Love Kittens</Banner>
+          <Banner fontSize={5}>Do You?</Banner>
+        </ImagePanel>
+      </AutoPlaySwipeableViews>
+    </Panel>
     <Panel p={4}>
       <Banner fontSize={8}>ONE BRICK AT A TIME</Banner>
       <Banner fontSize={5}>
