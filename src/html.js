@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import * as PropTypes from "prop-types"
-import { TypographyStyle } from "react-typography"
+import { TypographyStyle, GoogleFont } from "react-typography"
 import typography from "./utils/typography"
 
 let stylesStr
@@ -45,6 +45,7 @@ class Html extends Component {
           />
           <title>One Brick at a Time</title>
           <TypographyStyle typography={typography} />
+          <GoogleFont typography={typography} />
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
