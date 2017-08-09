@@ -7,14 +7,7 @@ import g from 'glamorous'
 import { ThemeProvider } from 'glamorous'
 import theme from '../theme';
 
-const Container = g.div({
-  fontFamily:
-    '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-  fontWeight: 400,
-  fontSize: '1rem',
-  color: '#111',
-  lineHeight: 1.5,
-})
+const Container = g.div()
 
 const TemplateWrapper = ({ children }) =>
   <ThemeProvider theme={theme}>

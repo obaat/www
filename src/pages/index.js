@@ -45,6 +45,7 @@ const Panel = g.div(
 )
 
 const backgroundImage = ({image}) => ({
+  backgroundColor: '#000',
   backgroundImage: `url("${image}")`,
   backgroundSize: 'cover',
 });
@@ -70,23 +71,23 @@ const IndexPage = () =>
     <Panel>
       <AutoPlaySwipeableViews enableMouseEvents  duration={ 5000 } springConfig={slideConfig}>
         <ImagePanel image={ image1 }>
-          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={8}>Building Schools, Building Skills</Banner>
           <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
         <ImagePanel image={ image2 }>
-          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={8}>Building Schools, Building Skills</Banner>
           <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
         <ImagePanel image={ image3 }>
-          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={8}>Building Schools, Building Skills</Banner>
           <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
         <ImagePanel image={ image4 }>
-          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={8}>Building Schools, Building Skills</Banner>
           <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
         <ImagePanel image={ image5 }>
-          <Banner fontSize={8}>Make an Impact</Banner>
+          <Banner fontSize={8}>Building Schools, Building Skills</Banner>
           <Banner fontSize={5}>One Brick at a time</Banner>
         </ImagePanel>
       </AutoPlaySwipeableViews>

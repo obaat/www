@@ -8,6 +8,8 @@ import { css } from 'glamor'
 import Modal from './Modal';
 import Icon from './Icon';
 import { Flex, Box } from 'grid-styled'
+import logo_white from '../images/logo_white.png';
+import logo_normal from '../images/logo.png';
 
 const dockedBackground = "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)";
 
@@ -44,11 +46,14 @@ const menuItems = [
 
 const Logo = g.div(
   {
-    backgroundImage: `url("//placekitten.com/200/50")`,
-    width: '200px',
-    height: '50px',
+    backgroundSize: "cover",
+    width: '105px',
+    height: '40px',
   },
-  space
+  ({logo}) => ({
+    backgroundImage: `url(${logo})`,
+  }),
+  space,
 )
 
 const MenuItem = g(Link)(
@@ -181,7 +186,7 @@ export default class Header extends Component {
         { showModal === 'wait' && this.renderWait() }
         <Fixed>
           <HeaderContainer px={3} scrolled={this.state.scrolled}>
-            <Logo mr={3} />
+            <Logo mr={3} logo={ this.state.scrolled ? logo_normal : logo_white } />
             {menuItems.map(({ title, to }) =>
               <MenuItem key={title} mr={3} p={1} to={to}>
                 {title}

@@ -4,11 +4,14 @@ module.exports = {
   },
    plugins: [
     {
-      resolve: `gatsby-source-contentful`,
+      resolve: `gatsby-source-prismic`,
       options: {
-        spaceId: `kpfz2fzy0si4`,
-        accessToken: `39591a0146faa8a21af1e25c47661572b42f506cb5a7c3402bf7d6acf1bf9d87`,
+        repositoryName: `one-brick`,
+        accessToken: `MC5XWWhTS2lZQUFOLUtDUFZy.77-977-9MzHvv73vv73vv71L77-9YUnvv73vv70_77-9LSF9Le-_vR3vv73vv70lUihUNSrvv73vv73vv70`,
       },
-    }, `gatsby-transformer-remark`, `gatsby-plugin-react-helmet`, `gatsby-plugin-glamor`
+    },
+    `gatsby-transformer-remark`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-glamor`,
   ]
 }
