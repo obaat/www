@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import g from 'glamorous'
 import Donate from './Donate'
 import { space, width, fontSize } from 'styled-system'
+import Link from 'next/link'
 import { animation } from 'polished'
-import Link from 'gatsby-link'
 import { css } from 'glamor'
 import Modal from './Modal';
 import Icon from './Icon';
 import { Flex, Box } from 'grid-styled'
-import logo_white from '../images/logo_white.png';
-import logo_normal from '../images/logo.png';
-
 const dockedBackground = "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)";
 
 const dockedColor = "rgba(255,255,255,0.4)";
@@ -51,12 +48,12 @@ const Logo = g.div(
     height: '40px',
   },
   ({logo}) => ({
-    backgroundImage: `url(${logo})`,
+    backgroundImage: `url(/static/images/${logo})`,
   }),
   space,
 )
 
-const MenuItem = g(Link)(
+const A = g.a(
   {
     textTransform: 'uppercase',
     textDecoration: 'none',
@@ -69,6 +66,8 @@ const MenuItem = g(Link)(
   },
   space
 )
+
+const MenuItem = props => <Link><A { ...props } /></Link>
 
 
 const Container = g.div({ })
@@ -186,7 +185,7 @@ export default class Header extends Component {
         { showModal === 'wait' && this.renderWait() }
         <Fixed>
           <HeaderContainer px={3} scrolled={this.state.scrolled}>
-            <Logo mr={3} logo={ this.state.scrolled ? logo_normal : logo_white } />
+            <Logo mr={3} logo={ this.state.scrolled ? "logo_normal.png" : "logo_white.png" } />
             {menuItems.map(({ title, to }) =>
               <MenuItem key={title} mr={3} p={1} to={to}>
                 {title}
