@@ -38,7 +38,6 @@
     "recompose": "^0.24.0",
     "styled-system": "^1.0.0-12",
     "typography": "^0.16.0",
-    "typography-breakpoint-constants": "^0.15.10",
-    "typography-theme-grand-view": "^0.15.10"
+    "typography-theme-noriega": "^0.15.10"
   }
 }

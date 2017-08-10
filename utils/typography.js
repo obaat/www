@@ -1,11 +1,17 @@
 import Typography from "typography"
-import grandViewTheme from 'typography-theme-grand-view'
+import theme from 'typography-theme-noriega'
 
-import {
-  MOBILE_MEDIA_QUERY,
-  TABLET_MEDIA_QUERY,
-} from "typography-breakpoint-constants"
+theme.overrideThemeStyles = () => ({
+  'h1,h2,h3,h4': {
+    lineHeight: 1.2,
+  }
+})
 
+// import {
+//   MOBILE_MEDIA_QUERY,
+//   TABLET_MEDIA_QUERY,
+// } from "typography-breakpoint-constants"
+//
 // const options = {
 //   baseFontSize: `18px`,
 //   baseLineHeight: 1.45,
@@ -32,7 +38,7 @@ import {
 //   },
 // }
 //
-const typography = new Typography(grandViewTheme)
+const typography = new Typography(theme)
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== `production`) {

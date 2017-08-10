@@ -10,7 +10,7 @@ const AutoPlaySwipeableViews = autoPlay(g(SwipeableViews)({
   height: "100%",
 }));
 
-const Banner = g.div({
+const Banner = g.h1({
   textShadow: "0px 0px 10px rgba(0,0,0,0.5)",
 },fontSize)
 
