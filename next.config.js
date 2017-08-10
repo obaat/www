@@ -1,17 +1,15 @@
+const {getByType, types} = require('./utils/api')
+
 module.exports = {
   async exportPathMap () {
-    // we fetch our list of posts, this allow us to dynamically generate the exported pages
-    const response = await fetch('http://jsonplaceholder.typicode.com/posts?_page=1')
-    const postList = await response.json()
-    console.log({response})
+    const response = await getByType(types.VOLUNTEERING)
 
-    // tranform the list of posts into a map of pages with the pathname `/post/:id`
-    const pages = postList.reduce(
-      (pages, post) =>
+    const pages = response.results.reduce(
+      (pages, {uid}) =>
         Object.assign({}, pages, {
-          [`/post/${post.id}`]: {
-            page: '/post',
-            query: { id: post.id }
+          [`/volunteering/${uid}`]: {
+            page: '/volunteering',
+            query: { id: uid }
           }
         }),
       {},

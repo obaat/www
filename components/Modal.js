@@ -2,21 +2,13 @@ import g from 'glamorous'
 import { space, width, fontSize } from 'styled-system'
 import React, {Component} from 'react';
 import Icon from './Icon';
-import {show} from '../styleHelpers';
+import {show, overlay} from '../styleHelpers';
 
 const ModalIcon = g(Icon)({
   background: "none",
   position: "absolute",
   right: 0,
   top: 0,
-});
-
-const overlay = (offset = 0) => props => ({
-  bottom: offset,
-  left: offset,
-  position: "absolute",
-  right: offset,
-  top: offset,
 });
 
 const ModalWrapper = g.div(overlay(0), {

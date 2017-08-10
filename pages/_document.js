@@ -2,6 +2,7 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import { renderStatic } from 'glamor/server'
 import typography from "../utils/typography"
 import { TypographyStyle, GoogleFont } from "react-typography"
+import {getByType} from '../utils/api'
 
 export default class MyDocument extends Document {
   static async getInitialProps ({ renderPage }) {

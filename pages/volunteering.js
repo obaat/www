@@ -5,7 +5,6 @@ import {mapValues} from 'lodash/fp'
 import Helmet from 'react-helmet'
 import {getByUID} from '../utils/api'
 import {withLayout} from '../components/Layout'
-import fetch from 'isomorphic-unfetch'
 
 const styling = {
   h1: g.div({}),
@@ -37,7 +36,7 @@ const Section = ({source, title}) => (
   </div>
 )
 
-const Volunteering = withLayout(({content}) =>
+const Volunteering = ({content}) =>
   <div>
     <Helmet title={ content.title && content.title[0].text } >
     </Helmet>
@@ -47,7 +46,6 @@ const Volunteering = withLayout(({content}) =>
     <Section title="Living" source={ content.living } />
     <Section title="FAQ" source={ content.faq } />
   </div>
-)
 
 Volunteering.getInitialProps = async ({query}) => {
   const uid = query.id
@@ -55,4 +53,4 @@ Volunteering.getInitialProps = async ({query}) => {
   return { content: res.data, meta: res }
 }
 
-export default Volunteering
+export default withLayout(Volunteering)

@@ -3,10 +3,11 @@ import Header from '../components/Header'
 import g from 'glamorous'
 import { ThemeProvider } from 'glamorous'
 import theme from '../theme'
-import {compose} from 'recompose'
+import {getByType, types} from '../utils/api'
+import mergeGetInitialProps from '../hoc/mergeGetInitialProps'
 
 const Container = g.div()
-const Layout = ({ children }) =>
+const Layout = ({ children, volunteering }) =>
   <ThemeProvider theme={theme}>
     <Container>
       <Helmet
@@ -18,21 +19,20 @@ const Layout = ({ children }) =>
       >
       </Helmet>
       {children}
-      <Header />
+      <Header volunteering={ volunteering }/>
     </Container>
   </ThemeProvider>
 
-export default Layout
-export const withLayout = ComposedComponent => props => <Layout><ComposedComponent { ...props } /></Layout>
+const merge = mergeGetInitialProps(
+  async () => {
+    const volunteering = await getByType(types.VOLUNTEERING)
+    return {volunteering: volunteering.results}
+  }
+)
 
-// Layout.getInitialProps = async function() {
-//   console.log("HERE")
-//   const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
-//   const data = await res.json()
-//
-//   console.log(`Show data fetched. Count: ${data.length}`)
-//
-//   return {
-//     shows: data
-//   }
-// }
+export default Layout
+
+export const withLayout = ComposedComponent => {
+  const EnhancedLayout = merge(ComposedComponent)(Layout)
+  return EnhancedLayout
+}

@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import g from 'glamorous'
 import Donate from './Donate'
-import { space, width, fontSize } from 'styled-system'
 import Link from 'next/link'
 import { animation } from 'polished'
 import { css } from 'glamor'
 import Modal from './Modal';
 import Icon from './Icon';
 import { Flex, Box } from 'grid-styled'
-const dockedBackground = "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)";
+import {withShowHideOnHover} from '../hoc'
+import {hoc, space} from '../styleHelpers'
+import {HumanDate} from '../utils/date'
 
+const dockedBackground = "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)";
 const dockedColor = "rgba(255,255,255,0.4)";
 const undockedColor = "#fff";
-
 const menuHeightDocked = '100px'
 const menuHeightScrolled = '50px'
 
@@ -34,11 +35,26 @@ const menuDocked = css.keyframes({
   },
 })
 
+const Subtext = hoc(g.div({}))
+
+const toVolunteeringMenu = src => src.map(({uid, first_publication_date, data: {title}}) => ({
+  title: title[0].text,
+  as: `/volunteering/${uid}`,
+  href: `/volunteering?id=${uid}`,
+  meta: (
+    <Subtext fontSize={ 0 }>
+      Added <HumanDate iso={first_publication_date}/>
+    </Subtext>
+  )
+}))
+
 const menuItems = [
-  { title: 'About Us' },
-  { title: 'What We Do' },
-  { title: 'Volunteering' },
-  { title: 'Say Hello' },
+  { title: 'About Us', href: '/about' },
+  { title: 'What We Do', href: '/whatwedo'  },
+  // { title: 'Projects', getChildren: props => toMenu(props.projects) },
+  // { title: 'Blog', getChildren: props => toMenu(props.blog) },
+  { title: 'Volunteering', href: '/volunteering', getChildren: props => toVolunteeringMenu(props.volunteering) },
+  { title: 'Say Hello', href: '/contact' },
 ]
 
 const Logo = g.div(
@@ -67,8 +83,49 @@ const A = g.a(
   space
 )
 
-const MenuItem = props => <Link><A { ...props } /></Link>
+const MenuItem = g(({items, as, href, ...props}) => {
+  const item = <Link as={ as } href={ href }><A { ...props } /></Link>
+  return items && items.length ? <SecondaryMenu items={ items }>{ item }</SecondaryMenu> : item
+})(space({mr:3, p:1}))
 
+const SubMenuItem = g.div({
+  marginTop: "15px",
+  paddingTop: "15px",
+  borderTop: "1px solid #000",
+})
+
+const OverlayMenu = g.div({
+  backgroundColor: "#fff",
+  color: "#000",
+  position: "absolute",
+  top: "-15px",
+  left: "-5px",
+  minWidth: "250px",
+  borderRadius: "5px",
+  boxShadow: "2px 2px 5px 0px rgba(0,0,0,0.3)",
+}, space({
+  p: 2,
+}))
+
+const SecondaryMenu = withShowHideOnHover(
+  g(({children, show, items, className, onMouseOver, onMouseOut}) => (
+    <div className={ className }>
+      { show &&
+        <OverlayMenu onMouseOver={ onMouseOver }>
+          { children }
+          { items.map(
+            ({title, meta, ...props}) =>
+            <SubMenuItem key={ title }><MenuItem { ...props }>{ title } { meta }</MenuItem></SubMenuItem>
+          )}
+          <SubMenuItem><MenuItem>See All</MenuItem></SubMenuItem>
+        </OverlayMenu>
+      }
+      { children }
+    </div>
+  ))({
+    position: "relative",
+  })
+)
 
 const Container = g.div({ })
 
@@ -178,6 +235,7 @@ export default class Header extends Component {
 
   render() {
     const {showModal} = this.state;
+    const _menuItems = menuItems.map(i => i.getChildren ? {...i, items: i.getChildren(this.props)} : i)
     return (
       <Container>
         { showModal === 'complete' && this.renderComplete() }
@@ -185,9 +243,9 @@ export default class Header extends Component {
         { showModal === 'wait' && this.renderWait() }
         <Fixed>
           <HeaderContainer px={3} scrolled={this.state.scrolled}>
-            <Logo mr={3} logo={ this.state.scrolled ? "logo_normal.png" : "logo_white.png" } />
-            {menuItems.map(({ title, to }) =>
-              <MenuItem key={title} mr={3} p={1} to={to}>
+            <Link href="/"><Logo mr={3} logo={ this.state.scrolled ? "logo_normal.png" : "logo_white.png" } /></Link>
+            {_menuItems.map(({ title, items, href, as }) =>
+              <MenuItem key={title} href={href} as={ as } items={ items }>
                 {title}
               </MenuItem>
             )}
