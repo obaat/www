@@ -16,7 +16,7 @@ export const withShowHideOnHover = compose(
       onMouseOut: ({show, setShow}) => e => {
         inProgress[count] = window.setTimeout(
           () => setShow(false)
-          ,100
+          ,20
         )
       }
     }

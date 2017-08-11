@@ -48,13 +48,20 @@ const toVolunteeringMenu = src => src.map(({uid, first_publication_date, data: {
   )
 }))
 
+const aboutItems = [
+  { title: "Ugandian Team", href: "/about/team" },
+  { title: "Trustees", href: "/about/team" },
+  { title: "Financials", href: "/about/financials" },
+  { title: "Partnerships", href: "/about/partners" },
+  { title: "Contact Us", href: "/contact" },
+]
+
 const menuItems = [
-  { title: 'About Us', href: '/about' },
+  { title: 'About Us', href: '/about', items: aboutItems},
   { title: 'What We Do', href: '/whatwedo'  },
   // { title: 'Projects', getChildren: props => toMenu(props.projects) },
   // { title: 'Blog', getChildren: props => toMenu(props.blog) },
-  { title: 'Volunteering', href: '/volunteering', getChildren: props => toVolunteeringMenu(props.volunteering) },
-  { title: 'Say Hello', href: '/contact' },
+  { title: 'Volunteer With Us', href: '/volunteering', getChildren: props => toVolunteeringMenu(props.volunteering) },
 ]
 
 const Logo = g.div(
@@ -117,7 +124,6 @@ const SecondaryMenu = withShowHideOnHover(
             ({title, meta, ...props}) =>
             <SubMenuItem key={ title }><MenuItem { ...props }>{ title } { meta }</MenuItem></SubMenuItem>
           )}
-          <SubMenuItem><MenuItem>See All</MenuItem></SubMenuItem>
         </OverlayMenu>
       }
       { children }
