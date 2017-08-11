@@ -7,6 +7,7 @@ import SwipeableViews from 'react-swipeable-views'
 import { autoPlay } from 'react-swipeable-views-utils'
 import {getSingleton, types} from '../utils/api'
 import {backgroundImageCover} from '../styleHelpers'
+import PrismicRichText from '../components/PrismicRichText'
 
 const AutoPlaySwipeableViews = autoPlay(g(SwipeableViews)({
   width: "100%",
@@ -73,6 +74,7 @@ const IndexPage = ({content}) => {
       <Panel p={4}>
         <Banner fontSize={8}>{ mission_title[0].text }</Banner>
         <Mission my={4}>
+          <PrismicRichText source={ content.mission } />
         </Mission>
         <Button context="info">Learn More</Button>
       </Panel>
