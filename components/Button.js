@@ -2,12 +2,13 @@ import React from 'react'
 import g from 'glamorous'
 import cx from 'classnames'
 import { space, width, fontSize, color } from 'styled-system'
+import {hoc} from '../styleHelpers'
 
 const Icon = g.i({
   paddingRight: '9px',
 })
 
-const Button = g.button(
+const Button = hoc(g.button(
   {
     textAlign: 'center',
     textDecoration: 'none',
@@ -27,12 +28,10 @@ const Button = g.button(
         'inset 0 2px 5rem rgba(0, 0, 0, .1), inset 0 -2px 0 rgba(0, 0, 0, .1)',
     },
   },
-  color,
-  space
-)
+))
 
 export default ({ children, context = 'normal', icon, ...passProps }) =>
-  <Button px={2} py={1} color={`${context}.1`} bg={`${context}.0`} { ...passProps }>
+  <Button px={2} py={1} invert palette={context} { ...passProps }>
     {icon && <Icon className={`fa fa-${icon}`} aria-hidden="true" />}
     {children}
   </Button>

@@ -25,20 +25,29 @@ const palette = convert({
   blue:[217, 71, 0.53],
   purple:[271, 100, 0.71],
   red:[348, 100, 0.61],
+  brick: [10, .8, .44],
 });
 
-const theme = {
-  colors: {
-    black: [palette.black, palette.white],
-    blue: [palette.blue, palette.white],
-    normal: [palette.greyDark, palette.white],
+const colors = {
+  black: [palette.black, palette.white],
+  blue: [palette.blue, palette.white],
+  normal: [palette.greyDark, palette.white],
 
-    primary: [palette.orange,palette.white],
-    info: [palette.blue, palette.white],
-    success: [palette.green, palette.white],
-    warning: [palette.yellow, palette.white],
-    danger: [palette.red, palette.white],
-  },
+  primary: [palette.orange,palette.white],
+  info: [palette.blue, palette.white],
+  success: [palette.green, palette.white],
+  warning: [palette.yellow, palette.white],
+  danger: [palette.red, palette.white],
+  greyLighter: [palette.greyLighter, palette.black],
+  brick: [palette.brick,palette.white],
+}
+
+const reverse = mapValues(v => v.slice().reverse())
+const inverseColors = reverse(colors)
+
+const theme = {
+  colors,
+  inverseColors,
 };
 
 export default theme;

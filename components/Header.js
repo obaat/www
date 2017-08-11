@@ -10,12 +10,11 @@ import { Flex, Box } from 'grid-styled'
 import {withShowHideOnHover} from '../hoc'
 import {hoc, space} from '../styleHelpers'
 import {HumanDate} from '../utils/date'
+import {menuHeightDocked, menuHeightScrolled} from '../utils/constants'
 
 const dockedBackground = "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)";
 const dockedColor = "rgba(255,255,255,0.4)";
 const undockedColor = "#fff";
-const menuHeightDocked = '100px'
-const menuHeightScrolled = '50px'
 
 const menuScrolled = css.keyframes({
   from: {
@@ -107,7 +106,7 @@ const OverlayMenu = g.div({
   position: "absolute",
   top: "-15px",
   left: "-5px",
-  minWidth: "250px",
+  minWidth: "300px",
   borderRadius: "5px",
   boxShadow: "2px 2px 5px 0px rgba(0,0,0,0.3)",
 }, space({
@@ -172,7 +171,7 @@ const HeaderContainer = g.div(
 const Wait = (props) => (
   <Flex justify="center" align="center">
     <Box width={100} px={2}>
-      <Icon name="check" fontSize={ 36 } color="normal.0" />
+      <Icon name="check" fontSize={ 36 } palette="normal" />
     </Box>
     <Box flex={1}>
       <h3>Many Thanks!</h3>
@@ -184,7 +183,7 @@ const Wait = (props) => (
 const Success = (props) => (
   <Flex justify="center" align="center">
     <Box width={100} px={2}>
-      <Icon name="check" fontSize={ 36 } color="success.0" />
+      <Icon name="check" fontSize={ 36 } palette="success" />
     </Box>
     <Box flex={1}>
       <h3>Many Thanks!</h3>
@@ -196,7 +195,7 @@ const Success = (props) => (
 const Failure = (props) => (
   <Flex justify="center" align="center">
     <Box width={100} px={2}>
-      <Icon name="times" fontSize={ 36 } color="danger.0" />
+      <Icon name="times" fontSize={ 36 } palette="danger" />
     </Box>
     <Box flex={1}>
       <h3>Something's Wrong</h3>
@@ -241,6 +240,8 @@ export default class Header extends Component {
 
   render() {
     const {showModal} = this.state;
+    const {fixed} = this.props;
+    const scrolled = this.state.scrolled || fixed;
     const _menuItems = menuItems.map(i => i.getChildren ? {...i, items: i.getChildren(this.props)} : i)
     return (
       <Container>
@@ -248,8 +249,8 @@ export default class Header extends Component {
         { showModal === 'failure' && this.renderFailure() }
         { showModal === 'wait' && this.renderWait() }
         <Fixed>
-          <HeaderContainer px={3} scrolled={this.state.scrolled}>
-            <Link href="/"><Logo mr={3} logo={ this.state.scrolled ? "logo_normal.png" : "logo_white.png" } /></Link>
+          <HeaderContainer px={3} scrolled={scrolled}>
+            <Link href="/"><Logo mr={3} logo={ scrolled ? "logo.png" : "logo_white.png" } /></Link>
             {_menuItems.map(({ title, items, href, as }) =>
               <MenuItem key={title} href={href} as={ as } items={ items }>
                 {title}

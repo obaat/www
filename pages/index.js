@@ -6,6 +6,7 @@ import g from 'glamorous'
 import SwipeableViews from 'react-swipeable-views'
 import { autoPlay } from 'react-swipeable-views-utils'
 import {getSingleton, types} from '../utils/api'
+import {backgroundImageCover} from '../styleHelpers'
 
 const AutoPlaySwipeableViews = autoPlay(g(SwipeableViews)({
   width: "100%",
@@ -38,12 +39,6 @@ const Panel = g.div(
   space
 )
 
-const backgroundImage = ({image}) => ({
-  backgroundColor: '#000',
-  backgroundImage: `url(${JSON.stringify(image)})`,
-  backgroundSize: 'cover',
-});
-
 const ImagePanel = g.div({
   color: '#fff',
   display: 'flex',
@@ -52,7 +47,7 @@ const ImagePanel = g.div({
   flexDirection: 'column',
   width: '100%',
   height: '100VH',
-}, space, backgroundImage);
+}, space, backgroundImageCover);
 
 const slideConfig = {
   duration: '0.5s',

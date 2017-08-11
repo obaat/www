@@ -5,47 +5,48 @@ import {mapValues} from 'lodash/fp'
 import Helmet from 'react-helmet'
 import {getByUID} from '../utils/api'
 import {withLayout} from '../components/Layout'
+import PrismicRichText from '../components/PrismicRichText'
+import SlideShow from '../components/SlideShow'
+import { Flex, Box } from 'grid-styled'
+import {backgroundImageCover} from '../styleHelpers'
+import get from 'lodash/get'
 
-const styling = {
-  h1: g.div({}),
-  h2: g.div({}),
-  h3: g.div({}),
-  unknown: g.div({backgroundColor: 'red'})
-}
-
-const StructuredTextWrapper = g.div()
-
-const StructuredText = ({source}) => {
-  const content = source.map((s,i) => {
-    const Container = styling[s.type] || styling.unknown;
-    return <Container key={ i }>{ s.text }</Container>
-  })
-
-  return (
-    <StructuredTextWrapper>
-      { content }
-    </StructuredTextWrapper>
-  )
-}
-
-const Title = g.div()
-const Section = ({source, title}) => (
+const Title = g.h3()
+const Section = ({title, ...props}) => (
   <div>
-    <Title>{ title }</Title>
-    <StructuredText source={ source } />
+    { title && <Title>{ title }</Title> }
+    <PrismicRichText { ...props } />
   </div>
 )
 
-const Volunteering = ({content}) =>
-  <div>
-    <Helmet title={ content.title && content.title[0].text } >
-    </Helmet>
-    <Section source={ content.title } />
-    <Section source={ content.description } />
-    <Section title="Costs" source={ content.costs } />
-    <Section title="Living" source={ content.living } />
-    <Section title="FAQ" source={ content.faq } />
-  </div>
+const PageTitle = g(Flex)({
+  minHeight: "250px",
+}, backgroundImageCover).withProps({
+  flex: 1,
+  justify: "center",
+  align: "center",
+  direction: "column",
+})
+
+const Volunteering = ({content}) => {
+  const image = get(
+    content, ['header_image', 'url'],
+    get(content, ['image_gallery', 0, 'image', 'url'])
+  )
+  return (
+    <div>
+      <Helmet title={ content.title && content.title[0].text } />
+      <PageTitle image={ image }>
+        <PrismicRichText color="#fff" fontSize={ 7 } source={ content.title } />
+      </PageTitle>
+      <SlideShow source={ content.image_gallery } />
+      <Section source={ content.description } />
+      <Section title="Costs" source={ content.costs } />
+      <Section title="Living" source={ content.living } />
+      <Section title="FAQ" source={ content.faq } />
+    </div>
+  )
+}
 
 Volunteering.getInitialProps = async ({query}) => {
   const uid = query.id
