@@ -3,20 +3,11 @@ import {withLayout} from '../components/Layout'
 import Button from '../components/Button'
 import Helmet from 'react-helmet'
 import g from 'glamorous'
-import SwipeableViews from 'react-swipeable-views'
-import { autoPlay } from 'react-swipeable-views-utils'
 import {getSingleton, types} from '../utils/api'
-import {backgroundImageCover} from '../styleHelpers'
+import {backgroundImageCover, overlay} from '../styleHelpers'
 import PrismicRichText from '../components/PrismicRichText'
-
-const AutoPlaySwipeableViews = autoPlay(g(SwipeableViews)({
-  width: "100%",
-  height: "100%",
-}));
-
-const Banner = g.h1({
-  textShadow: "0px 0px 10px rgba(0,0,0,0.5)",
-},fontSize)
+import {Flex, Absolute, Box, Heading, Banner} from 'rebass'
+import SlideShow from '../components/SlideShow'
 
 const Mission = g.div(
   {
@@ -27,49 +18,30 @@ const Mission = g.div(
   space
 )
 
-const Panel = g.div(
+// change to Flex
+const Panel = g(Flex)(
   {
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    width: '100%',
-    minHeight: '100VH',
   },
   color,
-  space
 )
 
-const ImagePanel = g.div({
-  color: '#fff',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  width: '100%',
-  height: '100VH',
-}, space, backgroundImageCover);
-
-const slideConfig = {
-  duration: '0.5s',
-  easeFunction: 'cubic-bezier(0.860, 0.000, 0.070, 1.000)',
-  delay: '0s'
-};
-
-const IndexPage = ({content}) => {
+const IndexPage =  ({content}) => {
   const {hero, mission, mission_title} = content
   return (
     <div>
       <Helmet title="One Brick at a Time" />
-      <Panel>
-        <AutoPlaySwipeableViews enableMouseEvents duration={ 5000 } springConfig={slideConfig}>
-          { hero.map(({image, lead, strapline}) =>
-            <ImagePanel image={ image.url }>
-              <Banner fontSize={8}>{ lead[0].text }</Banner>
-              <Banner fontSize={5}>{ strapline[0].text }</Banner>
-            </ImagePanel>
+      <Panel p={0}>
+        <SlideShow>
+          { hero.map(({image, lead, strapline}, i) =>
+          <Banner color="white" backgroundImage={ image.url } key={ i }>
+              <Heading f={8}>{ lead[0].text }</Heading>
+              <Heading f={5}>{ strapline[0].text }</Heading>
+            </Banner>
           )}
-        </AutoPlaySwipeableViews>
+        </SlideShow>
       </Panel>
       <Panel p={4}>
         <Banner fontSize={8}>{ mission_title[0].text }</Banner>
@@ -80,6 +52,10 @@ const IndexPage = ({content}) => {
       </Panel>
     </div>
   )
+}
+
+IndexPage.componentDidMount = () => {
+  window.setInterval
 }
 
 IndexPage.getInitialProps = async ({query}) => {
