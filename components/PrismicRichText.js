@@ -1,7 +1,9 @@
-import React from 'react'
-import g from 'glamorous'
-import mapValues from 'lodash/mapValues'
-import {hoc} from '../styleHelpers'
+import React from "react"
+import { Flex, Box } from "grid-styled"
+import g from "glamorous"
+import mapValues from "lodash/mapValues"
+import { hoc } from "../styleHelpers"
+import map from "lodash/map"
 
 const types = {
   heading1: "h1",
@@ -27,18 +29,35 @@ const types = {
 
 const styling = mapValues(types, (v, k) => hoc(g[v]()))
 
-const Unknown = g.div({backgroundColor: "red"})
+const Unknown = g.div({ backgroundColor: "red" })
 const Wrapper = g.div()
 
-const PrismicRichText = ({source, ...props}) => {
-  const content = source.map((s,i) => {
-    const Container = styling[s.type] || Unknown;
-    return <Container {...props} key={ i }>{ s.text }</Container>
+const PrismicRichText = ({ source, ...props }) => {
+  const content = source.map((s, i) => {
+    if (!s.type) {
+      const w = 1 / s.length
+      return (
+        <Flex>
+          {map(s, (v, k) =>
+            <Box w={w} p={2}>
+              <PrismicRichText source={v} key={k} />
+            </Box>,
+          )}
+        </Flex>
+      )
+    } else {
+      const Container = styling[s.type] || Unknown
+      return (
+        <Container {...props} key={i}>
+          {s.text}
+        </Container>
+      )
+    }
   })
 
   return (
     <Wrapper>
-      { content }
+      {content}
     </Wrapper>
   )
 }

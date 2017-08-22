@@ -1,18 +1,11 @@
-import React, { Component } from "react";
-import g from "glamorous";
-import { overlay } from "../styleHelpers";
-import range from "lodash/range";
-import { Chevron } from "reline";
-import {
-  Flex,
-  Box,
-  Absolute,
-  DotButton,
-  Carousel,
-  CarouselSlide
-} from "rebass";
+import React, { Component } from "react"
+import g from "glamorous"
+import { overlay } from "../styleHelpers"
+import range from "lodash/range"
+import { Chevron } from "reline"
+import { Flex, Box, Absolute, DotButton, Carousel, CarouselSlide } from "../ui"
 
-const FullFlex = g(Flex)(overlay("0px"));
+const FullFlex = g(Flex)(overlay("0px"))
 
 const CarouselControls = ({ page, total, onPageClick }) =>
   <FullFlex key={page} justify="center" column p={3}>
@@ -41,7 +34,7 @@ const CarouselControls = ({ page, total, onPageClick }) =>
         style={{
           height: "20px",
           width: "80px",
-          margin: "0 auto"
+          margin: "0 auto",
         }}
       >
         {range(total).map(i =>
@@ -51,81 +44,81 @@ const CarouselControls = ({ page, total, onPageClick }) =>
             key={i}
             active={i === page}
             onClick={() => onPageClick(i)}
-          />
+          />,
         )}
       </Flex>
     </Absolute>
-  </FullFlex>;
+  </FullFlex>
 
 const OurCarouselSlide = g(CarouselSlide)({
   transitionDuration: ".9s",
-  transitionTimingFunction: "cubic-bezier(0.860, 0.000, 0.070, 1.000)"
-});
+  transitionTimingFunction: "cubic-bezier(0.860, 0.000, 0.070, 1.000)",
+})
 
 export default class SlideShow extends Component {
   static defaultProps = {
     autoplaySpeed: 3000,
-    children: []
-  };
+    children: [],
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       autoPlayTimer: null,
-      selectedIndex: 0
-    };
+      selectedIndex: 0,
+    }
   }
 
   componentDidMount() {
-    window.addEventListener("focus", this.play);
-    window.addEventListener("blur", this.pause);
-    this.play();
+    window.addEventListener("focus", this.play)
+    window.addEventListener("blur", this.pause)
+    this.play()
   }
 
   componentWillUnmount() {
-    window.removeEventListener("focus", this.play);
-    window.removeEventListener("blur", this.pause);
-    this.pause();
+    window.removeEventListener("focus", this.play)
+    window.removeEventListener("blur", this.pause)
+    this.pause()
   }
 
-  totalSlides = () => this.props.children.length;
+  totalSlides = () => this.props.children.length
 
   setSlide = index => {
-    this.setState({ selectedIndex: index });
-  };
+    this.setState({ selectedIndex: index })
+  }
 
   nextSlide = () => {
     this.setSlide(
       this.state.selectedIndex + 1 === this.totalSlides()
         ? 0
-        : this.state.selectedIndex + 1
-    );
-  };
+        : this.state.selectedIndex + 1,
+    )
+  }
 
   prevSlide = () => {
     this.setSlide(
       this.state.selectedIndex === 0
         ? this.totalSlides()
-        : this.state.selectedIndex - 1
-    );
-  };
+        : this.state.selectedIndex - 1,
+    )
+  }
 
   play = () => {
     if (!this.state.autoPlayTimer) {
       this.setState({
-        autoPlayTimer: setInterval(this.nextSlide, this.props.autoplaySpeed)
-      });
+        autoPlayTimer: setInterval(this.nextSlide, this.props.autoplaySpeed),
+      })
     }
-  };
+  }
 
   pause = () => {
     if (this.state.autoPlayTimer) {
-      clearInterval(this.state.autoPlayTimer);
+      clearInterval(this.state.autoPlayTimer)
       this.setState({
-        autoPlayTimer: null
-      });
+        autoPlayTimer: null,
+      })
     }
-  };
+  }
 
   render() {
     return (
@@ -134,18 +127,18 @@ export default class SlideShow extends Component {
           page={this.state.selectedIndex}
           total={this.totalSlides()}
           onPageClick={index => {
-            this.pause();
-            this.setSlide(index);
+            this.pause()
+            this.setSlide(index)
           }}
         />
         <Carousel index={this.state.selectedIndex} p={0}>
           {this.props.children.map((slide, i) =>
             <OurCarouselSlide p={0} key={i}>
               {slide}
-            </OurCarouselSlide>
+            </OurCarouselSlide>,
           )}
         </Carousel>
       </div>
-    );
+    )
   }
 }
