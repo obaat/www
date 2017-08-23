@@ -2,7 +2,7 @@ import React from "react"
 import Button from "../components/Button"
 import g from "glamorous"
 import { mapValues } from "lodash/fp"
-import Link from "../components/Link"
+import XLink from "next/link"
 import Helmet from "react-helmet"
 import { getByUID } from "../utils/api"
 import { withLayout } from "../components/Layout"
@@ -24,14 +24,20 @@ const Title = g.div({
   textTransform: "uppercase",
 })
 
-const MenuItem = g(Link)({
+const MenuItemLink = g(ButtonTransparent)({
   textTransform: "uppercase",
-  p: 1,
+  borderBottom: "1px solid rgba(0,0,0,0.3)",
 })
 
-const Section = ({ title, ...props }) =>
+const MenuItem = ({ href, ...props }) =>
+  <XLink href={href}>
+    <MenuItemLink {...props} />
+  </XLink>
+
+const Section = ({ title, id, ...props }) =>
   props.source &&
   <div>
+    <a id={id} />
     {title &&
       <Title>
         {title}
@@ -66,24 +72,31 @@ const Volunteering = ({ content }) => {
       <Container py={4}>
         <Flex>
           <Box w={2 / 3} pr={3}>
-            <Section title="About the Programme" source={content.description} />
-            <Section title="Costs" source={content.costs} />
-            <Section title="Living" source={content.living} />
-            <Section title="FAQ" source={content.living} />
+            <Section
+              id="about"
+              title="About the Programme"
+              source={content.description}
+            />
+            <Section id="costs" title="Costs" source={content.costs} />
+            <Section id="living" title="Living" source={content.living} />
+            <Section id="faq" title="FAQ" source={content.living} />
           </Box>
-          <Box w={1 / 3} bg="#ccc">
-            <MenuItem to="#about" w={1}>
+          <Box w={1 / 3} p={2} palette="greyLighter" invert>
+            <MenuItem href="#about" px={3} w={1}>
               About
             </MenuItem>
-            <MenuItem to="#costs" w={1}>
+            <MenuItem href="#costs" px={3} w={1}>
               Costs
             </MenuItem>
-            <MenuItem to="#living" w={1}>
+            <MenuItem href="#living" px={3} w={1}>
               Living
             </MenuItem>
-            <MenuItem to="#faq" w={1}>
+            <MenuItem href="#faq" px={3} w={1}>
               FAQ
             </MenuItem>
+            <Button px={3} my={3} w={1} palette="info" invert>
+              Apply Now
+            </Button>
           </Box>
         </Flex>
       </Container>

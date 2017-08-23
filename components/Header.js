@@ -8,7 +8,7 @@ import Modal from "./Modal"
 import Icon from "./Icon"
 import { Flex, Box } from "grid-styled"
 import { withShowHideOnHover } from "../hoc"
-import { hoc, space } from "../styleHelpers"
+import { space } from "../styleHelpers"
 import { HumanDate } from "../utils/date"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
 
@@ -39,7 +39,7 @@ const menuDocked = css.keyframes({
   },
 })
 
-const Subtext = hoc(g.div({}))
+const Subtext = g.div({})
 
 const toVolunteeringMenu = src =>
   src.map(({ uid, first_publication_date, data: { title } }) => ({

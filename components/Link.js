@@ -1,9 +1,7 @@
 import Link from "next/link"
-import { hoc } from "../styleHelpers"
 
 // remove
-export default hoc((props) =>
+export default props =>
   <div className={props.className}>
     <Link {...props} />
-  </div>,
-)
+  </div>

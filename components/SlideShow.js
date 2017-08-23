@@ -50,10 +50,14 @@ const CarouselControls = ({ page, total, onPageClick }) =>
     </Absolute>
   </FullFlex>
 
-const OurCarouselSlide = g(CarouselSlide)({
-  transitionDuration: ".9s",
-  transitionTimingFunction: "cubic-bezier(0.860, 0.000, 0.070, 1.000)",
-})
+const OurCarousel = g(Carousel)(props => ({
+  "& > div:first-child": {
+    marginLeft: props.index * -100 + "%",
+    transitionProperty: "margin",
+    transitionDuration: "0.6s",
+    transitionTimingFunction: "cubic-bezier(0.860, 0.000, 0.070, 1.000)",
+  },
+}))
 
 export default class SlideShow extends Component {
   static defaultProps = {
@@ -131,13 +135,13 @@ export default class SlideShow extends Component {
             this.setSlide(index)
           }}
         />
-        <Carousel index={this.state.selectedIndex} p={0}>
+        <OurCarousel index={this.state.selectedIndex} p={0}>
           {this.props.children.map((slide, i) =>
-            <OurCarouselSlide p={0} key={i}>
+            <CarouselSlide p={0} key={i}>
               {slide}
-            </OurCarouselSlide>,
+            </CarouselSlide>,
           )}
-        </Carousel>
+        </OurCarousel>
       </div>
     )
   }

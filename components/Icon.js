@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import {hoc} from '../styleHelpers';
-import g from 'glamorous';
+import React, { Component } from "react"
+import g from "glamorous"
 
 const fa = {
   display: "inline-block",
@@ -10,7 +9,10 @@ const fa = {
   "-webkitFontSmoothing": "antialiased",
 }
 
-export default hoc(
-  g(({name, className, onClick}) =>
-    <i onClick={ onClick } className={`fa-${name} ${className}`} aria-hidden="true" />
-)(fa));
+export default g(({ name, className, onClick }) =>
+  <i
+    onClick={onClick}
+    className={`fa-${name} ${className}`}
+    aria-hidden="true"
+  />,
+)(fa)

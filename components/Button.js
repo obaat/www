@@ -17,7 +17,7 @@ const createButton = memoize(source =>
 export default ({ children, context = "normal", icon, as, ...passProps }) => {
   const Component = createButton(as || Button)
   return (
-    <Component px={2} py={1} invert palette={context} {...passProps}>
+    <Component palette={context} {...passProps}>
       {icon && <Icon className={`fa fa-${icon}`} aria-hidden="true" />}
       {children}
     </Component>

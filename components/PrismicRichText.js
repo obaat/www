@@ -2,7 +2,7 @@ import React from "react"
 import { Flex, Box } from "grid-styled"
 import g from "glamorous"
 import mapValues from "lodash/mapValues"
-import { hoc } from "../styleHelpers"
+import hoc from "../ui/hoc"
 import map from "lodash/map"
 
 const types = {
@@ -27,7 +27,7 @@ const types = {
   span: "span",
 }
 
-const styling = mapValues(types, (v, k) => hoc(g[v]()))
+const styling = mapValues(types, (v, k) => hoc()(g[v]()))
 
 const Unknown = g.div({ backgroundColor: "red" })
 const Wrapper = g.div()

@@ -1,13 +1,8 @@
-import { space, width, removeProps, responsiveStyle} from 'styled-system'
-import g from 'glamorous'
+import { space, width, removeProps, responsiveStyle } from "styled-system"
+import hoc from "./hoc"
+import g from "glamorous"
 
-export const flex = responsiveStyle('flex')
-export const order = responsiveStyle('order')
+export const flex = responsiveStyle("flex")
+export const order = responsiveStyle("order")
 
-export default g.div(
-  { boxSizing: 'border-box' },
-  width,
-  space,
-  flex,
-  order
-);
+export default hoc()(g.div({ boxSizing: "border-box" }))

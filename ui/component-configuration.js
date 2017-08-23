@@ -71,7 +71,7 @@ const components = [
   {
     name: "ButtonOutline",
     type: "Button",
-    overrideHocs: [space, ssColor, width, fontSize],
+    traits: [space, ssColor, width, fontSize],
     props: {
       bg: "transparent",
     },
@@ -114,6 +114,7 @@ const components = [
       bg: "transparent",
     },
     style: withPalette(props => ({
+      borderRadius: 0,
       "&:hover": {
         color: props.foreground,
         backgroundColor: "transparent",
@@ -181,14 +182,9 @@ const components = [
     props: {
       m: 0,
     },
-    style: props =>
-      Object.assign(
-        {
-          fontWeight: props.bold ? bold(props) : idx("weights.0", props.theme),
-        },
-        align(props),
-        caps(props),
-      ),
+    style: props => ({
+      fontWeight: props.bold ? bold(props) : get(props.theme, "weights.0"),
+    }),
     propTypes: {
       left: bool,
       center: bool,
@@ -409,7 +405,7 @@ const components = [
     },
     style: props => ({
       display: "block",
-      height: px(idx("space.1", props.theme)),
+      height: px(get(props.theme, "space.1")),
       cursor: "pointer",
       color: "inherit",
       borderRadius: px(99999),
@@ -485,7 +481,7 @@ const components = [
       mr: "auto",
     },
     style: props => ({
-      maxWidth: px(props.maxWidth || idx("maxWidth", props.theme) || 1024),
+      maxWidth: px(props.maxWidth || get(props.theme, "maxWidth") || 1024),
     }),
     propTypes: {
       maxWidth: numberOrString,
@@ -637,7 +633,7 @@ const components = [
     },
     style: withPalette(props => ({
       display: "block",
-      height: px(idx("space.1", props.theme)),
+      height: px(get(props.theme, "space.1")),
       borderRadius: px(props.theme.radius),
       overflow: "hidden",
       appearance: "none",
@@ -801,8 +797,8 @@ const components = [
     },
     style: props => ({
       padding: 0,
-      width: px(idx("space.3", props.theme)),
-      height: px(idx("space.3", props.theme)),
+      width: px(get(props.theme, "space.3")),
+      height: px(get(props.theme, "space.3")),
       borderWidth: px(4),
       borderStyle: "solid",
       borderColor: "transparent",
@@ -1012,11 +1008,11 @@ const components = [
         left: "50%",
         transform: "translate(-50%, -4px)",
         whiteSpace: "nowrap",
-        fontSize: px(idx("fontSizes.0", props.theme)),
-        paddingTop: px(idx("space.1", props.theme)),
-        paddingBottom: px(idx("space.1", props.theme)),
-        paddingLeft: px(idx("space.2", props.theme)),
-        paddingRight: px(idx("space.2", props.theme)),
+        fontSize: px(get(props.theme, "fontSizes.0")),
+        paddingTop: px(get(props.theme, "space.1")),
+        paddingBottom: px(get(props.theme, "space.1")),
+        paddingLeft: px(get(props.theme, "space.2")),
+        paddingRight: px(get(props.theme, "space.2")),
         color: props.foreground,
         backgroundColor: props.background,
         borderRadius: px(props.theme.radius),

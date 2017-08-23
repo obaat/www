@@ -4,6 +4,8 @@ import StripeCheckout from "react-stripe-checkout"
 import { ButtonOutline } from "../ui"
 import Button from "./Button"
 
+//TODO: move to primitives + traits
+
 export default g(
   class Donate extends Component {
     onToken = async token => {
@@ -47,6 +49,7 @@ export default g(
             <Button
               type="submit"
               context="danger"
+              invert
               icon="heart"
               as={ButtonOutline}
             >

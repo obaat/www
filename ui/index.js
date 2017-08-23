@@ -1,4 +1,4 @@
-import hoc from "./hoc"
+import { defaultTraits } from "./hoc"
 import g from "glamorous"
 import components from "./component-configuration"
 import { Flex, Box } from "./Grid"
@@ -6,7 +6,13 @@ import { compose, defaultProps } from "recompose"
 import { mapValues } from "lodash/fp"
 
 const toComponent = (generatedComponents, config) => {
-  const { name: displayName, overrideHocs, type, props, style } = config
+  const {
+    name: displayName,
+    traits = defaultTraits,
+    type,
+    props,
+    style,
+  } = config
 
   const C =
     generatedComponents[type] || typeof type !== "string"
@@ -17,7 +23,7 @@ const toComponent = (generatedComponents, config) => {
     throw new Error(`source component for ${displayName} not found`)
   }
 
-  const Component = compose(defaultProps(props), hoc(overrideHocs))(C(style))
+  const Component = defaultProps(props)(C(...traits, style))
 
   return {
     ...generatedComponents,
