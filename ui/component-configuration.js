@@ -30,7 +30,7 @@ const components = [
   {
     name: "Button",
     type: "button",
-    overrideHocs: [space, ssColor, width, fontSize],
+    traits: [space, ssColor, width, fontSize],
     props: {
       f: 1,
       m: 0,
@@ -504,7 +504,7 @@ const components = [
     name: "Border",
     type: "div",
     props: {},
-    style: props => {
+    style: withPalette(props => {
       const w = px(props.borderWidth || 1)
       const borderWidth =
         !props.top && !props.right && !props.bottom && !props.left
@@ -522,13 +522,13 @@ const components = [
       return Object.assign(
         {
           borderStyle: "solid",
-          borderColor: color(props)(props.color || "gray2"),
+          borderColor: ssColor(props, props.borderColor),
           color: "inherit",
         },
         borderWidth,
         directions,
       )
-    },
+    }),
     propTypes: {
       top: bool,
       right: bool,
@@ -758,12 +758,12 @@ const components = [
     name: "Tabs",
     type: "div",
     props: {},
-    style: props => ({
+    style: withPalette(props => ({
       display: "flex",
       borderBottomWidth: px(1),
       borderBottomStyle: "solid",
-      borderColor: color(props)("gray2"),
-    }),
+      borderColor: props.foreground,
+    })),
   },
   {
     name: "TabItem",
@@ -774,16 +774,17 @@ const components = [
       pt: 2,
       pb: 2,
     },
-    style: props => ({
+    style: withPalette(props => ({
       textDecoration: "none",
       fontWeight: bold(props),
-      color: props.active ? color(props)("blue") : "inherit",
+      color: props.active ? props.foreground : "inherit",
       borderBottomWidth: props.active ? 2 : 0,
       borderBottomStyle: "solid",
       "&:hover": {
-        color: color(props)("blue"),
+        color: props.foreground,
+        cursor: "pointer",
       },
-    }),
+    })),
     propTypes: {
       active: bool,
     },

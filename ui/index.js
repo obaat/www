@@ -14,6 +14,7 @@ const toComponent = (generatedComponents, config) => {
     style,
   } = config
 
+  //TODO: implement rootEl
   const C =
     generatedComponents[type] || typeof type !== "string"
       ? g(generatedComponents[type] || type, { displayName })

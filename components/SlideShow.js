@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import g from "glamorous"
 import { overlay } from "../styleHelpers"
 import range from "lodash/range"
+import toArray from "lodash/toArray"
 import { Chevron } from "reline"
 import { Flex, Box, Absolute, DotButton, Carousel, CarouselSlide } from "../ui"
 
@@ -85,7 +86,7 @@ export default class SlideShow extends Component {
     this.pause()
   }
 
-  totalSlides = () => this.props.children.length
+  totalSlides = () => React.Children.toArray(this.props.children).length
 
   setSlide = index => {
     this.setState({ selectedIndex: index })
@@ -125,18 +126,21 @@ export default class SlideShow extends Component {
   }
 
   render() {
+    const children = React.Children.toArray(this.props.children)
+
     return (
       <div style={{ width: "100%", position: "relative" }}>
-        <CarouselControls
-          page={this.state.selectedIndex}
-          total={this.totalSlides()}
-          onPageClick={index => {
-            this.pause()
-            this.setSlide(index)
-          }}
-        />
+        {children.length > 1 &&
+          <CarouselControls
+            page={this.state.selectedIndex}
+            total={this.totalSlides()}
+            onPageClick={index => {
+              this.pause()
+              this.setSlide(index)
+            }}
+          />}
         <OurCarousel index={this.state.selectedIndex} p={0}>
-          {this.props.children.map((slide, i) =>
+          {children.map((slide, i) =>
             <CarouselSlide p={0} key={i}>
               {slide}
             </CarouselSlide>,

@@ -8,7 +8,7 @@ import { getByUID } from "../utils/api"
 import { withLayout } from "../components/Layout"
 import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
-import { Flex, Box, ButtonTransparent } from "../ui"
+import { Flex, Box, Border, Tabs, TabItem } from "../ui"
 import { backgroundImageCover } from "../styleHelpers"
 import get from "lodash/get"
 import { menuHeightDocked } from "../utils/constants"
@@ -24,14 +24,14 @@ const Title = g.div({
   textTransform: "uppercase",
 })
 
-const MenuItemLink = g(ButtonTransparent)({
+const MenuItemLink = g(Border)({
   textTransform: "uppercase",
   borderBottom: "1px solid rgba(0,0,0,0.3)",
 })
 
 const MenuItem = ({ href, ...props }) =>
   <XLink href={href}>
-    <MenuItemLink {...props} />
+    <Border borderColor="greyLighter" {...props} />
   </XLink>
 
 const Section = ({ title, id, ...props }) =>
@@ -71,6 +71,16 @@ const Volunteering = ({ content }) => {
       </PageTitle>
       <Container py={4}>
         <Flex>
+          <Box w={1} mb={3}>
+            <Tabs>
+              <TabItem active>Beep</TabItem>
+              <TabItem>Boop</TabItem>
+              <TabItem>Bop</TabItem>
+            </Tabs>
+          </Box>
+        </Flex>
+
+        <Flex>
           <Box w={2 / 3} pr={3}>
             <Section
               id="about"
@@ -82,19 +92,19 @@ const Volunteering = ({ content }) => {
             <Section id="faq" title="FAQ" source={content.living} />
           </Box>
           <Box w={1 / 3} p={2} palette="greyLighter" invert>
-            <MenuItem href="#about" px={3} w={1}>
+            <MenuItem bottom href="#about" py={1} w={1}>
               About
             </MenuItem>
-            <MenuItem href="#costs" px={3} w={1}>
+            <MenuItem bottom href="#costs" py={1} w={1}>
               Costs
             </MenuItem>
-            <MenuItem href="#living" px={3} w={1}>
+            <MenuItem bottom href="#living" py={1} w={1}>
               Living
             </MenuItem>
-            <MenuItem href="#faq" px={3} w={1}>
+            <MenuItem bottom href="#faq" py={1} w={1}>
               FAQ
             </MenuItem>
-            <Button px={3} my={3} w={1} palette="info" invert>
+            <Button px={1} my={3} w={1} palette="info" invert>
               Apply Now
             </Button>
           </Box>
