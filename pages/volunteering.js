@@ -2,8 +2,8 @@ import React from "react"
 import Button from "../components/Button"
 import g from "glamorous"
 import { mapValues } from "lodash/fp"
-import XLink from "next/link"
 import Helmet from "react-helmet"
+import Link from "next/link"
 import {
   getByUID,
   getByIDs,
@@ -72,17 +72,11 @@ const Opportunity = ({ uid, data }) =>
           forceType="paragraph"
           source={data.programme_review}
         />}
-      <Button
-        href={`/volunteering/?id=${uid}`}
-        as={`/volunteering/${uid}`}
-        palette="info"
-        invert
-        icon="info"
-        w={1}
-        py={1}
-      >
-        More Information
-      </Button>
+      <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
+        <Button palette="info" invert icon="info" w={1} py={1}>
+          More Information
+        </Button>
+      </Link>
     </Box>
   </Card>
 
@@ -119,17 +113,12 @@ const Location = ({ uid, data }) =>
     </SlideShow>
     <Box p={2}>
       <PrismicRichText forceType="heading6" source={data.title} />
-      <Button
-        href={`/location/?id=${uid}`}
-        as={`/location/${uid}`}
-        palette="info"
-        invert
-        icon="info"
-        w={1}
-        py={1}
-      >
-        Apply now
-      </Button>
+
+      <Link href={`/location/?id=${uid}`} as={`/location/${uid}`}>
+        <Button palette="info" invert icon="info" w={1} py={1}>
+          Apply now
+        </Button>
+      </Link>
     </Box>
   </Card>
 
