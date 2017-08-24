@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import g from "glamorous"
 import StripeCheckout from "react-stripe-checkout"
-import { ButtonOutline } from "../ui"
+import { ButtonOutline, ButtonCircle } from "../ui"
 import Button from "./Button"
 
 //TODO: move to primitives + traits
@@ -34,7 +34,7 @@ export default g(
     }
 
     render() {
-      const { className, amount } = this.props
+      const { className, amount, scrolled } = this.props
       return (
         <div className={className}>
           <StripeCheckout
@@ -49,8 +49,9 @@ export default g(
             <Button
               type="submit"
               context="danger"
-              invert
+              invert={!scrolled}
               icon="heart"
+              py={1}
               as={ButtonOutline}
             >
               DONATE

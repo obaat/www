@@ -288,6 +288,7 @@ export default class Header extends Component {
             )}
             <Donate
               amount={1500}
+              scrolled={scrolled}
               onRequestCharge={this.showModal("wait")}
               onComplete={this.showModal("complete")}
               onFailure={this.showModal("failure")}

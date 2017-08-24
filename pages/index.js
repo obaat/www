@@ -36,7 +36,7 @@ const IndexPage = ({ content }) => {
         <SlideShow autoplay>
           {hero.map(({ image, lead, strapline }, i) =>
             <Banner color="white" backgroundImage={image.url} key={i}>
-              <Heading f={8}>
+              <Heading fontSize={8}>
                 {lead[0].text}
               </Heading>
               <Heading f={5}>

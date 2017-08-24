@@ -39,7 +39,6 @@ const Team = ({ team = [], content = {} }) => {
 Team.getInitialProps = async () => {
   const team = await getByType(types.TEAM_MEMBERS)
   const page = await getSingleton(types.TEAM_PAGE_CONTENT)
-  console.log(page)
   return { team: team.results, content: page.data }
 }
 

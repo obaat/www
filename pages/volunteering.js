@@ -64,7 +64,8 @@ const AccordionSection = ({ slice_type, items, primary }) => {
   return (
     <Panel palette="blue" mb={3}>
       <PanelHeader palette="blue">
-        {primary.title && <PrismicRichText source={primary.title} />}
+        {primary.title &&
+          <PrismicRichText forceType="heading5" source={primary.title} />}
       </PanelHeader>
       <Box p={3}>
         {primary.description &&
@@ -78,8 +79,13 @@ const Opportunity = ({ uid, data }) =>
   <Card mb={2}>
     <BackgroundImage ratio={1 / 2} src={get(data, "header_image.url")} />
     <Box p={2}>
-      <PrismicRichText forceType="heading6" source={data.title} />
-      <PrismicRichText forceType="paragraph" source={data.programme_review} />
+      {data.title &&
+        <PrismicRichText forceType="heading6" source={data.title} />}
+      {data.programme_review &&
+        <PrismicRichText
+          forceType="paragraph"
+          source={data.programme_review}
+        />}
       <Button
         href={`/volunteering/${uid}`}
         palette="info"
@@ -106,8 +112,9 @@ const Volunteering = ({ content, opportunities }) => {
             </Accordion>
           </Box>
           <Box w={1 / 3} px={3}>
-            Current openings
-            {opportunities.results &&
+            <Heading>Current openings</Heading>
+            {opportunities &&
+              opportunities.results &&
               opportunities.results.map(props => <Opportunity {...props} />)}
           </Box>
         </Flex>
@@ -139,7 +146,6 @@ const Location = ({ uid, data }) =>
   </Card>
 
 const VolunteeringOpportunity = ({ content, locations }) => {
-  console.log({ locations })
   return (
     <div>
       <PageTitle content={content} />
