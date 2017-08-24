@@ -46,11 +46,6 @@ const toVolunteeringMenu = src =>
     title: title[0].text,
     as: `/volunteering/${uid}`,
     href: `/volunteering?id=${uid}`,
-    meta: (
-      <Subtext fontSize={0}>
-        Added <HumanDate iso={first_publication_date} />
-      </Subtext>
-    ),
   }))
 
 const aboutItems = [
@@ -68,7 +63,7 @@ const menuItems = [
   // { title: 'Blog', getChildren: props => toMenu(props.blog) },
   {
     title: "Volunteer With Us",
-    href: "/volunteering",
+    items: [{ title: "General Information", href: "/volunteering" }],
     getChildren: props => toVolunteeringMenu(props.volunteering),
   },
 ]
@@ -269,7 +264,10 @@ export default class Header extends Component {
     const { fixed } = this.props
     const scrolled = this.state.scrolled || fixed
     const _menuItems = menuItems.map(
-      i => (i.getChildren ? { ...i, items: i.getChildren(this.props) } : i),
+      i =>
+        i.getChildren
+          ? { ...i, items: (i.items || []).concat(i.getChildren(this.props)) }
+          : i,
     )
     return (
       <Container>
