@@ -33,28 +33,14 @@ import get from "lodash/get"
 import { branch } from "recompose"
 import Error from "next/error"
 
-const Title = g.div({
-  textTransform: "uppercase",
-})
-
-const MenuItemLink = g(Border)({
-  textTransform: "uppercase",
-  borderBottom: "1px solid rgba(0,0,0,0.3)",
-})
-
-const MenuItem = ({ href, ...props }) =>
-  <XLink href={href}>
-    <Border borderColor="greyLighter" {...props} />
-  </XLink>
-
 const Section = ({ title, id, ...props }) =>
   props.source &&
   <div>
     <a id={id} />
     {title &&
-      <Title>
+      <Heading>
         {title}
-      </Title>}
+      </Heading>}
     <PrismicRichText {...props} />
   </div>
 
@@ -87,7 +73,8 @@ const Opportunity = ({ uid, data }) =>
           source={data.programme_review}
         />}
       <Button
-        href={`/volunteering/${uid}`}
+        href={`/volunteering/?id=${uid}`}
+        as={`/volunteering/${uid}`}
         palette="info"
         invert
         icon="info"
@@ -133,7 +120,8 @@ const Location = ({ uid, data }) =>
     <Box p={2}>
       <PrismicRichText forceType="heading6" source={data.title} />
       <Button
-        href={`/location/${uid}`}
+        href={`/location/?id=${uid}`}
+        as={`/location/${uid}`}
         palette="info"
         invert
         icon="info"
