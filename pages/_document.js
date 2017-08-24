@@ -1,7 +1,5 @@
 import Document, { Head, Main, NextScript } from "next/document"
 import { renderStatic } from "glamor/server"
-import typography from "../utils/typography"
-import { TypographyStyle, GoogleFont } from "react-typography"
 import { getByType } from "../utils/api"
 
 export default class MyDocument extends Document {
@@ -24,19 +22,20 @@ export default class MyDocument extends Document {
       <html op="charity" lang="en">
         <Head>
           <title>One Brick at a Time</title>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+          />
 
           <link
             rel="stylesheet"
             href="https://rsms.me/interface/interface.css"
           />
 
-          <link
+          {/* <link
             rel="stylesheet"
             href="https://unpkg.com/tachyons-box-sizing@3.1.7/css/tachyons-box-sizing.min.css"
-          />
-
-          <TypographyStyle typography={typography} />
-          {/* <GoogleFont typography={typography} /> */}
+          /> */}
 
           <link
             rel="stylesheet"
@@ -50,7 +49,8 @@ export default class MyDocument extends Document {
 
           <meta name="referrer" content="origin" />
           <meta charSet="utf-8" />
-          <meta name="description" content="" />
+          <meta name="description" content="We partner up with community-based NGOs to develop network of mutual support and we recruit volunteers to maintain these projects. This is allowing for social investment in the regional economy in the Rwenzori Region and beyond." />
+
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
             name="viewport"

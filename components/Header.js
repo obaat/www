@@ -110,7 +110,8 @@ const MenuItem = g(({ items, as, href, ...props }) => {
 const SubMenuItem = g.div({
   marginTop: "15px",
   paddingTop: "15px",
-  borderTop: "1px solid #000",
+  cursor: "pointer",
+  borderTop: "1px solid #ccc",
 })
 
 const OverlayMenu = g.div(
@@ -121,8 +122,9 @@ const OverlayMenu = g.div(
     top: "-15px",
     left: "-5px",
     minWidth: "300px",
-    borderRadius: "5px",
-    boxShadow: "2px 2px 5px 0px rgba(0,0,0,0.3)",
+    borderTopRightRadius: "15px",
+    borderBottomLeftRadius: "15px",
+    boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.2)",
   },
   space({
     p: 2,
