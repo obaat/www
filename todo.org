@@ -14,7 +14,7 @@
 * footer
 * stats
 * typograhpy
-* volunteer opp page - needs faq stuff writing
+* volunteer opp page - needs faq + reviews stuff writing
 * DONE volunteer opp location page
 * browser version locking
 * accordion styling / func

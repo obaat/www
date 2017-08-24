@@ -50,6 +50,7 @@ const invert = reduce(
 )
 const theme = {
   colors: { ...colors, ...invert },
+  font: "Interface, sans-serif",
   radius: 0,
 }
 

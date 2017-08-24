@@ -138,7 +138,9 @@ const Volunteering = ({ content, opportunities }) => {
           <Box w={2 / 3} pr={3}>
             <Section id="description" source={content.description} />
             <Accordion>
-              {content.body.map(props => <AccordionSection {...props} />)}
+              {content.body.map((props, i) =>
+                <AccordionSection {...props} key={i} />,
+              )}
             </Accordion>
           </Box>
           <Box w={1 / 3} px={3}>
