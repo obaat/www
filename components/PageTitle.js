@@ -30,7 +30,7 @@ export default ({ content, ...props }) => {
   return (
     <Container image={image} pt={menuHeightDocked}>
       <Helmet title={title} />
-      <PrismicRichText color="#fff" fontSize={7} source={content.title} />
+      <PrismicRichText color="#fff" fontSize={6} source={content.title} />
     </Container>
   )
 }

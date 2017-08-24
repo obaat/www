@@ -8,7 +8,13 @@ import { Flex, Box, Absolute, DotButton, Carousel, CarouselSlide } from "../ui"
 
 const FullFlex = g(Flex)(overlay("0px"))
 
-const CarouselControls = ({ controlSize, page, total, onPageClick }) =>
+const CarouselControls = ({
+  hidePaging,
+  controlSize,
+  page,
+  total,
+  onPageClick,
+}) =>
   <FullFlex key={page} justify="center" column p={2}>
     <Flex justify="center">
       <Box py={50} width={1 / 2} onClick={() => onPageClick(page - 1)}>
@@ -24,25 +30,26 @@ const CarouselControls = ({ controlSize, page, total, onPageClick }) =>
           <Chevron size={controlSize || 48} color="#fff" right />}
       </Box>
     </Flex>
-    <Absolute bottom left right m={1}>
-      <Flex
-        style={{
-          height: "20px",
-          width: `${20 * total}px`,
-          margin: "0 auto",
-        }}
-      >
-        {range(total).map(i =>
-          <DotButton
-            color="rgba(255,255,255,0.8)"
-            w={1}
-            key={i}
-            active={i === page}
-            onClick={() => onPageClick(i)}
-          />,
-        )}
-      </Flex>
-    </Absolute>
+    {!hidePaging &&
+      <Absolute bottom left right m={1}>
+        <Flex
+          style={{
+            height: "20px",
+            width: `${20 * total}px`,
+            margin: "0 auto",
+          }}
+        >
+          {range(total).map(i =>
+            <DotButton
+              color="rgba(255,255,255,0.8)"
+              w={1}
+              key={i}
+              active={i === page}
+              onClick={() => onPageClick(i)}
+            />,
+          )}
+        </Flex>
+      </Absolute>}
   </FullFlex>
 
 const OurCarousel = g(Carousel)(props => ({
@@ -85,7 +92,9 @@ export default class SlideShow extends Component {
   totalSlides = () => React.Children.toArray(this.props.children).length
 
   setSlide = index => {
-    this.setState({ selectedIndex: index })
+    if (index >= 0 && index < this.totalSlides()) {
+      this.setState({ selectedIndex: index })
+    }
   }
 
   nextSlide = () => {
@@ -128,6 +137,7 @@ export default class SlideShow extends Component {
       <div style={{ width: "100%", position: "relative" }}>
         {children.length > 1 &&
           <CarouselControls
+            hidePaging={this.props.hidePaging}
             controlSize={this.props.controlSize}
             page={this.state.selectedIndex}
             total={this.totalSlides()}

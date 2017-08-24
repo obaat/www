@@ -50,7 +50,7 @@ const invert = reduce(
 )
 const theme = {
   colors: { ...colors, ...invert },
-  radius: 5,
+  radius: 0,
 }
 
 export default theme

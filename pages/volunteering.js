@@ -18,12 +18,15 @@ import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 import {
   Card,
+  Absolute,
+  Relative,
   BackgroundImage,
   Flex,
   Box,
   Border,
   Tabs,
   TabItem,
+  ButtonOutline,
   Panel,
   PanelHeader,
   Heading,
@@ -62,23 +65,69 @@ const AccordionSection = ({ slice_type, items, primary }) => {
 }
 
 const Opportunity = ({ uid, data }) =>
-  <Card mb={2}>
-    <BackgroundImage ratio={1 / 2} src={get(data, "header_image.url")} />
-    <Box p={2}>
+  <Relative mb={2}>
+    <BackgroundImage
+      bg="#000"
+      ratio={1 / 2}
+      src={get(data, "header_image.url")}
+    >
+      <Absolute top left right p={1} bg="rgba(0,0,0,0.3)">
+        {data.title &&
+          <PrismicRichText
+            forceType="heading4"
+            color="#fff"
+            source={data.title}
+          />}
+      </Absolute>
+      <Absolute bottom right p={1}>
+        <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
+          <Button
+            palette="normal"
+            bg="rgba(0,0,0,0.3)"
+            invert
+            icon="chevron-right"
+            w={1}
+            py={1}
+            as={ButtonOutline}
+          >
+            More
+          </Button>
+        </Link>
+      </Absolute>
+    </BackgroundImage>
+  </Relative>
+
+const Location = ({ uid, data }) =>
+  <Relative mb={2}>
+    <SlideShow hidePaging controlSize={18}>
+      {data.image_gallery.map(({ image, description }, i) =>
+        <BackgroundImage src={image.url} key={i} />,
+      )}
+    </SlideShow>
+    <Absolute top left right p={1} bg="rgba(0,0,0,0.3)">
       {data.title &&
-        <PrismicRichText forceType="heading6" source={data.title} />}
-      {data.programme_review &&
         <PrismicRichText
-          forceType="paragraph"
-          source={data.programme_review}
+          forceType="heading3"
+          color="#fff"
+          source={data.title}
         />}
-      <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
-        <Button palette="info" invert icon="info" w={1} py={1}>
-          More Information
+    </Absolute>
+    <Absolute bottom right p={1}>
+      <Link href={`/location/?id=${uid}`} as={`/location/${uid}`}>
+        <Button
+          palette="normal"
+          bg="rgba(0,0,0,0.3)"
+          invert
+          icon="chevron-right"
+          w={1}
+          py={1}
+          as={ButtonOutline}
+        >
+          More
         </Button>
       </Link>
-    </Box>
-  </Card>
+    </Absolute>
+  </Relative>
 
 const Volunteering = ({ content, opportunities }) => {
   return (
@@ -103,24 +152,6 @@ const Volunteering = ({ content, opportunities }) => {
     </div>
   )
 }
-
-const Location = ({ uid, data }) =>
-  <Card mb={2}>
-    <SlideShow controlSize={18}>
-      {data.image_gallery.map(({ image, description }, i) =>
-        <BackgroundImage src={image.url} key={i} />,
-      )}
-    </SlideShow>
-    <Box p={2}>
-      <PrismicRichText forceType="heading6" source={data.title} />
-
-      <Link href={`/location/?id=${uid}`} as={`/location/${uid}`}>
-        <Button palette="info" invert icon="info" w={1} py={1}>
-          Apply now
-        </Button>
-      </Link>
-    </Box>
-  </Card>
 
 const VolunteeringOpportunity = ({ content, locations }) => {
   return (

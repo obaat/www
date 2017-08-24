@@ -49,10 +49,10 @@ export default g(
             <Button
               type="submit"
               context="danger"
-              invert={!scrolled}
+              invert={scrolled}
               icon="heart"
               py={1}
-              as={ButtonOutline}
+              as={ButtonCircle}
             >
               DONATE
             </Button>
