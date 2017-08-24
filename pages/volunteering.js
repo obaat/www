@@ -26,6 +26,7 @@ import {
   TabItem,
   Panel,
   PanelHeader,
+  Heading,
 } from "../ui"
 import { backgroundImageCover } from "../styleHelpers"
 import get from "lodash/get"
@@ -117,7 +118,11 @@ const Volunteering = ({ content, opportunities }) => {
 
 const Location = ({ uid, data }) =>
   <Card mb={2}>
-    <BackgroundImage ratio={1 / 4} src={get(data, "header_image.url")} />
+    <SlideShow controlSize={18}>
+      {data.image_gallery.map(({ image, description }, i) =>
+        <BackgroundImage src={image.url} key={i} />,
+      )}
+    </SlideShow>
     <Box p={2}>
       <PrismicRichText forceType="heading6" source={data.title} />
       <Button
@@ -148,7 +153,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
             />
           </Box>
           <Box w={1 / 3} px={2}>
-            Available Locations
+            <Heading>Available Locations</Heading>
             {locations.results.map(props => <Location {...props} />)}
           </Box>
         </Flex>

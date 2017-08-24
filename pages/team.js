@@ -14,17 +14,11 @@ const TeamMember = ({ uid, data: { name, image, description } }) =>
   <div>
     <a id={uid} />
     <Flex>
-      <Box w={1}>
-        <PrismicRichText source={name} />
+      <Box w={1 / 4} mb={3}>
+        <BackgroundImage ratio={4 / 3} src={image.url} />
       </Box>
-    </Flex>
-    <Flex>
-      <Box w={1 / 3}>
-        <SlideShow>
-          {image && image.url && <BackgroundImage src={image.url} />}
-        </SlideShow>
-      </Box>
-      <Box w={2 / 3} pl={3}>
+      <Box w={3 / 4} pl={3}>
+        <PrismicRichText forceType="heading2" source={name} />
         <PrismicRichText source={description} />
       </Box>
     </Flex>

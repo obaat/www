@@ -54,10 +54,10 @@ const toVolunteeringMenu = src =>
   }))
 
 const aboutItems = [
-  { title: "Ugandian Team", href: "/about/team" },
-  { title: "Trustees", href: "/about/team" },
-  { title: "Financials", href: "/about/financials" },
-  { title: "Partnerships", href: "/about/partners" },
+  { title: "Ugandian Team", href: "/team" },
+  { title: "Trustees", href: "/trustees" },
+  { title: "Financials", href: "/financials" },
+  { title: "Partnerships", href: "/partners" },
   { title: "Contact Us", href: "/contact" },
 ]
 

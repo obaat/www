@@ -33,7 +33,7 @@ const IndexPage = ({ content }) => {
     <div>
       <Helmet title="One Brick at a Time" />
       <Panel p={0}>
-        <SlideShow>
+        <SlideShow autoplay>
           {hero.map(({ image, lead, strapline }, i) =>
             <Banner color="white" backgroundImage={image.url} key={i}>
               <Heading f={8}>

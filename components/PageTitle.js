@@ -24,7 +24,7 @@ export default ({ content, ...props }) => {
   const image = get(
     content,
     ["header_image", "url"],
-    get(content, ["image_gallery", 0, "image"]),
+    get(content, ["image_gallery", 0, "image", "url"]),
   )
   const title = get(content, "title.0.text")
   return (

@@ -8,33 +8,27 @@ import { Flex, Box, Absolute, DotButton, Carousel, CarouselSlide } from "../ui"
 
 const FullFlex = g(Flex)(overlay("0px"))
 
-const CarouselControls = ({ page, total, onPageClick }) =>
-  <FullFlex key={page} justify="center" column p={3}>
+const CarouselControls = ({ controlSize, page, total, onPageClick }) =>
+  <FullFlex key={page} justify="center" column p={2}>
     <Flex justify="center">
-      <Box width={1 / 2}>
-        {page > 0 &&
-          <Chevron
-            size={48}
-            color="#fff"
-            left
-            onClick={() => onPageClick(page - 1)}
-          />}
+      <Box py={50} width={1 / 2} onClick={() => onPageClick(page - 1)}>
+        {page > 0 && <Chevron size={controlSize || 48} color="#fff" left />}
       </Box>
-      <Box width={1 / 2} style={{ textAlign: "right" }}>
+      <Box
+        width={1 / 2}
+        py={50}
+        style={{ textAlign: "right" }}
+        onClick={() => onPageClick(page + 1)}
+      >
         {page + 1 < total &&
-          <Chevron
-            size={48}
-            color="#fff"
-            right
-            onClick={() => onPageClick(page + 1)}
-          />}
+          <Chevron size={controlSize || 48} color="#fff" right />}
       </Box>
     </Flex>
     <Absolute bottom left right m={1}>
       <Flex
         style={{
           height: "20px",
-          width: "80px",
+          width: `${20 * total}px`,
           margin: "0 auto",
         }}
       >
@@ -75,9 +69,11 @@ export default class SlideShow extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("focus", this.play)
     window.addEventListener("blur", this.pause)
-    this.play()
+    if (this.props.autoplay) {
+      window.addEventListener("focus", this.play)
+      this.play()
+    }
   }
 
   componentWillUnmount() {
@@ -132,6 +128,7 @@ export default class SlideShow extends Component {
       <div style={{ width: "100%", position: "relative" }}>
         {children.length > 1 &&
           <CarouselControls
+            controlSize={this.props.controlSize}
             page={this.state.selectedIndex}
             total={this.totalSlides()}
             onPageClick={index => {
