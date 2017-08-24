@@ -4,7 +4,7 @@ module.exports = {
   async exportPathMap() {
     const volunteering = await getByType(types.VOLUNTEERING)
 
-    const pages = volunteering.results.reduce(
+    const volunteering_pages = volunteering.results.reduce(
       (pages, { uid }) =>
         Object.assign({}, pages, {
           [`/volunteering/${uid}`]: {
@@ -15,9 +15,24 @@ module.exports = {
       {},
     )
 
+    const location = await getByType(types.VOLUNTEERING_OPPORTUNITY_LOCATION)
+
+    const location_pages = volunteering.results.reduce(
+      (pages, { uid }) =>
+        Object.assign({}, pages, {
+          [`/location/${uid}`]: {
+            page: "/location",
+            query: { id: uid },
+          },
+        }),
+      {},
+    )
+
     // combine the map of post pages with the home
-    return Object.assign({}, pages, {
+    return Object.assign({}, location_pages, volunteering_pages, {
       "/": { page: "/" },
+      "/volunteering": { page: "/volunteering" },
+      "/about": { page: "/about" },
     })
   },
 }

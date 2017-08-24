@@ -31,7 +31,6 @@ const TeamMember = ({ uid, data: { name, image, description } }) =>
   </div>
 
 const Team = ({ team = [], content = {} }) => {
-  const image = get(content, ["header_image", "url"])
   return (
     <div>
       <PageTitle content={content} />

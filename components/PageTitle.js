@@ -10,6 +10,7 @@ import { menuHeightDocked } from "../utils/constants"
 const Container = g(Flex)(
   {
     minHeight: "300px",
+    backgroundColor: "#000",
   },
   backgroundImageCover,
 ).withProps({
@@ -20,7 +21,11 @@ const Container = g(Flex)(
 })
 
 export default ({ content, ...props }) => {
-  const image = get(content, ["header_image", "url"])
+  const image = get(
+    content,
+    ["header_image", "url"],
+    get(content, ["image_gallery", 0, "image"]),
+  )
   const title = get(content, "title.0.text")
   return (
     <Container image={image} pt={menuHeightDocked}>
