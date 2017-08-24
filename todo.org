@@ -1,2 +1,19 @@
 #+TITLE: Obaat
 * TODO Add meta tags
+
+1 vid buhinga
+2 vid kiterasa
+3rd buhinga
+
+* logo
+* video support to slideshow?
+* breadcrumbs
+* donation fixes
+* form for submitting
+* footer
+* stats
+* typograhpy
+* volunteer opp page
+* volunteer opp location page
+* browser version locking
+* accordion styling / func

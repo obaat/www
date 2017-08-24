@@ -10,8 +10,9 @@ import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 import get from "lodash/get"
 
-const TeamMember = ({ data: { name, image, description } }) =>
+const TeamMember = ({ uid, data: { name, image, description } }) =>
   <div>
+    <a id={uid} />
     <Flex>
       <Box w={1}>
         <PrismicRichText source={name} />
@@ -33,10 +34,7 @@ const Team = ({ team = [], content = {} }) => {
   const image = get(content, ["header_image", "url"])
   return (
     <div>
-      <Helmet title={content.title && content.title[0].text} />
-      <PageTitle image={image}>
-        <PrismicRichText color="#fff" fontSize={7} source={content.title} />
-      </PageTitle>
+      <PageTitle content={content} />
       <Container py={4}>
         <PrismicRichText color="#fff" source={content.description} />
         {team.map((props, i) => <TeamMember {...props} key={i} />)}

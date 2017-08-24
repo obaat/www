@@ -182,7 +182,6 @@ const scrolled = ({ scrolled }) =>
 
 const HeaderContainer = g.div(
   {
-    fontWeight: "bold",
     display: "flex",
     flex: "0 0 100%",
     alignItems: "center",

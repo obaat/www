@@ -2,9 +2,14 @@ const Prismic = require("prismic-javascript")
 
 const types = {
   VOLUNTEERING: "volunteer_opportunity",
+  VOLUNTEERING_PAGE_CONTENT: "volunteering_page",
+  VOLUNTEERING_OPPORTUNITY_LOCATION: "volunteering_opportunity_location",
   BLOG: "blog_post",
   PROJECTS: "projects",
   HOME: "home",
+  FINANCIALS_PAGE_CONTENT: "financials_page",
+  PARTNERSHIPS_PAGE_CONTENT: "financials",
+  PROJECT: "project",
   TEAM_MEMBERS: "team",
   TEAM_PAGE_CONTENT: "team_page",
 }
@@ -25,9 +30,15 @@ const getSingleton = async type => {
   return await api.getSingle(type)
 }
 
-const getByUID = type => async id => {
+const getByIDs = async ids => {
   const api = await apiBuilder()
-  const res = await api.getByUID(type, id)
+  const res = await api.getByIDs(ids)
+  return res
+}
+
+const getByUID = type => async (id, options) => {
+  const api = await apiBuilder()
+  const res = await api.getByUID(type, id, options)
   return res
 }
 
@@ -46,5 +57,6 @@ module.exports = {
   types,
   getByType,
   getByUID,
+  getByIDs,
   getSingleton,
 }

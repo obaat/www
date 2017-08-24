@@ -4,21 +4,33 @@ import g from "glamorous"
 import { mapValues } from "lodash/fp"
 import XLink from "next/link"
 import Helmet from "react-helmet"
-import { getByUID } from "../utils/api"
+import {
+  getByUID,
+  getByIDs,
+  getSingleton,
+  getByType,
+  types,
+} from "../utils/api"
 import { withLayout } from "../components/Layout"
 import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
-import { Flex, Box, Border, Tabs, TabItem } from "../ui"
+import PageTitle from "../components/PageTitle"
+import Container from "../components/Container"
+import {
+  Card,
+  BackgroundImage,
+  Flex,
+  Box,
+  Border,
+  Tabs,
+  TabItem,
+  Panel,
+  PanelHeader,
+} from "../ui"
 import { backgroundImageCover } from "../styleHelpers"
 import get from "lodash/get"
-import { menuHeightDocked } from "../utils/constants"
-
-const Container = g(Box)({
-  maxWidth: "1024px",
-  marginLeft: "auto",
-  marginRight: "auto",
-  //textAlign: "justify", c
-})
+import { branch } from "recompose"
+import Error from "next/error"
 
 const Title = g.div({
   textTransform: "uppercase",
@@ -45,68 +57,57 @@ const Section = ({ title, id, ...props }) =>
     <PrismicRichText {...props} />
   </div>
 
-const PageTitle = g(Flex)(
-  {
-    minHeight: "300px",
-  },
-  backgroundImageCover,
-).withProps({
-  flex: 1,
-  justify: "center",
-  align: "center",
-  direction: "column",
-})
+const Accordion = g.div()
 
-const Volunteering = ({ content }) => {
-  const image = get(
-    content,
-    ["header_image", "url"],
-    get(content, ["image_gallery", 0, "image", "url"]),
+const AccordionSection = ({ slice_type, items, primary }) => {
+  return (
+    <Panel palette="blue" mb={3}>
+      <PanelHeader palette="blue">
+        {primary.title && <PrismicRichText source={primary.title} />}
+      </PanelHeader>
+      <Box p={3}>
+        {primary.description &&
+          <PrismicRichText source={primary.description} />}
+      </Box>
+    </Panel>
   )
+}
+
+const Opportunity = ({ uid, data }) =>
+  <Card mb={2}>
+    <BackgroundImage ratio={1 / 2} src={get(data, "header_image.url")} />
+    <Box p={2}>
+      <PrismicRichText forceType="heading6" source={data.title} />
+      <PrismicRichText forceType="paragraph" source={data.programme_review} />
+      <Button
+        href={`/volunteering/${uid}`}
+        palette="info"
+        invert
+        icon="info"
+        w={1}
+        py={1}
+      >
+        More Information
+      </Button>
+    </Box>
+  </Card>
+
+const Volunteering = ({ content, opportunities }) => {
   return (
     <div>
-      <Helmet title={content.title && content.title[0].text} />
-      <PageTitle pt={menuHeightDocked} image={image}>
-        <PrismicRichText color="#fff" fontSize={7} source={content.title} />
-      </PageTitle>
+      <PageTitle content={content} />
       <Container py={4}>
         <Flex>
-          <Box w={1} mb={3}>
-            <Tabs>
-              <TabItem active>Beep</TabItem>
-              <TabItem>Boop</TabItem>
-              <TabItem>Bop</TabItem>
-            </Tabs>
-          </Box>
-        </Flex>
-
-        <Flex>
           <Box w={2 / 3} pr={3}>
-            <Section
-              id="about"
-              title="About the Programme"
-              source={content.description}
-            />
-            <Section id="costs" title="Costs" source={content.costs} />
-            <Section id="living" title="Living" source={content.living} />
-            <Section id="faq" title="FAQ" source={content.living} />
+            <Section id="description" source={content.description} />
+            <Accordion>
+              {content.body.map(props => <AccordionSection {...props} />)}
+            </Accordion>
           </Box>
-          <Box w={1 / 3} p={2} palette="greyLighter" invert>
-            <MenuItem bottom href="#about" py={1} w={1}>
-              About
-            </MenuItem>
-            <MenuItem bottom href="#costs" py={1} w={1}>
-              Costs
-            </MenuItem>
-            <MenuItem bottom href="#living" py={1} w={1}>
-              Living
-            </MenuItem>
-            <MenuItem bottom href="#faq" py={1} w={1}>
-              FAQ
-            </MenuItem>
-            <Button px={1} my={3} w={1} palette="info" invert>
-              Apply Now
-            </Button>
+          <Box w={1 / 3} px={3}>
+            Current openings
+            {opportunities.results &&
+              opportunities.results.map(props => <Opportunity {...props} />)}
           </Box>
         </Flex>
       </Container>
@@ -114,10 +115,74 @@ const Volunteering = ({ content }) => {
   )
 }
 
-Volunteering.getInitialProps = async ({ query }) => {
-  const uid = query.id
-  const res = await getByUID("volunteer_opportunity")(uid)
-  return { content: res.data, meta: res }
+const Location = ({ uid, data }) =>
+  <Card mb={2}>
+    <BackgroundImage ratio={1 / 4} src={get(data, "header_image.url")} />
+    <Box p={2}>
+      <PrismicRichText forceType="heading6" source={data.title} />
+      <Button
+        href={`/location/${uid}`}
+        palette="info"
+        invert
+        icon="info"
+        w={1}
+        py={1}
+      >
+        Apply now
+      </Button>
+    </Box>
+  </Card>
+
+const VolunteeringOpportunity = ({ content, locations }) => {
+  console.log({ locations })
+  return (
+    <div>
+      <PageTitle content={content} />
+      <Container py={4}>
+        <Flex>
+          <Box w={2 / 3} pr={3}>
+            <Section
+              id="about"
+              title="About the Programme"
+              source={content.description}
+            />
+          </Box>
+          <Box w={1 / 3} px={2}>
+            Available Locations
+            {locations.results.map(props => <Location {...props} />)}
+          </Box>
+        </Flex>
+      </Container>
+    </div>
+  )
 }
 
-export default withLayout(Volunteering)
+const Page = ({ opportunity, ...props }) =>
+  opportunity
+    ? <VolunteeringOpportunity {...props} />
+    : <Volunteering {...props} />
+
+Page.getInitialProps = async ({ query }) => {
+  const opportunities = await getByType(types.VOLUNTEERING)
+  if (query.id) {
+    const uid = query.id
+    const res = await getByUID(types.VOLUNTEERING)(uid)
+    const locations = await getByIDs(res.data.locations.map(l => l.location.id))
+    return {
+      content: res.data,
+      meta: res,
+      opportunities,
+      locations,
+      opportunity: true,
+    }
+  } else {
+    const res = await getSingleton(types.VOLUNTEERING_PAGE_CONTENT)
+    return {
+      content: res.data,
+      opportunities,
+      meta: res,
+    }
+  }
+}
+
+export default withLayout(Page)

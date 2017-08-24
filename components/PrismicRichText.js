@@ -32,7 +32,7 @@ const styling = mapValues(types, (v, k) => hoc()(g[v]()))
 const Unknown = g.div({ backgroundColor: "red" })
 const Wrapper = g.div()
 
-const PrismicRichText = ({ source, ...props }) => {
+const PrismicRichText = ({ source, forceType, ...props }) => {
   const content = source.map((s, i) => {
     if (!s.type) {
       const w = 1 / s.length
@@ -46,7 +46,7 @@ const PrismicRichText = ({ source, ...props }) => {
         </Flex>
       )
     } else {
-      const Container = styling[s.type] || Unknown
+      const Container = styling[forceType || s.type] || Unknown
       return (
         <Container {...props} key={i}>
           {s.text}
