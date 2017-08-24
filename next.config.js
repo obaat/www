@@ -17,7 +17,7 @@ module.exports = {
 
     const location = await getByType(types.VOLUNTEERING_OPPORTUNITY_LOCATION)
 
-    const location_pages = volunteering.results.reduce(
+    const location_pages = location.results.reduce(
       (pages, { uid }) =>
         Object.assign({}, pages, {
           [`/location/${uid}`]: {
@@ -29,10 +29,13 @@ module.exports = {
     )
 
     // combine the map of post pages with the home
-    return Object.assign({}, location_pages, volunteering_pages, {
+    const pages = Object.assign({}, location_pages, volunteering_pages, {
       "/": { page: "/" },
       "/volunteering": { page: "/volunteering" },
       "/about": { page: "/about" },
+      "/team": { page: "/team" },
     })
+    console.log({ pages })
+    return pages
   },
 }

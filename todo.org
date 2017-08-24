@@ -7,13 +7,14 @@
 
 * logo
 * video support to slideshow?
+* header menu make pretty
 * breadcrumbs
 * donation fixes
-* form for submitting
+* DONE form for submitting
 * footer
 * stats
 * typograhpy
-* volunteer opp page
-* volunteer opp location page
+* volunteer opp page - needs faq stuff writing
+* DONE volunteer opp location page
 * browser version locking
 * accordion styling / func
