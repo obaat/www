@@ -3,7 +3,7 @@ import theme from "typography-theme-noriega"
 
 const typography = new Typography({
   bodyFontFamily: ["interface", "sans-serif"],
-  "h1,h2,h3,h4": {
+  "h1,h2,h3,h4,h5,h6": {
     lineHeight: 1.2,
   },
 })

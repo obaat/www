@@ -522,7 +522,7 @@ const components = [
       return Object.assign(
         {
           borderStyle: "solid",
-          borderColor: ssColor(props, props.borderColor),
+          borderColor: props.borderColor,
           color: "inherit",
         },
         borderWidth,
