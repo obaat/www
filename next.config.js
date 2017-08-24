@@ -32,7 +32,7 @@ module.exports = {
     const pages = Object.assign({}, location_pages, volunteering_pages, {
       "/": { page: "/" },
       "/volunteering": { page: "/volunteering" },
-      "/about": { page: "/about" },
+      // "/about": { page: "/about" },
       "/team": { page: "/team" },
     })
     console.log({ pages })
