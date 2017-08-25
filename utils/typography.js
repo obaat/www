@@ -1,5 +1,4 @@
 import Typography from "typography"
-import theme from "typography-theme-noriega"
 
 const typography = new Typography({
   bodyFontFamily: ["interface", "sans-serif"],

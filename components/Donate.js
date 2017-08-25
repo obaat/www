@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import g from "glamorous"
 import StripeCheckout from "react-stripe-checkout"
-import { ButtonOutline, ButtonCircle } from "../ui"
+import { ButtonCircle } from "../ui"
 import Button from "./Button"
 
-//TODO: move to primitives + traits
+// TODO: move to primitives + traits
 
 export default g(
   class Donate extends Component {

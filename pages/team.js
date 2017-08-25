@@ -1,14 +1,10 @@
 import React from "react"
-import g from "glamorous"
-import Helmet from "react-helmet"
 import { getSingleton, getByIDs, types } from "../utils/api"
 import { withLayout } from "../components/Layout"
 import PrismicRichText from "../components/PrismicRichText"
-import SlideShow from "../components/SlideShow"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
-import get from "lodash/get"
 
 const TeamMember = ({ uid, odd, data: { name, image, description } }) =>
   <div>

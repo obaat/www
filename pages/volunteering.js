@@ -1,8 +1,6 @@
 import React from "react"
 import Button from "../components/Button"
 import g from "glamorous"
-import { mapValues } from "lodash/fp"
-import Helmet from "react-helmet"
 import Link from "next/link"
 import {
   getByUID,
@@ -17,24 +15,18 @@ import SlideShow from "../components/SlideShow"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 import {
-  Card,
   Absolute,
   Relative,
   BackgroundImage,
   Flex,
   Box,
-  Border,
-  Tabs,
-  TabItem,
   ButtonOutline,
   Panel,
   PanelHeader,
   Heading,
 } from "../ui"
-import { backgroundImageCover } from "../styleHelpers"
 import get from "lodash/get"
-import { branch } from "recompose"
-import Error from "next/error"
+// import Error from "next/error"
 
 const Section = ({ title, id, ...props }) =>
   props.source &&
@@ -147,7 +139,9 @@ const Volunteering = ({ content, opportunities }) => {
             <Heading>Current openings</Heading>
             {opportunities &&
               opportunities.results &&
-              opportunities.results.map(props => <Opportunity {...props} />)}
+              opportunities.results.map((props, i) =>
+                <Opportunity key={i} {...props} />,
+              )}
           </Box>
         </Flex>
       </Container>
@@ -170,7 +164,9 @@ const VolunteeringOpportunity = ({ content, locations }) => {
           </Box>
           <Box w={1 / 3} px={2}>
             <Heading>Available Locations</Heading>
-            {locations.results.map(props => <Location {...props} />)}
+            {locations.results.map((props, i) =>
+              <Location key={i} {...props} />,
+            )}
           </Box>
         </Flex>
       </Container>

@@ -1,12 +1,12 @@
-import { space, color, fontSize } from "styled-system"
+import React from "react"
+import { space, color } from "styled-system"
 import { withLayout } from "../components/Layout"
 import Button from "../components/Button"
 import Helmet from "react-helmet"
 import g from "glamorous"
 import { getSingleton, types } from "../utils/api"
-import { backgroundImageCover, overlay } from "../styleHelpers"
 import PrismicRichText from "../components/PrismicRichText"
-import { Flex, Absolute, Box, Heading, Banner } from "../ui"
+import { Flex, Heading, Banner } from "../ui"
 import SlideShow from "../components/SlideShow"
 
 const Mission = g.div(
@@ -51,7 +51,7 @@ const IndexPage = ({ content }) => {
           {mission_title[0].text}
         </Banner>
         <Mission my={4}>
-          <PrismicRichText source={content.mission} />
+          <PrismicRichText source={mission} />
         </Mission>
         <Button context="info">Learn More</Button>
       </Panel>
@@ -63,8 +63,7 @@ IndexPage.componentDidMount = () => {
   window.setInterval
 }
 
-IndexPage.getInitialProps = async ({ query }) => {
-  const uid = query.id
+IndexPage.getInitialProps = async () => {
   const res = await getSingleton(types.HOME)
   return { content: res.data, meta: res }
 }

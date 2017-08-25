@@ -1,17 +1,14 @@
 import React from "react"
 import g from "glamorous"
-import cx from "classnames"
-import { Button, ButtonCircle, ButtonOutline } from "../ui"
+import { Button } from "../ui"
 import memoize from "lodash/memoize"
-import Link from "next/link"
-import { nest } from "recompose"
 
 const Icon = g.i({
   paddingRight: "9px",
 })
 
 const createButton = memoize(source =>
-  g(source)({
+  g(source, { displayName: "Button" })({
     cursor: "pointer",
   }),
 )

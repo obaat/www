@@ -1,16 +1,18 @@
-import Helmet from 'react-helmet'
-import Header from '../components/Header'
-import g from 'glamorous'
-import { ThemeProvider } from 'glamorous'
-import theme from '../theme'
-import {getByType, types} from '../utils/api'
-import mergeGetInitialProps from '../hoc/mergeGetInitialProps'
-import {menuHeightDocked, menuHeightScrolled} from '../utils/constants'
+import React from "react"
+import Helmet from "react-helmet"
+import Header from "../components/Header"
+import g from "glamorous"
+import { ThemeProvider } from "glamorous"
+import theme from "../theme"
+import { getByType, types } from "../utils/api"
+import mergeGetInitialProps from "../hoc/mergeGetInitialProps"
+import { menuHeightScrolled } from "../utils/constants"
 
 const Container = g.div(
-  ({fixed}) => fixed && ({
-    marginTop: menuHeightScrolled,
-  })
+  ({ fixed }) =>
+    fixed && {
+      marginTop: menuHeightScrolled,
+    },
 )
 
 const Layout = ({ children, volunteering, url }) => {
@@ -18,28 +20,25 @@ const Layout = ({ children, volunteering, url }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container fixed={ fixed }>
+      <Container fixed={fixed}>
         <Helmet
           title=""
           meta={[
-            { name: 'description', content: 'Obaat' },
-            { name: 'keywords', content: 'obaat, uganda' },
+            { name: "description", content: "Obaat" },
+            { name: "keywords", content: "obaat, uganda" },
           ]}
-        >
-        </Helmet>
+        />
         {children}
-        <Header fixed={ fixed } volunteering={ volunteering }/>
+        <Header fixed={fixed} volunteering={volunteering} />
       </Container>
     </ThemeProvider>
   )
 }
 
-const merge = mergeGetInitialProps(
-  async () => {
-    const volunteering = await getByType(types.VOLUNTEERING)
-    return {volunteering: volunteering.results}
-  }
-)
+const merge = mergeGetInitialProps(async () => {
+  const volunteering = await getByType(types.VOLUNTEERING)
+  return { volunteering: volunteering.results }
+})
 
 export default Layout
 

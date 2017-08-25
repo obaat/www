@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import g from "glamorous"
 import { overlay } from "../styleHelpers"
 import range from "lodash/range"
-import toArray from "lodash/toArray"
 import { Chevron } from "reline"
 import { Flex, Box, Absolute, DotButton, Carousel, CarouselSlide } from "../ui"
 

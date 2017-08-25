@@ -5,16 +5,17 @@
 2 vid kiterasa
 3rd buhinga
 
-* logo
-* video support to slideshow?
-* header menu make pretty
-* breadcrumbs
-* donation fixes
-* DONE form for submitting
-* footer
-* stats
 * typograhpy
+* footer
 * volunteer opp page - needs faq + reviews stuff writing
+* accordion styling / func
+* logo
+* apply button everywhere
+* header menu make pretty + fix
+* breadcrumbs
+* video support to slideshow?
+* donation fixes / remove for now
+* DONE form for submitting
+* stats
 * DONE volunteer opp location page
 * browser version locking
-* accordion styling / func

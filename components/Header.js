@@ -9,12 +9,10 @@ import Icon from "./Icon"
 import { Flex, Box } from "grid-styled"
 import { withShowHideOnHover } from "../hoc"
 import { space } from "../styleHelpers"
-import { HumanDate } from "../utils/date"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
 
 const dockedBackground =
   "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)"
-const dockedColor = "rgba(255,255,255,0.4)"
 const undockedColor = "#fff"
 
 const menuScrolled = css.keyframes({
@@ -38,8 +36,6 @@ const menuDocked = css.keyframes({
     height: menuHeightDocked,
   },
 })
-
-const Subtext = g.div({})
 
 const toVolunteeringMenu = src =>
   src.map(({ uid, first_publication_date, data: { title } }) => ({

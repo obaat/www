@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "google",
+    "plugin:flowtype/recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/flowtype",
+    "prettier/react"
+  ],
+  "plugins": ["flowtype", "react", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "comma-dangle": [2, "always-multiline"],
+    "require-jsdoc": "off",
+    "react/display-name": "off",
+    "react/prop-types": "off"
+  }
+}

@@ -1,6 +1,6 @@
+import React from "react"
 import Document, { Head, Main, NextScript } from "next/document"
 import { renderStatic } from "glamor/server"
-import { getByType } from "../utils/api"
 
 export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }) {
@@ -49,7 +49,10 @@ export default class MyDocument extends Document {
 
           <meta name="referrer" content="origin" />
           <meta charSet="utf-8" />
-          <meta name="description" content="We partner up with community-based NGOs to develop network of mutual support and we recruit volunteers to maintain these projects. This is allowing for social investment in the regional economy in the Rwenzori Region and beyond." />
+          <meta
+            name="description"
+            content="We partner up with community-based NGOs to develop network of mutual support and we recruit volunteers to maintain these projects. This is allowing for social investment in the regional economy in the Rwenzori Region and beyond."
+          />
 
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
