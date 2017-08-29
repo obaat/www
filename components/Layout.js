@@ -12,6 +12,7 @@ import Footer from "../components/Footer"
 const Container = g.div(
   {
     fontFamily: "Interface, sans-serif",
+    lineHeight: "1.7em",
   },
   ({ fixed }) =>
     fixed && {

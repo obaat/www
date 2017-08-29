@@ -8,10 +8,12 @@ const types = {
   PROJECTS: "projects",
   HOME: "home",
   FINANCIALS_PAGE_CONTENT: "financials_page",
-  PARTNERSHIPS_PAGE_CONTENT: "financials",
+  PARTNERSHIPS_PAGE_CONTENT: "partnerships",
   PROJECT: "project",
   TEAM_MEMBERS: "team",
   TEAM_PAGE_CONTENT: "team_page",
+  TRUSTEES_PAGE_CONTENT: "trustees_page",
+  CONTACT_PAGE_CONTENT: "contact_page",
 }
 
 // const accessToken =

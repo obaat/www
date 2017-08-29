@@ -6,13 +6,12 @@ const fa = {
   font: "normal normal normal 14px/1 FontAwesome",
   fontSize: "inherit",
   textRendering: "auto",
-  "-webkitFontSmoothing": "antialiased",
+  WebkitFontSmoothing: "antialiased",
 }
 
-export default g(({ name, className, onClick }) =>
-  <i
-    onClick={onClick}
-    className={`fa-${name} ${className}`}
-    aria-hidden="true"
-  />,
-)(fa)
+const Icon = g.i(fa).withProps(props => ({
+  className: `fa-${props.name}`,
+  "aria-hidden": "true",
+}))
+
+export default g(Icon)(fa)

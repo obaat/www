@@ -14,6 +14,7 @@ import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
+import Accordion, { AccordionSection } from "../components/Accordion"
 import {
   Absolute,
   Relative,
@@ -24,9 +25,16 @@ import {
   Panel,
   PanelHeader,
   Heading,
+  Text,
 } from "../ui"
 import get from "lodash/get"
+import { withProps } from "recompose"
 // import Error from "next/error"
+
+const SidebarHeader = withProps({
+  color: "red",
+  f: 3,
+})(Text)
 
 const Section = ({ title, id, ...props }) =>
   props.source &&
@@ -38,23 +46,6 @@ const Section = ({ title, id, ...props }) =>
       </Heading>}
     <PrismicRichText {...props} />
   </div>
-
-const Accordion = g.div()
-
-const AccordionSection = ({ slice_type, items, primary }) => {
-  return (
-    <Panel palette="blue" mb={3}>
-      <PanelHeader palette="blue">
-        {primary.title &&
-          <PrismicRichText forceType="heading5" source={primary.title} />}
-      </PanelHeader>
-      <Box p={3}>
-        {primary.description &&
-          <PrismicRichText source={primary.description} />}
-      </Box>
-    </Panel>
-  )
-}
 
 const Opportunity = ({ uid, data }) =>
   <Relative mb={2}>
@@ -121,22 +112,60 @@ const Location = ({ uid, data }) =>
     </Absolute>
   </Relative>
 
+const renderers = {
+  text_only: ({ primary, items }) =>
+    primary.description && <PrismicRichText source={primary.description} />,
+  faq: ({ items = [] }) =>
+    <Box>
+      {items.map(({ question, answer }, i) =>
+        <Box key={i} w={1}>
+          <PrismicRichText w={1} forceType="heading6" source={question} />
+          <PrismicRichText w={1} source={answer} />
+        </Box>,
+      )}
+    </Box>,
+
+  table: ({ items = [] }) =>
+    <table width="100%">
+      <tbody>
+        {items.map(({ column_1, column_2 }, i) =>
+          <tr key={i}>
+            <td>
+              <PrismicRichText source={column_1} />
+            </td>
+            <td>
+              <PrismicRichText source={column_2} />
+            </td>
+          </tr>,
+        )}
+      </tbody>
+    </table>,
+}
+
+const renderPrismicSlice = ({ slice_type, items, primary }, i) => {
+  const title =
+    primary.title &&
+    <PrismicRichText forceType="heading5" source={primary.title} />
+  const Component = renderers[slice_type]
+  return {
+    title,
+    description: <Component primary={primary} items={items} />,
+  }
+}
+
 const Volunteering = ({ content, opportunities }) => {
+  const accordionItems = content.body.map(renderPrismicSlice)
+
   return (
     <div>
       <PageTitle content={content} />
       <Container py={4}>
         <Flex>
           <Box w={2 / 3} pr={3}>
-            <Section id="description" source={content.description} />
-            <Accordion>
-              {content.body.map((props, i) =>
-                <AccordionSection {...props} key={i} />,
-              )}
-            </Accordion>
+            <Section id="description" source={content.description} mb={3} />
+            <Accordion items={accordionItems} />
           </Box>
           <Box w={1 / 3} px={3}>
-            <Heading>Current openings</Heading>
             {opportunities &&
               opportunities.results &&
               opportunities.results.map((props, i) =>
@@ -163,7 +192,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
             />
           </Box>
           <Box w={1 / 3} px={2}>
-            <Heading>Available Locations</Heading>
+            <SidebarHeader>Available Locations</SidebarHeader>
             {locations.results.map((props, i) =>
               <Location key={i} {...props} />,
             )}

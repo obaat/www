@@ -129,10 +129,11 @@ const OverlayMenu = g.div(
     position: "absolute",
     top: "-15px",
     left: "-15px",
-    minWidth: "300px",
+    minWidth: "200px",
     borderTopRightRadius: "15px",
     borderBottomLeftRadius: "15px",
-    boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.2)",
+    border: "2px solid rgba(0,0,0,0.2)",
+    // boxShadow: "1px 1px 3px 0px ",
   },
   space({
     p: 2,
@@ -284,9 +285,9 @@ export default class Header extends Component {
         {showModal === "wait" && this.renderWait()}
         <Fixed>
           <HeaderContainer px={3} scrolled={scrolled}>
-            <Link href="/">
-              <Logo mr={3} logo={scrolled ? "logo.png" : "logo_white.png"} />
-            </Link>
+            <MenuItem key="logo" href="/">
+              One Brick at a Time
+            </MenuItem>
             {_menuItems.map(({ title, items, href, as }) =>
               <MenuItem key={title} href={href} as={as} items={items}>
                 {title}

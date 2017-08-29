@@ -20,6 +20,6 @@ const palette = ({ palette, theme, invert }) => {
   }
 }
 
-export const defaultTraits = [color, palette, space, width, fontSize, clickable]
+export const defaultTraits = [fontSize, color, palette, space, width, clickable]
 
 export default (hocs = defaultTraits) => Component => g(Component)(...hocs)

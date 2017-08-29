@@ -5,18 +5,18 @@
 2 vid kiterasa
 3rd buhinga
 
+* DONE header menu make pretty + fix
+* DONE form for submitting
+* DONE volunteer opp location page
+* DONE volunteer opp page - needs faq + table view
+* DONE accordion styling / func
+* reviews from volunteers + image view
 * FRONT PAGE
-* typograhpy
-* footer
-* volunteer opp page - needs faq + reviews stuff writing
-* accordion styling / func
-* logo
+* footer 1 / 2
+* logo / chris
 * apply button everywhere
-* header menu make pretty + fix
 * breadcrumbs
 * video support to slideshow?
 * donation fixes / remove for now
-* DONE form for submitting
 * stats
-* DONE volunteer opp location page
 * browser version locking

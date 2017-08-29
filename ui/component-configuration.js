@@ -220,7 +220,7 @@ const components = [
     type: "Heading",
     props: {
       is: "h3",
-      f: 4,
+      fontSize: 5,
       m: 0,
     },
     style: {},

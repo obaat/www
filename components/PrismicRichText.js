@@ -4,30 +4,37 @@ import g from "glamorous"
 import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
 import map from "lodash/map"
+import { Heading, Text, Subhead } from "../ui"
 
-const types = {
-  heading1: "h1",
-  heading2: "h2",
-  heading3: "h3",
-  heading4: "h4",
-  heading5: "h5",
-  heading6: "h6",
-  paragraph: "p",
-  preformatted: "pre",
-  strong: "b",
-  em: "em",
-  "list-item": "li",
-  "o-list-item": "li",
-  "group-list-item": "ul",
-  "group-o-list-item": "ol",
-  image: "img",
-  embed: "embed",
-  hyperlink: "a",
-  label: "label",
-  span: "span",
+const ourTypes = {
+  heading1: g(Heading)({}),
+  heading2: g(Subhead)({}),
+  heading3: g(Subhead)({}),
+  heading4: g(Subhead)({}),
+  heading5: g(Subhead)({}),
+  heading6: g(Subhead)({}),
+  paragraph: g(Text)({}),
 }
 
-const styling = mapValues(types, (v, k) => hoc()(g[v]()))
+const rawTypes = {
+  preformatted: g.pre,
+  strong: g.b,
+  em: g.em,
+  "list-item": g.li,
+  "o-list-item": g.li,
+  "group-list-item": g.ul,
+  "group-o-list-item": g.ol,
+  image: g.img,
+  embed: g.embed,
+  hyperlink: g.a,
+  label: g.label,
+  span: g.span,
+}
+
+const styling = {
+  ...mapValues(rawTypes, (v, k) => hoc()(v({}))),
+  ...ourTypes,
+}
 
 const Unknown = g.div({ backgroundColor: "red" })
 const Wrapper = g.div()
