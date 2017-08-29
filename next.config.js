@@ -34,6 +34,7 @@ module.exports = {
       "/volunteering": { page: "/volunteering" },
       // "/about": { page: "/about" },
       "/team": { page: "/team" },
+      "/trustees": { page: "/trustees" },
     })
     console.log({ pages })
     return pages
