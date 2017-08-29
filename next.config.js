@@ -35,6 +35,9 @@ module.exports = {
       // "/about": { page: "/about" },
       "/team": { page: "/team" },
       "/trustees": { page: "/trustees" },
+      "/financials": { page: "/financials" },
+      "/partners": { page: "/partners" },
+      "/contact": { page: "/contact" },
     })
     console.log({ pages })
     return pages
