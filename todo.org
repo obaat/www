@@ -5,6 +5,7 @@
 2 vid kiterasa
 3rd buhinga
 
+* FRONT PAGE
 * typograhpy
 * footer
 * volunteer opp page - needs faq + reviews stuff writing

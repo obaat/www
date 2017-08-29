@@ -38,7 +38,7 @@ const menuDocked = css.keyframes({
 })
 
 const toVolunteeringMenu = src =>
-  src.map(({ uid, first_publication_date, data: { title } }) => ({
+  src.map(({ uid, data: { title } }) => ({
     title: title[0].text,
     as: `/volunteering/${uid}`,
     href: `/volunteering?id=${uid}`,
@@ -90,18 +90,30 @@ const A = g.a(
   space,
 )
 
-const MenuItem = g(({ items, as, href, ...props }) => {
-  const item = (
-    <Link as={as} href={href}>
-      <A {...props} />
-    </Link>
-  )
-  return items && items.length
-    ? <SecondaryMenu items={items}>
-        {item}
-      </SecondaryMenu>
-    : item
-})(space({ mr: 3, p: 1 }))
+const MenuItem = g(
+  withShowHideOnHover(
+    ({ items, as, onMouseOver, onMouseOut, show, href, ...props }) => {
+      const item = (
+        <Link as={as} href={href}>
+          <A onMouseOver={onMouseOver} {...props} />
+        </Link>
+      )
+      return items && items.length
+        ? <SecondaryMenu items={items} show={show} onMouseOut={onMouseOut}>
+            {item}
+          </SecondaryMenu>
+        : item
+    },
+  ),
+)(
+  {
+    justify: "right",
+    align: "right",
+  },
+  space({
+    mr: 3,
+  }),
+)
 
 const SubMenuItem = g.div({
   marginTop: "15px",
@@ -116,7 +128,7 @@ const OverlayMenu = g.div(
     color: "#000",
     position: "absolute",
     top: "-15px",
-    left: "-5px",
+    left: "-15px",
     minWidth: "300px",
     borderTopRightRadius: "15px",
     borderBottomLeftRadius: "15px",
@@ -127,26 +139,24 @@ const OverlayMenu = g.div(
   }),
 )
 
-const SecondaryMenu = withShowHideOnHover(
-  g(({ children, show, items, className, onMouseOver, onMouseOut }) =>
-    <div className={className}>
-      {show &&
-        <OverlayMenu onMouseOver={onMouseOver}>
-          {children}
-          {items.map(({ title, meta, ...props }) =>
-            <SubMenuItem key={title}>
-              <MenuItem {...props}>
-                {title} {meta}
-              </MenuItem>
-            </SubMenuItem>,
-          )}
-        </OverlayMenu>}
-      {children}
-    </div>,
-  )({
-    position: "relative",
-  }),
-)
+const SecondaryMenu = g(({ show, children, onMouseOut, items, className }) =>
+  <div className={className}>
+    {show &&
+      <OverlayMenu onMouseLeave={onMouseOut}>
+        {children}
+        {items.map(({ title, meta, ...props }) =>
+          <SubMenuItem key={title}>
+            <MenuItem {...props}>
+              {title} {meta}
+            </MenuItem>
+          </SubMenuItem>,
+        )}
+      </OverlayMenu>}
+    {children}
+  </div>,
+)({
+  position: "relative",
+})
 
 const Container = g.div({})
 

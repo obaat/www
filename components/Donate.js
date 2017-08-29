@@ -10,6 +10,7 @@ export default g(
   class Donate extends Component {
     onToken = async token => {
       const { amount, onComplete, onRequestCharge, onFailure } = this.props
+
       onRequestCharge()
       try {
         const res = await fetch(
@@ -26,6 +27,7 @@ export default g(
           },
         )
         const data = await res.json()
+
         onComplete(data)
       } catch (e) {
         console.error(e)
@@ -35,6 +37,7 @@ export default g(
 
     render() {
       const { className, amount, scrolled } = this.props
+
       return (
         <div className={className}>
           <StripeCheckout

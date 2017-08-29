@@ -7,8 +7,12 @@ import theme from "../theme"
 import { getByType, types } from "../utils/api"
 import mergeGetInitialProps from "../hoc/mergeGetInitialProps"
 import { menuHeightScrolled } from "../utils/constants"
+import Footer from "../components/Footer"
 
 const Container = g.div(
+  {
+    fontFamily: "Interface, sans-serif",
+  },
   ({ fixed }) =>
     fixed && {
       marginTop: menuHeightScrolled,
@@ -30,6 +34,7 @@ const Layout = ({ children, volunteering, url }) => {
         />
         {children}
         <Header fixed={fixed} volunteering={volunteering} />
+        <Footer />
       </Container>
     </ThemeProvider>
   )

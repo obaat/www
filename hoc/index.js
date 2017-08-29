@@ -1,27 +1,20 @@
-import {compose, withState, withHandlers} from 'recompose'
-import {debounce} from 'lodash'
+import { compose, withState, withHandlers } from "recompose"
+import { debounce } from "lodash"
 
 let count = 0
 const inProgress = {}
 
 export const withShowHideOnHover = compose(
-  withState('show', 'setShow', false),
+  withState("show", "setShow", false),
   withHandlers(() => {
     const id = count++
     return {
-      onMouseOver: ({show, setShow}) => e => {
-        inProgress[count] && window.clearTimeout(inProgress[count])
+      onMouseOver: ({ setShow }) => e => {
         setShow(true)
       },
-      onMouseOut: ({show, setShow}) => e => {
-        inProgress[count] = window.setTimeout(
-          () => setShow(false)
-          ,20
-        )
-      }
+      onMouseOut: ({ setShow }) => e => {
+        setShow(false)
+      },
     }
   }),
-  ComposedComponent => (props) =>
-    <span onMouseOver={ props.onMouseOver } onMouseOut={ props.onMouseOut }><ComposedComponent { ...props } /></span>
 )
-
