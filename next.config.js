@@ -15,7 +15,7 @@ module.exports = {
       {},
     )
 
-    const projects = await getByType(types.PROJECTS)
+    const projects = await getByType(types.PROJECT)
 
     const project_pages = projects.results.reduce(
       (pages, { uid }) =>

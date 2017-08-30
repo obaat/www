@@ -124,11 +124,10 @@ Page.getInitialProps = async ({ query: { status, id: uid } }) => {
     }
   } else {
     const res = await getSingleton(types.PROJECT_PAGE_CONTENT)
-    const projects = await getByIDs(
-      res.data[status === "planned" ? "planned_projects" : "projects"].map(
-        l => l.project.id,
-      ),
-    )
+    const ids = res.data[
+      status === "planned" ? "planned_projects" : "projects"
+    ].map(l => l.project.id)
+    const projects = ids.length ? await getByIDs(ids) : { results: [] }
     return {
       content: res.data,
       projects,
