@@ -14,6 +14,7 @@ const types = {
   TEAM_PAGE_CONTENT: "team_page",
   TRUSTEES_PAGE_CONTENT: "trustees_page",
   CONTACT_PAGE_CONTENT: "contact_page",
+  APPLY_PAGE_CONTENT: "apply_page",
 }
 
 // const accessToken =

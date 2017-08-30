@@ -4,6 +4,8 @@ import g from "glamorous"
 
 export const clickable = ({ onClick }) => onClick && { cursor: "pointer" }
 export const hide = ({ hide }) => hide && { display: "none" }
+export const bold = ({ bold }) =>
+  bold && { fontWeight: bold > 0 ? bold : "bold" }
 
 const def = ["purple", "orange"]
 
@@ -20,6 +22,14 @@ const palette = ({ palette, theme, invert }) => {
   }
 }
 
-export const defaultTraits = [fontSize, color, palette, space, width, clickable]
+export const defaultTraits = [
+  fontSize,
+  bold,
+  color,
+  palette,
+  space,
+  width,
+  clickable,
+]
 
 export default (hocs = defaultTraits) => Component => g(Component)(...hocs)

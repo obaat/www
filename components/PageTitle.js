@@ -20,7 +20,7 @@ const Container = g(Flex)(
   direction: "column",
 })
 
-export default ({ content, ...props }) => {
+export default ({ content, children, ...props }) => {
   const image = get(
     content,
     ["header_image", "url"],
@@ -31,6 +31,7 @@ export default ({ content, ...props }) => {
     <Container image={image} pt={menuHeightDocked}>
       <Helmet title={title} />
       <PrismicRichText color="#fff" fontSize={6} source={content.title} />
+      {children}
     </Container>
   )
 }

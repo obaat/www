@@ -1,5 +1,6 @@
 import React from "react"
 import Button from "../components/Button"
+import ApplyNow from "../components/ApplyNow"
 import g from "glamorous"
 import Link from "next/link"
 import {
@@ -21,21 +22,22 @@ import {
   BackgroundImage,
   Flex,
   Box,
+  Border,
   ButtonOutline,
   Panel,
   PanelHeader,
   Heading,
   Text,
+  H3,
 } from "../ui"
 import get from "lodash/get"
 import { withProps } from "recompose"
 // import Error from "next/error"
 
-const SidebarHeader = withProps({
-  color: "red",
-  f: 3,
-})(Text)
-
+const SidebarHeader = ({ children }) =>
+  <Border bottom mb={2} pb={1} borderColor="#bbb">
+    {children}
+  </Border>
 const Section = ({ title, id, ...props }) =>
   props.source &&
   <div>
@@ -51,13 +53,14 @@ const Opportunity = ({ uid, data }) =>
   <Relative mb={2}>
     <BackgroundImage
       bg="#000"
+      color="#fff"
       ratio={1 / 2}
       src={get(data, "header_image.url")}
     >
       <Absolute top left right p={1} bg="rgba(0,0,0,0.3)">
         {data.title &&
           <PrismicRichText
-            forceType="heading4"
+            forceType="heading5"
             color="#fff"
             source={data.title}
           />}
@@ -90,7 +93,7 @@ const Location = ({ uid, data }) =>
     <Absolute top left right p={1} bg="rgba(0,0,0,0.3)">
       {data.title &&
         <PrismicRichText
-          forceType="heading3"
+          forceType="heading5"
           color="#fff"
           source={data.title}
         />}
@@ -99,6 +102,7 @@ const Location = ({ uid, data }) =>
       <Link href={`/location/?id=${uid}`} as={`/location/${uid}`}>
         <Button
           palette="normal"
+          color="#fff"
           bg="rgba(0,0,0,0.3)"
           invert
           icon="chevron-right"
@@ -119,8 +123,13 @@ const renderers = {
     <Box>
       {items.map(({ question, answer }, i) =>
         <Box key={i} w={1}>
-          <PrismicRichText w={1} forceType="heading6" source={question} />
-          <PrismicRichText w={1} source={answer} />
+          <PrismicRichText
+            w={1}
+            bold={500}
+            forceType="heading5"
+            source={question}
+          />
+          <PrismicRichText w={1} source={answer} mb={1} />
         </Box>,
       )}
     </Box>,
@@ -158,7 +167,13 @@ const Volunteering = ({ content, opportunities }) => {
 
   return (
     <div>
-      <PageTitle content={content} />
+      <Relative>
+        <PageTitle content={content}>
+          <Absolute bottom right p={3}>
+            <ApplyNow />
+          </Absolute>
+        </PageTitle>
+      </Relative>
       <Container py={4}>
         <Flex>
           <Box w={2 / 3} pr={3}>
@@ -166,6 +181,7 @@ const Volunteering = ({ content, opportunities }) => {
             <Accordion items={accordionItems} />
           </Box>
           <Box w={1 / 3} px={3}>
+            <SidebarHeader>Available Roles</SidebarHeader>
             {opportunities &&
               opportunities.results &&
               opportunities.results.map((props, i) =>
@@ -181,7 +197,13 @@ const Volunteering = ({ content, opportunities }) => {
 const VolunteeringOpportunity = ({ content, locations }) => {
   return (
     <div>
-      <PageTitle content={content} />
+      <Relative>
+        <PageTitle content={content}>
+          <Absolute bottom right p={3}>
+            <ApplyNow />
+          </Absolute>
+        </PageTitle>
+      </Relative>
       <Container py={4}>
         <Flex>
           <Box w={2 / 3} pr={3}>

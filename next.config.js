@@ -38,6 +38,7 @@ module.exports = {
       "/financials": { page: "/financials" },
       "/partners": { page: "/partners" },
       "/contact": { page: "/contact" },
+      "/apply": { page: "/apply" },
     })
     console.log({ pages })
     return pages

@@ -4,16 +4,16 @@ import g from "glamorous"
 import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
 import map from "lodash/map"
-import { Heading, Text, Subhead } from "../ui"
+import { Heading, Text, Subhead, H3, H4, H5, H6 } from "../ui"
 
 const ourTypes = {
-  heading1: g(Heading)({}),
-  heading2: g(Subhead)({}),
-  heading3: g(Subhead)({}),
-  heading4: g(Subhead)({}),
-  heading5: g(Subhead)({}),
-  heading6: g(Subhead)({}),
-  paragraph: g(Text)({}),
+  heading1: Heading,
+  heading2: Subhead,
+  heading3: H3,
+  heading4: H4,
+  heading5: H5,
+  heading6: H6,
+  paragraph: Text,
 }
 
 const rawTypes = {
@@ -36,8 +36,7 @@ const styling = {
   ...ourTypes,
 }
 
-const Unknown = g.div({ backgroundColor: "red" })
-const Wrapper = g.div()
+const Unknown = g.div({ color: "yellow", backgroundColor: "red" })
 
 const PrismicRichText = ({ source, forceType, ...props }) => {
   const content = source.map((s, i) => {
@@ -47,7 +46,7 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
         <Flex>
           {map(s, (v, k) =>
             <Box w={w} p={2}>
-              <PrismicRichText source={v} key={k} />
+              <PrismicRichText source={v} key={k} {...props} />
             </Box>,
           )}
         </Flex>
@@ -63,9 +62,9 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
   })
 
   return (
-    <Wrapper>
+    <div>
       {content}
-    </Wrapper>
+    </div>
   )
 }
 

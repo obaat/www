@@ -107,6 +107,24 @@ const components = [
     }),
   },
   {
+    name: "ButtonCircleOutline",
+    type: "Button",
+    props: {
+      pl: 3,
+      pr: 3,
+    },
+    style: withPalette(props => ({
+      boxShadow: `inset 0 0 0 2px ${props.background}`,
+      backgroundColor: props.foreground,
+      color: props.background,
+      borderRadius: px(99999),
+      ":hover": {
+        backgroundColor: props.background,
+        color: props.foreground,
+      },
+    })),
+  },
+  {
     name: "ButtonTransparent",
     type: "Button",
     props: {
@@ -200,8 +218,6 @@ const components = [
     props: {
       is: "h2",
       f: 5,
-      m: 0,
-      bold: true,
     },
     style: {
       lineHeight: 1.25,
@@ -219,9 +235,44 @@ const components = [
     name: "Subhead",
     type: "Heading",
     props: {
+      is: "h2",
+      f: 4,
+    },
+    style: {},
+  },
+  {
+    name: "H3",
+    type: "Heading",
+    props: {
       is: "h3",
-      fontSize: 5,
-      m: 0,
+      f: 5,
+    },
+    style: {},
+  },
+  {
+    name: "H4",
+    type: "Heading",
+    props: {
+      is: "h4",
+      f: 3,
+    },
+    style: {},
+  },
+  {
+    name: "H5",
+    type: "Heading",
+    props: {
+      is: "h5",
+      fontSize: 2,
+    },
+    style: {},
+  },
+  {
+    name: "H6",
+    type: "Heading",
+    props: {
+      is: "h6",
+      fontSize: 1,
     },
     style: {},
   },
