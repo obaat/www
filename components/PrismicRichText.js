@@ -49,7 +49,6 @@ const handler = {
 }
 
 const PrismicRichText = ({ source, forceType, ...props }) => {
-  console.log({ source })
   const content = source.map((s, i) => {
     if (!s.type) {
       const w = 1 / s.length

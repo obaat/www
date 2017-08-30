@@ -18,7 +18,6 @@ import Container from "../components/Container"
 import get from "lodash/get"
 
 const Location = ({ content = {} }) => {
-  const location = get(content, "title.0.text")
   return (
     <div>
       <Relative>

@@ -15,6 +15,19 @@ module.exports = {
       {},
     )
 
+    const projects = await getByType(types.PROJECTS)
+
+    const project_pages = projects.results.reduce(
+      (pages, { uid }) =>
+        Object.assign({}, pages, {
+          [`/projects/${uid}`]: {
+            page: "/projects",
+            query: { id: uid },
+          },
+        }),
+      {},
+    )
+
     const location = await getByType(types.VOLUNTEERING_OPPORTUNITY_LOCATION)
 
     const location_pages = location.results.reduce(
@@ -29,17 +42,24 @@ module.exports = {
     )
 
     // combine the map of post pages with the home
-    const pages = Object.assign({}, location_pages, volunteering_pages, {
-      "/": { page: "/" },
-      "/volunteering": { page: "/volunteering" },
-      // "/about": { page: "/about" },
-      "/team": { page: "/team" },
-      "/trustees": { page: "/trustees" },
-      "/financials": { page: "/financials" },
-      "/partners": { page: "/partners" },
-      "/contact": { page: "/contact" },
-      "/apply": { page: "/apply" },
-    })
+    const pages = Object.assign(
+      {},
+      location_pages,
+      volunteering_pages,
+      project_pages,
+      {
+        "/": { page: "/" },
+        "/volunteering": { page: "/volunteering" },
+        "/projects": { page: "/projects" },
+        // "/about": { page: "/about" },
+        "/team": { page: "/team" },
+        "/trustees": { page: "/trustees" },
+        "/financials": { page: "/financials" },
+        "/partners": { page: "/partners" },
+        "/contact": { page: "/contact" },
+        "/apply": { page: "/apply" },
+      },
+    )
     console.log({ pages })
     return pages
   },
