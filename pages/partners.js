@@ -2,7 +2,7 @@ import React from "react"
 import { getSingleton, getByIDs, types } from "../utils/api"
 import { withLayout } from "../components/Layout"
 import PrismicRichText from "../components/PrismicRichText"
-import { Flex, Box, Border, BackgroundImage } from "../ui"
+import { Flex, Box, Border, Image, BackgroundImage } from "../ui"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 
@@ -11,7 +11,7 @@ const Partner = ({ title, description, logo, website, uid, odd }) =>
     <a id={uid} />
     <Flex>
       <Box w={1 / 5} mb={3} order={odd ? 2 : 1}>
-        <BackgroundImage src={logo.url} />
+        <Image src={logo.url} />
       </Box>
       <Box
         w={4 / 5}

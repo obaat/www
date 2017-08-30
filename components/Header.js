@@ -45,16 +45,22 @@ const toVolunteeringMenu = src =>
   }))
 
 const aboutItems = [
-  { title: "Ugandian Team", href: "/team" },
+  { title: "Our Story", href: "/about" },
+  { title: "Our Team", href: "/team" },
   { title: "Trustees", href: "/trustees" },
-  { title: "Financials", href: "/financials" },
-  { title: "Partnerships", href: "/partners" },
+  { title: "Our Partners", href: "/partners" },
+  // { title: "Financials", href: "/financials" },
   { title: "Contact Us", href: "/contact" },
 ]
 
+const whatItems = [
+  { title: "Our Projects", href: "/projects?status=complete" },
+  { title: "Planned Projects", href: "/projects?status=planned" },
+]
+
 const menuItems = [
-  { title: "About Us", href: "/about", items: aboutItems },
-  { title: "What We Do", href: "/whatwedo" },
+  { title: "About Us", items: aboutItems },
+  { title: "What We Do", items: whatItems },
   // { title: 'Projects', getChildren: props => toMenu(props.projects) },
   // { title: 'Blog', getChildren: props => toMenu(props.blog) },
   {

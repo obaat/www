@@ -4,6 +4,7 @@ import g from "glamorous"
 import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
 import map from "lodash/map"
+import Link from "next/link"
 import { Heading, Text, Subhead, H3, H4, H5, H6 } from "../ui"
 
 const ourTypes = {
@@ -38,7 +39,17 @@ const styling = {
 
 const Unknown = g.div({ color: "yellow", backgroundColor: "red" })
 
+const handler = {
+  hyperlink: ({ children, url }) =>
+    <Link href={url}>
+      <a target="_blank">
+        {children}
+      </a>
+    </Link>,
+}
+
 const PrismicRichText = ({ source, forceType, ...props }) => {
+  console.log({ source })
   const content = source.map((s, i) => {
     if (!s.type) {
       const w = 1 / s.length
@@ -53,9 +64,46 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
       )
     } else {
       const Container = styling[forceType || s.type] || Unknown
+      // split the text into pieces
+      let content = s.text
+
+      if (s.spans && s.spans.length) {
+        let prevEnd = 0
+        content = s.spans.reduce((parts, { start, end, data, type }) => {
+          const toAdd = []
+
+          if (parts.length === 0 && start > 0) {
+            toAdd.push(
+              <span key="first">
+                {p.text.slice(0, start)}
+              </span>,
+            )
+          }
+
+          if (prevEnd < start) {
+            toAdd.push(
+              <span key={`${prevEnd}-${start}`}>
+                {p.text.slice(prevEnd, start)}
+              </span>,
+            )
+          }
+
+          const part = s.text.slice(start, end)
+          const Component = handler[type]
+          prevEnd = end
+          toAdd.push(
+            <Component key={`${start}-${end}`} {...data}>
+              {part}
+            </Component>,
+          )
+          return parts.concat(toAdd)
+        }, [])
+        content.push(s.text.slice(prevEnd))
+      }
+
       return (
         <Container {...props} key={i}>
-          {s.text}
+          {content}
         </Container>
       )
     }
