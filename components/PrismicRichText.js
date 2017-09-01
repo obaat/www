@@ -18,6 +18,7 @@ const ourTypes = {
 }
 
 const rawTypes = {
+  unformatted: g.span,
   preformatted: g.pre,
   strong: g.b,
   em: g.em,
@@ -40,12 +41,11 @@ const styling = {
 const Unknown = g.div({ color: "yellow", backgroundColor: "red" })
 
 const handler = {
-  hyperlink: ({ children, url }) =>
+  hyperlink: ({ children, url }) => (
     <Link href={url}>
-      <a target="_blank">
-        {children}
-      </a>
-    </Link>,
+      <a target="_blank">{children}</a>
+    </Link>
+  ),
 }
 
 const PrismicRichText = ({ source, forceType, ...props }) => {
@@ -54,11 +54,11 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
       const w = 1 / s.length
       return (
         <Flex>
-          {map(s, (v, k) =>
+          {map(s, (v, k) => (
             <Box w={w} p={2}>
               <PrismicRichText source={v} key={k} {...props} />
-            </Box>,
-          )}
+            </Box>
+          ))}
         </Flex>
       )
     } else {
@@ -72,11 +72,7 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
           const toAdd = []
 
           if (parts.length === 0 && start > 0) {
-            toAdd.push(
-              <span key="first">
-                {p.text.slice(0, start)}
-              </span>,
-            )
+            toAdd.push(<span key="first">{p.text.slice(0, start)}</span>)
           }
 
           if (prevEnd < start) {
@@ -108,11 +104,7 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
     }
   })
 
-  return (
-    <div>
-      {content}
-    </div>
-  )
+  return <span>{content}</span>
 }
 
 export default PrismicRichText

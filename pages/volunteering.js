@@ -15,10 +15,12 @@ import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
+import Icon from "../components/Icon"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import {
   Absolute,
   Relative,
+  Arrow,
   BackgroundImage,
   Flex,
   Box,
@@ -33,6 +35,25 @@ import {
 import get from "lodash/get"
 import { withProps } from "recompose"
 // import Error from "next/error"
+
+const Bread = g.span({})
+
+const Crumb = g.span({
+  whiteSpace: "nowrap",
+  color: "#aaa",
+  display: "inline-block",
+  padding: "3px",
+})
+
+const BreadCrumbs = ({ route }) => (
+  <Bread mb={3}>
+    {route.map(({ title, href }, i) => (
+      <Crumb>
+        {i > 0 && <Icon color="#000" name="angle-double-right" />} {title}
+      </Crumb>
+    ))}
+  </Bread>
+)
 
 const Overlay = g(Absolute)({
   pointerEvents: "none",
@@ -188,6 +209,7 @@ const Volunteering = ({ content, opportunities }) => {
       <Container py={4}>
         <Flex>
           <Box w={2 / 3} pr={3}>
+            <BreadCrumbs route={[{ title: "Volunteering" }]} />
             <Section id="description" source={content.description} mb={3} />
             <Accordion items={accordionItems} />
           </Box>
@@ -218,6 +240,19 @@ const VolunteeringOpportunity = ({ content, locations }) => {
       <Container py={4}>
         <Flex>
           <Box w={2 / 3} pr={3}>
+            <BreadCrumbs
+              route={[
+                { title: "Volunteering" },
+                {
+                  title: (
+                    <PrismicRichText
+                      forceType="unformatted"
+                      source={content.title}
+                    />
+                  ),
+                },
+              ]}
+            />
             <Section
               id="about"
               title="About the Programme"

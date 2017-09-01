@@ -13,7 +13,6 @@
 * DONE apply button everywhere
 * reviews from volunteers + image view
 * FRONT PAGE
-* footer 1 / 2
 * logo / chris
 * breadcrumbs
 * video support to slideshow?
