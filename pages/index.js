@@ -35,14 +35,24 @@ const mapping = {
   volunteer_opportunity: ({ uid }) => `/volunteering/${uid}`,
 }
 
+const mappingLocal = {
+  volunteering_page: () => "/volunteering",
+  volunteer_opportunity: ({ uid }) => `/volunteering?id=${uid}`,
+}
+
 const toRelativeUrl = ({ type, ...props }) => {
   return (mapping[type] || (() => "unknown"))(props)
 }
 
+const toLocalRelativeUrl = ({ type, ...props }) => {
+  return (mappingLocal[type] || (() => "unknown"))(props)
+}
+
 const ActionButton = ({ prismicUrl, href, ...props }) => {
   const resolved = href ? href : toRelativeUrl(prismicUrl)
+  const local = href ? href : toLocalRelativeUrl(prismicUrl)
   return (
-    <Link href={resolved} as={resolved}>
+    <Link href={local} as={resolved}>
       <LeadButton {...props} />
     </Link>
   )

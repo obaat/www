@@ -249,10 +249,11 @@ const components = [
     type: "Heading",
     props: {
       is: "h2",
-      lineHeight: "1em",
       f: 3,
     },
-    style: {},
+    style: {
+      lineHeight: "1em",
+    },
   },
   {
     name: "H3",
@@ -261,7 +262,9 @@ const components = [
       is: "h3",
       f: 3,
     },
-    style: {},
+    style: {
+      lineHeight: "1.2em",
+    },
   },
   {
     name: "H4",
