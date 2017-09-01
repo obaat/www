@@ -16,6 +16,7 @@ import {
   H3,
   H4,
   H5,
+  Text,
   Banner,
   ButtonCircleOutline,
 } from "../ui"
@@ -163,7 +164,10 @@ class IndexPage extends React.Component {
             />
           </Box>
           <Box w={1 / 2} p={3}>
-            <H5>Opportunities Created</H5>
+            <H5>
+              Opportunities Created
+              <Text f={1}>for education, jobs and access to health care</Text>
+            </H5>
             <Count
               innerRef={c => this.counters.push(c)}
               start={0}
