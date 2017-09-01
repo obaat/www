@@ -35,7 +35,7 @@ const Layout = ({ children, volunteering, url }) => {
         />
         {children}
         <Header fixed={fixed} volunteering={volunteering} />
-        {/* <Footer /> */}
+        <Footer />
       </Container>
     </ThemeProvider>
   )
