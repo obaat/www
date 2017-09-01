@@ -1264,6 +1264,10 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
+countup.js@^1.8.5:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-1.9.1.tgz#0ab10eed91fd06eb751443afc1403982452c26f0"
+
 create-ecdh@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.0.tgz#888c723596cdf7612f6498233eebd7a35301737d"
@@ -1291,7 +1295,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.3, create-react-class@^15.6.0:
+create-react-class@^15.5.1, create-react-class@^15.5.3, create-react-class@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
   dependencies:
@@ -3497,6 +3501,12 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-countup@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-2.2.0.tgz#a10b740511f55ad0c200cc36a30fcd3d22ec0ab8"
+  dependencies:
+    countup.js "^1.8.5"
+
 react-deep-force-update@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.1.0.tgz#1c5f36ea96bcbf411605ec063f36c568ea4df86c"
@@ -3561,6 +3571,13 @@ react-side-effect@^1.1.0:
 react-stripe-checkout@^2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/react-stripe-checkout/-/react-stripe-checkout-2.6.3.tgz#3173a870b04e5a3c321a06d24cd53c6030111c45"
+
+react-visibility-sensor@^3.10.1:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/react-visibility-sensor/-/react-visibility-sensor-3.10.1.tgz#4e520b3d15a018ac50e39af63b2f6b79f0eee799"
+  dependencies:
+    create-react-class "^15.5.1"
+    prop-types "^15.5.4"
 
 react@^15.6.1:
   version "15.6.1"

@@ -11,10 +11,10 @@
 * DONE volunteer opp page - needs faq + table view
 * DONE accordion styling / func
 * DONE apply button everywhere
+* DONE breadcrumbs
 * reviews from volunteers + image view
 * FRONT PAGE
 * logo / chris
-* breadcrumbs
 * video support to slideshow?
 * donation fixes / remove for now
 * stats

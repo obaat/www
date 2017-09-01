@@ -15,10 +15,16 @@ import {
   Box,
   H3,
   H4,
+  H5,
   Banner,
   ButtonCircleOutline,
 } from "../ui"
 import SlideShow from "../components/SlideShow"
+import CountUp, { startAnimation } from "react-countup"
+import VisibilitySensor from "react-visibility-sensor"
+import hoc from "../ui/hoc"
+
+const Count = hoc()(CountUp)
 
 const LeadButton = g(Button)({
   minWidth: "250px",
@@ -70,8 +76,9 @@ const Mission = g.div(
 const Panel = g(Flex)(
   {
     alignItems: "center",
+    textAlign: "center",
     justifyContent: "center",
-    flexDirection: "column",
+    flexWrap: "wrap",
   },
   color,
 )
@@ -80,33 +87,97 @@ const Slide = g(Banner)({
   textAlign: "center",
 })
 
-const IndexPage = ({ content }) => {
-  const { hero, mission, mission_title } = content
-  return (
-    <div>
-      <Helmet title="One Brick at a Time" />
-      <Panel p={0}>
-        <SlideShow autoplay autoplaySpeed={5000}>
-          {hero.map(({ image, lead, strapline, url }, i) => (
-            <Slide color="white" backgroundImage={image.url} key={i}>
-              <Heading>{get(lead, "0.text")}</Heading>
-              <Box w={1 / 2}>
-                <H4>{get(strapline, "0.text")}</H4>
-              </Box>
-              <ActionButton prismicUrl={url}>See Opportunities</ActionButton>
-            </Slide>
-          ))}
-        </SlideShow>
-      </Panel>
-      <Panel p={4}>
-        <Heading>{get(mission_title, "0.text")}</Heading>
-        <Mission my={4}>
-          <PrismicRichText source={mission} />
-        </Mission>
-        <ActionButton href="/about">Learn More</ActionButton>
-      </Panel>
-    </div>
-  )
+class IndexPage extends React.Component {
+  counters = []
+
+  onVisible = isVisible => {
+    console.log(isVisible)
+    isVisible && this.counters.forEach(startAnimation)
+  }
+
+  render() {
+    const { content } = this.props
+    const { hero, mission, mission_title } = content
+    return (
+      <div>
+        <Helmet title="One Brick at a Time" />
+        <Panel p={0} direction="column">
+          <SlideShow autoplay autoplaySpeed={5000}>
+            {hero.map(({ image, lead, strapline, url }, i) => (
+              <Slide color="white" backgroundImage={image.url} key={i}>
+                <Heading>{get(lead, "0.text")}</Heading>
+                <Box w={1 / 2}>
+                  <H4>{get(strapline, "0.text")}</H4>
+                </Box>
+                <ActionButton prismicUrl={url}>See Opportunities</ActionButton>
+              </Slide>
+            ))}
+          </SlideShow>
+        </Panel>
+        <Panel p={4} direction="column">
+          <Heading>{get(mission_title, "0.text")}</Heading>
+          <Mission my={4}>
+            <PrismicRichText source={mission} />
+          </Mission>
+          <ActionButton href="/about">Learn More</ActionButton>
+        </Panel>
+        <VisibilitySensor onChange={this.onVisible} />
+        <Panel py={4} direction="row" align="middle" palette="blue" invert>
+          <Box w={1}>
+            <Heading>Our Impact</Heading>
+          </Box>
+          <Box w={1 / 2} p={3}>
+            <H5>Years Experience in Uganda</H5>
+            <Count
+              innerRef={c => this.counters.push(c)}
+              start={0}
+              end={10}
+              f={40}
+              duration={2.75}
+              useEasing={true}
+              suffix="+"
+            />
+          </Box>
+          <Box w={1 / 2} p={3}>
+            <H5>Trained Local People</H5>
+            <Count
+              innerRef={c => this.counters.push(c)}
+              start={0}
+              end={300}
+              f={40}
+              duration={2.75}
+              useEasing={true}
+              suffix="+"
+            />
+          </Box>
+          <Box w={1 / 2} p={3}>
+            <H5>Projects Completed</H5>
+            <Count
+              innerRef={c => this.counters.push(c)}
+              start={0}
+              end={23}
+              f={40}
+              duration={2.75}
+              useEasing={true}
+              suffix="+"
+            />
+          </Box>
+          <Box w={1 / 2} p={3}>
+            <H5>Opportunities Created</H5>
+            <Count
+              innerRef={c => this.counters.push(c)}
+              start={0}
+              end={1500}
+              f={40}
+              duration={2.75}
+              useEasing={true}
+              suffix="+"
+            />
+          </Box>
+        </Panel>
+      </div>
+    )
+  }
 }
 
 IndexPage.componentDidMount = () => {
