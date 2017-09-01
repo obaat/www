@@ -34,6 +34,17 @@ import get from "lodash/get"
 import { withProps } from "recompose"
 // import Error from "next/error"
 
+const Overlay = g(Absolute)({
+  pointerEvents: "none",
+  background: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5))",
+}).withProps({
+  top: true,
+  bottom: true,
+  left: true,
+  right: true,
+  p: 2,
+})
+
 const SidebarHeader = ({ children }) =>
   <Border bottom mb={2} pb={1} borderColor="#bbb">
     {children}
@@ -57,19 +68,19 @@ const Opportunity = ({ uid, data }) =>
       ratio={1 / 2}
       src={get(data, "header_image.url")}
     >
-      <Absolute top left right p={1} bg="rgba(0,0,0,0.3)">
+      <Overlay>
         {data.title &&
           <PrismicRichText
             forceType="heading5"
             color="#fff"
             source={data.title}
           />}
-      </Absolute>
+      </Overlay>
+
       <Absolute bottom right p={1}>
         <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
           <Button
             palette="normal"
-            bg="rgba(0,0,0,0.3)"
             invert
             icon="chevron-right"
             w={1}
@@ -90,14 +101,14 @@ const Location = ({ uid, data }) =>
         <BackgroundImage src={image.url} key={i} />,
       )}
     </SlideShow>
-    <Absolute top left right p={1} bg="rgba(0,0,0,0.3)">
+    <Overlay>
       {data.title &&
         <PrismicRichText
           forceType="heading5"
           color="#fff"
           source={data.title}
         />}
-    </Absolute>
+    </Overlay>
     <Absolute bottom right p={1}>
       <Link href={`/location/?id=${uid}`} as={`/location/${uid}`}>
         <Button

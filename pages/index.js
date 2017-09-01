@@ -1,13 +1,52 @@
 import React from "react"
 import { space, color } from "styled-system"
 import { withLayout } from "../components/Layout"
+import get from "lodash/get"
 import Button from "../components/Button"
 import Helmet from "react-helmet"
 import g from "glamorous"
 import { getSingleton, types } from "../utils/api"
+import Link from "next/link"
 import PrismicRichText from "../components/PrismicRichText"
-import { Flex, Heading, Banner } from "../ui"
+import {
+  Flex,
+  Heading,
+  Subhead,
+  Box,
+  H3,
+  H4,
+  Banner,
+  ButtonCircleOutline,
+} from "../ui"
 import SlideShow from "../components/SlideShow"
+
+const LeadButton = g(Button)({
+  minWidth: "250px",
+  backgroundColor: "rgba(0,0,0,0.2)",
+}).withProps({
+  palette: "brick",
+  as: ButtonCircleOutline,
+  mt: 3,
+  bold: 500,
+})
+
+const mapping = {
+  volunteering_page: () => "/volunteering",
+  volunteer_opportunity: ({ uid }) => `/volunteering/${uid}`,
+}
+
+const toRelativeUrl = ({ type, ...props }) => {
+  return (mapping[type] || (() => "unknown"))(props)
+}
+
+const ActionButton = ({ prismicUrl, href, ...props }) => {
+  const resolved = href ? href : toRelativeUrl(prismicUrl)
+  return (
+    <Link href={resolved} as={resolved}>
+      <LeadButton {...props} />
+    </Link>
+  )
+}
 
 const Mission = g.div(
   {
@@ -27,33 +66,34 @@ const Panel = g(Flex)(
   color,
 )
 
+const Slide = g(Banner)({
+  textAlign: "center",
+})
+
 const IndexPage = ({ content }) => {
   const { hero, mission, mission_title } = content
   return (
     <div>
       <Helmet title="One Brick at a Time" />
       <Panel p={0}>
-        <SlideShow autoplay>
-          {hero.map(({ image, lead, strapline }, i) =>
-            <Banner color="white" backgroundImage={image.url} key={i}>
-              <Heading fontSize={8}>
-                {lead[0].text}
-              </Heading>
-              <Heading f={5}>
-                {strapline[0].text}
-              </Heading>
-            </Banner>,
-          )}
+        <SlideShow autoplay autoplaySpeed={5000}>
+          {hero.map(({ image, lead, strapline, url }, i) => (
+            <Slide color="white" backgroundImage={image.url} key={i}>
+              <Heading>{get(lead, "0.text")}</Heading>
+              <Box w={1 / 2}>
+                <H4>{get(strapline, "0.text")}</H4>
+              </Box>
+              <ActionButton prismicUrl={url}>See Opportunities</ActionButton>
+            </Slide>
+          ))}
         </SlideShow>
       </Panel>
       <Panel p={4}>
-        <Banner fontSize={8}>
-          {mission_title[0].text}
-        </Banner>
+        <Heading>{get(mission_title, "0.text")}</Heading>
         <Mission my={4}>
           <PrismicRichText source={mission} />
         </Mission>
-        <Button context="info">Learn More</Button>
+        <ActionButton href="/about">Learn More</ActionButton>
       </Panel>
     </div>
   )

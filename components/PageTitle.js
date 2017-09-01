@@ -20,6 +20,10 @@ const Container = g(Flex)(
   direction: "column",
 })
 
+const Title = g(PrismicRichText)({
+  textShadow: "0 2px 2px rgba(0,0,0,0.5)",
+})
+
 export default ({ content, children, ...props }) => {
   const image = get(
     content,
@@ -30,7 +34,7 @@ export default ({ content, children, ...props }) => {
   return (
     <Container image={image} pt={menuHeightDocked}>
       <Helmet title={title} />
-      <PrismicRichText color="#fff" fontSize={6} source={content.title} />
+      <Title color="#fff" fontSize={6} source={content.title} />
       {children}
     </Container>
   )

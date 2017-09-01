@@ -51,7 +51,7 @@ export default g(
           >
             <Button
               type="submit"
-              context="danger"
+              context="brick"
               invert={scrolled}
               icon="heart"
               py={1}

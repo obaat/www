@@ -15,9 +15,11 @@ const getMergedConfig = (node, siblings) => {
   let mergedProps = node.props
   let type = node.type
   let target = findParent(node)
+  let is = node.props.is
   while (target) {
     styles.unshift(target.style)
-    mergedProps = { ...mergedProps, ...target.props }
+    if (!is) is = target.props.is
+    mergedProps = { ...target.props, ...mergedProps }
     type = target.type
     target = target.type && findParent(target)
   }
@@ -25,8 +27,8 @@ const getMergedConfig = (node, siblings) => {
   // always return the top level parents type
   return {
     ...node,
-    props: mergedProps,
-    type,
+    props: omit(mergedProps, "is"),
+    type: is || type,
     styles,
   }
 }
@@ -40,7 +42,7 @@ const toComponent = (generatedComponents, config, all) => {
     styles,
   } = getMergedConfig(config)
 
-  const C = typeof type === "string" ? g[props.is || type] : g(type)
+  const C = typeof type === "string" ? g[type] : g(type)
 
   if (!C) {
     throw new Error(`source component for ${displayName} not found`)

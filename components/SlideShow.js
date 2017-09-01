@@ -3,53 +3,63 @@ import g from "glamorous"
 import { overlay } from "../styleHelpers"
 import range from "lodash/range"
 import { Chevron } from "reline"
-import { Flex, Box, Absolute, DotButton, Carousel, CarouselSlide } from "../ui"
+import {
+  Flex,
+  Box,
+  Absolute,
+  Relative,
+  DotButton,
+  Carousel,
+  CarouselSlide,
+} from "../ui"
 
-const FullFlex = g(Flex)(overlay("0px"))
+const AbsMiddle = g(Flex)(({ direction }) => ({
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  left: direction === "left" ? 0 : "auto",
+  right: direction === "right" ? 0 : "auto",
+}))
 
-const CarouselControls = ({
-  hidePaging,
-  controlSize,
-  page,
-  total,
-  onPageClick,
-}) =>
-  <FullFlex key={page} justify="center" column p={2}>
-    <Flex justify="center">
-      <Box py={50} width={1 / 2} onClick={() => onPageClick(page - 1)}>
-        {page > 0 && <Chevron size={controlSize || 48} color="#fff" left />}
-      </Box>
-      <Box
-        width={1 / 2}
-        py={50}
-        style={{ textAlign: "right" }}
-        onClick={() => onPageClick(page + 1)}
-      >
-        {page + 1 < total &&
-          <Chevron size={controlSize || 48} color="#fff" right />}
-      </Box>
+const Arrow = ({ controlSize = 48, page, onPageClick, direction }) => (
+  <AbsMiddle
+    direction={direction}
+    controlSize={controlSize}
+    align="center"
+    justify="center"
+    onClick={() => onPageClick(page + (direction === "left" ? -1 : 1))}
+    px={2}
+  >
+    <Chevron
+      size={controlSize}
+      color="#fff"
+      left={direction === "left"}
+      right={direction === "right"}
+    />
+  </AbsMiddle>
+)
+
+const Paging = ({ total, page, onPageClick }) => (
+  <Absolute left right bottom style={{ margin: "0 auto" }} pb={2}>
+    <Flex
+      style={{
+        height: "20px",
+        width: `${20 * total}px`,
+        margin: "0 auto",
+      }}
+    >
+      {range(total).map(i => (
+        <DotButton
+          color="rgba(255,255,255,0.8)"
+          w={1}
+          key={i}
+          active={i === page}
+          onClick={() => onPageClick(i)}
+        />
+      ))}
     </Flex>
-    {!hidePaging &&
-      <Absolute bottom left right m={1}>
-        <Flex
-          style={{
-            height: "20px",
-            width: `${20 * total}px`,
-            margin: "0 auto",
-          }}
-        >
-          {range(total).map(i =>
-            <DotButton
-              color="rgba(255,255,255,0.8)"
-              w={1}
-              key={i}
-              active={i === page}
-              onClick={() => onPageClick(i)}
-            />,
-          )}
-        </Flex>
-      </Absolute>}
-  </FullFlex>
+  </Absolute>
+)
 
 const OurCarousel = g(Carousel)(props => ({
   "& > div:first-child": {
@@ -129,30 +139,49 @@ export default class SlideShow extends Component {
     }
   }
 
+  onPageClick = index => {
+    this.pause()
+    this.setSlide(index)
+  }
+
   render() {
     const children = React.Children.toArray(this.props.children)
+    const { selectedIndex } = this.state
+    const { controlSize, hidePaging } = this.props
 
     return (
-      <div style={{ width: "100%", position: "relative" }}>
-        {children.length > 1 &&
-          <CarouselControls
-            hidePaging={this.props.hidePaging}
-            controlSize={this.props.controlSize}
-            page={this.state.selectedIndex}
+      <Relative style={{ width: "100%" }}>
+        {selectedIndex > 0 && (
+          <Arrow
+            direction="left"
+            controlSize={controlSize}
+            page={selectedIndex}
+            onPageClick={this.onPageClick}
+          />
+        )}
+        {selectedIndex < this.totalSlides() - 1 && (
+          <Arrow
+            direction="right"
+            controlSize={controlSize}
+            page={selectedIndex}
+            onPageClick={this.onPageClick}
+          />
+        )}
+        {!hidePaging && (
+          <Paging
             total={this.totalSlides()}
-            onPageClick={index => {
-              this.pause()
-              this.setSlide(index)
-            }}
-          />}
-        <OurCarousel index={this.state.selectedIndex} p={0}>
-          {children.map((slide, i) =>
+            page={selectedIndex}
+            onPageClick={this.onPageClick}
+          />
+        )}
+        <OurCarousel index={selectedIndex} p={0}>
+          {children.map((slide, i) => (
             <CarouselSlide p={0} key={i}>
               {slide}
-            </CarouselSlide>,
-          )}
+            </CarouselSlide>
+          ))}
         </OurCarousel>
-      </div>
+      </Relative>
     )
   }
 }

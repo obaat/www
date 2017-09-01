@@ -10,6 +10,15 @@ import { Flex, Box } from "grid-styled"
 import { withShowHideOnHover } from "../hoc"
 import { space } from "../styleHelpers"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
+import NProgress from "nprogress"
+import Router from "next/router"
+
+Router.onRouteChangeStart = url => {
+  console.log(`Loading: ${url}`)
+  NProgress.start()
+}
+Router.onRouteChangeComplete = () => NProgress.done()
+Router.onRouteChangeError = () => NProgress.done()
 
 const dockedBackground =
   "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)"
@@ -99,16 +108,20 @@ const A = g.a(
 const MenuItem = g(
   withShowHideOnHover(
     ({ items, as, onMouseOver, onMouseOut, show, href, ...props }) => {
-      const item = (
+      const item = href ? (
         <Link as={as} href={href}>
           <A onMouseOver={onMouseOver} {...props} />
         </Link>
+      ) : (
+        <A onMouseOver={onMouseOver} {...props} />
       )
-      return items && items.length
-        ? <SecondaryMenu items={items} show={show} onMouseOut={onMouseOut}>
-            {item}
-          </SecondaryMenu>
-        : item
+      return items && items.length ? (
+        <SecondaryMenu items={items} show={show} onMouseOut={onMouseOut}>
+          {item}
+        </SecondaryMenu>
+      ) : (
+        item
+      )
     },
   ),
 )(
@@ -146,22 +159,23 @@ const OverlayMenu = g.div(
   }),
 )
 
-const SecondaryMenu = g(({ show, children, onMouseOut, items, className }) =>
+const SecondaryMenu = g(({ show, children, onMouseOut, items, className }) => (
   <div className={className}>
-    {show &&
+    {show && (
       <OverlayMenu onMouseLeave={onMouseOut}>
         {children}
-        {items.map(({ title, meta, ...props }) =>
+        {items.map(({ title, meta, ...props }) => (
           <SubMenuItem key={title}>
             <MenuItem {...props}>
               {title} {meta}
             </MenuItem>
-          </SubMenuItem>,
-        )}
-      </OverlayMenu>}
+          </SubMenuItem>
+        ))}
+      </OverlayMenu>
+    )}
     {children}
-  </div>,
-)({
+  </div>
+))({
   position: "relative",
 })
 
@@ -200,7 +214,7 @@ const HeaderContainer = g.div(
   space,
 )
 
-const Wait = props =>
+const Wait = props => (
   <Flex justify="center" align="center">
     <Box width={100} px={2}>
       <Icon name="check" fontSize={36} palette="normal" />
@@ -211,8 +225,9 @@ const Wait = props =>
       <code>{props.description}</code>.
     </Box>
   </Flex>
+)
 
-const Success = props =>
+const Success = props => (
   <Flex justify="center" align="center">
     <Box width={100} px={2}>
       <Icon name="check" fontSize={36} palette="success" />
@@ -223,8 +238,9 @@ const Success = props =>
       <code>{props.description}</code>.
     </Box>
   </Flex>
+)
 
-const Failure = props =>
+const Failure = props => (
   <Flex justify="center" align="center">
     <Box width={100} px={2}>
       <Icon name="times" fontSize={36} palette="danger" />
@@ -234,6 +250,7 @@ const Failure = props =>
       We had an issue processing your donation.
     </Box>
   </Flex>
+)
 
 export default class Header extends Component {
   state = {
@@ -294,11 +311,11 @@ export default class Header extends Component {
             <MenuItem key="logo" href="/">
               One Brick at a Time
             </MenuItem>
-            {_menuItems.map(({ title, items, href, as }) =>
+            {_menuItems.map(({ title, items, href, as }) => (
               <MenuItem key={title} href={href} as={as} items={items}>
                 {title}
-              </MenuItem>,
-            )}
+              </MenuItem>
+            ))}
             <Donate
               amount={1500}
               scrolled={scrolled}

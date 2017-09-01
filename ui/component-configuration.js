@@ -115,13 +115,24 @@ const components = [
     },
     style: withPalette(props => ({
       boxShadow: `inset 0 0 0 2px ${props.background}`,
-      backgroundColor: props.foreground,
+      backgroundColor: "transparent",
       color: props.background,
       borderRadius: px(99999),
       ":hover": {
         backgroundColor: props.background,
         color: props.foreground,
       },
+    })),
+  },
+  {
+    name: "ButtonCircleOutlineFilled",
+    type: "ButtonCircleOutline",
+    props: {
+      pl: 3,
+      pr: 3,
+    },
+    style: withPalette(props => ({
+      backgroundColor: props.foreground,
     })),
   },
   {
@@ -220,7 +231,7 @@ const components = [
       f: 5,
     },
     style: {
-      lineHeight: 1.25,
+      lineHeight: 1.5,
     },
     propTypes: {
       left: bool,
@@ -236,7 +247,9 @@ const components = [
     type: "Heading",
     props: {
       is: "h2",
-      f: 4,
+      lineHeight: "1em",
+      marginBottom: "16px",
+      f: 3,
     },
     style: {},
   },
@@ -245,7 +258,7 @@ const components = [
     type: "Heading",
     props: {
       is: "h3",
-      f: 5,
+      f: 3,
     },
     style: {},
   },
@@ -263,7 +276,7 @@ const components = [
     type: "Heading",
     props: {
       is: "h5",
-      fontSize: 2,
+      f: 2,
     },
     style: {},
   },
@@ -272,7 +285,7 @@ const components = [
     type: "Heading",
     props: {
       is: "h6",
-      fontSize: 1,
+      f: 1,
     },
     style: {},
   },
@@ -1003,6 +1016,9 @@ const components = [
       width: "100%",
       overflow: "hidden",
       whiteSpace: "nowrap",
+      "& > div": {
+        whiteSpace: "normal",
+      },
       "& > div:first-child": {
         marginLeft: props.index * -100 + "%",
         transitionProperty: "margin",

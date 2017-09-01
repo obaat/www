@@ -1,7 +1,6 @@
 import React from "react"
 import Document, { Head, Main, NextScript } from "next/document"
 import { renderStatic } from "glamor/server"
-
 export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }) {
     const page = renderPage()
@@ -25,6 +24,11 @@ export default class MyDocument extends Document {
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+          />
+
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css"
           />
 
           <link
