@@ -210,6 +210,7 @@ const components = [
     type: "p",
     props: {
       m: 0,
+      mb: 2,
     },
     style: props => ({
       fontWeight: props.bold ? bold(props) : get(props.theme, "weights.0"),
@@ -228,10 +229,11 @@ const components = [
     type: "Text",
     props: {
       is: "h2",
+      mb: 2,
       f: 5,
     },
     style: {
-      lineHeight: 1.5,
+      lineHeight: "1em",
     },
     propTypes: {
       left: bool,
@@ -248,7 +250,6 @@ const components = [
     props: {
       is: "h2",
       lineHeight: "1em",
-      marginBottom: "16px",
       f: 3,
     },
     style: {},
@@ -264,28 +265,25 @@ const components = [
   },
   {
     name: "H4",
-    type: "Heading",
+    type: "H3",
     props: {
       is: "h4",
-      f: 3,
     },
     style: {},
   },
   {
     name: "H5",
-    type: "Heading",
+    type: "H4",
     props: {
       is: "h5",
-      f: 2,
     },
     style: {},
   },
   {
     name: "H6",
-    type: "Heading",
+    type: "H5",
     props: {
       is: "h6",
-      f: 1,
     },
     style: {},
   },

@@ -45,22 +45,21 @@ const Overlay = g(Absolute)({
   p: 2,
 })
 
-const SidebarHeader = ({ children }) =>
+const SidebarHeader = ({ children }) => (
   <Border bottom mb={2} pb={1} borderColor="#bbb">
     {children}
   </Border>
+)
 const Section = ({ title, id, ...props }) =>
-  props.source &&
-  <div>
-    <a id={id} />
-    {title &&
-      <Heading>
-        {title}
-      </Heading>}
-    <PrismicRichText {...props} />
-  </div>
+  props.source && (
+    <div>
+      <a id={id} />
+      {title && <Heading>{title}</Heading>}
+      <PrismicRichText {...props} />
+    </div>
+  )
 
-const Opportunity = ({ uid, data }) =>
+const Opportunity = ({ uid, data }) => (
   <Relative mb={2}>
     <BackgroundImage
       bg="#000"
@@ -69,12 +68,13 @@ const Opportunity = ({ uid, data }) =>
       src={get(data, "header_image.url")}
     >
       <Overlay>
-        {data.title &&
+        {data.title && (
           <PrismicRichText
             forceType="heading5"
             color="#fff"
             source={data.title}
-          />}
+          />
+        )}
       </Overlay>
 
       <Absolute bottom right p={1}>
@@ -93,21 +93,23 @@ const Opportunity = ({ uid, data }) =>
       </Absolute>
     </BackgroundImage>
   </Relative>
+)
 
-const Location = ({ uid, data }) =>
+const Location = ({ uid, data }) => (
   <Relative mb={2}>
     <SlideShow hidePaging controlSize={18}>
-      {data.image_gallery.map(({ image, description }, i) =>
-        <BackgroundImage src={image.url} key={i} />,
-      )}
+      {data.image_gallery.map(({ image, description }, i) => (
+        <BackgroundImage src={image.url} key={i} />
+      ))}
     </SlideShow>
     <Overlay>
-      {data.title &&
+      {data.title && (
         <PrismicRichText
           forceType="heading5"
           color="#fff"
           source={data.title}
-        />}
+        />
+      )}
     </Overlay>
     <Absolute bottom right p={1}>
       <Link href={`/location/?id=${uid}`} as={`/location/${uid}`}>
@@ -126,29 +128,26 @@ const Location = ({ uid, data }) =>
       </Link>
     </Absolute>
   </Relative>
+)
 
 const renderers = {
   text_only: ({ primary, items }) =>
     primary.description && <PrismicRichText source={primary.description} />,
-  faq: ({ items = [] }) =>
+  faq: ({ items = [] }) => (
     <Box>
-      {items.map(({ question, answer }, i) =>
+      {items.map(({ question, answer }, i) => (
         <Box key={i} w={1}>
-          <PrismicRichText
-            w={1}
-            bold={500}
-            forceType="heading5"
-            source={question}
-          />
-          <PrismicRichText w={1} source={answer} mb={1} />
-        </Box>,
-      )}
-    </Box>,
+          <PrismicRichText w={1} forceType="heading5" source={question} />
+          <PrismicRichText w={1} forceType="paragraph" source={answer} mb={3} />
+        </Box>
+      ))}
+    </Box>
+  ),
 
-  table: ({ items = [] }) =>
+  table: ({ items = [] }) => (
     <table width="100%">
       <tbody>
-        {items.map(({ column_1, column_2 }, i) =>
+        {items.map(({ column_1, column_2 }, i) => (
           <tr key={i}>
             <td>
               <PrismicRichText source={column_1} />
@@ -156,16 +155,17 @@ const renderers = {
             <td>
               <PrismicRichText source={column_2} />
             </td>
-          </tr>,
-        )}
+          </tr>
+        ))}
       </tbody>
-    </table>,
+    </table>
+  ),
 }
 
 const renderPrismicSlice = ({ slice_type, items, primary }, i) => {
-  const title =
-    primary.title &&
+  const title = primary.title && (
     <PrismicRichText forceType="heading5" source={primary.title} />
+  )
   const Component = renderers[slice_type]
   return {
     title,
@@ -195,9 +195,9 @@ const Volunteering = ({ content, opportunities }) => {
             <SidebarHeader>Available Roles</SidebarHeader>
             {opportunities &&
               opportunities.results &&
-              opportunities.results.map((props, i) =>
-                <Opportunity key={i} {...props} />,
-              )}
+              opportunities.results.map((props, i) => (
+                <Opportunity key={i} {...props} />
+              ))}
           </Box>
         </Flex>
       </Container>
@@ -226,9 +226,9 @@ const VolunteeringOpportunity = ({ content, locations }) => {
           </Box>
           <Box w={1 / 3} px={2}>
             <SidebarHeader>Available Locations</SidebarHeader>
-            {locations.results.map((props, i) =>
-              <Location key={i} {...props} />,
-            )}
+            {locations.results.map((props, i) => (
+              <Location key={i} {...props} />
+            ))}
           </Box>
         </Flex>
       </Container>
@@ -237,9 +237,11 @@ const VolunteeringOpportunity = ({ content, locations }) => {
 }
 
 const Page = ({ opportunity, ...props }) =>
-  opportunity
-    ? <VolunteeringOpportunity {...props} />
-    : <Volunteering {...props} />
+  opportunity ? (
+    <VolunteeringOpportunity {...props} />
+  ) : (
+    <Volunteering {...props} />
+  )
 
 Page.getInitialProps = async ({ query }) => {
   const opportunities = await getByType(types.VOLUNTEERING)
