@@ -36,21 +36,24 @@ import get from "lodash/get"
 import { withProps } from "recompose"
 // import Error from "next/error"
 
-const Bread = g.span({})
+const Bread = g(Box)({})
 
 const Crumb = g.span({
   whiteSpace: "nowrap",
   color: "#aaa",
   display: "inline-block",
-  padding: "3px",
 })
 
 const BreadCrumbs = ({ route }) => (
-  <Bread mb={3}>
+  <Bread mb={1}>
     {route.map(({ title, href }, i) => (
-      <Crumb>
-        {i > 0 && <Icon color="#000" name="angle-double-right" />} {title}
-      </Crumb>
+      <span>
+        <Crumb pr={1}>{title} </Crumb>
+        {(route.length === 1 || route.length - 1 > i) && (
+          <Icon pl={1} color="#000" name="angle-double-right" />
+        )}{" "}
+        {route.length === 1 && <Crumb pr={1}>/</Crumb>}
+      </span>
     ))}
   </Bread>
 )
@@ -209,7 +212,12 @@ const Volunteering = ({ content, opportunities }) => {
       <Container py={4}>
         <Flex>
           <Box w={2 / 3} pr={3}>
-            <BreadCrumbs route={[{ title: "Volunteering" }]} />
+            <BreadCrumbs
+              route={[
+                { title: "Volunteering" },
+                { title: "General Information" },
+              ]}
+            />
             <Section id="description" source={content.description} mb={3} />
             <Accordion items={accordionItems} />
           </Box>
