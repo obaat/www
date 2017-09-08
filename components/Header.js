@@ -6,7 +6,7 @@ import { animation } from "polished"
 import { css } from "glamor"
 import Modal from "./Modal"
 import Icon from "./Icon"
-import { Flex, Box } from "grid-styled"
+import { Flex, Box } from "../ui"
 import { withShowHideOnHover } from "../hoc"
 import { space } from "../styleHelpers"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
@@ -204,14 +204,11 @@ const scrolled = ({ scrolled }) =>
         ...animation([menuDocked, "0.2s"]),
       }
 
-const HeaderContainer = g.div(
+const HeaderContainer = g(Flex)(
   {
-    display: "flex",
-    flex: "0 0 100%",
     alignItems: "center",
   },
   scrolled,
-  space,
 )
 
 const Wait = props => (
@@ -307,7 +304,12 @@ export default class Header extends Component {
         {showModal === "failure" && this.renderFailure()}
         {showModal === "wait" && this.renderWait()}
         <Fixed>
-          <HeaderContainer px={3} scrolled={scrolled}>
+          <HeaderContainer
+            wrap="wrap"
+            px={3}
+            py={[2, 2, 2, 0]}
+            scrolled={scrolled}
+          >
             <MenuItem key="logo" href="/">
               One Brick at a Time
             </MenuItem>
@@ -316,13 +318,15 @@ export default class Header extends Component {
                 {title}
               </MenuItem>
             ))}
-            <Donate
-              amount={1500}
-              scrolled={scrolled}
-              onRequestCharge={this.showModal("wait")}
-              onComplete={this.showModal("complete")}
-              onFailure={this.showModal("failure")}
-            />
+            <Box grow={1} align="right">
+              <Donate
+                amount={1500}
+                scrolled={scrolled}
+                onRequestCharge={this.showModal("wait")}
+                onComplete={this.showModal("complete")}
+                onFailure={this.showModal("failure")}
+              />
+            </Box>
           </HeaderContainer>
         </Fixed>
       </Container>
