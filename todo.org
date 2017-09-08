@@ -14,8 +14,9 @@
 * DONE breadcrumbs
 * DONE FRONT PAGE
 * reviews from volunteers + image view
-* logo / chris
+* zoom for slideshow
 * video support to slideshow?
+* INPROGRES logo / chris
 * donation fixes / remove for now
 * stats
 * browser version locking

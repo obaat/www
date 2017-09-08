@@ -47,7 +47,7 @@ const Crumb = g.span({
 const BreadCrumbs = ({ route }) => (
   <Bread mb={1}>
     {route.map(({ title, href }, i) => (
-      <span>
+      <span key={i}>
         <Crumb pr={1}>{title} </Crumb>
         {(route.length === 1 || route.length - 1 > i) && (
           <Icon pl={1} color="#000" name="angle-double-right" />
@@ -209,9 +209,9 @@ const Volunteering = ({ content, opportunities }) => {
           </Absolute>
         </PageTitle>
       </Relative>
-      <Container py={4}>
-        <Flex>
-          <Box w={2 / 3} pr={3}>
+      <Container pt={3}>
+        <Flex wrap="wrap">
+          <Box w={[1, 1, 1, 2 / 3]} pr={[0, 0, 0, 3]}>
             <BreadCrumbs
               route={[
                 { title: "Volunteering" },
@@ -221,7 +221,7 @@ const Volunteering = ({ content, opportunities }) => {
             <Section id="description" source={content.description} mb={3} />
             <Accordion items={accordionItems} />
           </Box>
-          <Box w={1 / 3} px={3}>
+          <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
             <SidebarHeader>Available Roles</SidebarHeader>
             {opportunities &&
               opportunities.results &&
@@ -247,7 +247,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
       </Relative>
       <Container py={4}>
         <Flex>
-          <Box w={2 / 3} pr={3}>
+          <Box w={[1, 1, 1, 2 / 3]} pr={3}>
             <BreadCrumbs
               route={[
                 { title: "Volunteering" },
@@ -267,7 +267,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
               source={content.description}
             />
           </Box>
-          <Box w={1 / 3} px={2}>
+          <Box w={[1, 1, 1, 1 / 3]} px={2}>
             <SidebarHeader>Available Locations</SidebarHeader>
             {locations.results.map((props, i) => (
               <Location key={i} {...props} />

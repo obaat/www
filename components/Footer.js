@@ -10,9 +10,11 @@ const Slink = ({ icon, href, children, ...props }) => (
   </a>
 )
 
+const w = [1, 1, 1, 1 / 3]
+
 export default () => (
-  <Flex palette="brick" invert>
-    <Box w={1 / 3} p={3}>
+  <Flex palette="brick" wrap="wrap" invert>
+    <Box w={w} p={3}>
       <div>Become part of our story</div>
       <Slink
         color="#fff"
@@ -44,7 +46,7 @@ export default () => (
       />
     </Box>
 
-    <Box w={1 / 3} p={3}>
+    <Box w={w} p={3}>
       <addr>
         OBAAT UK<br />
         Charity number 1155099<br />
@@ -54,7 +56,7 @@ export default () => (
         England
       </addr>
     </Box>
-    <Box w={1 / 3} p={3}>
+    <Box w={w} p={3}>
       <addr>
         OBAAT Uganda<br />
         NGO registration number 11726<br />

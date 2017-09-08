@@ -45,15 +45,15 @@ const Project = ({ content = {} }) => {
         </PageTitle>
       </Relative>
       <Container py={4}>
-        <Flex>
-          <Box w={1 / 3}>
+        <Flex wrap="wrap">
+          <Box w={[1, 1, 1, 1 / 3]}>
             <SlideShow autoplay controlSize={18}>
-              {content.image_gallery.map(({ image, description }, i) =>
-                <BackgroundImage src={image.url} key={i} />,
-              )}
+              {content.image_gallery.map(({ image, description }, i) => (
+                <BackgroundImage src={image.url} key={i} />
+              ))}
             </SlideShow>
           </Box>
-          <Box w={2 / 3} pl={3}>
+          <Box w={[1, 1, 1, 2 / 3]} pl={3}>
             <PrismicRichText source={content.description} />
           </Box>
         </Flex>
@@ -62,8 +62,8 @@ const Project = ({ content = {} }) => {
   )
 }
 
-const ProjectPreview = ({ uid, data, slug }) =>
-  <Box w={1 / 2} p={1}>
+const ProjectPreview = ({ uid, data, slug }) => (
+  <Box w={[1, 1, 1, 1 / 2]} p={1}>
     <Relative>
       <Link href={`/projects/?id=${uid}`} as={`/projects/${uid}`}>
         <BackgroundImage
@@ -95,6 +95,7 @@ const ProjectPreview = ({ uid, data, slug }) =>
       </Link>
     </Relative>
   </Box>
+)
 
 const ProjectsIndex = ({ projects, content }) => {
   return (
@@ -103,9 +104,9 @@ const ProjectsIndex = ({ projects, content }) => {
       <Container py={4}>
         <PrismicRichText source={content.description} />
         <Flex>
-          {projects.results.map(props =>
-            <ProjectPreview key={props.uid} {...props} />,
-          )}
+          {projects.results.map(props => (
+            <ProjectPreview key={props.uid} {...props} />
+          ))}
         </Flex>
       </Container>
     </div>

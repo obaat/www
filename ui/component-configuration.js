@@ -210,10 +210,12 @@ const components = [
     type: "p",
     props: {
       m: 0,
-      mb: 2,
+      fontSize: "1em",
+      my: "1.5em",
     },
     style: props => ({
       fontWeight: props.bold ? bold(props) : get(props.theme, "weights.0"),
+      lineHeight: "1.375em",
     }),
     propTypes: {
       left: bool,
@@ -229,11 +231,10 @@ const components = [
     type: "Text",
     props: {
       is: "h2",
-      mb: 2,
-      f: 5,
+      my: "1.5em",
     },
     style: {
-      lineHeight: "1em",
+      fontSize: "1.5em",
     },
     propTypes: {
       left: bool,
@@ -249,10 +250,13 @@ const components = [
     type: "Heading",
     props: {
       is: "h2",
-      f: 3,
+      my: "1.15em",
+      fontSize: "1.05em",
     },
     style: {
-      lineHeight: "1em",
+      lineHeight: "1.286",
+      marginTop: "1.286em",
+      marginBottom: "1.286em",
     },
   },
   {

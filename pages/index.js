@@ -11,6 +11,8 @@ import PrismicRichText from "../components/PrismicRichText"
 import {
   Flex,
   Heading,
+  Relative,
+  Absolute,
   Subhead,
   Box,
   H3,
@@ -84,15 +86,27 @@ const Panel = g(Flex)(
   color,
 )
 
-const Slide = g(Banner)({
-  textAlign: "center",
+const Slide = g(Banner)({})
+
+const Lead = g(Heading)({
+  textAlign: "left",
+}).withProps({
+  f: 50,
+  bold: 500,
+})
+
+const Sub = g(H4)({
+  textAlign: "left",
+})
+
+const BoxOut = g(Absolute)({
+  backgroundColor: "rgba(0,0,0,0.3)",
 })
 
 class IndexPage extends React.Component {
   counters = []
 
   onVisible = isVisible => {
-    console.log(isVisible)
     isVisible && this.counters.forEach(startAnimation)
   }
 
@@ -105,13 +119,30 @@ class IndexPage extends React.Component {
         <Panel p={0} direction="column">
           <SlideShow autoplay autoplaySpeed={5000}>
             {hero.map(({ image, lead, strapline, url }, i) => (
-              <Slide color="white" backgroundImage={image.url} key={i}>
-                <Heading>{get(lead, "0.text")}</Heading>
-                <Box w={1 / 2}>
-                  <H4>{get(strapline, "0.text")}</H4>
-                </Box>
-                <ActionButton prismicUrl={url}>See Opportunities</ActionButton>
-              </Slide>
+              <Relative>
+                <Slide color="white" backgroundImage={image.url} key={i}>
+                  <BoxOut p={3} bottom left>
+                    <Flex
+                      wrap="wrap"
+                      style={{ maxWidth: "800px" }}
+                      align="center"
+                      justify="center"
+                    >
+                      <Box w={1}>
+                        <Lead>{get(lead, "0.text")}</Lead>
+                      </Box>
+                      <Box w={1 / 2}>
+                        <Sub>{get(strapline, "0.text")}</Sub>
+                      </Box>
+                      <Box w={1 / 2}>
+                        <ActionButton prismicUrl={url}>
+                          See Opportunities
+                        </ActionButton>
+                      </Box>
+                    </Flex>
+                  </BoxOut>
+                </Slide>
+              </Relative>
             ))}
           </SlideShow>
         </Panel>

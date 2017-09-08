@@ -6,6 +6,8 @@ const Container = g(Box)({
   marginLeft: "auto",
   marginRight: "auto",
   // textAlign: "justify",
+}).withProps({
+  px: [3, 2, 0],
 })
 
 export default Container

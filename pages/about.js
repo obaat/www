@@ -10,7 +10,7 @@ const About = ({ content = {} }) => {
   return (
     <div>
       <PageTitle content={content} />
-      <Container py={4}>
+      <Container>
         <PrismicRichText source={content.description} />
       </Container>
     </div>
