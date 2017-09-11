@@ -29,7 +29,7 @@ const palette = convert({
   brick: [10, 0.8, 0.44],
 })
 
-const colors = {
+export const colors = {
   black: [palette.black, palette.white],
   blue: [palette.blue, palette.white],
   normal: [palette.greyDark, palette.white],
@@ -43,7 +43,7 @@ const colors = {
   brick: [palette.brick, palette.white],
 }
 
-const invert = reduce(
+export const invert = reduce(
   colors,
   (a, v, k) => ({ [`${k}Invert`]: v.slice().reverse(), ...a }),
   {},

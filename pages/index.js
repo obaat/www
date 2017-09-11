@@ -1,6 +1,9 @@
 import React from "react"
+import Typist from "react-typist"
 import { space, color } from "styled-system"
+import { visible } from "../styleHelpers"
 import { withLayout } from "../components/Layout"
+import { colors } from "../theme"
 import get from "lodash/get"
 import Button from "../components/Button"
 import Helmet from "react-helmet"
@@ -20,7 +23,7 @@ import {
   H5,
   Text,
   Banner,
-  ButtonCircleOutline,
+  ButtonCircle,
 } from "../ui"
 import SlideShow from "../components/SlideShow"
 import CountUp, { startAnimation } from "react-countup"
@@ -31,12 +34,13 @@ const Count = hoc()(CountUp)
 
 const LeadButton = g(Button)({
   minWidth: "250px",
-  backgroundColor: "rgba(0,0,0,0.2)",
 }).withProps({
-  palette: "brick",
-  as: ButtonCircleOutline,
   mt: 3,
-  bold: 500,
+  palette: "brick",
+  invert: true,
+  as: ButtonCircle,
+  f: 4,
+  py: 1,
 })
 
 const mapping = {
@@ -88,27 +92,53 @@ const Panel = g(Flex)(
 
 const Slide = g(Banner)({})
 
-const Lead = g(Heading)({
-  textAlign: "left",
+const Lead = g(hoc()(Typist))({
+  backgroundColor: colors.brick[0],
+  boxDecorationBreak: "clone",
+  color: colors.brick[1],
+  display: "inline",
+  lineHeight: 1.3,
+  padding: "0.5rem",
 }).withProps({
-  f: 50,
-  bold: 500,
+  f: 40,
 })
 
-const Sub = g(H4)({
-  textAlign: "left",
+const Sub = g(H4)(visible, {
+  display: "inline",
+  padding: "0.5rem",
+  backgroundColor: colors.brick[0],
+  boxDecorationBreak: "clone",
+  lineHeight: 1.6,
+  transition: "opacity 0.6s linear",
+  color: colors.brick[1],
+}).withProps({
+  f: 4,
 })
 
 const BoxOut = g(Absolute)({
-  backgroundColor: "rgba(0,0,0,0.3)",
+  margin: "0 auto",
+  maxWidth: "700px",
+  textAlign: "center",
 })
+
+const cursorOpts = {
+  show: false,
+}
+
+const transitionSpeed = 5000
 
 class IndexPage extends React.Component {
   counters = []
+  state = {
+    visible: {},
+  }
 
   onVisible = isVisible => {
     isVisible && this.counters.forEach(startAnimation)
   }
+
+  setTypingDoneFor = i => e =>
+    this.setState({ visible: { ...this.state.visible, [i]: true } })
 
   render() {
     const { content } = this.props
@@ -117,29 +147,28 @@ class IndexPage extends React.Component {
       <div>
         <Helmet title="One Brick at a Time" />
         <Panel p={0} direction="column">
-          <SlideShow autoplay autoplaySpeed={5000}>
+          <SlideShow autoplay autoplaySpeed={transitionSpeed}>
             {hero.map(({ image, lead, strapline, url }, i) => (
               <Relative>
                 <Slide color="white" backgroundImage={image.url} key={i}>
-                  <BoxOut p={3} bottom left>
-                    <Flex
-                      wrap="wrap"
-                      style={{ maxWidth: "800px" }}
-                      align="center"
-                      justify="center"
-                    >
-                      <Box w={1}>
-                        <Lead>{get(lead, "0.text")}</Lead>
-                      </Box>
-                      <Box w={1 / 2}>
-                        <Sub>{get(strapline, "0.text")}</Sub>
-                      </Box>
-                      <Box w={1 / 2}>
-                        <ActionButton prismicUrl={url}>
-                          See Opportunities
-                        </ActionButton>
-                      </Box>
-                    </Flex>
+                  <BoxOut p={3} bottom left right>
+                    <Box>
+                      <Lead
+                        cursor={cursorOpts}
+                        startDelay={i * (transitionSpeed + 100)}
+                        onTypingDone={this.setTypingDoneFor(i)}
+                      >
+                        {get(lead, "0.text")}
+                      </Lead>
+                    </Box>
+                    <Box mt={3}>
+                      <Sub visible={this.state.visible[i]}>
+                        {get(strapline, "0.text")}
+                      </Sub>
+                    </Box>
+                    <ActionButton prismicUrl={url}>
+                      See Opportunities
+                    </ActionButton>
                   </BoxOut>
                 </Slide>
               </Relative>

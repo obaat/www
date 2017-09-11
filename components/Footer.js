@@ -6,7 +6,8 @@ import Icon from "./Icon"
 
 const Slink = ({ icon, href, children, ...props }) => (
   <a href={href} target="_blank">
-    <Icon {...props} /> {children}
+    <Icon {...props} />
+    {children}
   </a>
 )
 

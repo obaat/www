@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/purge/.config/fnm/bin/node /Users/purge/.config/fnm/bin/yarn outdated
+  /Users/purge/.config/fnm/bin/node /Users/purge/.config/fnm/bin/yarn add kea redux-saga reselect redux react-redux
 
 PATH: 
   /Users/purge/.tmuxifier/bin:/Users/purge/.rbenv/shims:/Users/purge/.plenv/shims:/Users/purge/.plenv/bin:/Users/purge/.rbenv/shims:/Users/purge/.plenv/shims:/Users/purge/.plenv/bin:/Users/purge/.config/fnm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
@@ -4612,7 +4612,7 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: connect ECONNREFUSED 104.16.61.173:443
+  Error: connect ECONNREFUSED 104.16.62.173:443
       at Object.exports._errnoException (util.js:1022:11)
       at exports._exceptionWithHostPort (util.js:1045:20)
       at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1146:14)
