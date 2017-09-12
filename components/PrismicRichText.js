@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex, Box } from "grid-styled"
+import { Flex, Box } from "../ui"
 import g from "glamorous"
 import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
