@@ -26,10 +26,7 @@ export default class MyDocument extends Document {
             href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
           />
 
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css"
-          />
+          <link rel="stylesheet" href="/static/nprogress.css" />
 
           <link
             rel="stylesheet"

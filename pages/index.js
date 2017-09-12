@@ -40,7 +40,6 @@ const LeadButton = g(Button)({
   invert: true,
   as: ButtonCircle,
   f: 4,
-  py: 1,
 })
 
 const mapping = {
@@ -116,9 +115,8 @@ const Sub = g(H4)(visible, {
 })
 
 const BoxOut = g(Absolute)({
-  margin: "0 auto",
   maxWidth: "700px",
-  textAlign: "center",
+  textAlign: "left",
 })
 
 const cursorOpts = {
@@ -151,7 +149,7 @@ class IndexPage extends React.Component {
             {hero.map(({ image, lead, strapline, url }, i) => (
               <Relative>
                 <Slide color="white" backgroundImage={image.url} key={i}>
-                  <BoxOut p={3} bottom left right>
+                  <BoxOut p={3} bottom left>
                     <Box>
                       <Lead
                         cursor={cursorOpts}
@@ -166,7 +164,13 @@ class IndexPage extends React.Component {
                         {get(strapline, "0.text")}
                       </Sub>
                     </Box>
-                    <ActionButton prismicUrl={url}>
+                  </BoxOut>
+                  <BoxOut p={3} bottom right>
+                    <ActionButton
+                      icon="chevron-right"
+                      prismicUrl={url}
+                      iconPosition="right"
+                    >
                       See Opportunities
                     </ActionButton>
                   </BoxOut>
