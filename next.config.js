@@ -60,7 +60,6 @@ module.exports = {
         "/apply": { page: "/apply" },
       },
     )
-    console.log({ pages })
     return pages
   },
 }
