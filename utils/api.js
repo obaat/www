@@ -23,7 +23,7 @@ const types = {
 
 const apiBuilder = () =>
   Prismic.api(
-    "https://one-brick.prismic.io/api/v2",
+    "https://one-brick.cdn.prismic.io/api/v2",
     {
       // accessToken,
     },
