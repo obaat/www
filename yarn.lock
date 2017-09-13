@@ -2123,8 +2123,8 @@ glamor@^2.20.40:
     through "^2.3.8"
 
 glamorous@^4.6.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.8.0.tgz#3c7416cd1045ed992953d545b6241d43dbbbbc75"
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.9.1.tgz#41cc6cbafe917e52966dad98101f2ef9344ec118"
   dependencies:
     brcast "^3.0.0"
     fast-memoize "^2.2.7"

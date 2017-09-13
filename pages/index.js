@@ -89,8 +89,6 @@ const Panel = g(Flex)(
   color,
 )
 
-const Slide = g(Banner)({})
-
 const Lead = g(hoc()(Typist))({
   backgroundColor: colors.brick[0],
   boxDecorationBreak: "clone",
@@ -147,8 +145,8 @@ class IndexPage extends React.Component {
         <Panel p={0} direction="column">
           <SlideShow autoplay autoplaySpeed={transitionSpeed}>
             {hero.map(({ image, lead, strapline, url }, i) => (
-              <Relative>
-                <Slide color="white" backgroundImage={image.url} key={i}>
+              <Relative key={i}>
+                <Banner color="white" backgroundImage={image.url}>
                   <BoxOut p={3} bottom left>
                     <Box>
                       <Lead
@@ -174,7 +172,7 @@ class IndexPage extends React.Component {
                       See Opportunities
                     </ActionButton>
                   </BoxOut>
-                </Slide>
+                </Banner>
               </Relative>
             ))}
           </SlideShow>
