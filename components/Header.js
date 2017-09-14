@@ -77,6 +77,17 @@ const menuItems = [
     items: [{ title: "General Information", href: "/volunteering" }],
     getChildren: props => toVolunteeringMenu(props.volunteering),
   },
+  {
+    title: "Bursary",
+    items: [{ title: "Sponsor a Child", href: "/sponsor" }],
+  },
+  {
+    title: "One Brick Supply",
+    items: [
+      { title: "Shop", href: "/shop" },
+      { title: "Spread the Word", href: "/spreadtheword" },
+    ],
+  },
 ]
 
 const Logo = g.div(

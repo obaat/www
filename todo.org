@@ -14,6 +14,7 @@
 * DONE breadcrumbs
 * DONE FRONT PAGE
 * DONE stats
+* bar through index slideshow aka http://www.kadafrica.org/
 * reviews from volunteers + image view
 * zoom for slideshow
 * video support to slideshow?

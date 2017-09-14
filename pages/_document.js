@@ -30,23 +30,13 @@ export default class MyDocument extends Document {
 
           <link
             rel="stylesheet"
-            href="https://rsms.me/interface/interface.css"
-          />
-
-          {/* <link
-            rel="stylesheet"
-            href="https://unpkg.com/tachyons-box-sizing@3.1.7/css/tachyons-box-sizing.min.css"
-          /> */}
-
-          <link
-            rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           />
 
-          {/* <link
+          <link
+            href="https://fonts.googleapis.com/css?family=Josefin+Sans"
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
-          /> */}
+          />
 
           <meta name="referrer" content="origin" />
           <meta charSet="utf-8" />

@@ -84,27 +84,29 @@ const Panel = g(Flex)(
   color,
 )
 
-const Lead = g(hoc()(Typist))({
-  backgroundColor: colors.brick[0],
-  boxDecorationBreak: "clone",
+const Lead = g(Text)({
+  // backgroundColor: colors.brick[0],
+  // boxDecorationBreak: "clone",
   color: colors.brick[1],
   display: "inline",
   lineHeight: 1.3,
   padding: "0.5rem",
+  textTransform: "uppercase",
 }).withProps({
-  f: 40,
+  fontSize: 60,
+  bold: 800,
 })
 
-const Sub = g(H4)(visible, {
+const Sub = g(hoc()(Typist))(visible, {
   display: "inline",
   padding: "0.5rem",
-  backgroundColor: colors.brick[0],
-  boxDecorationBreak: "clone",
+  // backgroundColor: colors.brick[0],
+  // boxDecorationBreak: "clone",
   lineHeight: 1.6,
-  transition: "opacity 0.6s linear",
+  // transition: "opacity 0.6s linear",
   color: colors.brick[1],
 }).withProps({
-  f: 4,
+  fontSize: 4,
 })
 
 const BoxOut = g(Absolute)({
@@ -122,6 +124,7 @@ class IndexPage extends React.Component {
   counters = []
   state = {
     visible: {},
+    visibleSlide: null,
   }
 
   onVisible = isVisible => {
@@ -131,6 +134,8 @@ class IndexPage extends React.Component {
   setTypingDoneFor = i => e =>
     this.setState({ visible: { ...this.state.visible, [i]: true } })
 
+  setVisibleSlideIndex = idx => this.setState({ visibleSlide: idx })
+
   render() {
     const { content } = this.props
     const { hero, mission, mission_title } = content
@@ -138,35 +143,20 @@ class IndexPage extends React.Component {
       <div>
         <Helmet title="One Brick at a Time" />
         <Panel p={0} direction="column">
-          <SlideShow autoplay autoplaySpeed={transitionSpeed}>
-            {hero.map(({ image, lead, strapline, url }, i) => (
+          <SlideShow
+            autoplay
+            autoplaySpeed={transitionSpeed}
+            onChange={this.setVisibleSlideIndex}
+          >
+            {hero.map(({ image, lead, strapline, url, visibleIndex }, i) => (
               <Relative key={i}>
                 <Banner color="white" backgroundImage={image.url}>
-                  <BoxOut p={3} bottom left>
-                    <Box>
-                      <Lead
-                        cursor={cursorOpts}
-                        startDelay={i * (transitionSpeed + 100)}
-                        onTypingDone={this.setTypingDoneFor(i)}
-                      >
-                        {get(lead, "0.text")}
-                      </Lead>
-                    </Box>
-                    <Box mt={3}>
-                      <Sub visible={this.state.visible[i]}>
-                        {get(strapline, "0.text")}
-                      </Sub>
-                    </Box>
-                  </BoxOut>
+                  <Lead>{get(lead, "0.text")}</Lead>
+                  <Sub visible={this.state.visibleSlideIndex === i}>
+                    {get(strapline, "0.text")}
+                  </Sub>
                   <BoxOut p={3} bottom right>
-                    <ActionButton
-                      icon="chevron-right"
-                      iconSize={0}
-                      prismicUrl={url}
-                      iconPosition="right"
-                    >
-                      Find Out More
-                    </ActionButton>
+                    <ActionButton prismicUrl={url}>Find Out More</ActionButton>
                   </BoxOut>
                 </Banner>
               </Relative>

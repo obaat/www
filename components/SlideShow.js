@@ -3,6 +3,7 @@ import g from "glamorous"
 import { overlay } from "../styleHelpers"
 import range from "lodash/range"
 import { Chevron } from "reline"
+import { withProps } from "recompose"
 import {
   Flex,
   Box,
@@ -102,6 +103,7 @@ export default class SlideShow extends Component {
 
   setSlide = index => {
     if (index >= 0 && index < this.totalSlides()) {
+      this.props.onChange && this.props.onChange(index)
       this.setState({ selectedIndex: index })
     }
   }
@@ -145,9 +147,9 @@ export default class SlideShow extends Component {
   }
 
   render() {
-    const children = React.Children.toArray(this.props.children)
     const { selectedIndex } = this.state
     const { controlSize, hidePaging } = this.props
+    const children = React.Children.toArray(this.props.children)
 
     return (
       <Relative style={{ width: "100%" }}>
