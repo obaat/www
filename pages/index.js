@@ -10,6 +10,7 @@ import Helmet from "react-helmet"
 import g from "glamorous"
 import { getSingleton, types } from "../utils/api"
 import Link from "next/link"
+import Icon from "../components/Icon"
 import PrismicRichText from "../components/PrismicRichText"
 import {
   Flex,
@@ -38,7 +39,6 @@ const LeadButton = g(Button)({
   mt: 3,
   palette: "brick",
   invert: true,
-  as: ButtonCircle,
   f: 4,
 })
 
@@ -70,14 +70,9 @@ const ActionButton = ({ prismicUrl, href, ...props }) => {
   )
 }
 
-const Mission = g.div(
-  {
-    fontStyle: "italic",
-    textAlign: "center",
-    maxWidth: "600px",
-  },
-  space,
-)
+const Mission = g.div({
+  textAlign: "left",
+})
 
 const Panel = g(Flex)(
   {
@@ -166,10 +161,11 @@ class IndexPage extends React.Component {
                   <BoxOut p={3} bottom right>
                     <ActionButton
                       icon="chevron-right"
+                      iconSize={0}
                       prismicUrl={url}
                       iconPosition="right"
                     >
-                      See Opportunities
+                      Find Out More
                     </ActionButton>
                   </BoxOut>
                 </Banner>
@@ -177,23 +173,29 @@ class IndexPage extends React.Component {
             ))}
           </SlideShow>
         </Panel>
-        <Panel p={4} direction="column">
-          <Heading>{get(mission_title, "0.text")}</Heading>
-          <Mission my={4}>
-            <PrismicRichText source={mission} />
-          </Mission>
+        <Panel p={4} direction="row">
+          <Box w={1 / 2} p={3} style={{ textAlign: "right" }}>
+            <PrismicRichText source={mission_title} forceType="heading1" />
+          </Box>
+          <Box w={1 / 2} p={3}>
+            <Mission>
+              <PrismicRichText source={mission} />
+            </Mission>
+          </Box>
           <ActionButton href="/about">Learn More</ActionButton>
         </Panel>
         <VisibilitySensor onChange={this.onVisible} />
-        <Panel py={4} direction="row" align="middle" palette="blue" invert>
+        <Panel py={4} direction="row" palette="blue" invert>
           <Box w={1}>
             <Heading>Our Impact</Heading>
           </Box>
           <Box w={1 / 2} p={3}>
-            <H5>Years Experience in Uganda</H5>
+            <Icon f={50} mb={2} name="clock-o" />
+            <H5 mb={2}>Years Experience in Uganda</H5>
             <Count
               innerRef={c => this.counters.push(c)}
               start={0}
+              issio
               end={10}
               f={40}
               duration={2.75}
@@ -202,7 +204,8 @@ class IndexPage extends React.Component {
             />
           </Box>
           <Box w={1 / 2} p={3}>
-            <H5>Trained Local People</H5>
+            <Icon f={50} mb={2} name="wrench" />
+            <H5 mb={2}>Trained Local People</H5>
             <Count
               innerRef={c => this.counters.push(c)}
               start={0}
@@ -214,7 +217,8 @@ class IndexPage extends React.Component {
             />
           </Box>
           <Box w={1 / 2} p={3}>
-            <H5>Projects Completed</H5>
+            <Icon f={50} mb={2} name="hospital-o" />
+            <H5 mb={2}>Projects Completed</H5>
             <Count
               innerRef={c => this.counters.push(c)}
               start={0}
@@ -226,9 +230,12 @@ class IndexPage extends React.Component {
             />
           </Box>
           <Box w={1 / 2} p={3}>
-            <H5>
+            <Icon f={50} mb={2} name="users" />
+            <H5 mb={2}>
               Opportunities Created
-              <Text f={1}>for education, jobs and access to health care</Text>
+              <Text fontSize={0}>
+                for education, jobs and access to health care
+              </Text>
             </H5>
             <Count
               innerRef={c => this.counters.push(c)}

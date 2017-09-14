@@ -2,10 +2,12 @@ import React, { Component } from "react"
 import StripeCheckout from "react-stripe-checkout"
 import { ButtonCircle } from "../ui"
 import Button from "./Button"
+import Link from "next/link"
 
 // TODO: move to primitives + traits
+const VIA_STRIPE = false
 
-export default class Donate extends Component {
+class StripeDonate extends Component {
   onToken = async token => {
     const { amount, onComplete, onRequestCharge, onFailure } = this.props
 
@@ -60,3 +62,19 @@ export default class Donate extends Component {
     )
   }
 }
+
+const DonateJustGiving = ({ scrolled }) => (
+  <a href="https://www.justgiving.com/onebrickatatime" target="_blank">
+    <Button
+      context="brick"
+      invert={scrolled}
+      icon="heart"
+      py={1}
+      as={ButtonCircle}
+    >
+      DONATE
+    </Button>
+  </a>
+)
+
+export default (VIA_STRIPE ? StripeDonate : DonateJustGiving)

@@ -103,7 +103,7 @@ const ProjectsIndex = ({ projects, content }) => {
       <PageTitle content={content} />
       <Container py={4}>
         <PrismicRichText source={content.description} />
-        <Flex>
+        <Flex wrap="wrap">
           {projects.results.map(props => (
             <ProjectPreview key={props.uid} {...props} />
           ))}

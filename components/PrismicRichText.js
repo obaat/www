@@ -5,7 +5,7 @@ import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
 import map from "lodash/map"
 import Link from "next/link"
-import { Heading, Text, Subhead, H3, H4, H5, H6 } from "../ui"
+import { Heading, Text, Subhead, H3, H4, H5, H6, Li, Ol, Ul } from "../ui"
 
 const ourTypes = {
   heading1: Heading,
@@ -15,6 +15,10 @@ const ourTypes = {
   heading5: H5,
   heading6: H6,
   paragraph: Text,
+  "list-item": Li,
+  "o-list-item": Li,
+  "group-list-item": Ul,
+  "group-o-list-item": Ol,
 }
 
 const rawTypes = {
@@ -22,10 +26,6 @@ const rawTypes = {
   preformatted: g.pre,
   strong: g.b,
   em: g.em,
-  "list-item": g.li,
-  "o-list-item": g.li,
-  "group-list-item": g.ul,
-  "group-o-list-item": g.ol,
   image: g.img,
   embed: g.embed,
   hyperlink: g.a,
@@ -97,7 +97,7 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
       }
 
       return (
-        <Container {...props} key={i}>
+        <Container {...props} key={i} mb={2}>
           {content}
         </Container>
       )

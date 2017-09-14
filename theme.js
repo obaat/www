@@ -52,6 +52,7 @@ const theme = {
   colors: { ...colors, ...invert },
   font: "Interface, sans-serif",
   radius: 0,
+  fontSizes: ["0.8em", "1em", "1.05em", "1.10em", "1.50em", "1.70em", "3em"],
 }
 
 export default theme

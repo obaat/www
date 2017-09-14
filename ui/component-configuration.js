@@ -210,8 +210,8 @@ const components = [
     type: "p",
     props: {
       m: 0,
-      fontSize: "1em",
-      my: "1.5em",
+      fontSize: 1,
+      mb: 1,
     },
     style: props => ({
       fontWeight: props.bold ? bold(props) : get(props.theme, "weights.0"),
@@ -231,10 +231,8 @@ const components = [
     type: "Text",
     props: {
       is: "h2",
-      my: "1.5em",
-    },
-    style: {
-      fontSize: "1.5em",
+      fontSize: 5,
+      mb: 1,
     },
     propTypes: {
       left: bool,
@@ -250,8 +248,8 @@ const components = [
     type: "Heading",
     props: {
       is: "h2",
-      my: "1.15em",
-      fontSize: "1.05em",
+      mb: "1.15em",
+      fontSize: 6,
     },
     style: {
       lineHeight: "1.286",
@@ -264,7 +262,8 @@ const components = [
     type: "Heading",
     props: {
       is: "h3",
-      f: 3,
+      mb: 1,
+      fontSize: 5,
     },
     style: {
       lineHeight: "1.2em",
@@ -275,6 +274,7 @@ const components = [
     type: "H3",
     props: {
       is: "h4",
+      fontSize: 4,
     },
     style: {},
   },
@@ -283,6 +283,7 @@ const components = [
     type: "H4",
     props: {
       is: "h5",
+      fontSize: 3,
     },
     style: {},
   },
@@ -299,7 +300,7 @@ const components = [
     type: "Text",
     props: {
       is: "small",
-      f: 0,
+      fontSize: 0,
     },
     style: {},
   },
@@ -308,18 +309,21 @@ const components = [
     type: "Text",
     props: {
       is: "p",
-      f: 3,
+      fontSize: 3,
       m: 0,
     },
     style: {
       lineHeight: 1.25,
     },
   },
+  { name: "Ul", type: "Text", props: { is: "ul" } },
+  { name: "Ol", type: "Text", props: { is: "ol" } },
+  { name: "Li", type: "Text", props: { is: "li" } },
   {
     name: "Pre",
     type: "pre",
     props: {
-      f: 1,
+      fontSize: 1,
       m: 0,
     },
     style: props => ({
@@ -331,7 +335,7 @@ const components = [
     name: "Code",
     type: "code",
     props: {
-      f: 1,
+      fontSize: 1,
     },
     style: props => ({
       fontFamily: props.theme.monospace,
@@ -351,7 +355,7 @@ const components = [
     props: {
       is: "blockquote",
       m: 0,
-      f: 3,
+      fontSize: 3,
     },
     style: {},
   },
@@ -379,7 +383,7 @@ const components = [
     name: "Label",
     type: "label",
     props: {
-      f: 1,
+      fontSize: 1,
       mb: 1,
     },
     style: {
@@ -392,7 +396,7 @@ const components = [
     type: "input",
     props: {
       type: "text",
-      f: "inherit",
+      fontSize: "inherit",
       p: 1,
       m: 0,
       w: 1,
@@ -668,7 +672,7 @@ const components = [
     name: "PanelHeader",
     type: "header",
     props: {
-      f: 2,
+      fontSize: 2,
       p: 2,
     },
     style: props => ({
@@ -681,7 +685,7 @@ const components = [
     name: "PanelFooter",
     type: "footer",
     props: {
-      f: 1,
+      fontSize: 1,
       p: 2,
     },
     style: props => ({
@@ -775,7 +779,7 @@ const components = [
     name: "Badge",
     type: "div",
     props: {
-      f: 0,
+      fontSize: 0,
       p: 1,
       ml: 1,
       mr: 1,

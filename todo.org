@@ -13,10 +13,10 @@
 * DONE apply button everywhere
 * DONE breadcrumbs
 * DONE FRONT PAGE
+* DONE stats
 * reviews from volunteers + image view
 * zoom for slideshow
 * video support to slideshow?
 * INPROGRES logo / chris
 * donation fixes / remove for now
-* stats
 * browser version locking

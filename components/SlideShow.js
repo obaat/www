@@ -151,6 +151,13 @@ export default class SlideShow extends Component {
 
     return (
       <Relative style={{ width: "100%" }}>
+        <OurCarousel index={selectedIndex} p={0}>
+          {children.map((slide, i) => (
+            <CarouselSlide p={0} key={i}>
+              {slide}
+            </CarouselSlide>
+          ))}
+        </OurCarousel>
         {selectedIndex > 0 && (
           <Arrow
             direction="left"
@@ -174,13 +181,6 @@ export default class SlideShow extends Component {
             onPageClick={this.onPageClick}
           />
         )}
-        <OurCarousel index={selectedIndex} p={0}>
-          {children.map((slide, i) => (
-            <CarouselSlide p={0} key={i}>
-              {slide}
-            </CarouselSlide>
-          ))}
-        </OurCarousel>
       </Relative>
     )
   }

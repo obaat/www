@@ -8,6 +8,7 @@ const Container = g(Box)({
   // textAlign: "justify",
 }).withProps({
   px: [3, 2, 0],
+  py: 3,
 })
 
 export default Container

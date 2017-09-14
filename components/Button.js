@@ -1,13 +1,14 @@
 import React from "react"
 import g from "glamorous"
+import Icon from "./Icon"
 import { Button } from "../ui"
 import memoize from "lodash/memoize"
 
-const IconLeft = g.i({
+const IconLeft = g(Icon)({
   paddingRight: "9px",
 })
 
-const IconRight = g.i({
+const IconRight = g(Icon)({
   paddingLeft: "9px",
 })
 
@@ -22,6 +23,7 @@ export default ({
   context = "normal",
   icon,
   iconPosition = "left",
+  iconSize = 1,
   as,
   ...passProps
 }) => {
@@ -29,10 +31,18 @@ export default ({
   return (
     <Component palette={context} {...passProps}>
       {iconPosition === "left" &&
-      icon && <IconLeft className={`fa fa-${icon}`} aria-hidden="true" />}
+      icon && (
+        <IconLeft f={iconSize} className={`fa fa-${icon}`} aria-hidden="true" />
+      )}
       {children}
       {iconPosition === "right" &&
-      icon && <IconRight className={`fa fa-${icon}`} aria-hidden="true" />}
+      icon && (
+        <IconRight
+          f={iconSize}
+          className={`fa fa-${icon}`}
+          aria-hidden="true"
+        />
+      )}
     </Component>
   )
 }
