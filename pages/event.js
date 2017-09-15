@@ -34,7 +34,6 @@ const Unknown = () => <div>?</div>
 
 const renderPrismicSlice = ({ slice_type, items, primary }, i) => {
   const Component = renderers[slice_type] || Unknown
-  console.log({ items })
 
   return (
     <div key={i}>
