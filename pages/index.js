@@ -1,14 +1,14 @@
 import React from "react"
-import Typist from "react-typist"
 import { space, color } from "styled-system"
 import { visible } from "../styleHelpers"
 import { withLayout } from "../components/Layout"
 import { colors } from "../theme"
+import Container from "../components/Container"
 import get from "lodash/get"
 import Button from "../components/Button"
 import Helmet from "react-helmet"
 import g from "glamorous"
-import { getSingleton, types } from "../utils/api"
+import { getByType, getSingleton, types } from "../utils/api"
 import Link from "next/link"
 import Icon from "../components/Icon"
 import PrismicRichText from "../components/PrismicRichText"
@@ -23,6 +23,7 @@ import {
   H4,
   H5,
   Text,
+  SubHead,
   Banner,
   ButtonCircle,
 } from "../ui"
@@ -70,6 +71,26 @@ const ActionButton = ({ prismicUrl, href, ...props }) => {
   )
 }
 
+const Statement = ({ data: { description, name, role } }) => (
+  <Container maxWidth="800px">
+    <Flex>
+      <Box>
+        <Icon f={50} name="quote-left" />
+      </Box>
+      <Box p={3} align="justify">
+        <PrismicRichText forceType="paragraph" source={description} />
+        <Box align="right">
+          <PrismicRichText forceType="heading4" source={name} />
+          <PrismicRichText forceType="paragraph" source={role} />
+        </Box>
+      </Box>
+      <Box alignSelf="flex-end">
+        <Icon f={50} name="quote-right" />
+      </Box>
+    </Flex>
+  </Container>
+)
+
 const Mission = g.div({
   textAlign: "left",
 })
@@ -97,7 +118,7 @@ const Lead = g(Text)({
   bold: 800,
 })
 
-const Sub = g(hoc()(Typist))(visible, {
+const Sub = g(hoc()(Subhead))({
   display: "inline",
   padding: "0.5rem",
   // backgroundColor: colors.brick[0],
@@ -105,8 +126,6 @@ const Sub = g(hoc()(Typist))(visible, {
   lineHeight: 1.6,
   // transition: "opacity 0.6s linear",
   color: colors.brick[1],
-}).withProps({
-  fontSize: 4,
 })
 
 const BoxOut = g(Absolute)({
@@ -137,7 +156,7 @@ class IndexPage extends React.Component {
   setVisibleSlideIndex = idx => this.setState({ visibleSlide: idx })
 
   render() {
-    const { content } = this.props
+    const { content, statements } = this.props
     const { hero, mission, mission_title } = content
     return (
       <div>
@@ -164,7 +183,7 @@ class IndexPage extends React.Component {
           </SlideShow>
         </Panel>
         <Panel p={4} direction="row">
-          <Box w={1 / 2} p={3} style={{ textAlign: "right" }}>
+          <Box w={1 / 2} p={3} align="right">
             <PrismicRichText source={mission_title} forceType="heading1" />
           </Box>
           <Box w={1 / 2} p={3}>
@@ -174,8 +193,24 @@ class IndexPage extends React.Component {
           </Box>
           <ActionButton href="/about">Learn More</ActionButton>
         </Panel>
-        <VisibilitySensor onChange={this.onVisible} />
+
         <Panel py={4} direction="row" palette="blue" invert>
+          <Box w={1}>
+            <Heading>Volunteer Experiences</Heading>
+          </Box>
+          <Box w={1} p={3}>
+            <SlideShow autoplay autoplaySpeed={transitionSpeed}>
+              {statements &&
+                statements.results &&
+                statements.results.map((props, i) => (
+                  <Statement key={i} {...props} />
+                ))}
+            </SlideShow>
+          </Box>
+          <ActionButton href="/volunteering">Learn More</ActionButton>
+        </Panel>
+        <VisibilitySensor onChange={this.onVisible} />
+        <Panel py={4} direction="row" palette="greyLighter" invert>
           <Box w={1}>
             <Heading>Our Impact</Heading>
           </Box>
@@ -185,7 +220,6 @@ class IndexPage extends React.Component {
             <Count
               innerRef={c => this.counters.push(c)}
               start={0}
-              issio
               end={10}
               f={40}
               duration={2.75}
@@ -249,7 +283,8 @@ IndexPage.componentDidMount = () => {
 
 IndexPage.getInitialProps = async () => {
   const res = await getSingleton(types.HOME)
-  return { content: res.data, meta: res }
+  const statements = await getByType(types.VOLUNTEER_STATEMENT)
+  return { content: res.data, statements }
 }
 
 export default withLayout(IndexPage)

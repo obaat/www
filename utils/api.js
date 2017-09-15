@@ -9,6 +9,7 @@ const types = {
   PROJECT: "project",
   EVENT: "event",
   HOME: "home",
+  VOLUNTEER_STATEMENT: "volunteer_statement",
   FINANCIALS_PAGE_CONTENT: "financials_page",
   PARTNERSHIPS_PAGE_CONTENT: "partnerships",
   TEAM_MEMBERS: "team",
