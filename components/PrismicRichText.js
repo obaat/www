@@ -48,6 +48,9 @@ const handler = {
 }
 
 const PrismicRichText = ({ source, forceType, ...props }) => {
+  if (!Array.isArray(source)) {
+    return <Unknown>???</Unknown>
+  }
   const content = source.map((s, i) => {
     if (!s.type) {
       const w = 1 / s.length

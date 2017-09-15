@@ -6,7 +6,7 @@ import { Flex, Box, Border, Image, BackgroundImage } from "../ui"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 
-const Partner = ({ title, description, logo, website, uid, odd }) =>
+const Partner = ({ title, description, logo, website, uid, odd }) => (
   <div>
     <a id={uid} />
     <Flex>
@@ -27,15 +27,17 @@ const Partner = ({ title, description, logo, website, uid, odd }) =>
       </Box>
     </Flex>
   </div>
+)
 
 const Partnerships = ({ content = {} }) => {
   return (
     <div>
       <PageTitle content={content} />
       <Container py={4}>
-        {content.partner.map((props, i) =>
-          <Partner {...props} uid={i} key={i} odd={!!(i % 2)} />,
-        )}
+        {content.partner &&
+          content.partner.map((props, i) => (
+            <Partner {...props} uid={i} key={i} odd={!!(i % 2)} />
+          ))}
       </Container>
     </div>
   )
