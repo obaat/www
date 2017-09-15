@@ -207,7 +207,9 @@ class IndexPage extends React.Component {
                 ))}
             </SlideShow>
           </Box>
-          <ActionButton href="/volunteering">Learn More</ActionButton>
+          <ActionButton palette="blue" invert={false} href="/volunteering">
+            Learn More About Volunteering
+          </ActionButton>
         </Panel>
         <VisibilitySensor onChange={this.onVisible} />
         <Panel py={4} direction="row" palette="greyLighter" invert>
@@ -271,6 +273,9 @@ class IndexPage extends React.Component {
               suffix="+"
             />
           </Box>
+          <ActionButton palette="greyLighter" invert={false} href="/projects">
+            See Our Projects
+          </ActionButton>
         </Panel>
       </div>
     )
