@@ -125,7 +125,6 @@ const Sub = g(hoc()(Subhead))({
   maxWidth: "800px",
   // backgroundColor: colors.brick[0],
   // boxDecorationBreak: "clone",
-  lineHeight: 1.6,
   // transition: "opacity 0.6s linear",
   color: colors.brick[1],
 })
@@ -196,25 +195,8 @@ class IndexPage extends React.Component {
           <ActionButton href="/about">Learn More</ActionButton>
         </Panel>
 
-        <Panel py={4} direction="row" palette="blue" invert>
-          <Box w={1}>
-            <Heading>Volunteer Experiences</Heading>
-          </Box>
-          <Box w={1} p={3}>
-            <SlideShow autoplay autoplaySpeed={transitionSpeed}>
-              {statements &&
-                statements.results &&
-                statements.results.map((props, i) => (
-                  <Statement key={i} {...props} />
-                ))}
-            </SlideShow>
-          </Box>
-          <ActionButton palette="blue" invert={false} href="/volunteering">
-            Learn More About Volunteering
-          </ActionButton>
-        </Panel>
         <VisibilitySensor onChange={this.onVisible} />
-        <Panel py={4} direction="row" palette="greyLighter" invert>
+        <Panel py={4} direction="row" palette="blue" invert>
           <Box w={1}>
             <Heading>Our Impact</Heading>
           </Box>
@@ -275,8 +257,29 @@ class IndexPage extends React.Component {
               suffix="+"
             />
           </Box>
-          <ActionButton palette="greyLighter" invert={false} href="/projects">
+          <ActionButton palette="blue" invert={false} href="/projects">
             See Our Projects
+          </ActionButton>
+        </Panel>
+        <Panel py={4} direction="row" palette="greyLighter" invert>
+          <Box w={1}>
+            <Heading>Volunteer Experiences</Heading>
+          </Box>
+          <Box w={1} p={3}>
+            <SlideShow autoplay autoplaySpeed={transitionSpeed}>
+              {statements &&
+                statements.results &&
+                statements.results.map((props, i) => (
+                  <Statement key={i} {...props} />
+                ))}
+            </SlideShow>
+          </Box>
+          <ActionButton
+            palette="greyLighter"
+            invert={false}
+            href="/volunteering"
+          >
+            Learn More About Volunteering
           </ActionButton>
         </Panel>
       </div>

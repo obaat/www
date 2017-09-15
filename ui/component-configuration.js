@@ -161,9 +161,12 @@ const components = [
     name: "Link",
     type: "a",
     props: {
-      color: "blue",
+      palette: "blue",
     },
-    style: {},
+    style: withPalette(props => ({
+      textDecoration: "underline",
+      textDecorationSkip: "ink",
+    })),
   },
   {
     name: "NavLink",
@@ -230,7 +233,7 @@ const components = [
     name: "Heading",
     type: "Text",
     props: {
-      is: "h2",
+      is: "h1",
       fontSize: 6,
       mb: 1,
     },
@@ -252,9 +255,7 @@ const components = [
       fontSize: 5,
     },
     style: {
-      lineHeight: "1.286",
-      marginTop: "1.286em",
-      marginBottom: "1.286em",
+      lineHeight: 1.286,
     },
   },
   {
@@ -266,7 +267,7 @@ const components = [
       fontSize: 5,
     },
     style: {
-      lineHeight: "1.2em",
+      lineHeight: 1.2,
     },
   },
   {

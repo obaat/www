@@ -8,7 +8,7 @@ const convert = mapValues(hsl => chroma.hsl(hsl).css())
 const transparent = "transparent"
 
 const palette = convert({
-  black: [1, 0, 0.04],
+  black: [1, 0, 0.24],
   blackBis: [0, 0, 0.07],
   blackTer: [0, 0, 0.14],
   greyDarker: [0, 0, 0.21],
@@ -50,9 +50,9 @@ export const invert = reduce(
 )
 const theme = {
   colors: { ...colors, ...invert },
-  font: "Interface, sans-serif",
+  font: "'Josefin Sans', sans-serif",
   radius: 0,
-  fontSizes: ["0.8em", "1em", "1.05em", "1.10em", "1.50em", "1.70em", "3em"],
+  fontSizes: ["0.8em", "1.2em", "1.3em", "1.4em", "1.50em", "1.70em", "3em"],
 }
 
 export default theme

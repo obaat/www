@@ -5,9 +5,22 @@ import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
 import map from "lodash/map"
 import Link from "next/link"
-import { Heading, Text, Subhead, H3, H4, H5, H6, Li, Ol, Ul } from "../ui"
+import {
+  Heading,
+  Text,
+  Link as UILink,
+  Subhead,
+  H3,
+  H4,
+  H5,
+  H6,
+  Li,
+  Ol,
+  Ul,
+} from "../ui"
 
 const ourTypes = {
+  hyperlink: UILink,
   heading1: Heading,
   heading2: Subhead,
   heading3: H3,
@@ -27,7 +40,6 @@ const rawTypes = {
   strong: g.b,
   em: g.em,
   image: g.img,
-  hyperlink: g.a,
   label: g.label,
   span: g.span,
 }
@@ -40,9 +52,11 @@ const styling = {
 const Unknown = g.div({ color: "yellow", backgroundColor: "red" })
 
 const handler = {
-  hyperlink: ({ children, url }) => (
+  hyperlink: ({ children, url, ...props }) => (
     <Link href={url}>
-      <a target="_blank">{children}</a>
+      <UILink {...props} target="_blank">
+        {children}
+      </UILink>
     </Link>
   ),
 }
@@ -72,10 +86,6 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
         let prevEnd = 0
         content = s.spans.reduce((parts, { start, end, data, type }) => {
           const toAdd = []
-
-          if (parts.length === 0 && start > 0) {
-            toAdd.push(<span key="first">{s.text.slice(0, start)}</span>)
-          }
 
           if (prevEnd < start) {
             toAdd.push(

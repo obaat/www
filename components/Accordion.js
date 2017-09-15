@@ -12,7 +12,7 @@ const AccordionContainer = g(Panel)({
   borderBottom: "1px solid #ccc",
 })
 
-const AccordionHeader = g(PanelHeader)({
+const AccordionHeader = g(Box)({
   borderColor: color,
 })
 
@@ -25,14 +25,15 @@ const ToggleIcon = g(Icon)({
 const AccordionSection = ({ open, toggleOpen, title, description }) => {
   return (
     <AccordionContainer>
-      <AccordionHeader bg={color} p={2} onClick={toggleOpen}>
+      <AccordionHeader mb={-2} bg={color} p={2} onClick={toggleOpen}>
         <ToggleIcon name={open ? "chevron-up" : "chevron-down"} />
         {title}
       </AccordionHeader>
-      {open &&
+      {open && (
         <AccordionBody p={2} bg="#fafafa">
           {description}
-        </AccordionBody>}
+        </AccordionBody>
+      )}
     </AccordionContainer>
   )
 }
@@ -46,15 +47,15 @@ const oneOpen = compose(
     }
   }),
 )
-export default oneOpen(({ items, openSection, toggleOpen }) =>
+export default oneOpen(({ items, openSection, toggleOpen }) => (
   <div>
-    {items.map((props, i) =>
+    {items.map((props, i) => (
       <AccordionSection
         key={i}
         open={i === openSection}
         toggleOpen={toggleOpen(i)}
         {...props}
-      />,
-    )}
-  </div>,
-)
+      />
+    ))}
+  </div>
+))
