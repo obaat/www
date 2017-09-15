@@ -112,6 +112,7 @@ const Lead = g(Text)({
   display: "inline",
   lineHeight: 1.3,
   padding: "0.5rem",
+  maxWidth: "800px",
   textTransform: "uppercase",
 }).withProps({
   fontSize: 60,
@@ -121,6 +122,7 @@ const Lead = g(Text)({
 const Sub = g(hoc()(Subhead))({
   display: "inline",
   padding: "0.5rem",
+  maxWidth: "800px",
   // backgroundColor: colors.brick[0],
   // boxDecorationBreak: "clone",
   lineHeight: 1.6,
