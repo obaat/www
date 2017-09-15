@@ -27,6 +27,7 @@ import {
   Panel,
   PanelHeader,
   Heading,
+  SubHead,
   Text,
   H3,
 } from "../ui"
@@ -63,7 +64,7 @@ const Project = ({ content = {} }) => {
 }
 
 const ProjectPreview = ({ uid, data, slug }) => (
-  <Box w={[1, 1, 1, 1 / 2]} p={1}>
+  <Box w={[1, 1, 1, 1 / 2]} p={1} color="#fff">
     <Relative>
       <Link href={`/projects/?id=${uid}`} as={`/projects/${uid}`}>
         <BackgroundImage
@@ -72,24 +73,10 @@ const ProjectPreview = ({ uid, data, slug }) => (
           src={get(data, "header_image.url")}
         >
           <Absolute top left p={2}>
-            <PrismicRichText
-              forceType="heading1"
-              color="#fff"
-              source={data.title}
-            />}
+            <PrismicRichText forceType="heading2" source={data.title} />
           </Absolute>
-          <Absolute bottom right p={2}>
-            <Button
-              palette="normal"
-              bg="rgba(0,0,0,0.3)"
-              invert
-              icon="chevron-right"
-              w={1}
-              py={1}
-              as={ButtonOutline}
-            >
-              See More
-            </Button>
+          <Absolute bottom right p={2} fontSize={4}>
+            See More
           </Absolute>
         </BackgroundImage>
       </Link>

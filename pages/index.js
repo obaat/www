@@ -148,11 +148,11 @@ class IndexPage extends React.Component {
             autoplaySpeed={transitionSpeed}
             onChange={this.setVisibleSlideIndex}
           >
-            {hero.map(({ image, lead, strapline, url, visibleIndex }, i) => (
+            {hero.map(({ image, lead, strapline, url }, i) => (
               <Relative key={i}>
                 <Banner color="white" backgroundImage={image.url}>
                   <Lead>{get(lead, "0.text")}</Lead>
-                  <Sub visible={this.state.visibleSlideIndex === i}>
+                  <Sub visible={this.state.visibleSlide === i}>
                     {get(strapline, "0.text")}
                   </Sub>
                   <BoxOut p={3} bottom right>

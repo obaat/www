@@ -28,6 +28,12 @@ app
       app.render(req, res, actualPage, queryParams)
     })
 
+    server.get("/event/:id", (req, res) => {
+      const actualPage = "/event"
+      const queryParams = { id: req.params.id }
+      app.render(req, res, actualPage, queryParams)
+    })
+
     server.get("*", (req, res) => {
       return handle(req, res)
     })

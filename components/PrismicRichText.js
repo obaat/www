@@ -27,7 +27,6 @@ const rawTypes = {
   strong: g.b,
   em: g.em,
   image: g.img,
-  embed: g.embed,
   hyperlink: g.a,
   label: g.label,
   span: g.span,
@@ -72,13 +71,13 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
           const toAdd = []
 
           if (parts.length === 0 && start > 0) {
-            toAdd.push(<span key="first">{p.text.slice(0, start)}</span>)
+            toAdd.push(<span key="first">{s.text.slice(0, start)}</span>)
           }
 
           if (prevEnd < start) {
             toAdd.push(
               <span key={`${prevEnd}-${start}`}>
-                {p.text.slice(prevEnd, start)}
+                {s.text.slice(prevEnd, start)}
               </span>,
             )
           }

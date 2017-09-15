@@ -231,7 +231,7 @@ const components = [
     type: "Text",
     props: {
       is: "h2",
-      fontSize: 5,
+      fontSize: 6,
       mb: 1,
     },
     propTypes: {
@@ -249,7 +249,7 @@ const components = [
     props: {
       is: "h2",
       mb: "1.15em",
-      fontSize: 6,
+      fontSize: 5,
     },
     style: {
       lineHeight: "1.286",

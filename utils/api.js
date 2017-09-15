@@ -7,6 +7,7 @@ const types = {
   BLOG: "blog_post",
   PROJECT_PAGE_CONTENT: "projects_page",
   PROJECT: "project",
+  EVENT: "event",
   HOME: "home",
   FINANCIALS_PAGE_CONTENT: "financials_page",
   PARTNERSHIPS_PAGE_CONTENT: "partnerships",
@@ -16,6 +17,7 @@ const types = {
   CONTACT_PAGE_CONTENT: "contact_page",
   APPLY_PAGE_CONTENT: "apply_page",
   ABOUT_PAGE_CONTENT: "about_page",
+  SPREAD_THE_WORD_PAGE_CONTENT: "spread_the_word",
 }
 
 // const accessToken =

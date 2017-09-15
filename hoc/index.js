@@ -1,5 +1,5 @@
 import { compose, withState, withHandlers } from "recompose"
-import { debounce } from "lodash"
+import debounce from "lodash/debounce"
 
 let count = 0
 const inProgress = {}
