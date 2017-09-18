@@ -25,7 +25,7 @@ import {
   Text,
   SubHead,
   Banner,
-  ButtonCircle,
+  Measure,
 } from "../ui"
 import SlideShow from "../components/SlideShow"
 import CountUp, { startAnimation } from "react-countup"
@@ -91,7 +91,7 @@ const Statement = ({ data: { description, name, role } }) => (
   </Container>
 )
 
-const Mission = g.div({
+const Mission = g(Measure)({
   textAlign: "left",
 })
 

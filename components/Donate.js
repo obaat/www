@@ -1,12 +1,50 @@
 import React, { Component } from "react"
 import StripeCheckout from "react-stripe-checkout"
 import { ButtonCircle } from "../ui"
+import Modal from "./Modal"
 import Button from "./Button"
 import Link from "next/link"
 
 // TODO: move to primitives + traits
 const VIA_STRIPE = false
 
+const Wait = props => (
+  <Flex justify="center" align="center">
+    <Box width={100} px={2}>
+      <Icon name="check" fontSize={36} palette="normal" />
+    </Box>
+    <Box flex={1}>
+      <h3>Many Thanks!</h3>
+      We've received your donation. It will appear on your statement as{" "}
+      <code>{props.description}</code>.
+    </Box>
+  </Flex>
+)
+
+const Success = props => (
+  <Flex justify="center" align="center">
+    <Box width={100} px={2}>
+      <Icon name="check" fontSize={36} palette="success" />
+    </Box>
+    <Box flex={1}>
+      <h3>Many Thanks!</h3>
+      We've received your donation. It will appear on your statement as{" "}
+      <code>{props.description}</code>.
+    </Box>
+  </Flex>
+)
+
+const Failure = props => (
+  <Flex justify="center" align="center">
+    <Box width={100} px={2}>
+      <Icon name="times" fontSize={36} palette="danger" />
+    </Box>
+    <Box flex={1}>
+      <h3>Something's Wrong</h3>
+      We had an issue processing your donation.
+    </Box>
+  </Flex>
+)
 class StripeDonate extends Component {
   onToken = async token => {
     const { amount, onComplete, onRequestCharge, onFailure } = this.props
@@ -35,7 +73,27 @@ class StripeDonate extends Component {
     }
   }
 
+  renderWait = () => this.renderModal(<Wait />, false)
+  renderComplete = props => this.renderModal(<Success {...props} />)
+  renderFailure = props => this.renderModal(<Failure {...props} />)
+
+  showModal = name => props =>
+    this.setState({ showModal: name, componentProps: props })
+
+  renderModal(content, canClose = true) {
+    return (
+      <Modal
+        canClose={canClose}
+        isOpen
+        onRequestClose={() => this.setState({ showModal: null })}
+      >
+        {content}
+      </Modal>
+    )
+  }
+
   render() {
+    const { showModal } = this.state
     const { amount, scrolled } = this.props
 
     return (
@@ -58,6 +116,9 @@ class StripeDonate extends Component {
         >
           DONATE
         </Button>
+        {showModal === "complete" && this.renderComplete()}
+        {showModal === "failure" && this.renderFailure()}
+        {showModal === "wait" && this.renderWait()}
       </StripeCheckout>
     )
   }
@@ -69,6 +130,8 @@ const DonateJustGiving = ({ scrolled }) => (
       context="brick"
       invert={scrolled}
       icon="heart"
+      fontSize={0}
+      iconSize={0}
       py={1}
       as={ButtonCircle}
     >

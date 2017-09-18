@@ -50,7 +50,7 @@ const BreadCrumbs = ({ route }) => (
       <span key={i}>
         <Crumb pr={1}>{title} </Crumb>
         {(route.length === 1 || route.length - 1 > i) && (
-            <Icon pl={1} color="#000" name="angle-double-right" />
+            <Icon pl={1} f={0} color="#000" name="angle-double-right" />
           )}{" "}
         {route.length === 1 && <Crumb pr={1}>/</Crumb>}
       </span>

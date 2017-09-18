@@ -16,6 +16,7 @@
 * DONE stats
 * DONE donation fixes / remove for now
 * DONE reviews from volunteers + image view
+* fix stupid menubar
 * zoom for slideshow
 * video support to slideshow?
 * INPROGRESS logo / chris

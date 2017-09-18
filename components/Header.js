@@ -1,22 +1,16 @@
 import React, { Component } from "react"
 import g from "glamorous"
 import Donate from "./Donate"
-import Link from "next/link"
 import { animation } from "polished"
 import { css } from "glamor"
-import Modal from "./Modal"
 import Icon from "./Icon"
 import { Flex, Box } from "../ui"
-import { withShowHideOnHover } from "../hoc"
-import { space } from "../styleHelpers"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
+import Menu, { MenuItem, SecondaryMenu } from "./Menu"
 import NProgress from "nprogress"
 import Router from "next/router"
 
-Router.onRouteChangeStart = url => {
-  console.log(`Loading: ${url}`)
-  NProgress.start()
-}
+Router.onRouteChangeStart = () => NProgress.start()
 Router.onRouteChangeComplete = () => NProgress.done()
 Router.onRouteChangeError = () => NProgress.done()
 
@@ -46,50 +40,6 @@ const menuDocked = css.keyframes({
   },
 })
 
-const toVolunteeringMenu = src =>
-  src.map(({ uid, data: { title } }) => ({
-    title: title[0].text,
-    as: `/volunteering/${uid}`,
-    href: `/volunteering?id=${uid}`,
-  }))
-
-const aboutItems = [
-  { title: "Our Story", href: "/about" },
-  { title: "Our Team", href: "/team" },
-  { title: "Trustees", href: "/trustees" },
-  { title: "Our Partners", href: "/partners" },
-  // { title: "Financials", href: "/financials" },
-  { title: "Contact Us", href: "/contact" },
-]
-
-const whatItems = [
-  { title: "Our Projects", href: "/projects?status=complete" },
-  { title: "Planned Projects", href: "/projects?status=planned" },
-]
-
-const menuItems = [
-  { title: "About Us", items: aboutItems },
-  { title: "What We Do", items: whatItems },
-  // { title: 'Projects', getChildren: props => toMenu(props.projects) },
-  // { title: 'Blog', getChildren: props => toMenu(props.blog) },
-  {
-    title: "Volunteer With Us",
-    items: [{ title: "General Information", href: "/volunteering" }],
-    getChildren: props => toVolunteeringMenu(props.volunteering),
-  },
-  {
-    title: "Bursary",
-    items: [{ title: "Sponsor a Child", href: "/sponsor" }],
-  },
-  {
-    title: "One Brick Supply",
-    items: [
-      { title: "Shop", href: "/shop" },
-      { title: "Spread the Word", href: "/spreadtheword" },
-    ],
-  },
-]
-
 const Logo = g.div(
   {
     backgroundSize: "cover",
@@ -99,96 +49,7 @@ const Logo = g.div(
   ({ logo }) => ({
     backgroundImage: `url(/static/images/${logo})`,
   }),
-  space,
 )
-
-const A = g.a(
-  {
-    textTransform: "uppercase",
-    textDecoration: "none",
-    color: "inherit",
-    ":hover": {
-      textDecoration: "none",
-      cursor: "pointer",
-      color: "inherit",
-    },
-  },
-  space,
-)
-
-const MenuItem = g(
-  withShowHideOnHover(
-    ({ items, as, onMouseOver, onMouseOut, show, href, ...props }) => {
-      const item = href ? (
-        <Link as={as} href={href}>
-          <A onMouseOver={onMouseOver} {...props} />
-        </Link>
-      ) : (
-        <A onMouseOver={onMouseOver} {...props} />
-      )
-      return items && items.length ? (
-        <SecondaryMenu items={items} show={show} onMouseOut={onMouseOut}>
-          {item}
-        </SecondaryMenu>
-      ) : (
-        item
-      )
-    },
-  ),
-)(
-  {
-    justify: "right",
-    align: "right",
-  },
-  space({
-    mr: 3,
-  }),
-)
-
-const SubMenuItem = g.div({
-  marginTop: "15px",
-  paddingTop: "15px",
-  cursor: "pointer",
-  borderTop: "1px dotted #ccc",
-})
-
-const OverlayMenu = g.div(
-  {
-    backgroundColor: "#fff",
-    color: "#000",
-    position: "absolute",
-    top: "-15px",
-    left: "-15px",
-    minWidth: "200px",
-    borderTopRightRadius: "15px",
-    borderBottomLeftRadius: "15px",
-    border: "2px solid rgba(0,0,0,0.2)",
-    // boxShadow: "1px 1px 3px 0px ",
-  },
-  space({
-    p: 2,
-  }),
-)
-
-const SecondaryMenu = g(({ show, children, onMouseOut, items, className }) => (
-  <div className={className}>
-    {show && (
-      <OverlayMenu onMouseLeave={onMouseOut}>
-        {children}
-        {items.map(({ title, meta, ...props }) => (
-          <SubMenuItem key={title}>
-            <MenuItem {...props}>
-              {title} {meta}
-            </MenuItem>
-          </SubMenuItem>
-        ))}
-      </OverlayMenu>
-    )}
-    {children}
-  </div>
-))({
-  position: "relative",
-})
 
 const Container = g.div({})
 
@@ -222,49 +83,9 @@ const HeaderContainer = g(Flex)(
   scrolled,
 )
 
-const Wait = props => (
-  <Flex justify="center" align="center">
-    <Box width={100} px={2}>
-      <Icon name="check" fontSize={36} palette="normal" />
-    </Box>
-    <Box flex={1}>
-      <h3>Many Thanks!</h3>
-      We've received your donation. It will appear on your statement as{" "}
-      <code>{props.description}</code>.
-    </Box>
-  </Flex>
-)
-
-const Success = props => (
-  <Flex justify="center" align="center">
-    <Box width={100} px={2}>
-      <Icon name="check" fontSize={36} palette="success" />
-    </Box>
-    <Box flex={1}>
-      <h3>Many Thanks!</h3>
-      We've received your donation. It will appear on your statement as{" "}
-      <code>{props.description}</code>.
-    </Box>
-  </Flex>
-)
-
-const Failure = props => (
-  <Flex justify="center" align="center">
-    <Box width={100} px={2}>
-      <Icon name="times" fontSize={36} palette="danger" />
-    </Box>
-    <Box flex={1}>
-      <h3>Something's Wrong</h3>
-      We had an issue processing your donation.
-    </Box>
-  </Flex>
-)
-
 export default class Header extends Component {
   state = {
     scrolled: false,
-    showModal: null,
-    componentProps: {},
   }
 
   componentDidMount() {
@@ -280,40 +101,11 @@ export default class Header extends Component {
     this.setState({ scrolled: scrollTop > 100 })
   }
 
-  renderModal(content, canClose = true) {
-    return (
-      <Modal
-        canClose={canClose}
-        isOpen
-        onRequestClose={() => this.setState({ showModal: null })}
-      >
-        {content}
-      </Modal>
-    )
-  }
-
-  renderWait = () => this.renderModal(<Wait />, false)
-  renderComplete = props => this.renderModal(<Success {...props} />)
-  renderFailure = props => this.renderModal(<Failure {...props} />)
-
-  showModal = name => props =>
-    this.setState({ showModal: name, componentProps: props })
-
   render() {
-    const { showModal } = this.state
     const { fixed } = this.props
     const scrolled = this.state.scrolled || fixed
-    const _menuItems = menuItems.map(
-      i =>
-        i.getChildren
-          ? { ...i, items: (i.items || []).concat(i.getChildren(this.props)) }
-          : i,
-    )
     return (
       <Container>
-        {showModal === "complete" && this.renderComplete()}
-        {showModal === "failure" && this.renderFailure()}
-        {showModal === "wait" && this.renderWait()}
         <Fixed>
           <HeaderContainer
             wrap="wrap"
@@ -324,19 +116,9 @@ export default class Header extends Component {
             <MenuItem key="logo" href="/">
               One Brick at a Time
             </MenuItem>
-            {_menuItems.map(({ title, items, href, as }) => (
-              <MenuItem key={title} href={href} as={as} items={items}>
-                {title}
-              </MenuItem>
-            ))}
+            <Menu volunteering={this.props.volunteering} />
             <Box grow={1} align="right">
-              <Donate
-                amount={1500}
-                scrolled={scrolled}
-                onRequestCharge={this.showModal("wait")}
-                onComplete={this.showModal("complete")}
-                onFailure={this.showModal("failure")}
-              />
+              <Donate amount={1500} scrolled={scrolled} />
             </Box>
           </HeaderContainer>
         </Fixed>

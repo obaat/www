@@ -52,7 +52,7 @@ const theme = {
   colors: { ...colors, ...invert },
   font: "'Josefin Sans', sans-serif",
   radius: 0,
-  fontSizes: ["0.8em", "1.2em", "1.3em", "1.4em", "1.50em", "1.70em", "3em"],
+  fontSizes: ["1em", "1.2em", "1.3em", "1.4em", "1.50em", "1.70em", "3em"],
 }
 
 export default theme

@@ -32,7 +32,7 @@ const components = [
     type: "button",
     traits: [space, ssColor, width, fontSize],
     props: {
-      f: 1,
+      fontSize: 1,
       m: 0,
       pl: 3,
       pr: 3,

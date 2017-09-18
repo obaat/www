@@ -33,6 +33,7 @@
     "react-dom": "^15.6.1",
     "react-helmet": "^5.2.0",
     "react-lorem-component": "^0.12.2",
+    "react-powerplug": "^0.0.2",
     "react-stripe-checkout": "^2.6.3",
     "react-typist": "^1.1.1",
     "react-visibility-sensor": "^3.10.1",

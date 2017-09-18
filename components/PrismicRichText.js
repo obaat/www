@@ -52,13 +52,16 @@ const styling = {
 const Unknown = g.div({ color: "yellow", backgroundColor: "red" })
 
 const handler = {
-  hyperlink: ({ children, url, ...props }) => (
-    <Link href={url}>
-      <UILink {...props} target="_blank">
-        {children}
-      </UILink>
-    </Link>
-  ),
+  hyperlink: ({ children, url, ...props }) => {
+    const href = props.slug ? `/${props.slug}` : ""
+    return (
+      <Link href={href}>
+        <UILink {...props} target="_blank">
+          {children}
+        </UILink>
+      </Link>
+    )
+  },
 }
 
 const PrismicRichText = ({ source, forceType, ...props }) => {
