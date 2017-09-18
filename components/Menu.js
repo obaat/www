@@ -77,19 +77,20 @@ export const MenuItem = ({
   children,
   ...props
 }) => {
-  const a = <A>{children}</A>
-  const item = href ? (
+  const item = (
+    <A>
+      <MenuContainer px={2} py={1} onMouseOver={onMouseOver} {...props}>
+        {children}
+      </MenuContainer>
+    </A>
+  )
+
+  return href ? (
     <Link as={as} href={href}>
-      {a}
+      {item}
     </Link>
   ) : (
-    a
-  )
-  return (
-    <MenuContainer px={2} py={1} onMouseOver={onMouseOver} {...props}>
-      {" "}
-      {item}
-    </MenuContainer>
+    item
   )
 }
 
