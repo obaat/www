@@ -13,7 +13,7 @@ export const TeamMember = ({
 }) => (
   <div>
     <a id={uid} />
-    <Flex wrap="wrap">
+    <Flex wrap="wrap" mb={3}>
       <Box w={[1, 1, 1 / 5]} mb={3} order={odd ? 2 : 1}>
         <BackgroundImage ratio={4 / 3} src={image.url} bg="#aaa" />
       </Box>
