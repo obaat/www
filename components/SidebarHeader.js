@@ -1,9 +1,9 @@
 import React from "react"
-import { Border } from "../ui"
+import { Border, H6 } from "../ui"
 
 const SidebarHeader = ({ children }) => (
   <Border bottom mb={2} pb={1} borderColor="#bbb">
-    {children}
+    <H6>{children}</H6>
   </Border>
 )
 

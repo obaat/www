@@ -9,12 +9,7 @@ import { Flex, Relative, Absolute, Box, Border, BackgroundImage } from "../ui"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 import { HumanDate } from "../utils/date"
-
-const SidebarHeader = ({ children }) => (
-  <Border bottom mb={2} pb={1} borderColor="#bbb">
-    {children}
-  </Border>
-)
+import SidebarHeader from "../components/SidebarHeader"
 
 const Overlay = g(Absolute)({
   pointerEvents: "none",
