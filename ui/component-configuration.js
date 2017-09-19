@@ -40,7 +40,7 @@ const components = [
       pb: 2,
     },
     style: withPalette(props => ({
-      fontFamily: "inherit",
+      fontFamily: props.theme.font.heading,
       fontWeight: bold(props),
       display: "inline-block",
       verticalAlign: "middle",
@@ -170,6 +170,7 @@ const components = [
       palette: "blue",
     },
     style: withPalette(props => ({
+      fontFamily: props.theme.font.body,
       textDecoration: "none",
       textDecorationSkip: "ink",
       ":hover": {
