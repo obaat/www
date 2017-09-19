@@ -228,6 +228,7 @@ const components = [
     style: props => ({
       fontWeight: props.bold ? bold(props) : get(props.theme, "weights.0"),
       lineHeight: "1.375em",
+      fontFamily: props.theme.font.body,
     }),
     propTypes: {
       left: bool,
@@ -246,6 +247,10 @@ const components = [
       fontSize: 6,
       mb: 1,
     },
+    style: props => ({
+      fontFamily: props.theme.font.heading,
+    }),
+
     propTypes: {
       left: bool,
       center: bool,
@@ -605,7 +610,7 @@ const components = [
       return Object.assign(
         {
           borderStyle: "solid",
-          borderColor: props.borderColor,
+          borderColor: color(props)(props.borderColor),
           color: "inherit",
         },
         borderWidth,

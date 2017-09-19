@@ -40,6 +40,7 @@ export const colors = {
   warning: [palette.yellow, palette.white],
   danger: [palette.red, palette.white],
   greyLighter: [palette.greyLighter, palette.black],
+  grey: [palette.grey, palette.black],
   brick: [palette.brick, palette.white],
 }
 
@@ -50,9 +51,14 @@ export const invert = reduce(
 )
 const theme = {
   colors: { ...colors, ...invert },
-  font: "'Josefin Sans', sans-serif",
+  font: {
+    heading: "'Josefin Sans', sans-serif",
+    body:
+      "'San Francisco', 'Helvetica Neue', 'Lucida Grande', 'Segoe UI',Verdana,Arial,Helvetica,sans-serif",
+  },
+
   radius: 0,
-  fontSizes: ["1em", "1.2em", "1.3em", "1.4em", "1.50em", "1.70em", "3em"],
+  fontSizes: ["0.9em", "1em", "1.3em", "1.4em", "1.50em", "1.70em", "3em"],
 }
 
 export default theme

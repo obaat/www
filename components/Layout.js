@@ -11,7 +11,7 @@ import theme from "../theme"
 
 const Container = g.div(
   {
-    fontFamily: theme.font,
+    fontFamily: theme.font.heading,
     lineHeight: "1.7em",
     color: theme.colors.black[0],
   },

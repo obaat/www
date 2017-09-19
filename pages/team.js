@@ -24,7 +24,7 @@ export const TeamMember = ({
         order={[0, 0, 0, odd ? 1 : 2]}
         style={{ textAlign: odd ? "right" : "left" }}
       >
-        <Border bottom mb={2} borderColor="#aaa">
+        <Border bottom mb={2} borderColor="grey">
           <PrismicRichText mb={1} forceType="heading2" source={name} />
         </Border>
         <PrismicRichText forceType="heading6" source={job_title} />

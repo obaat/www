@@ -5,7 +5,19 @@ import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
 import map from "lodash/map"
 import Link from "./Link"
-import { Heading, Text, Subhead, H3, H4, H5, H6, Li, Ol, Ul } from "../ui"
+import {
+  Small,
+  Heading,
+  Text,
+  Subhead,
+  H3,
+  H4,
+  H5,
+  H6,
+  Li,
+  Ol,
+  Ul,
+} from "../ui"
 
 const ourTypes = {
   heading1: Heading,
@@ -14,6 +26,7 @@ const ourTypes = {
   heading4: H4,
   heading5: H5,
   heading6: H6,
+  small: Small,
   paragraph: Text,
   "list-item": Li,
   "o-list-item": Li,

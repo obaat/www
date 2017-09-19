@@ -24,7 +24,13 @@ const AbsMiddle = g(Flex)(({ direction }) => ({
   right: direction === "right" ? 0 : "auto",
 }))
 
-const Arrow = ({ controlSize = 48, page, onPageClick, direction }) => (
+const Arrow = ({
+  controlSize = 48,
+  color = "#fff",
+  page,
+  onPageClick,
+  direction,
+}) => (
   <AbsMiddle
     direction={direction}
     controlSize={controlSize}
@@ -35,7 +41,7 @@ const Arrow = ({ controlSize = 48, page, onPageClick, direction }) => (
   >
     <Chevron
       size={controlSize}
-      color="#fff"
+      color={color}
       left={direction === "left"}
       right={direction === "right"}
     />
@@ -150,7 +156,7 @@ export default class SlideShow extends Component {
 
   render() {
     const { selectedIndex } = this.state
-    const { controlSize, hidePaging } = this.props
+    const { controlSize, hidePaging, controlColor = "#fff" } = this.props
     const children = React.Children
       .toArray(this.props.children)
       .slice(0, Math.max(PRELOAD_MAX, selectedIndex + PRELOAD_MAX))
@@ -168,6 +174,7 @@ export default class SlideShow extends Component {
           <Arrow
             direction="left"
             controlSize={controlSize}
+            color={controlColor}
             page={selectedIndex}
             onPageClick={this.onPageClick}
           />
@@ -176,6 +183,7 @@ export default class SlideShow extends Component {
           <Arrow
             direction="right"
             controlSize={controlSize}
+            color={controlColor}
             page={selectedIndex}
             onPageClick={this.onPageClick}
           />

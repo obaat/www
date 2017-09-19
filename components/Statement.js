@@ -5,7 +5,7 @@ import Icon from "../components/Icon"
 import { Flex, Box } from "../ui"
 
 const Statement = ({ data: { description, name, role } }) => (
-  <Container maxWidth="600px">
+  <Container maxWidth="600px" py={0}>
     <Flex align="flex-start">
       <Box>
         <Icon f={50} name="quote-left" />

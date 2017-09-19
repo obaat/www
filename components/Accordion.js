@@ -39,7 +39,7 @@ const AccordionSection = ({ open, toggleOpen, title, description }) => {
 }
 
 const oneOpen = compose(
-  withState("openSection", "setOpenSection", 0),
+  withState("openSection", "setOpenSection", null),
   withHandlers(() => {
     return {
       toggleOpen: ({ openSection, setOpenSection }) => curIndex => e =>
@@ -47,6 +47,7 @@ const oneOpen = compose(
     }
   }),
 )
+
 export default oneOpen(({ items, openSection, toggleOpen }) => (
   <div>
     {items.map((props, i) => (

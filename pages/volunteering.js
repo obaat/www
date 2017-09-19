@@ -16,49 +16,21 @@ import SlideShow from "../components/SlideShow"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 import Statement from "../components/Statement"
-import Icon from "../components/Icon"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import SidebarHeader from "../components/SidebarHeader"
+import BreadCrumbs from "../components/Breadcrumbs"
 import {
   Absolute,
   Relative,
-  Arrow,
   BackgroundImage,
   Flex,
   Box,
-  Border,
   ButtonOutline,
-  Panel,
-  PanelHeader,
   Heading,
-  Text,
-  H3,
+  Border,
 } from "../ui"
 import get from "lodash/get"
 import { withProps } from "recompose"
-// import Error from "next/error"
-
-const Bread = g(Box)({})
-
-const Crumb = g.span({
-  whiteSpace: "nowrap",
-  color: "#aaa",
-  display: "inline-block",
-})
-
-const BreadCrumbs = ({ route }) => (
-  <Bread mb={1}>
-    {route.map(({ title, href }, i) => (
-      <span key={i}>
-        <Crumb pr={1}>{title} </Crumb>
-        {(route.length === 1 || route.length - 1 > i) && (
-            <Icon pl={1} f={0} color="#000" name="angle-double-right" />
-          )}{" "}
-        {route.length === 1 && <Crumb pr={1}>/</Crumb>}
-      </span>
-    ))}
-  </Bread>
-)
 
 const Overlay = g(Absolute)({
   pointerEvents: "none",
@@ -81,39 +53,22 @@ const Section = ({ title, id, ...props }) =>
   )
 
 const Opportunity = ({ uid, data }) => (
-  <Relative mb={2}>
-    <BackgroundImage
-      bg="#000"
-      color="#fff"
-      ratio={1 / 2}
-      src={get(data, "header_image.url")}
-    >
-      <Overlay>
-        {data.title && (
-          <PrismicRichText
-            forceType="heading5"
-            color="#fff"
-            source={data.title}
-          />
-        )}
-      </Overlay>
-
-      <Absolute bottom right p={1}>
-        <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
-          <Button
-            palette="normal"
-            invert
-            icon="chevron-right"
-            w={1}
-            py={1}
-            as={ButtonOutline}
-          >
-            More
-          </Button>
-        </Link>
-      </Absolute>
-    </BackgroundImage>
-  </Relative>
+  <Border p={2} mb={2} borderColor="greyLighter" top left bottom right>
+    <PrismicRichText forceType="paragraph" source={data.title} />
+    <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
+      <Button
+        w={1}
+        py={1}
+        palette="brick"
+        invert
+        icon="chevron-right"
+        iconSize={0}
+        iconPosition="right"
+      >
+        More info
+      </Button>
+    </Link>
+  </Border>
 )
 
 const Location = ({ uid, data }) => (
@@ -182,18 +137,7 @@ const renderers = {
       </tbody>
     </table>
   ),
-  quotes: ({ data, items = [] }) => {
-    const filled = items.map(({ quote: { id } }) =>
-      data.results.find(r => r.id === id),
-    )
-    return (
-      <Box palette="greyLighter" invert>
-        <SlideShow controlSize={18}>
-          {filled.map((props, i) => <Statement key={i} {...props} />)}
-        </SlideShow>
-      </Box>
-    )
-  },
+
   image_gallery: ({ items = [] }) => {
     return (
       <SlideShow controlSize={18}>
@@ -205,7 +149,28 @@ const renderers = {
   },
 }
 
-const renderPrismicSlice = data => ({ slice_type, items, primary }, i) => {
+const Quotes = ({ data, items = [] }) => {
+  const filled = items.map(({ quote: { id } }) =>
+    data.results.find(r => r.id === id),
+  )
+
+  return (
+    <Border borderColor="greyLighter" top left bottom right>
+      <SlideShow controlSize={18} controlColor="#777">
+        {filled.map(({ data: { description, name, role } }, i) => (
+          <Box p={3}>
+            <PrismicRichText forceType="small" source={description} />
+            <Box align="right" mt={2}>
+              <PrismicRichText forceType="paragraph" source={name} />
+            </Box>
+          </Box>
+        ))}
+      </SlideShow>
+    </Border>
+  )
+}
+
+const renderPrismicSlice = ({ slice_type, items, primary }, i) => {
   const title = primary.title && (
     <PrismicRichText forceType="heading6" source={primary.title} />
   )
@@ -213,19 +178,16 @@ const renderPrismicSlice = data => ({ slice_type, items, primary }, i) => {
   return {
     title,
     description: (
-      <Component
-        primary={primary}
-        items={items}
-        slice_type={slice_type}
-        data={data}
-      />
+      <Component primary={primary} items={items} slice_type={slice_type} />
     ),
   }
 }
 
 const Volunteering = ({ content, opportunities, additionalData }) => {
-  const renderPrismicSliceWithData = renderPrismicSlice(additionalData)
-  const accordionItems = content.body.map(renderPrismicSliceWithData)
+  const quotes = content.body.find(s => s.slice_type === "quotes")
+  const accordionItems = content.body
+    .filter(s => s.slice_type !== "quotes")
+    .map(renderPrismicSlice)
 
   return (
     <div>
@@ -255,6 +217,7 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
               opportunities.results.map((props, i) => (
                 <Opportunity key={i} {...props} />
               ))}
+            {quotes && <Quotes items={quotes.items} data={additionalData} />}
           </Box>
         </Flex>
       </Container>
@@ -277,7 +240,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
           <Box w={[1, 1, 1, 2 / 3]} pr={3}>
             <BreadCrumbs
               route={[
-                { title: "Volunteering" },
+                { title: "Volunteering", href: "/volunteering" },
                 {
                   title: (
                     <PrismicRichText
