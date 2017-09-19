@@ -87,7 +87,7 @@ const Panel = g(Flex)(
   color,
 )
 
-const Lead = g(Text)({
+const Lead = g(Heading)({
   // backgroundColor: colors.brick[0],
   // boxDecorationBreak: "clone",
   color: colors.brick[1],
