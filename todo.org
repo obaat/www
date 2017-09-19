@@ -18,6 +18,5 @@
 * DONE reviews from volunteers + image view
 * DONE fix stupid menubar
 * zoom for slideshow
-* video support to slideshow?
 * INPROGRESS logo / chris
 * browser version locking

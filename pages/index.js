@@ -254,7 +254,7 @@ class IndexPage extends React.Component {
           <Box w={1} p={3}>
             <SlideShow autoplay autoplaySpeed={transitionSpeed}>
               {chunkedStatements.map((statements, i) => (
-                <Flex justify="center">
+                <Flex key={i} justify="center">
                   {statements.map((props, i) => (
                     <Statement key={i} {...props} />
                   ))}

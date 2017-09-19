@@ -42,7 +42,6 @@ const components = [
     style: withPalette(props => ({
       fontFamily: "inherit",
       fontWeight: bold(props),
-      lineHeight: 16 / 14,
       display: "inline-block",
       verticalAlign: "middle",
       textAlign: "center",

@@ -26,12 +26,12 @@ export default class MyDocument extends Document {
             href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
           />
 
-          <link rel="stylesheet" href="/static/nprogress.css" />
           <link
             rel="stylesheet"
             href="https://unpkg.com/tachyons-box-sizing@3.1.7/css/tachyons-box-sizing.min.css"
           />
 
+          <link rel="stylesheet" href="/static/nprogress.css" />
           <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
