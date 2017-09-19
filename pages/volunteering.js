@@ -15,6 +15,7 @@ import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
+import Statement from "../components/Statement"
 import Icon from "../components/Icon"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import SidebarHeader from "../components/SidebarHeader"
@@ -150,7 +151,7 @@ const Location = ({ uid, data }) => (
   </Relative>
 )
 
-const Unknown = () => <div>???</div>
+const Unknown = ({ slice_type }) => <div> {slice_type} ???</div>
 const renderers = {
   text_only: ({ primary, items }) =>
     primary.description && <PrismicRichText source={primary.description} />,
@@ -181,6 +182,18 @@ const renderers = {
       </tbody>
     </table>
   ),
+  quotes: ({ data, items = [] }) => {
+    const filled = items.map(({ quote: { id } }) =>
+      data.results.find(r => r.id === id),
+    )
+    return (
+      <Box palette="greyLighter" invert>
+        <SlideShow controlSize={18}>
+          {filled.map((props, i) => <Statement key={i} {...props} />)}
+        </SlideShow>
+      </Box>
+    )
+  },
   image_gallery: ({ items = [] }) => {
     return (
       <SlideShow controlSize={18}>
@@ -192,19 +205,27 @@ const renderers = {
   },
 }
 
-const renderPrismicSlice = ({ slice_type, items, primary }, i) => {
+const renderPrismicSlice = data => ({ slice_type, items, primary }, i) => {
   const title = primary.title && (
     <PrismicRichText forceType="heading6" source={primary.title} />
   )
   const Component = renderers[slice_type] || Unknown
   return {
     title,
-    description: <Component primary={primary} items={items} />,
+    description: (
+      <Component
+        primary={primary}
+        items={items}
+        slice_type={slice_type}
+        data={data}
+      />
+    ),
   }
 }
 
-const Volunteering = ({ content, opportunities }) => {
-  const accordionItems = content.body.map(renderPrismicSlice)
+const Volunteering = ({ content, opportunities, additionalData }) => {
+  const renderPrismicSliceWithData = renderPrismicSlice(additionalData)
+  const accordionItems = content.body.map(renderPrismicSliceWithData)
 
   return (
     <div>
@@ -307,8 +328,12 @@ Page.getInitialProps = async ({ query }) => {
     }
   } else {
     const res = await getSingleton(types.VOLUNTEERING_PAGE_CONTENT)
+    const quotes = res.data.body.find(s => s.slice_type === "quotes")
+    const ids = (quotes && quotes.items.map(l => l.quote.id)) || []
+    const additionalData = ids.length ? await getByIDs(ids) : { results: [] }
     return {
       content: res.data,
+      additionalData,
       opportunities,
       meta: res,
     }

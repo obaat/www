@@ -29,6 +29,7 @@ import {
   Measure,
 } from "../ui"
 import SlideShow from "../components/SlideShow"
+import Statement from "../components/Statement"
 import CountUp, { startAnimation } from "react-countup"
 import VisibilitySensor from "react-visibility-sensor"
 import hoc from "../ui/hoc"
@@ -71,26 +72,6 @@ const ActionButton = ({ prismicUrl, href, ...props }) => {
     </Link>
   )
 }
-
-const Statement = ({ data: { description, name, role } }) => (
-  <Container maxWidth="600px">
-    <Flex>
-      <Box>
-        <Icon f={50} name="quote-left" />
-      </Box>
-      <Box p={3} align="justify">
-        <PrismicRichText forceType="paragraph" source={description} />
-        <Box align="right">
-          <PrismicRichText forceType="heading4" source={name} />
-          <PrismicRichText forceType="paragraph" source={role} />
-        </Box>
-      </Box>
-      <Box alignSelf="flex-end">
-        <Icon f={50} name="quote-right" />
-      </Box>
-    </Flex>
-  </Container>
-)
 
 const Mission = g(Measure)({
   textAlign: "left",
