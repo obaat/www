@@ -58,7 +58,7 @@ const theme = {
   },
 
   radius: 0,
-  fontSizes: ["0.9em", "1em", "1.3em", "1.4em", "1.50em", "1.70em", "3em"],
+  fontSizes: ["0.88em", "1em", "1.3em", "1.4em", "1.50em", "1.70em", "3em"],
 }
 
 export default theme

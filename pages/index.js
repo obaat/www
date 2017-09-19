@@ -227,12 +227,10 @@ class IndexPage extends React.Component {
           </Box>
           <Box w={1 / 2} p={3}>
             <Icon f={50} mb={2} name="users" />
-            <H5 mb={2}>
-              Opportunities Created
-              <Text fontSize={0}>
-                for education, jobs and access to health care
-              </Text>
-            </H5>
+            <H5 mb={0}>Opportunities Created</H5>
+            <Text fontSize={0} mb={2}>
+              for education, jobs and access to health care
+            </Text>
             <Count
               innerRef={c => this.counters.push(c)}
               start={0}
