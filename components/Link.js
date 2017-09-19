@@ -1,8 +1,14 @@
 import React from "react"
-import Link from "next/link"
+import NxLink from "next/link"
+import { Link as UILink } from "../ui"
 
-// remove
-export default props =>
-  <div className={props.className}>
-    <Link {...props} />
-  </div>
+const Link = ({ url, slug, href, target, ...props }) => {
+  const _href = slug ? `/${slug}` : href
+  return (
+    <NxLink href={_href}>
+      <UILink {...props} target={target} />
+    </NxLink>
+  )
+}
+
+export default Link

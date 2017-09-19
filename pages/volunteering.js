@@ -17,6 +17,7 @@ import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 import Icon from "../components/Icon"
 import Accordion, { AccordionSection } from "../components/Accordion"
+import SidebarHeader from "../components/SidebarHeader"
 import {
   Absolute,
   Relative,
@@ -69,11 +70,6 @@ const Overlay = g(Absolute)({
   p: 2,
 })
 
-const SidebarHeader = ({ children }) => (
-  <Border bottom mb={2} pb={1} borderColor="#bbb">
-    {children}
-  </Border>
-)
 const Section = ({ title, id, ...props }) =>
   props.source && (
     <div>

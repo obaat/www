@@ -5,6 +5,7 @@ import { withLayout } from "../components/Layout"
 import { colors } from "../theme"
 import Container from "../components/Container"
 import get from "lodash/get"
+import chunk from "lodash/chunk"
 import Button from "../components/Button"
 import Helmet from "react-helmet"
 import g from "glamorous"
@@ -72,7 +73,7 @@ const ActionButton = ({ prismicUrl, href, ...props }) => {
 }
 
 const Statement = ({ data: { description, name, role } }) => (
-  <Container maxWidth="800px">
+  <Container maxWidth="600px">
     <Flex>
       <Box>
         <Icon f={50} name="quote-left" />
@@ -159,6 +160,8 @@ class IndexPage extends React.Component {
   render() {
     const { content, statements } = this.props
     const { hero, mission, mission_title } = content
+    const chunkedStatements = chunk(get(statements, "results", []), 2)
+
     return (
       <div>
         <Helmet title="One Brick at a Time" />
@@ -269,11 +272,13 @@ class IndexPage extends React.Component {
           </Box>
           <Box w={1} p={3}>
             <SlideShow autoplay autoplaySpeed={transitionSpeed}>
-              {statements &&
-                statements.results &&
-                statements.results.map((props, i) => (
-                  <Statement key={i} {...props} />
-                ))}
+              {chunkedStatements.map((statements, i) => (
+                <Flex justify="center">
+                  {statements.map((props, i) => (
+                    <Statement key={i} {...props} />
+                  ))}
+                </Flex>
+              ))}
             </SlideShow>
           </Box>
           <ActionButton

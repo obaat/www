@@ -4,23 +4,10 @@ import g from "glamorous"
 import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
 import map from "lodash/map"
-import Link from "next/link"
-import {
-  Heading,
-  Text,
-  Link as UILink,
-  Subhead,
-  H3,
-  H4,
-  H5,
-  H6,
-  Li,
-  Ol,
-  Ul,
-} from "../ui"
+import Link from "./Link"
+import { Heading, Text, Subhead, H3, H4, H5, H6, Li, Ol, Ul } from "../ui"
 
 const ourTypes = {
-  hyperlink: UILink,
   heading1: Heading,
   heading2: Subhead,
   heading3: H3,
@@ -52,16 +39,7 @@ const styling = {
 const Unknown = g.div({ color: "yellow", backgroundColor: "red" })
 
 const handler = {
-  hyperlink: ({ children, url, ...props }) => {
-    const href = props.slug ? `/${props.slug}` : ""
-    return (
-      <Link href={href}>
-        <UILink {...props} target="_blank">
-          {children}
-        </UILink>
-      </Link>
-    )
-  },
+  hyperlink: Link,
 }
 
 const PrismicRichText = ({ source, forceType, ...props }) => {

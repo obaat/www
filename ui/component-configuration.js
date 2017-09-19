@@ -164,8 +164,11 @@ const components = [
       palette: "blue",
     },
     style: withPalette(props => ({
-      textDecoration: "underline",
+      textDecoration: "none",
       textDecorationSkip: "ink",
+      ":hover": {
+        textDecoration: "underline",
+      },
     })),
   },
   {
