@@ -22,7 +22,7 @@ export default ({
   const Component = createButton(as || Button)
   return (
     <Component palette={context} {...passProps}>
-      <Flex style={{ display: "inline-flex" }} align="center" justify="center">
+      <Flex align="center" justify="center">
         {icon && (
           <Box pt="2px" order={iconPosition === "right" ? 1 : 0}>
             <Icon

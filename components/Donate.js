@@ -130,7 +130,6 @@ const DonateJustGiving = ({ scrolled }) => (
       context="brick"
       invert={scrolled}
       icon="heart"
-      fontSize={0}
       iconSize={0}
       py={1}
       as={ButtonCircle}

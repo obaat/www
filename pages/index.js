@@ -42,7 +42,7 @@ const LeadButton = g(Button)({
   mt: 3,
   palette: "brick",
   invert: true,
-  f: 4,
+  fontSize: 3,
 })
 
 const mapping = {
