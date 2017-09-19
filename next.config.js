@@ -33,7 +33,7 @@ module.exports = {
       "/": { page: "/" },
       "/volunteering": { page: "/volunteering" },
       "/projects": { page: "/projects" },
-      // "/about": { page: "/about" },
+      "/about": { page: "/about" },
       "/team": { page: "/team" },
       "/trustees": { page: "/trustees" },
       "/financials": { page: "/financials" },
