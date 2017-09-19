@@ -6,7 +6,7 @@ const Link = ({ url, slug, href, target, ...props }) => {
   const _href = slug ? `/${slug}` : href
   return (
     <NxLink href={_href}>
-      <UILink {...props} target={target} />
+      <UILink {...props} target={target} rel="noopener" />
     </NxLink>
   )
 }
