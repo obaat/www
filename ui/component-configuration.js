@@ -314,7 +314,7 @@ const components = [
     name: "Small",
     type: "Text",
     props: {
-      is: "small",
+      is: "div",
       fontSize: 0,
     },
     style: {},
