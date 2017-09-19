@@ -42,7 +42,7 @@ const handler = {
   hyperlink: Link,
 }
 
-const PrismicRichText = ({ source, forceType, ...props }) => {
+const PrismicRichText = ({ source, forceType, mb = 2, ...props }) => {
   if (!Array.isArray(source)) {
     return <Unknown>???</Unknown>
   }
@@ -90,7 +90,7 @@ const PrismicRichText = ({ source, forceType, ...props }) => {
       }
 
       return (
-        <Container {...props} key={i} mb={2}>
+        <Container {...props} key={i} mb={mb}>
           {content}
         </Container>
       )

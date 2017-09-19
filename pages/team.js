@@ -9,7 +9,7 @@ import Container from "../components/Container"
 export const TeamMember = ({
   uid,
   odd,
-  data: { name, image, description },
+  data: { name, job_title, image, description },
 }) => (
   <div>
     <a id={uid} />
@@ -25,9 +25,13 @@ export const TeamMember = ({
         style={{ textAlign: odd ? "right" : "left" }}
       >
         <Border bottom mb={2} borderColor="#aaa">
-          <PrismicRichText forceType="heading2" source={name} />
+          <PrismicRichText mb={1} forceType="heading2" source={name} />
         </Border>
-        <PrismicRichText source={description} />
+        <PrismicRichText forceType="heading6" source={job_title} />
+        <PrismicRichText
+          style={{ textAlign: "justify" }}
+          source={description}
+        />
       </Box>
     </Flex>
   </div>

@@ -260,7 +260,7 @@ const components = [
     type: "Heading",
     props: {
       is: "h2",
-      mb: "1.15em",
+      mb: 1,
       fontSize: 5,
     },
     style: {
