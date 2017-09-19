@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "babel-eslint": "8.0.0",
+    "babel-plugin-sitrep": "^1.2.3",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.3.0",

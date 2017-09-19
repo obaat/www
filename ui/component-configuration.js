@@ -71,12 +71,11 @@ const components = [
   {
     name: "ButtonOutline",
     type: "Button",
+    props: {},
     traits: [space, ssColor, width, fontSize],
-    props: {
-      bg: "transparent",
-    },
     style: withPalette(props => ({
       boxShadow: `inset 0 0 0 2px`,
+      backgroundColor: "transparent",
       color: props.foreground,
       "&:hover": {
         color: props.foreground,
@@ -93,6 +92,14 @@ const components = [
           1 / 4,
         )}`,
       },
+    })),
+  },
+  {
+    name: "ButtonOutlineFilled",
+    type: "ButtonOutline",
+    props: {},
+    style: withPalette(props => ({
+      backgroundColor: props.background,
     })),
   },
   {

@@ -501,6 +501,10 @@ babel-plugin-react-require@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-react-require/-/babel-plugin-react-require-3.0.0.tgz#2e4e7b4496b93a654a1c80042276de4e4eeb20e3"
 
+babel-plugin-sitrep@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/babel-plugin-sitrep/-/babel-plugin-sitrep-1.2.3.tgz#9302ae71b21fb1d6950a8f7be1c7a96fd9bb6b09"
+
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-async-functions/-/babel-plugin-syntax-async-functions-6.13.0.tgz#cad9cad1191b5ad634bf30ae0872391e0647be95"

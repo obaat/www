@@ -150,6 +150,7 @@ const Location = ({ uid, data }) => (
   </Relative>
 )
 
+const Unknown = () => <div>???</div>
 const renderers = {
   text_only: ({ primary, items }) =>
     primary.description && <PrismicRichText source={primary.description} />,
@@ -180,13 +181,22 @@ const renderers = {
       </tbody>
     </table>
   ),
+  image_gallery: ({ items = [] }) => {
+    return (
+      <SlideShow controlSize={18}>
+        {items.map(({ gallery_image: { url } }, i) => (
+          <BackgroundImage src={url} key={i} />
+        ))}
+      </SlideShow>
+    )
+  },
 }
 
 const renderPrismicSlice = ({ slice_type, items, primary }, i) => {
   const title = primary.title && (
     <PrismicRichText forceType="heading6" source={primary.title} />
   )
-  const Component = renderers[slice_type]
+  const Component = renderers[slice_type] || Unknown
   return {
     title,
     description: <Component primary={primary} items={items} />,

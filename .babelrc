@@ -1,4 +1,4 @@
 {
   "presets": ["next/babel", "flow"],
-  "retainLines": true
+  "plugins": ["sitrep"]
 }

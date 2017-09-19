@@ -14,6 +14,8 @@ import {
   CarouselSlide,
 } from "../ui"
 
+const PRELOAD_MAX = 3
+
 const AbsMiddle = g(Flex)(({ direction }) => ({
   position: "absolute",
   top: 0,
@@ -149,7 +151,9 @@ export default class SlideShow extends Component {
   render() {
     const { selectedIndex } = this.state
     const { controlSize, hidePaging } = this.props
-    const children = React.Children.toArray(this.props.children)
+    const children = React.Children
+      .toArray(this.props.children)
+      .slice(0, Math.max(PRELOAD_MAX, selectedIndex + PRELOAD_MAX))
 
     return (
       <Relative style={{ width: "100%" }}>

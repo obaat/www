@@ -20,19 +20,16 @@ const About = ({ content = {} }) => {
           <Box w={[1, 1, 1, 1 / 3]} pr={[0, 0, 0, 3]}>
             <SidebarHeader>Related Information</SidebarHeader>
             <Box>
-              <Link href="/trustees">
-                <a>Trustees</a>
-              </Link>
+              <Link href="/trustees">Trustees</Link>
             </Box>
             <Box>
-              <Link href="/volunteering">
-                <a>Volunteer With Us</a>
-              </Link>
+              <Link href="/volunteering">Volunteer With Us</Link>
             </Box>
             <Box>
-              <Link href="/contact">
-                <a>Contact Us</a>
-              </Link>
+              <Link href="/projects?status=complete">Completed Projects</Link>
+            </Box>
+            <Box>
+              <Link href="/contact">Contact Us</Link>
             </Box>
           </Box>
         </Flex>
