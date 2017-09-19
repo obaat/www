@@ -168,7 +168,7 @@ class IndexPage extends React.Component {
             autoplaySpeed={transitionSpeed}
             onChange={this.setVisibleSlideIndex}
           >
-            {hero.map(({ image, lead, strapline, url }, i) => (
+            {hero.map(({ image, lead, strapline, button_text, url }, i) => (
               <Relative key={i}>
                 <Banner color="white" backgroundImage={image.url}>
                   <Lead>{get(lead, "0.text")}</Lead>
@@ -176,7 +176,9 @@ class IndexPage extends React.Component {
                     {get(strapline, "0.text")}
                   </Sub>
                   <BoxOut p={3} bottom right>
-                    <ActionButton prismicUrl={url}>Find Out More</ActionButton>
+                    <ActionButton prismicUrl={url}>
+                      {button_text || "Find Out More"}
+                    </ActionButton>
                   </BoxOut>
                 </Banner>
               </Relative>
