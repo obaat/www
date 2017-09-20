@@ -1,20 +1,35 @@
 import React, { Component } from "react"
 import g from "glamorous"
+import Icon from "./Icon"
 import { overlay } from "../styleHelpers"
 import range from "lodash/range"
 import { Chevron } from "reline"
 import { withProps } from "recompose"
 import {
   Flex,
+  Fixed,
   Box,
   Absolute,
   Relative,
   DotButton,
   Carousel,
   CarouselSlide,
+  Close,
 } from "../ui"
 
 const PRELOAD_MAX = 3
+
+const Fullscreen = g(Fixed)({
+  backgroundColor: "rgba(255,255,255, 0.8)",
+  height: "100VH",
+  overflow: "hidden",
+  zIndex: 999999,
+}).withProps({
+  top: true,
+  bottom: true,
+  left: true,
+  right: true,
+})
 
 const AbsMiddle = g(Flex)(({ direction }) => ({
   position: "absolute",
@@ -46,6 +61,17 @@ const Arrow = ({
       right={direction === "right"}
     />
   </AbsMiddle>
+)
+
+const Zoom = ({ isZoomed, controlSize, controlColor, onClick }) => (
+  <Absolute left bottom pb={2} pl={2} onClick={onClick}>
+    <Icon
+      f={controlSize}
+      color={controlColor}
+      name={isZoomed ? "close" : "arrows-alt"}
+      onClick={onClick}
+    />
+  </Absolute>
 )
 
 const Paging = ({ total, page, onPageClick }) => (
@@ -90,6 +116,7 @@ export default class SlideShow extends Component {
     this.state = {
       autoPlayTimer: null,
       selectedIndex: 0,
+      zoom: false,
     }
   }
 
@@ -154,14 +181,24 @@ export default class SlideShow extends Component {
     this.setSlide(index)
   }
 
+  toggleZoom = () => {
+    this.pause()
+    this.setState({ zoom: !this.state.zoom })
+  }
+
   render() {
-    const { selectedIndex } = this.state
-    const { controlSize, hidePaging, controlColor = "#fff" } = this.props
+    const { selectedIndex, zoom } = this.state
+    const {
+      controlSize = 48,
+      hidePaging,
+      hideZoom,
+      controlColor = "#fff",
+    } = this.props
     const children = React.Children
       .toArray(this.props.children)
       .slice(0, Math.max(PRELOAD_MAX, selectedIndex + PRELOAD_MAX))
 
-    return (
+    const container = (
       <Relative style={{ width: "100%" }}>
         <OurCarousel index={selectedIndex} p={0}>
           {children.map((slide, i) => (
@@ -195,7 +232,48 @@ export default class SlideShow extends Component {
             onPageClick={this.onPageClick}
           />
         )}
+        {!hideZoom && (
+          <Zoom
+            onClick={this.toggleZoom}
+            controlSize={controlSize}
+            controlColor={controlColor}
+          />
+        )}
       </Relative>
+    )
+
+    return zoom ? (
+      <Fullscreen>
+        <Absolute top bottom left right m={2} style={{ overflow: "hidden" }}>
+          {selectedIndex > 0 && (
+            <Arrow
+              direction="left"
+              controlSize={48}
+              color={controlColor}
+              page={selectedIndex}
+              onPageClick={this.onPageClick}
+            />
+          )}
+          {selectedIndex < this.totalSlides() - 1 && (
+            <Arrow
+              direction="right"
+              controlSize={48}
+              color={controlColor}
+              page={selectedIndex}
+              onPageClick={this.onPageClick}
+            />
+          )}
+          <Zoom
+            onClick={this.toggleZoom}
+            controlSize={48}
+            controlColor={controlColor}
+            isZoomed
+          />
+          {children[selectedIndex]}
+        </Absolute>
+      </Fullscreen>
+    ) : (
+      container
     )
   }
 }

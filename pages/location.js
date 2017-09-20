@@ -29,14 +29,14 @@ const Location = ({ content = {} }) => {
       </Relative>
       <Container py={4}>
         <Flex wrap="wrap">
-          <Box w={[1, 1, 1, 1 / 3]}>
-            <SlideShow autoplay controlSize={18}>
+          <Box w={[1, 1, 1, 1 / 2]}>
+            <SlideShow autoplay controlSize={24}>
               {content.image_gallery.map(({ image, description }, i) => (
                 <BackgroundImage src={image.url} key={i} />
               ))}
             </SlideShow>
           </Box>
-          <Box w={[1, 1, 1, 2 / 3]} pl={[0, 0, 0, 3]}>
+          <Box w={[1, 1, 1, 1 / 2]} pl={[0, 0, 0, 3]}>
             <PrismicRichText source={content.description} />
           </Box>
         </Flex>

@@ -54,7 +54,7 @@ const Section = ({ title, id, ...props }) =>
 
 const Opportunity = ({ uid, data }) => (
   <Border p={2} mb={2} borderColor="greyLighter" top left bottom right>
-    <PrismicRichText forceType="paragraph" source={data.title} />
+    <PrismicRichText forceType="heading6" source={data.title} />
     <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
       <Button
         w={1}
