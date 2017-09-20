@@ -10,10 +10,10 @@ const Video = ({ items = [] }) => {
   return (
     <div>
       {items.map(({ description, embed }, i) => (
-        <div key={i}>
+        <Box mb={2} key={i}>
           <PrismicRichText w={1} forceType="heading5" source={description} />
           <Embed {...embed} />
-        </div>
+        </Box>
       ))}
     </div>
   )

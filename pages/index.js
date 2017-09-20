@@ -20,6 +20,7 @@ import {
   Absolute,
   Subhead,
   Box,
+  H2,
   H3,
   H4,
   H5,
@@ -27,12 +28,14 @@ import {
   SubHead,
   Banner,
   Measure,
+  BackgroundImage,
 } from "../ui"
 import SlideShow from "../components/SlideShow"
 import Statement from "../components/Statement"
 import CountUp, { startAnimation } from "react-countup"
 import VisibilitySensor from "react-visibility-sensor"
 import hoc from "../ui/hoc"
+import { menuHeightDocked } from "../utils/constants"
 
 const Count = hoc()(CountUp)
 
@@ -88,23 +91,19 @@ const Panel = g(Flex)(
 )
 
 const Lead = g(Heading)({
-  // backgroundColor: colors.brick[0],
-  // boxDecorationBreak: "clone",
-  color: colors.brick[1],
-  display: "inline",
   lineHeight: 1.3,
   padding: "0.5rem",
+  textAlign: "left",
   maxWidth: "800px",
   textTransform: "uppercase",
 }).withProps({
-  fontSize: 60,
   bold: 800,
 })
 
 const Sub = g(hoc()(Subhead))({
-  display: "inline",
   padding: "0.5rem",
   maxWidth: "800px",
+  textAlign: "left",
   // backgroundColor: colors.brick[0],
   // boxDecorationBreak: "clone",
   // transition: "opacity 0.6s linear",
@@ -146,7 +145,7 @@ class IndexPage extends React.Component {
     return (
       <div>
         <Helmet title="One Brick at a Time" />
-        <Panel p={0} direction="column">
+        <Panel p={0} direction="row">
           <SlideShow
             autoplay
             hideZoom
@@ -154,8 +153,17 @@ class IndexPage extends React.Component {
             onChange={this.setVisibleSlideIndex}
           >
             {hero.map(({ image, lead, strapline, button_text, url }, i) => (
-              <Relative key={i}>
-                <Banner color="white" backgroundImage={image.url}>
+              <Flex>
+                <Box w={2 / 3}>
+                  <BackgroundImage src={image.url} key={i} />
+                </Box>
+                <Box
+                  w={1 / 3}
+                  palette="blue"
+                  invert
+                  px={3}
+                  pt={menuHeightDocked}
+                >
                   <Lead>{get(lead, "0.text")}</Lead>
                   <Sub visible={this.state.visibleSlide === i}>
                     {get(strapline, "0.text")}
@@ -165,8 +173,8 @@ class IndexPage extends React.Component {
                       {button_text || "Find Out More"}
                     </ActionButton>
                   </BoxOut>
-                </Banner>
-              </Relative>
+                </Box>
+              </Flex>
             ))}
           </SlideShow>
         </Panel>
