@@ -17,6 +17,6 @@
 * DONE donation fixes / remove for now
 * DONE reviews from volunteers + image view
 * DONE fix stupid menubar
-* zoom for slideshow
+* DONE zoom for slideshow
 * INPROGRESS logo / chris
 * browser version locking

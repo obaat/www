@@ -54,7 +54,7 @@ const theme = {
   font: {
     heading: "'Josefin Sans', sans-serif",
     body:
-      "'San Francisco', 'Helvetica Neue', 'Lucida Grande', 'Segoe UI',Verdana,Arial,Helvetica,sans-serif",
+      "'Open Sans','San Francisco', 'Helvetica Neue', 'Lucida Grande', 'Segoe UI',Verdana,Arial,Helvetica,sans-serif",
   },
 
   radius: 0,
