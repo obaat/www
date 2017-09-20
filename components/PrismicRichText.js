@@ -37,8 +37,8 @@ const ourTypes = {
 const rawTypes = {
   unformatted: g.span,
   preformatted: g.pre,
-  strong: g.b,
   em: g.em,
+  strong: g.strong,
   image: g.img,
   label: g.label,
   span: g.span,
@@ -49,13 +49,16 @@ const styling = {
   ...ourTypes,
 }
 
-const Unknown = g.div({ color: "yellow", backgroundColor: "red" })
+const Unknown = ({ type }) => <div>??? {type} </div>
 
 const handler = {
   hyperlink: Link,
+  strong: g.strong({
+    fontWeight: 800,
+  }),
 }
 
-const PrismicRichText = ({ source, forceType, mb = 2, mt, ...props }) => {
+const PrismicRichText = ({ source, forceType, mb, mt, ...props }) => {
   if (!Array.isArray(source)) {
     return <Unknown>???</Unknown>
   }
@@ -90,10 +93,10 @@ const PrismicRichText = ({ source, forceType, mb = 2, mt, ...props }) => {
           }
 
           const part = s.text.slice(start, end)
-          const Component = handler[type]
+          const Component = handler[type] || Unknown
           prevEnd = end
           toAdd.push(
-            <Component key={`${start}-${end}`} {...data}>
+            <Component key={`${start}-${end}`} {...data} type={type}>
               {part}
             </Component>,
           )

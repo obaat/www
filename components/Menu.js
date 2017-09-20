@@ -101,12 +101,10 @@ const SelectedMenuItem = g(MenuItem)({
 })
 
 export const SubMenuItem = g(MenuItem)(({ last }) => ({
-  paddingTop: "15px",
   cursor: "pointer",
   borderBottom: last ? "" : "1px dotted #ccc",
   ":hover": {
     backgroundColor: "#ccc",
-    borderBottomColor: "#000",
   },
 }))
 
@@ -116,11 +114,10 @@ export const OverlayMenu = g.div({
   position: "absolute",
   left: 0,
   top: "100%",
-  minWidth: "300px",
+  minWidth: "270px",
   borderBottom: "1px solid rgba(0,0,0,0.2)",
   borderLeft: "1px solid rgba(0,0,0,0.2)",
   borderRight: "1px solid rgba(0,0,0,0.2)",
-  // boxShadow: "1px 1px 3px 0px ",
 })
 
 export const SecondaryMenu = ({ children, onMouseOut, items, className }) => (

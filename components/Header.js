@@ -113,9 +113,6 @@ export default class Header extends Component {
             py={[2, 2, 2, 0]}
             scrolled={scrolled}
           >
-            <MenuItem key="logo" href="/">
-              One Brick at a Time
-            </MenuItem>
             <Menu volunteering={this.props.volunteering} />
             <Box grow={1} align="right">
               <Donate amount={1500} scrolled={scrolled} />

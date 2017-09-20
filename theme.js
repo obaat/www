@@ -52,7 +52,7 @@ export const invert = reduce(
 const theme = {
   colors: { ...colors, ...invert },
   font: {
-    heading: "'Josefin Sans', sans-serif",
+    heading: "'Hind Vadodara', serif",
     body:
       "'Open Sans','San Francisco', 'Helvetica Neue', 'Lucida Grande', 'Segoe UI',Verdana,Arial,Helvetica,sans-serif",
   },

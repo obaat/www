@@ -20,10 +20,10 @@ import {
   Absolute,
   Subhead,
   Box,
-  H2,
   H3,
   H4,
   H5,
+  H6,
   Text,
   SubHead,
   Banner,
@@ -95,7 +95,6 @@ const Lead = g(Heading)({
   padding: "0.5rem",
   textAlign: "left",
   maxWidth: "800px",
-  textTransform: "uppercase",
 }).withProps({
   bold: 800,
 })
@@ -119,7 +118,7 @@ const cursorOpts = {
   show: false,
 }
 
-const transitionSpeed = 5000
+const transitionSpeed = 6 * 1000
 
 class IndexPage extends React.Component {
   counters = []
@@ -153,41 +152,42 @@ class IndexPage extends React.Component {
             onChange={this.setVisibleSlideIndex}
           >
             {hero.map(({ image, lead, strapline, button_text, url }, i) => (
-              <Flex>
-                <Box w={2 / 3}>
-                  <BackgroundImage src={image.url} key={i} />
-                </Box>
-                <Box
-                  w={1 / 3}
-                  palette="blue"
-                  invert
-                  px={3}
-                  pt={menuHeightDocked}
-                >
-                  <Lead>{get(lead, "0.text")}</Lead>
-                  <Sub visible={this.state.visibleSlide === i}>
-                    {get(strapline, "0.text")}
-                  </Sub>
-                  <BoxOut p={3} bottom right>
-                    <ActionButton prismicUrl={url}>
-                      {button_text || "Find Out More"}
-                    </ActionButton>
-                  </BoxOut>
-                </Box>
-              </Flex>
+              <Relative key={i}>
+                <Flex>
+                  <Box w={2 / 3}>
+                    <BackgroundImage ratio={2 / 3} src={image.url} key={i} />
+                  </Box>
+                  <Box
+                    w={1 / 3}
+                    palette="blue"
+                    invert
+                    px={3}
+                    pt={menuHeightDocked}
+                  >
+                    <Lead>{get(lead, "0.text")}</Lead>
+                    <Sub visible={this.state.visibleSlide === i}>
+                      {get(strapline, "0.text")}
+                    </Sub>
+                    <Absolute bottom right m={3}>
+                      <ActionButton prismicUrl={url}>
+                        {button_text || "Find Out More"}
+                      </ActionButton>
+                    </Absolute>
+                  </Box>
+                </Flex>
+              </Relative>
             ))}
           </SlideShow>
         </Panel>
-        <Panel p={4} direction="row">
+        <Panel>
           <Box w={1 / 2} p={3} align="right">
-            <PrismicRichText source={mission_title} forceType="heading1" />
+            <Subhead>One Brick at a time</Subhead>
           </Box>
-          <Box w={1 / 2} p={3}>
-            <Mission>
+          <Box w={1 / 2} p={3} align="justify">
+            <Measure>
               <PrismicRichText source={mission} />
-            </Mission>
+            </Measure>
           </Box>
-          <ActionButton href="/about">Learn More</ActionButton>
         </Panel>
 
         <VisibilitySensor onChange={this.onVisible} />

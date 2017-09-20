@@ -24,7 +24,7 @@ export default ({
     <Component palette={context} {...passProps}>
       <Flex align="center" justify="center">
         {icon && (
-          <Box pt="2px" order={iconPosition === "right" ? 1 : 0}>
+          <Box order={iconPosition === "right" ? 1 : 0}>
             <Icon
               pr={iconPosition === "left" ? 1 : 0}
               pl={iconPosition === "right" ? 1 : 0}
@@ -33,7 +33,7 @@ export default ({
             />
           </Box>
         )}
-        <Box pt="3px">{children}</Box>
+        <Box>{children}</Box>
       </Flex>
     </Component>
   )

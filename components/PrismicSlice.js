@@ -2,7 +2,7 @@ import React from "react"
 import Embed from "../components/Embed"
 import SlideShow from "../components/SlideShow"
 import PrismicRichText from "../components/PrismicRichText"
-import { Flex, BackgroundImage, Box } from "../ui"
+import { Flex, Border, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 
 const Unknown = ({ slice_type }) => <div> {slice_type} ???</div>
 
@@ -36,20 +36,24 @@ export const renderers = {
   ),
 
   table: ({ items = [] }) => (
-    <table width="100%">
+    <Table width="100%">
       <tbody>
         {items.map(({ column_1, column_2 }, i) => (
-          <tr key={i}>
-            <td>
-              <PrismicRichText source={column_1} />
-            </td>
-            <td>
-              <PrismicRichText source={column_2} />
-            </td>
-          </tr>
+          <Tr key={i} mb={1} cellpadding={0} cellspacing={0}>
+            <Td w={1 / 2}>
+              <Border top borderColor="greyLighter" borderWidth={i > 0 ? 1 : 0}>
+                <PrismicRichText mt={i > 0 ? 2 : 0} source={column_1} />
+              </Border>
+            </Td>
+            <Td>
+              <Border top borderColor="greyLighter" borderWidth={i > 0 ? 1 : 0}>
+                <PrismicRichText mt={i > 0 ? 2 : 0} source={column_2} />
+              </Border>
+            </Td>
+          </Tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   ),
 
   image_gallery: ({ items = [] }) => {

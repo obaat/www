@@ -3,6 +3,7 @@ import { Flex, Box } from "./Grid"
 import get from "lodash/get"
 import { space, color as ssColor, width, fontSize } from "styled-system"
 import { bool, string, number, oneOf, oneOfType } from "prop-types"
+import isNil from "lodash/isNil"
 const numberOrString = oneOfType([number, string])
 const theme = ({ theme, palette, invert }) =>
   get(
@@ -170,6 +171,7 @@ const components = [
       palette: "blue",
     },
     style: withPalette(props => ({
+      backgroundColor: "inherit",
       fontFamily: props.theme.font.body,
       textDecoration: "none",
       textDecorationSkip: "ink",
@@ -332,9 +334,10 @@ const components = [
       lineHeight: 1.25,
     },
   },
-  { name: "Ul", type: "Text", props: { is: "ul" } },
-  { name: "Ol", type: "Text", props: { is: "ol" } },
-  { name: "Li", type: "Text", props: { is: "li" } },
+  { name: "Ul", type: "Text", props: { is: "ul", mb: 0, mt: 0 } },
+  { name: "Ol", type: "Text", props: { is: "ol", mb: 0, mt: 0 } },
+
+  { name: "Li", type: "Text", props: { is: "li", mb: 0, mt: 0 } },
   {
     name: "Pre",
     type: "pre",
@@ -594,7 +597,7 @@ const components = [
     type: "div",
     props: {},
     style: withPalette(props => {
-      const w = px(props.borderWidth || 1)
+      const w = px(isNil(props.borderWidth) ? 1 : props.borderWidth)
       const borderWidth =
         !props.top && !props.right && !props.bottom && !props.left
           ? { borderWidth: w }
@@ -1273,6 +1276,24 @@ const components = [
       mb: 4,
       flex: "1 1 auto",
     },
+    style: {},
+  },
+  {
+    name: "Tr",
+    type: "tr",
+    props: {},
+    style: {},
+  },
+  {
+    name: "Td",
+    type: "td",
+    props: {},
+    style: {},
+  },
+  {
+    name: "Table",
+    type: "table",
+    props: {},
     style: {},
   },
 ]

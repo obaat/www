@@ -109,7 +109,7 @@ const Location = ({ uid, data }) => (
 
 const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
   const title = primary.title && (
-    <PrismicRichText forceType="heading6" source={primary.title} />
+    <PrismicRichText mb={2} forceType="heading6" source={primary.title} />
   )
   const Component = sliceRenderers[slice_type] || Unknown
   return {
