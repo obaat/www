@@ -45,7 +45,9 @@ const Team = ({ members = [], content = {} }) => {
       <PageTitle content={content} />
       <Container py={4}>
         <PrismicRichText color="#fff" source={content.description} />
-        {members.map((props, i) => <TeamMember {...props} key={props.uid} />)}
+        {members.map((props, i) => (
+          <TeamMember {...props} key={props.uid} odd={!!(i % 2)} />
+        ))}
       </Container>
     </div>
   )
