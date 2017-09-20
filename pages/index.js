@@ -149,6 +149,7 @@ class IndexPage extends React.Component {
         <Panel p={0} direction="column">
           <SlideShow
             autoplay
+            hideZoom
             autoplaySpeed={transitionSpeed}
             onChange={this.setVisibleSlideIndex}
           >
@@ -250,7 +251,7 @@ class IndexPage extends React.Component {
             <Heading>Volunteer Experiences</Heading>
           </Box>
           <Box w={1} p={3}>
-            <SlideShow autoplay autoplaySpeed={transitionSpeed}>
+            <SlideShow autoplay hideZoom autoplaySpeed={transitionSpeed}>
               {chunkedStatements.map((statements, i) => (
                 <Flex key={i} justify="center">
                   {statements.map((props, i) => (
