@@ -19,6 +19,9 @@ import Statement from "../components/Statement"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import SidebarHeader from "../components/SidebarHeader"
 import BreadCrumbs from "../components/Breadcrumbs"
+import PrismicSlice, {
+  renderers as sliceRenderers,
+} from "../components/PrismicSlice"
 import {
   Absolute,
   Relative,
@@ -29,8 +32,6 @@ import {
   Heading,
   Border,
 } from "../ui"
-import get from "lodash/get"
-import { withProps } from "recompose"
 
 const Overlay = g(Absolute)({
   pointerEvents: "none",
@@ -106,47 +107,17 @@ const Location = ({ uid, data }) => (
   </Relative>
 )
 
-const Unknown = ({ slice_type }) => <div> {slice_type} ???</div>
-const renderers = {
-  text_only: ({ primary, items }) =>
-    primary.description && <PrismicRichText source={primary.description} />,
-  faq: ({ items = [] }) => (
-    <Box>
-      {items.map(({ question, answer }, i) => (
-        <Box key={i} w={1}>
-          <PrismicRichText w={1} forceType="heading5" source={question} />
-          <PrismicRichText w={1} forceType="paragraph" source={answer} mb={3} />
-        </Box>
-      ))}
-    </Box>
-  ),
-
-  table: ({ items = [] }) => (
-    <table width="100%">
-      <tbody>
-        {items.map(({ column_1, column_2 }, i) => (
-          <tr key={i}>
-            <td>
-              <PrismicRichText source={column_1} />
-            </td>
-            <td>
-              <PrismicRichText source={column_2} />
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  ),
-
-  image_gallery: ({ items = [] }) => {
-    return (
-      <SlideShow controlSize={18}>
-        {items.map(({ gallery_image: { url } }, i) => (
-          <BackgroundImage src={url} key={i} />
-        ))}
-      </SlideShow>
-    )
-  },
+const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
+  const title = primary.title && (
+    <PrismicRichText forceType="heading6" source={primary.title} />
+  )
+  const Component = sliceRenderers[slice_type] || Unknown
+  return {
+    title,
+    description: (
+      <Component primary={primary} items={items} slice_type={slice_type} />
+    ),
+  }
 }
 
 const Quotes = ({ data, items = [] }) => {
@@ -170,24 +141,11 @@ const Quotes = ({ data, items = [] }) => {
   )
 }
 
-const renderPrismicSlice = ({ slice_type, items, primary }, i) => {
-  const title = primary.title && (
-    <PrismicRichText forceType="heading6" source={primary.title} />
-  )
-  const Component = renderers[slice_type] || Unknown
-  return {
-    title,
-    description: (
-      <Component primary={primary} items={items} slice_type={slice_type} />
-    ),
-  }
-}
-
 const Volunteering = ({ content, opportunities, additionalData }) => {
   const quotes = content.body.find(s => s.slice_type === "quotes")
   const accordionItems = content.body
     .filter(s => s.slice_type !== "quotes")
-    .map(renderPrismicSlice)
+    .map(renderSliceToAccordion)
 
   return (
     <div>
@@ -226,6 +184,9 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
 }
 
 const VolunteeringOpportunity = ({ content, locations }) => {
+  const slices = content.body
+    ? content.body.map((props, i) => <PrismicSlice key={i} {...props} />)
+    : []
   return (
     <div>
       <Relative>
@@ -256,6 +217,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
               title="About the Programme"
               source={content.description}
             />
+            {slices}
           </Box>
           <Box w={[1, 1, 1, 1 / 3]} px={2}>
             <SidebarHeader>Available Locations</SidebarHeader>
