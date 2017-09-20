@@ -79,7 +79,13 @@ export const MenuItem = ({
 }) => {
   const item = (
     <A>
-      <MenuContainer px={2} py={1} onMouseOver={onMouseOver} {...props}>
+      <MenuContainer
+        px={2}
+        py={1}
+        onTouch={onMouseOver}
+        onMouseOver={onMouseOver}
+        {...props}
+      >
         {children}
       </MenuContainer>
     </A>

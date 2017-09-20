@@ -58,7 +58,7 @@ const handler = {
   }),
 }
 
-const PrismicRichText = ({ source, forceType, mb, mt, ...props }) => {
+const PrismicRichText = ({ source, forceType, mb = 2, mt, ...props }) => {
   if (!Array.isArray(source)) {
     return <Unknown>???</Unknown>
   }
