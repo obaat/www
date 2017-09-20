@@ -13,21 +13,22 @@ export const TeamMember = ({
 }) => (
   <div>
     <a id={uid} />
-    <Flex wrap="wrap" mb={3}>
-      <Box w={[1, 1, 1 / 5]} mb={3} order={odd ? 2 : 1}>
-        <BackgroundImage ratio={4 / 3} src={image.url} bg="#aaa" />
-      </Box>
-      <Box
-        w={[1, 1, 4 / 5]}
-        pl={[0, 0, 0, odd ? 0 : 3]}
-        pr={[0, 0, 0, odd ? 3 : 0]}
-        order={[0, 0, 0, odd ? 1 : 2]}
-        style={{ textAlign: odd ? "right" : "left" }}
-      >
-        <Border bottom mb={1} pb={2} borderColor="grey">
-          <PrismicRichText mb={0} forceType="heading2" source={name} />
-          <PrismicRichText mb={0} forceType="paragraph" source={job_title} />
-        </Border>
+    <Flex wrap="wrap" mb={3} style={{ textAlign: odd ? "right" : "left" }}>
+      <Border w={1} bottom mb={1} pb={2} borderColor="grey">
+        <PrismicRichText mb={0} forceType="heading2" source={name} />
+        <PrismicRichText mb={0} forceType="paragraph" source={job_title} />
+      </Border>
+      <Box w={1}>
+        <Box
+          mt={1}
+          mr={odd ? 0 : 2}
+          ml={odd ? 2 : 0}
+          mb={2}
+          w={150}
+          style={{ float: odd ? "right" : "left" }}
+        >
+          <BackgroundImage ratio={4 / 3} src={image.url} bg="#aaa" />
+        </Box>
         <PrismicRichText
           mt={1}
           style={{ textAlign: "justify" }}
