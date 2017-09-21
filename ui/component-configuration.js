@@ -35,10 +35,8 @@ const components = [
     props: {
       fontSize: 1,
       m: 0,
-      pl: 3,
-      pr: 3,
-      pt: 2,
-      pb: 2,
+      px: 2,
+      py: 2,
     },
     style: withPalette(props => ({
       fontFamily: props.theme.font.heading,

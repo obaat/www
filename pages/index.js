@@ -39,14 +39,14 @@ import { menuHeightDocked } from "../utils/constants"
 
 const Count = hoc()(CountUp)
 
-const sideColors = ["blue", "brick", "greyLightere"]
+const sideColors = ["blue", "brick", "greyLighter"]
 
 const LeadButton = g(Button)({
   minWidth: "250px",
 }).withProps({
-  mt: [3, 2],
+  py: [1, 1, 1, 1, 2],
   palette: "brick",
-  fontSize: [3, 2],
+  fontSize: [2, 2, 2, 2, 3],
 })
 
 const mapping = {
@@ -169,15 +169,19 @@ class IndexPage extends React.Component {
                 {hero.map(({ image, lead, strapline, button_text, url }, i) => (
                   <Fill
                     key={i}
-                    px={3}
+                    px={2}
                     pt={menuHeightDocked}
                     palette={sideColors[i]}
                     invert
                   >
                     <Lead>{get(lead, "0.text")}</Lead>
                     <Sub visible>{get(strapline, "0.text")}</Sub>
-                    <Absolute bottom right m={3}>
-                      <ActionButton prismicUrl={url} palette={sideColors[i]}>
+                    <Absolute bottom right left m={2}>
+                      <ActionButton
+                        w={1}
+                        prismicUrl={url}
+                        palette={sideColors[i]}
+                      >
                         {button_text || "Find Out More"}
                       </ActionButton>
                     </Absolute>
