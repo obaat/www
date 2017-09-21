@@ -310,6 +310,7 @@ const components = [
     type: "H5",
     props: {
       is: "h6",
+      fontSize: 2,
     },
     style: {},
   },
