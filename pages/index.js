@@ -39,12 +39,13 @@ import { menuHeightDocked } from "../utils/constants"
 
 const Count = hoc()(CountUp)
 
+const sideColors = ["blue", "brick", "greyLightere"]
+
 const LeadButton = g(Button)({
   minWidth: "250px",
 }).withProps({
   mt: [3, 2],
   palette: "brick",
-  invert: true,
   fontSize: [3, 2],
 })
 
@@ -75,6 +76,11 @@ const ActionButton = ({ prismicUrl, href, ...props }) => {
     </Link>
   )
 }
+
+const Fill = g(Relative)({
+  width: "100%",
+  height: "100%",
+})
 
 const Mission = g(Measure)({
   textAlign: "left",
@@ -137,6 +143,7 @@ class IndexPage extends React.Component {
 
   render() {
     const { content, statements } = this.props
+    const { visibleSlide } = this.state
     const { hero, mission, mission_title } = content
     const chunkedStatements = chunk(get(statements, "results", []), 2)
 
@@ -144,39 +151,41 @@ class IndexPage extends React.Component {
       <div>
         <Helmet title="One Brick at a Time" />
         <Panel p={0} direction="row">
-          <SlideShow
-            autoplay
-            hideZoom
-            autoplaySpeed={transitionSpeed}
-            onChange={this.setVisibleSlideIndex}
-          >
-            {hero.map(({ image, lead, strapline, button_text, url }, i) => (
-              <Relative key={i}>
-                <Flex>
-                  <Box w={2 / 3}>
-                    <BackgroundImage ratio={2 / 3} src={image.url} key={i} />
-                  </Box>
-                  <Box
-                    w={1 / 3}
-                    palette="blue"
-                    invert
+          <Flex>
+            <Box w={2 / 3}>
+              <SlideShow
+                autoplay
+                hideZoom
+                autoplaySpeed={transitionSpeed}
+                onChange={this.setVisibleSlideIndex}
+              >
+                {hero.map(({ image, lead, strapline, button_text, url }, i) => (
+                  <BackgroundImage ratio={2 / 3} src={image.url} key={i} />
+                ))}
+              </SlideShow>
+            </Box>
+            <Box w={1 / 3}>
+              <SlideShow hideZoom hidePaging hideArrows index={visibleSlide}>
+                {hero.map(({ image, lead, strapline, button_text, url }, i) => (
+                  <Fill
+                    key={i}
                     px={3}
                     pt={menuHeightDocked}
+                    palette={sideColors[i]}
+                    invert
                   >
                     <Lead>{get(lead, "0.text")}</Lead>
-                    <Sub visible={this.state.visibleSlide === i}>
-                      {get(strapline, "0.text")}
-                    </Sub>
+                    <Sub visible>{get(strapline, "0.text")}</Sub>
                     <Absolute bottom right m={3}>
-                      <ActionButton prismicUrl={url}>
+                      <ActionButton prismicUrl={url} palette={sideColors[i]}>
                         {button_text || "Find Out More"}
                       </ActionButton>
                     </Absolute>
-                  </Box>
-                </Flex>
-              </Relative>
-            ))}
-          </SlideShow>
+                  </Fill>
+                ))}
+              </SlideShow>
+            </Box>
+          </Flex>
         </Panel>
         <Panel>
           <Box w={1 / 2} p={3} align="right">
@@ -249,7 +258,7 @@ class IndexPage extends React.Component {
               suffix="+"
             />
           </Box>
-          <ActionButton palette="blue" invert={false} href="/projects">
+          <ActionButton palette="blue" href="/projects">
             See Our Projects
           </ActionButton>
         </Panel>
@@ -268,11 +277,7 @@ class IndexPage extends React.Component {
               ))}
             </SlideShow>
           </Box>
-          <ActionButton
-            palette="greyLighter"
-            invert={false}
-            href="/volunteering"
-          >
+          <ActionButton palette="greyLighter" href="/volunteering">
             Learn More About Volunteering
           </ActionButton>
         </Panel>

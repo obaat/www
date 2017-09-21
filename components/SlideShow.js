@@ -4,6 +4,7 @@ import Icon from "./Icon"
 import { overlay } from "../styleHelpers"
 import range from "lodash/range"
 import { Chevron } from "reline"
+import isNil from "lodash/isNil"
 import { withProps } from "recompose"
 import {
   Flex,
@@ -13,6 +14,7 @@ import {
   Relative,
   DotButton,
   Carousel,
+  CarouselVertical,
   CarouselSlide,
   Close,
 } from "../ui"
@@ -96,14 +98,10 @@ const Paging = ({ total, page, onPageClick }) => (
   </Absolute>
 )
 
-const OurCarousel = g(Carousel)(props => ({
-  "& > div:first-child": {
-    marginLeft: props.index * -100 + "%",
-    transitionProperty: "margin",
-    transitionDuration: "0.6s",
-    transitionTimingFunction: "cubic-bezier(0.860, 0.000, 0.070, 1.000)",
-  },
-}))
+const Fill = g(Relative)({
+  width: "100%",
+  height: "100%",
+})
 
 export default class SlideShow extends Component {
   static defaultProps = {
@@ -190,41 +188,48 @@ export default class SlideShow extends Component {
     const { selectedIndex, zoom } = this.state
     const {
       controlSize = 48,
+      index,
       hidePaging,
       hideZoom,
+      hideArrows,
       controlColor = "#fff",
+      vertical,
     } = this.props
     const children = React.Children
       .toArray(this.props.children)
       .slice(0, Math.max(PRELOAD_MAX, selectedIndex + PRELOAD_MAX))
+    const Component = vertical ? CarouselVertical : Carousel
+    const visibleIndex = isNil(index) ? selectedIndex : index
 
     const container = (
-      <Relative style={{ width: "100%" }}>
-        <OurCarousel index={selectedIndex} p={0}>
+      <Fill>
+        <Component index={visibleIndex} p={0}>
           {children.map((slide, i) => (
             <CarouselSlide p={0} key={i}>
               {slide}
             </CarouselSlide>
           ))}
-        </OurCarousel>
-        {selectedIndex > 0 && (
-          <Arrow
-            direction="left"
-            controlSize={controlSize}
-            color={controlColor}
-            page={selectedIndex}
-            onPageClick={this.onPageClick}
-          />
-        )}
-        {selectedIndex < this.totalSlides() - 1 && (
-          <Arrow
-            direction="right"
-            controlSize={controlSize}
-            color={controlColor}
-            page={selectedIndex}
-            onPageClick={this.onPageClick}
-          />
-        )}
+        </Component>
+        {!hideArrows &&
+          selectedIndex > 0 && (
+            <Arrow
+              direction="left"
+              controlSize={controlSize}
+              color={controlColor}
+              page={selectedIndex}
+              onPageClick={this.onPageClick}
+            />
+          )}
+        {!hideArrows &&
+          selectedIndex < this.totalSlides() - 1 && (
+            <Arrow
+              direction="right"
+              controlSize={controlSize}
+              color={controlColor}
+              page={selectedIndex}
+              onPageClick={this.onPageClick}
+            />
+          )}
         {!hidePaging && (
           <Paging
             total={this.totalSlides()}
@@ -239,7 +244,7 @@ export default class SlideShow extends Component {
             controlColor={controlColor}
           />
         )}
-      </Relative>
+      </Fill>
     )
 
     return zoom ? (

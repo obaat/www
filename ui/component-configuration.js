@@ -251,6 +251,8 @@ const components = [
     },
     style: props => ({
       fontFamily: props.theme.font.heading,
+      // textTransform: "uppercase",
+      // fontWeight: 900,
     }),
 
     propTypes: {
@@ -1056,6 +1058,7 @@ const components = [
     props: {},
     style: props => ({
       width: "100%",
+      height: "100%",
       overflow: "hidden",
       whiteSpace: "nowrap",
       "& > div": {
@@ -1064,8 +1067,27 @@ const components = [
       "& > div:first-child": {
         marginLeft: props.index * -100 + "%",
         transitionProperty: "margin",
-        transitionDuration: ".2s",
-        transitionTimingFunction: "ease-out",
+        transitionDuration: "0.6s",
+        transitionTimingFunction: "cubic-bezier(0.860, 0.000, 0.070, 1.000)",
+      },
+    }),
+    propTypes: {
+      index: number,
+    },
+  },
+
+  {
+    name: "CarouselVertical",
+    type: "div",
+    props: {},
+    style: props => ({
+      height: "100%",
+      overflow: "hidden",
+      "& > div:first-child": {
+        marginTop: props.index * -100 + "%",
+        transitionProperty: "margin",
+        transitionDuration: "0.6s",
+        transitionTimingFunction: "cubic-bezier(0.860, 0.000, 0.070, 1.000)",
       },
     }),
     propTypes: {
@@ -1092,10 +1114,11 @@ const components = [
       w: 1,
       p: 3,
     },
-    style: props => ({
+    style: {
       display: "inline-block",
+      height: "100%",
       verticalAlign: "middle",
-    }),
+    },
   },
 
   {

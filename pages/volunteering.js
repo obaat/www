@@ -30,6 +30,7 @@ import {
   Box,
   ButtonOutline,
   Heading,
+  Subhead,
   Border,
   H6,
 } from "../ui"
@@ -49,7 +50,7 @@ const Section = ({ title, id, ...props }) =>
   props.source && (
     <div>
       <a id={id} />
-      {title && <Heading>{title}</Heading>}
+      {title && <Subhead>{title}</Subhead>}
       <PrismicRichText {...props} />
     </div>
   )
