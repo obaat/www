@@ -351,7 +351,7 @@ const components = [
   {
     name: "Li",
     type: "Text",
-    props: { is: "li", ml: 1, pr: 1, mb: 0, mt: 0 },
+    props: { is: "li", ml: 1, pr: 1, mb: 1, mt: 0 },
   },
   {
     name: "Pre",
