@@ -226,7 +226,7 @@ const components = [
     props: {
       m: 0,
       fontSize: 1,
-      mb: 1,
+      mb: 2,
     },
     style: props => ({
       fontWeight: props.bold ? bold(props) : get(props.theme, "weights.0"),
@@ -334,10 +334,25 @@ const components = [
       lineHeight: 1.25,
     },
   },
-  { name: "Ul", type: "Text", props: { is: "ul", mb: 0, mt: 0 } },
-  { name: "Ol", type: "Text", props: { is: "ol", mb: 0, mt: 0 } },
+  {
+    name: "Ul",
+    type: "Text",
+    props: { is: "ul", mb: 0, mt: 0 },
+    style: {
+      listStyle: "square outside",
+    },
+  },
+  {
+    name: "Ol",
+    type: "Text",
+    props: { is: "ol", mb: 0, mt: 0 },
+  },
 
-  { name: "Li", type: "Text", props: { is: "li", mb: 0, mt: 0 } },
+  {
+    name: "Li",
+    type: "Text",
+    props: { is: "li", ml: 1, pr: 1, mb: 0, mt: 0 },
+  },
   {
     name: "Pre",
     type: "pre",

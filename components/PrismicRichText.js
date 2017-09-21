@@ -54,15 +54,15 @@ const Unknown = ({ type }) => <div>??? {type} </div>
 const handler = {
   hyperlink: Link,
   strong: g.strong({
-    fontWeight: 800,
+    fontWeight: "bold",
   }),
 }
 
-const PrismicRichText = ({ source, forceType, mb = 2, mt, ...props }) => {
+const PrismicRichText = ({ source, forceType, mb, mt, ...props }) => {
   if (!Array.isArray(source)) {
     return <Unknown>???</Unknown>
   }
-  const content = source.map((s, i) => {
+  const flatContent = source.map((s, i) => {
     if (!s.type) {
       const w = 1 / s.length
       return (
@@ -76,12 +76,14 @@ const PrismicRichText = ({ source, forceType, mb = 2, mt, ...props }) => {
       )
     } else {
       const Container = styling[forceType || s.type] || Unknown
+
       // split the text into pieces
       let content = s.text
 
       if (s.spans && s.spans.length) {
         let prevEnd = 0
-        content = s.spans.reduce((parts, { start, end, data, type }) => {
+        content = s.spans.reduce((parts, span) => {
+          const { start, end, data, type } = span
           const toAdd = []
 
           if (prevEnd < start) {
@@ -95,25 +97,61 @@ const PrismicRichText = ({ source, forceType, mb = 2, mt, ...props }) => {
           const part = s.text.slice(start, end)
           const Component = handler[type] || Unknown
           prevEnd = end
+
           toAdd.push(
             <Component key={`${start}-${end}`} {...data} type={type}>
               {part}
             </Component>,
           )
+
           return parts.concat(toAdd)
         }, [])
         content.push(s.text.slice(prevEnd))
       }
 
       return (
-        <Container {...props} key={i} mb={mb} mt={mt}>
+        <Container {...props} type={s.type} key={i}>
           {content}
         </Container>
       )
     }
   })
 
-  return <span>{content}</span>
+  const finalContent = []
+  let list = []
+
+  flatContent.forEach((item, i) => {
+    const { type } = item.props
+    if (type === "list-item" || type === "o-list-item") {
+      list.push(item)
+    }
+
+    if (list.length) {
+      if (type !== "list-item" && type !== "o-list-item") {
+        finalContent.push(
+          <Ul key={`ul-${i}`} ml={1}>
+            {[...list]}
+          </Ul>,
+        )
+        list.length = 0
+      } else if (item === flatContent[flatContent.length - 1]) {
+        finalContent.push(
+          <Ul key={`ul-${i}`} ml={1}>
+            {[...list]}
+          </Ul>,
+        )
+        list.length = 0
+      }
+    } else {
+      finalContent.push(item)
+    }
+  })
+
+  return (
+    <Box mb={mb} mt={mt}>
+      {finalContent}
+    </Box>
+  )
 }
 
 export default PrismicRichText
