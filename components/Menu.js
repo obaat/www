@@ -92,7 +92,7 @@ export const MenuItem = ({
   )
 
   return href ? (
-    <Link as={as} href={href} prefetch>
+    <Link as={as} href={href}>
       {item}
     </Link>
   ) : (
