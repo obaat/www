@@ -184,10 +184,16 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
   )
 }
 
+const sidebarTypes = { image_gallery: true }
+
 const VolunteeringOpportunity = ({ content, locations }) => {
-  const slices = content.body
-    ? content.body.map((props, i) => <PrismicSlice key={i} {...props} />)
-    : []
+  const body = content.body || []
+  const sidebarSlices = body
+    .filter(b => sidebarTypes[b.slice_type])
+    .map((props, i) => <PrismicSlice key={i} {...props} />)
+  const mainSlices = body
+    .filter(b => !sidebarTypes[b.slice_type])
+    .map((props, i) => <PrismicSlice key={i} {...props} />)
   return (
     <div>
       <Relative>
@@ -218,13 +224,17 @@ const VolunteeringOpportunity = ({ content, locations }) => {
               title="About the Programme"
               source={content.description}
             />
-            {slices}
+            {mainSlices}
           </Box>
           <Box w={[1, 1, 1, 1 / 3]} px={2}>
-            <SidebarHeader>Available Locations</SidebarHeader>
+            {locations.results &&
+              locations.results.length > 0 && (
+                <SidebarHeader>Available Locations</SidebarHeader>
+              )}
             {locations.results.map((props, i) => (
               <Location key={i} {...props} />
             ))}
+            {sidebarSlices}
           </Box>
         </Flex>
       </Container>

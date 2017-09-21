@@ -58,7 +58,7 @@ const handler = {
   }),
 }
 
-const PrismicRichText = ({ source, forceType, mb, mt, ...props }) => {
+const PrismicRichText = ({ source, forceType, mb, mt, xmb, xmt, ...props }) => {
   if (!Array.isArray(source)) {
     return <Unknown>???</Unknown>
   }
@@ -99,7 +99,13 @@ const PrismicRichText = ({ source, forceType, mb, mt, ...props }) => {
           prevEnd = end
 
           toAdd.push(
-            <Component key={`${start}-${end}`} {...data} type={type}>
+            <Component
+              key={`${start}-${end}`}
+              {...data}
+              type={type}
+              mb={mb}
+              mt={mt}
+            >
               {part}
             </Component>,
           )
@@ -110,7 +116,7 @@ const PrismicRichText = ({ source, forceType, mb, mt, ...props }) => {
       }
 
       return (
-        <Container {...props} type={s.type} key={i}>
+        <Container {...props} type={s.type} key={i} mt={xmt} mb={xmb}>
           {content}
         </Container>
       )
