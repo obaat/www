@@ -97,19 +97,15 @@ const Lead = g(Heading)({
   maxWidth: "800px",
 }).withProps({
   bold: 800,
-  fontSize: [6, 5, 4],
+  fontSize: [1, 1, 1, 5, 6],
 })
 
 const Sub = g(hoc()(Subhead))({
   padding: "0.5rem",
   maxWidth: "800px",
   textAlign: "left",
-  // backgroundColor: colors.brick[0],
-  // boxDecorationBreak: "clone",
-  // transition: "opacity 0.6s linear",
-  color: colors.brick[1],
 }).withProps({
-  fontSize: [5, 4, 3],
+  fontSize: [1, 1, 1, 3, 5],
 })
 
 const BoxOut = g(Absolute)({
@@ -131,7 +127,7 @@ class IndexPage extends React.Component {
   }
 
   onVisible = isVisible => {
-    isVisible && this.counters.forEach(startAnimation)
+    isVisible && this.counters.forEach(a => a && startAnimation(a))
   }
 
   setTypingDoneFor = i => e =>

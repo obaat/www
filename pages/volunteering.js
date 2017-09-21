@@ -31,6 +31,7 @@ import {
   ButtonOutline,
   Heading,
   Border,
+  H6,
 } from "../ui"
 
 const Overlay = g(Absolute)({
@@ -127,9 +128,9 @@ const Quotes = ({ data, items = [] }) => {
 
   return (
     <Border borderColor="greyLighter" top left bottom right>
-      <SlideShow controlSize={18} controlColor="#777" hideZoom>
+      <SlideShow controlSize={18} controlColor="#777" hideZoom hidePaging>
         {filled.map(({ data: { description, name, role } }, i) => (
-          <Box p={3} key={i}>
+          <Box py={2} px={3} key={i}>
             <PrismicRichText forceType="small" source={description} />
             <Box align="right" mt={2}>
               <PrismicRichText forceType="paragraph" source={name} />
