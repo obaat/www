@@ -31,19 +31,29 @@ export const renderers = {
         <Box key={i} w={1}>
           <Flex>
             <Box pr={1}>
-              <Icon name="comment" f={0} />
+              <Icon name="comment-o" f={14} flip="horizontal" />
             </Box>
-            <Box>
+            <Box w={1} pt="3px">
               <PrismicRichText
-                w={1}
                 forceType="paragraph"
-                bold
+                bold={900}
                 source={question}
               />
             </Box>
           </Flex>
-
-          <PrismicRichText w={1} forceType="paragraph" source={answer} mb={3} />
+          <Flex>
+            <Box pr={1}>
+              <Icon name="comment" f={14} />
+            </Box>
+            <Box w={1} pt="3px">
+              <PrismicRichText
+                w={1}
+                forceType="paragraph"
+                source={answer}
+                mb={3}
+              />
+            </Box>
+          </Flex>
         </Box>
       ))}
     </Box>

@@ -11,7 +11,9 @@ const fa = {
 
 const Icon = hoc()(
   g.i(fa).withProps(props => ({
-    className: `fa-${props.name}`,
+    className: `fa-${props.name} ${props.rotate
+      ? `fa-rotate-${props.rotate}`
+      : ""} ${props.flip ? `fa-flip-${props.flip}` : ""} `,
     f: 1,
     "aria-hidden": "true",
   })),

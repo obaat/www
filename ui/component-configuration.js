@@ -222,7 +222,6 @@ const components = [
     name: "Text",
     type: "p",
     props: {
-      m: 0,
       fontSize: 1,
       mb: 2,
     },
