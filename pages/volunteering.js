@@ -57,16 +57,16 @@ const Section = ({ title, id, ...props }) =>
 
 const Opportunity = ({ uid, data }) => (
   <Border p={2} mb={2} borderColor="greyLighter" top left bottom right>
-    <PrismicRichText forceType="heading6" source={data.title} />
+    <PrismicRichText forceType="paragraph" bold={700} source={data.title} />
     <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
       <Button
         w={1}
         py={1}
         palette="brick"
-        invert
         icon="chevron-right"
-        iconSize={0}
+        iconSize={12}
         iconPosition="right"
+        as={ButtonOutline}
       >
         More info
       </Button>
@@ -172,7 +172,7 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
             <Accordion items={accordionItems} />
           </Box>
           <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
-            <SidebarHeader>Available Roles</SidebarHeader>
+            <SidebarHeader>Available Placements</SidebarHeader>
             {opportunities &&
               opportunities.results &&
               opportunities.results.map((props, i) => (

@@ -27,6 +27,7 @@ import {
   Text,
   SubHead,
   Banner,
+  ButtonOutline,
   Measure,
   BackgroundImage,
 } from "../ui"
@@ -180,6 +181,8 @@ class IndexPage extends React.Component {
                     <Absolute bottom right left m={2}>
                       <ActionButton
                         w={1}
+                        invert
+                        as={ButtonOutline}
                         prismicUrl={url}
                         palette={sideColors[i]}
                       >
@@ -208,7 +211,7 @@ class IndexPage extends React.Component {
           <Box w={1}>
             <Heading>Our Impact</Heading>
           </Box>
-          <Box w={1 / 2} p={3}>
+          <Box w={1 / 4} p={3}>
             <Icon f={50} mb={2} name="clock-o" />
             <H5 mb={2}>Years Experience in Uganda</H5>
             <Count
@@ -221,7 +224,7 @@ class IndexPage extends React.Component {
               suffix="+"
             />
           </Box>
-          <Box w={1 / 2} p={3}>
+          <Box w={1 / 4} p={3}>
             <Icon f={50} mb={2} name="wrench" />
             <H5 mb={2}>Trained Local People</H5>
             <Count
@@ -234,7 +237,7 @@ class IndexPage extends React.Component {
               suffix="+"
             />
           </Box>
-          <Box w={1 / 2} p={3}>
+          <Box w={1 / 4} p={3}>
             <Icon f={50} mb={2} name="hospital-o" />
             <H5 mb={2}>Projects Completed</H5>
             <Count
@@ -247,7 +250,7 @@ class IndexPage extends React.Component {
               suffix="+"
             />
           </Box>
-          <Box w={1 / 2} p={3}>
+          <Box w={1 / 4} p={3}>
             <Icon f={50} mb={2} name="users" />
             <H5 mb={0}>Opportunities Created</H5>
             <Text fontSize={0} mb={2}>
