@@ -9,6 +9,7 @@ import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
 import Menu, { MenuItem, SecondaryMenu } from "./Menu"
 import NProgress from "nprogress"
 import Router from "next/router"
+import Link from "next/link"
 
 Router.onRouteChangeStart = () => NProgress.start()
 Router.onRouteChangeComplete = () => NProgress.done()
@@ -113,6 +114,9 @@ export default class Header extends Component {
             py={[2, 2, 2, 0]}
             scrolled={scrolled}
           >
+            <Link href="/">
+              <Box>LOGO</Box>
+            </Link>
             <Menu volunteering={this.props.volunteering} />
             <Box grow={1} align="right">
               <Donate amount={1500} scrolled={scrolled} />

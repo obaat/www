@@ -102,7 +102,7 @@ const Lead = g(Heading)({
   textAlign: "left",
   maxWidth: "800px",
 }).withProps({
-  bold: 800,
+  bold: 700,
   fontSize: [1, 1, 1, 5, 6],
 })
 
@@ -111,6 +111,7 @@ const Sub = g(hoc()(Subhead))({
   maxWidth: "800px",
   textAlign: "left",
 }).withProps({
+  bold: 400,
   fontSize: [1, 1, 1, 3, 5],
 })
 
