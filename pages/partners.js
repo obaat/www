@@ -3,6 +3,7 @@ import { getSingleton, getByIDs, types } from "../utils/api"
 import { withLayout } from "../components/Layout"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, Image, BackgroundImage } from "../ui"
+import Link from "../components/Link"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 
@@ -20,8 +21,13 @@ const Partner = ({ title, description, logo, website, uid, odd }) => (
         order={odd ? 1 : 2}
         style={{ textAlign: odd ? "right" : "left" }}
       >
-        <Border bottom mb={2} borderColor="#aaa">
-          <PrismicRichText forceType="heading2" source={title} />
+        <Border bottom mb={2} borderColor="greyLighter">
+          <PrismicRichText mb={0} forceType="heading2" source={title} />
+          {website && (
+            <Link target="_blank" href={website.url}>
+              {website.url}
+            </Link>
+          )}
         </Border>
         <PrismicRichText source={description} />
       </Box>

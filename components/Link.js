@@ -10,7 +10,7 @@ const Link = ({ url, slug, href, target, ...props }) => {
   const _href = slug ? `/${mapping[slug] || slug}` : href
   return (
     <NxLink href={_href}>
-      <UILink {...props} target={target} rel="noopener" />
+      <UILink {...props} href={_href} target={target} rel="noopener" />
     </NxLink>
   )
 }

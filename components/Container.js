@@ -7,7 +7,7 @@ const Container = g(Box)(props => ({
   marginRight: "auto",
   // textAlign: "justify",
 })).withProps({
-  px: [3, 2, 0],
+  px: [1, 2, 2],
   py: 3,
 })
 

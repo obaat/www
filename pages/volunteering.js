@@ -127,7 +127,7 @@ const Quotes = ({ data, items = [] }) => {
 
   return (
     <Border borderColor="greyLighter" top left bottom right>
-      <SlideShow controlSize={18} controlColor="#777">
+      <SlideShow controlSize={18} controlColor="#777" hideZoom>
         {filled.map(({ data: { description, name, role } }, i) => (
           <Box p={3} key={i}>
             <PrismicRichText forceType="small" source={description} />

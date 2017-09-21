@@ -42,10 +42,10 @@ const Count = hoc()(CountUp)
 const LeadButton = g(Button)({
   minWidth: "250px",
 }).withProps({
-  mt: 3,
+  mt: [3, 2],
   palette: "brick",
   invert: true,
-  fontSize: 3,
+  fontSize: [3, 2],
 })
 
 const mapping = {
@@ -97,6 +97,7 @@ const Lead = g(Heading)({
   maxWidth: "800px",
 }).withProps({
   bold: 800,
+  fontSize: [6, 5, 4],
 })
 
 const Sub = g(hoc()(Subhead))({
@@ -107,6 +108,8 @@ const Sub = g(hoc()(Subhead))({
   // boxDecorationBreak: "clone",
   // transition: "opacity 0.6s linear",
   color: colors.brick[1],
+}).withProps({
+  fontSize: [5, 4, 3],
 })
 
 const BoxOut = g(Absolute)({
