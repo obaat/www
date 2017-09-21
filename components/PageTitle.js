@@ -35,7 +35,7 @@ export default ({ content, children, title: _title, ...props }) => {
   return (
     <Container image={image} pt={menuHeightDocked}>
       <Helmet title={title} />
-      <Title>{title}</Title>
+      <Title mt={-60}>{title}</Title>
       {children}
     </Container>
   )
