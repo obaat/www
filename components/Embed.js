@@ -1,7 +1,6 @@
 import React from "react"
 
 const Embed = ({ type, provider_name, width, html, height, ...props }) => {
-  console.log({ provider_name })
   switch (provider_name) {
     case "YouTube": {
       const src = { __html: html }

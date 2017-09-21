@@ -228,6 +228,7 @@ const components = [
     },
     style: props => ({
       fontWeight: props.bold ? bold(props) : get(props.theme, "weights.0"),
+      lineHeight: "1.53em",
       fontFamily: props.theme.font.body,
     }),
     propTypes: {
