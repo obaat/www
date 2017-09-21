@@ -115,6 +115,7 @@ const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
   )
   const Component = sliceRenderers[slice_type] || Unknown
   return {
+    id: `s-${i}`,
     title,
     description: (
       <Component primary={primary} items={items} slice_type={slice_type} />

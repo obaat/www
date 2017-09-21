@@ -95,7 +95,9 @@ const components = [
   {
     name: "ButtonOutlineFilled",
     type: "ButtonOutline",
-    props: {},
+    props: {
+      px: 3,
+    },
     style: withPalette(props => ({
       backgroundColor: props.background,
     })),
@@ -104,8 +106,7 @@ const components = [
     name: "ButtonCircle",
     type: "Button",
     props: {
-      pl: 3,
-      pr: 3,
+      px: 3,
     },
     style: props => ({
       borderRadius: px(99999),
@@ -115,8 +116,7 @@ const components = [
     name: "ButtonCircleOutline",
     type: "Button",
     props: {
-      pl: 3,
-      pr: 3,
+      px: 3,
     },
     style: withPalette(props => ({
       boxShadow: `inset 0 0 0 2px ${props.background}`,
@@ -133,8 +133,7 @@ const components = [
     name: "ButtonCircleOutlineFilled",
     type: "ButtonCircleOutline",
     props: {
-      pl: 3,
-      pr: 3,
+      px: 3,
     },
     style: withPalette(props => ({
       backgroundColor: props.foreground,
@@ -267,8 +266,9 @@ const components = [
     type: "Heading",
     props: {
       is: "h2",
-      mb: 1,
+      mb: 2,
       fontSize: 5,
+      bold: 700,
     },
     style: {
       lineHeight: 1.286,
@@ -279,7 +279,8 @@ const components = [
     type: "Heading",
     props: {
       is: "h3",
-      mb: 1,
+      mb: 2,
+      bold: 700,
       fontSize: 5,
     },
     style: {

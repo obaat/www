@@ -31,20 +31,18 @@ export const renderers = {
         <Box key={i} w={1}>
           <Flex>
             <Box pr={1}>
-              <Icon name="comment-o" f={14} flip="horizontal" />
+              <Icon name="comment-o" f={14} />
             </Box>
             <Box w={1} pt="3px">
               <PrismicRichText
                 forceType="paragraph"
                 bold={900}
                 source={question}
+                xmb={0}
               />
             </Box>
           </Flex>
           <Flex>
-            <Box pr={1}>
-              <Icon name="comment" f={14} />
-            </Box>
             <Box w={1} pt="3px">
               <PrismicRichText
                 w={1}

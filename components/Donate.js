@@ -132,7 +132,6 @@ const DonateJustGiving = ({ scrolled }) => (
       icon="heart"
       iconSize={0}
       py={1}
-      px={2}
       as={ButtonCircle}
     >
       DONATE
