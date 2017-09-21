@@ -34,7 +34,12 @@ export const renderers = {
               <Icon name="comment" f={0} />
             </Box>
             <Box>
-              <PrismicRichText w={1} forceType="heading6" source={question} />
+              <PrismicRichText
+                w={1}
+                forceType="paragraph"
+                bold
+                source={question}
+              />
             </Box>
           </Flex>
 
