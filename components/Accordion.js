@@ -26,13 +26,18 @@ const ToggleIcon = g(Icon)({
 const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
   return (
     <AccordionContainer>
-      <AccordionHeader mb={-2} bg={color} p={2} onClick={toggleOpen(id)}>
+      <AccordionHeader
+        id={id}
+        mb={-2}
+        bg={color}
+        p={2}
+        onClick={toggleOpen(id)}
+      >
         <ToggleIcon name={open ? "chevron-up" : "chevron-down"} />
         {title}
       </AccordionHeader>
       {open && (
         <AccordionBody p={2} bg="#fafafa">
-          <a href={`#${id}`} />
           {description}
         </AccordionBody>
       )}
@@ -46,7 +51,7 @@ const oneOpen = compose(
     return {
       toggleOpen: ({ openSection, setOpenSection }) => curIndex => id => e => {
         setOpenSection(openSection === curIndex ? null : curIndex)
-        router.push(router.pathname + "#" + id)
+        window.setTimeout(() => router.replace(router.pathname + "#" + id), 20)
       },
     }
   }),
