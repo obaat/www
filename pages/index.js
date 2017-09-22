@@ -163,7 +163,7 @@ class IndexPage extends React.Component {
                 ))}
               </SlideShow>
             </Box>
-            <Box w={1 / 3} palette="brick" invert>
+            <Box w={1 / 3}>
               <SlideShow hideZoom hidePaging hideArrows index={visibleSlide}>
                 {hero.map(({ image, lead, strapline, button_text, url }, i) => (
                   <Box

@@ -82,7 +82,7 @@ export const MenuItem = ({
       <MenuContainer
         px={2}
         py={1}
-        onTouch={onMouseOver}
+        onTouchStart={onMouseOver}
         onMouseOver={onMouseOver}
         {...props}
       >
