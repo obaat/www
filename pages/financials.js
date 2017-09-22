@@ -1,5 +1,5 @@
 import React from "react"
-import { getSingleton } from "../utils/api"
+import { getSingleton, types } from "../utils/api"
 import page from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import PageTitle from "../components/PageTitle"

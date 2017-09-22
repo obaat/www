@@ -9,8 +9,6 @@ import Footer from "../components/Footer"
 import Header from "../components/Header"
 import theme from "../theme"
 
-// color palette: http://paletton.com/#uid=33m0y0ksMDf8jVahZJZEepkKleL
-
 const Container = g.div(
   {
     fontFamily: theme.font.heading,
