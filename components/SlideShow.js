@@ -222,7 +222,9 @@ export default class SlideShow extends Component {
                 transform: `translate${vertical ? "Y" : "X"}(-${x}%)`,
               }}
             >
-              {children.map((slide, i) => <CarouselSeat>{slide}</CarouselSeat>)}
+              {children.map((slide, i) => (
+                <CarouselSeat key={i}>{slide}</CarouselSeat>
+              ))}
             </Carousel>
           )}
         </Motion>

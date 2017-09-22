@@ -5,6 +5,7 @@ import { css } from "glamor"
 import { Flex, Box, Relative, Link as UILink } from "../ui"
 import { space } from "../styleHelpers"
 import { Set } from "react-powerplug"
+import enhanceWithClickOutside from "react-click-outside"
 
 const toVolunteeringMenu = src =>
   src.map(({ uid, data: { title } }) => ({
@@ -126,19 +127,33 @@ export const OverlayMenu = g.div({
   borderRight: "1px solid rgba(0,0,0,0.2)",
 })
 
-export const SecondaryMenu = ({ children, onMouseOut, items, className }) => (
-  <Box>
-    {children}
-    <Relative>
-      <OverlayMenu onMouseLeave={onMouseOut}>
-        {items.map(({ title, meta, ...props }, i) => (
-          <SubMenuItem key={title} {...props} last={i === items.length - 1}>
-            {title} {meta}
-          </SubMenuItem>
-        ))}
-      </OverlayMenu>
-    </Relative>
-  </Box>
+export const SecondaryMenu = enhanceWithClickOutside(
+  class SecondaryMenu extends Component {
+    handleClickOutside = () => {
+      this.props.onMouseOut()
+    }
+    render() {
+      const { children, onMouseOut, items, className } = this.props
+      return (
+        <Box>
+          {children}
+          <Relative>
+            <OverlayMenu onMouseLeave={onMouseOut}>
+              {items.map(({ title, meta, ...props }, i) => (
+                <SubMenuItem
+                  key={title}
+                  {...props}
+                  last={i === items.length - 1}
+                >
+                  {title} {meta}
+                </SubMenuItem>
+              ))}
+            </OverlayMenu>
+          </Relative>
+        </Box>
+      )
+    }
+  },
 )
 
 export default props => {
