@@ -40,6 +40,7 @@ const Arrow = ({
   page,
   onPageClick,
   direction,
+  px = 2,
 }) => (
   <AbsMiddle
     direction={direction}
@@ -47,7 +48,7 @@ const Arrow = ({
     align="center"
     justify="center"
     onClick={() => onPageClick(page + (direction === "left" ? -1 : 1))}
-    px={2}
+    px={px}
   >
     <Chevron
       size={controlSize}
@@ -206,6 +207,7 @@ export default class SlideShow extends Component {
       hideArrows,
       controlColor = "#fff",
       vertical,
+      px = 2,
     } = this.props
     const children = React.Children
       .toArray(this.props.children)
@@ -236,6 +238,7 @@ export default class SlideShow extends Component {
               color={controlColor}
               page={selectedIndex}
               onPageClick={this.onPageClick}
+              px={px}
             />
           )}
         {!hideArrows &&
@@ -246,6 +249,7 @@ export default class SlideShow extends Component {
               color={controlColor}
               page={selectedIndex}
               onPageClick={this.onPageClick}
+              px={px}
             />
           )}
         {!hidePaging && (

@@ -6,18 +6,16 @@ import { compose, withState, withHandlers } from "recompose"
 
 import { Flex, Box, Panel, PanelHeader, Heading } from "../ui"
 
-const color = "#eee"
-
 const AccordionContainer = g(Panel)({
-  borderColor: color,
   borderBottom: "1px solid #ccc",
+  borderColor: "#fff",
 })
 
-const AccordionHeader = g(Box)({
-  borderColor: color,
-})
+const AccordionHeader = g(Box)({})
 
-const AccordionBody = g(Box)({})
+const AccordionBody = g(Box)({
+  borderTop: "2px solid #fff",
+})
 
 const ToggleIcon = g(Icon)({
   float: "right",
@@ -29,7 +27,8 @@ const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
       <AccordionHeader
         id={id}
         mb={-2}
-        bg={color}
+        palette="greyLighter"
+        invert
         p={2}
         onClick={toggleOpen(id)}
       >
@@ -37,7 +36,7 @@ const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
         {title}
       </AccordionHeader>
       {open && (
-        <AccordionBody p={2} bg="#fafafa">
+        <AccordionBody p={2} palette="greyLighterStill" invert>
           {description}
         </AccordionBody>
       )}

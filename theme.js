@@ -16,6 +16,7 @@ const palette = convert({
   grey: [0, 0, 0.48],
   greyLight: [0, 0, 0.71],
   greyLighter: [0, 0, 0.86],
+  greyLighterStill: [0, 0, 0.94],
   whiteTer: [0, 0, 0.96],
   whiteBis: [0, 0, 0.98],
   white: [0, 0, 100],
@@ -40,6 +41,7 @@ export const colors = {
   warning: [palette.yellow, palette.white],
   danger: [palette.red, palette.white],
   greyLighter: [palette.greyLighter, palette.black],
+  greyLighterStill: [palette.greyLighterStill, palette.black],
   grey: [palette.grey, palette.black],
   brick: [palette.brick, palette.white],
 }

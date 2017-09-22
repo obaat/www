@@ -1,8 +1,9 @@
 import React from "react"
 import Button from "../components/Button"
 import ApplyNow from "../components/ApplyNow"
+import Icon from "../components/Icon"
 import g from "glamorous"
-import Link from "next/link"
+import Link from "../components/Link"
 import {
   getByUID,
   getByIDs,
@@ -29,6 +30,7 @@ import {
   Flex,
   Box,
   ButtonOutline,
+  ButtonTransparent,
   Heading,
   Subhead,
   Border,
@@ -56,20 +58,20 @@ const Section = ({ title, id, ...props }) =>
   )
 
 const Opportunity = ({ uid, data }) => (
-  <Box mb={2}>
-    <PrismicRichText forceType="paragraph" bold={700} source={data.title} />
+  <Box>
     <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
-      <Button
-        w={1}
-        py={1}
-        palette="brick"
-        icon="chevron-right"
-        iconSize={12}
-        iconPosition="right"
-        as={ButtonOutline}
-      >
-        More info
-      </Button>
+      <Flex>
+        <Box>
+          <PrismicRichText
+            forceType="unformatted"
+            bold={700}
+            source={data.title}
+          />
+        </Box>
+        <Box>
+          <Icon pl={1} f={0} name="chevron-right" />
+        </Box>
+      </Flex>
     </Link>
   </Box>
 )
@@ -111,7 +113,12 @@ const Location = ({ uid, data }) => (
 
 const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
   const title = primary.title && (
-    <PrismicRichText mb={2} forceType="heading6" source={primary.title} />
+    <PrismicRichText
+      mb={2}
+      forceType="heading6"
+      bold={300}
+      source={primary.title}
+    />
   )
   const Component = sliceRenderers[slice_type] || Unknown
   return {
@@ -129,13 +136,19 @@ const Quotes = ({ data, items = [] }) => {
   )
 
   return (
-    <Border borderColor="greyLighter" top left bottom right>
-      <SlideShow controlSize={18} controlColor="#777" hideZoom hidePaging>
+    <Border borderColor="greyLighter" top left bottom right mt={2}>
+      <SlideShow
+        controlSize={18}
+        controlColor="#777"
+        px={1}
+        hideZoom
+        hidePaging
+      >
         {filled.map(({ data: { description, name, role } }, i) => (
           <Box py={2} px={3} key={i}>
-            <PrismicRichText forceType="small" source={description} />
+            <PrismicRichText forceType="paragraph" source={description} />
             <Box align="right" mt={2}>
-              <PrismicRichText forceType="paragraph" source={name} />
+              <PrismicRichText bold={700} forceType="paragraph" source={name} />
             </Box>
           </Box>
         ))}
@@ -173,11 +186,14 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
           </Box>
           <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
             <SidebarHeader>Available Placements</SidebarHeader>
-            {opportunities &&
-              opportunities.results &&
-              opportunities.results.map((props, i) => (
-                <Opportunity key={i} {...props} />
-              ))}
+            <Border top bottom left right p={2} borderColor="greyLighter">
+              {opportunities &&
+                opportunities.results &&
+                opportunities.results.map((props, i) => (
+                  <Opportunity key={i} {...props} />
+                ))}
+            </Border>
+            <H6 mt={2}>Volunteer Experiences</H6>
             {quotes && <Quotes items={quotes.items} data={additionalData} />}
           </Box>
         </Flex>

@@ -11,16 +11,19 @@ const Statement = ({ data: { description, avatar, name, role } }) => (
         <Icon f={50} name="quote-left" />
       </Box>
       <Box p={3} align="justify">
-        <PrismicRichText forceType="paragraph" source={description} />
-        <Flex>
-          <Box>
-            {avatar && avatar.url && <Avatar size={70} src={avatar.url} />}
-          </Box>
-          <Box w={1} align="right">
-            <PrismicRichText forceType="heading4" source={name} />
-            <PrismicRichText forceType="paragraph" source={role} />
+        <Flex align="center">
+          {avatar &&
+            avatar.url && (
+              <Box w={100}>
+                <Avatar size={70} src={avatar.url} />
+              </Box>
+            )}
+          <Box align="right">
+            <PrismicRichText forceType="heading4" xmb={1} source={name} />
           </Box>
         </Flex>
+        <PrismicRichText forceType="paragraph" source={description} />
+        <PrismicRichText forceType="small" source={role} />
       </Box>
       <Box alignSelf="flex-end">
         <Icon f={50} name="quote-right" />
