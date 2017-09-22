@@ -1,23 +1,16 @@
 import React, { Component } from "react"
 import g from "glamorous"
+import { css } from "glamor"
 import Icon from "./Icon"
 import { overlay } from "../styleHelpers"
 import range from "lodash/range"
 import { Chevron } from "reline"
 import isNil from "lodash/isNil"
 import { withProps } from "recompose"
-import {
-  Flex,
-  Fixed,
-  Box,
-  Absolute,
-  Relative,
-  DotButton,
-  Carousel,
-  CarouselVertical,
-  CarouselSlide,
-  Close,
-} from "../ui"
+import { Flex, Fixed, Box, Absolute, Relative, DotButton, Close } from "../ui"
+import { Motion, spring } from "react-motion"
+// import Transition from "react-transition-group/Transition"
+// import TransitionGroup from "react-transition-group/TransitionGroup"
 
 const PRELOAD_MAX = 3
 
@@ -101,7 +94,26 @@ const Paging = ({ total, page, onPageClick }) => {
   )
 }
 
-const Fill = g(Relative)({})
+const CarouselContainer = g.div({
+  overflow: "hidden",
+  position: "relative",
+  width: "100%",
+  height: "100%",
+})
+
+const Carousel = g(Flex)({
+  width: "100%",
+  height: "100%",
+  margin: "0",
+  padding: "0",
+  transition: "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)",
+})
+
+const CarouselSeat = g.section({
+  background: "#ddd",
+  position: "relative",
+  flex: "1 0 100%",
+})
 
 export default class SlideShow extends Component {
   static defaultProps = {
@@ -198,18 +210,22 @@ export default class SlideShow extends Component {
     const children = React.Children
       .toArray(this.props.children)
       .slice(0, Math.max(PRELOAD_MAX, selectedIndex + PRELOAD_MAX))
-    const Component = vertical ? CarouselVertical : Carousel
     const visibleIndex = isNil(index) ? selectedIndex : index
 
     const container = (
-      <Fill>
-        <Component index={visibleIndex} p={0}>
-          {children.map((slide, i) => (
-            <CarouselSlide p={0} key={i}>
-              {slide}
-            </CarouselSlide>
-          ))}
-        </Component>
+      <CarouselContainer>
+        <Motion style={{ x: visibleIndex * 100 }}>
+          {({ x }) => (
+            <Carousel
+              direction={vertical ? "column" : "row"}
+              style={{
+                transform: `translate${vertical ? "Y" : "X"}(-${x}%)`,
+              }}
+            >
+              {children.map((slide, i) => <CarouselSeat>{slide}</CarouselSeat>)}
+            </Carousel>
+          )}
+        </Motion>
         {!hideArrows &&
           selectedIndex > 0 && (
             <Arrow
@@ -244,7 +260,7 @@ export default class SlideShow extends Component {
             controlColor={controlColor}
           />
         )}
-      </Fill>
+      </CarouselContainer>
     )
 
     return zoom ? (

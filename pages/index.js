@@ -1,6 +1,7 @@
 import React from "react"
 import g from "glamorous"
 import { color } from "styled-system"
+import theme from "../theme"
 import get from "lodash/get"
 import chunk from "lodash/chunk"
 import Helmet from "react-helmet"
@@ -126,7 +127,7 @@ class IndexPage extends React.Component {
   counters = []
   state = {
     visible: {},
-    visibleSlide: null,
+    visibleSlide: 0,
   }
 
   onVisible = isVisible => {
@@ -148,44 +149,35 @@ class IndexPage extends React.Component {
       <div>
         <Helmet title="One Brick at a Time" />
         <Panel p={0} direction="row">
-          <Flex>
+          <Flex w={1}>
             <Box w={2 / 3}>
               <SlideShow
                 autoplay
                 hideZoom
                 autoplaySpeed={transitionSpeed}
                 onChange={this.setVisibleSlideIndex}
+                controlColor={theme.colors[sideColors[visibleSlide]][0]}
               >
                 {hero.map(({ image, lead, strapline, button_text, url }, i) => (
                   <BackgroundImage ratio={2 / 3} src={image.url} key={i} />
                 ))}
               </SlideShow>
             </Box>
-            <Box w={1 / 3}>
+            <Box w={1 / 3} palette="brick" invert>
               <SlideShow hideZoom hidePaging hideArrows index={visibleSlide}>
                 {hero.map(({ image, lead, strapline, button_text, url }, i) => (
-                  <BackgroundImage
-                    key={i}
-                    style={{ position: "relative" }}
-                    ratio={3 / 2}
+                  <Box
                     palette={sideColors[i]}
                     invert
+                    key={i}
+                    pt={menuHeightDocked}
+                    px={3}
+                    w={1}
+                    style={{ height: "100%" }}
                   >
                     <Lead>{get(lead, "0.text")}</Lead>
                     <Sub>{get(strapline, "0.text")}</Sub>
-                    <Absolute bottom right left m={2}>
-                      <ActionButton
-                        w={1}
-                        invert
-                        as={ButtonOutline}
-                        prismicUrl={url}
-                        palette={sideColors[i]}
-                      >
-                        {button_text || "Find Out More"}
-                      </ActionButton>
-                    </Absolute>
-                  </BackgroundImage>
-                ))}
+                  </Box>
                 ))}
               </SlideShow>
             </Box>
@@ -271,7 +263,12 @@ class IndexPage extends React.Component {
             <Heading>Volunteer Experiences</Heading>
           </Box>
           <Box w={1} p={3}>
-            <SlideShow autoplay hideZoom autoplaySpeed={transitionSpeed}>
+            <SlideShow
+              autoplay
+              controlColor={theme.colors.greyLighter[1]}
+              hideZoom
+              autoplaySpeed={transitionSpeed}
+            >
               {chunkedStatements.map((statements, i) => (
                 <Flex key={i} justify="center">
                   {statements.map((props, i) => (

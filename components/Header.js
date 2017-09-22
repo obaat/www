@@ -10,7 +10,7 @@ import Menu, { MenuItem, SecondaryMenu } from "./Menu"
 import Link from "next/link"
 
 const dockedBackground =
-  "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)"
+  "linear-gradient(to bottom, rgba(0,0,0,0.5) 20%,rgba(0,0,0,0) 100%)"
 const undockedColor = "#fff"
 
 const menuScrolled = css.keyframes({
