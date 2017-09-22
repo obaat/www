@@ -1,4 +1,5 @@
 import { Component, PropTypes } from "react"
+import { getByType, types } from "../utils/api"
 import g from "glamorous"
 import Helmet from "react-helmet"
 import { ThemeProvider } from "glamorous"
@@ -9,17 +10,11 @@ import Footer from "../components/Footer"
 import Header from "../components/Header"
 import theme from "../theme"
 
-const Container = g.div(
-  {
-    fontFamily: theme.font.heading,
-    lineHeight: "1.7em",
-    color: theme.colors.black[0],
-  },
-  // ({ fixed }) =>
-  //   fixed && {
-  //     marginTop: menuHeightScrolled,
-  //   },
-)
+const Container = g.div({
+  fontFamily: theme.font.heading,
+  lineHeight: "1.7em",
+  color: theme.colors.black[0],
+})
 
 export default ComposedComponent =>
   class WithLayout extends Component {
@@ -30,9 +25,9 @@ export default ComposedComponent =>
     }
 
     static async getInitialProps(ctx) {
-      // const volunteering = await getByType(types.VOLUNTEERING)
-      // return { volunteering: volunteering.results }
-      return loadGetInitialProps(ComposedComponent, ctx)
+      const volunteering = await getByType(types.VOLUNTEERING)
+      const res = await loadGetInitialProps(ComposedComponent, ctx)
+      return { ...res, volunteering: volunteering.results }
     }
 
     componentDidMount() {
@@ -44,7 +39,6 @@ export default ComposedComponent =>
         <ThemeProvider theme={theme}>
           <Container>
             <Helmet
-              title=""
               meta={[
                 { name: "description", content: "Obaat" },
                 { name: "keywords", content: "obaat, uganda" },

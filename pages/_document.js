@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html op="charity" lang="en">
+      <html lang="en">
         <Head>
           <title>One Brick at a Time</title>
           <link

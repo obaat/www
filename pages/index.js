@@ -165,6 +165,7 @@ class IndexPage extends React.Component {
               <SlideShow hideZoom hidePaging hideArrows index={visibleSlide}>
                 {hero.map(({ image, lead, strapline, button_text, url }, i) => (
                   <BackgroundImage
+                    key={i}
                     style={{ position: "relative" }}
                     ratio={3 / 2}
                     palette={sideColors[i]}
