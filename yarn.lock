@@ -554,6 +554,13 @@ babel-plugin-transform-class-properties@6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
+babel-plugin-transform-define@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-define/-/babel-plugin-transform-define-1.3.0.tgz#94c5f9459c810c738cc7c50cbd44a31829d6f319"
+  dependencies:
+    lodash "4.17.4"
+    traverse "0.6.6"
+
 babel-plugin-transform-es2015-arrow-functions@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-es2015-arrow-functions/-/babel-plugin-transform-es2015-arrow-functions-6.22.0.tgz#452692cb711d5f79dc7f85e440ce41b9f244d221"
@@ -1373,7 +1380,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.1, create-react-class@^15.5.3, create-react-class@^15.6.0:
+create-react-class@^15.5.1, create-react-class@^15.5.2, create-react-class@^15.5.3, create-react-class@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
   dependencies:
@@ -2861,7 +2868,7 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1:
+lodash@4.17.4, lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -3512,7 +3519,7 @@ prop-types-exact@^1.1.1:
     has "^1.0.1"
     object.assign "^4.0.4"
 
-prop-types@15.5.10, prop-types@^15.5.10, prop-types@^15.5.4:
+prop-types@15.5.10, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -3612,6 +3619,14 @@ react-dom@^15.6.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
     prop-types "^15.5.10"
+
+react-ga@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.2.0.tgz#45235de1356e4d988d9b82214d615a08489c9291"
+  dependencies:
+    create-react-class "^15.5.2"
+    object-assign "^4.0.1"
+    prop-types "^15.5.6"
 
 react-helmet@^5.2.0:
   version "5.2.0"
@@ -4350,6 +4365,10 @@ tough-cookie@~2.3.0:
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.2.tgz#f081f76e4c85720e6c37a5faced737150d84072a"
   dependencies:
     punycode "^1.4.1"
+
+traverse@0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
 
 trim-right@^1.0.1:
   version "1.0.1"

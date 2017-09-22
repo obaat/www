@@ -1058,7 +1058,6 @@ const components = [
     props: {},
     style: props => ({
       width: "100%",
-      height: "100%",
       overflow: "hidden",
       whiteSpace: "nowrap",
       "& > div": {
@@ -1116,7 +1115,6 @@ const components = [
     },
     style: {
       display: "inline-block",
-      height: "100%",
       verticalAlign: "middle",
     },
   },

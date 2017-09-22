@@ -10,12 +10,12 @@ import {
   getByType,
   types,
 } from "../utils/api"
-import { withLayout } from "../components/Layout"
+
+import page from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
-import Statement from "../components/Statement"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import SidebarHeader from "../components/SidebarHeader"
 import BreadCrumbs from "../components/Breadcrumbs"
@@ -278,4 +278,4 @@ Page.getInitialProps = async ({ query }) => {
   }
 }
 
-export default withLayout(Page)
+export default page(Page)

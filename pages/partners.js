@@ -1,6 +1,6 @@
 import React from "react"
 import { getSingleton, getByIDs, types } from "../utils/api"
-import { withLayout } from "../components/Layout"
+import page from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, Image, BackgroundImage } from "../ui"
 import Link from "../components/Link"
@@ -54,4 +54,4 @@ Partnerships.getInitialProps = async () => {
   return { content: page.data }
 }
 
-export default withLayout(Partnerships)
+export default page(Partnerships)

@@ -1,6 +1,6 @@
 import React from "react"
 import { types, getByUID } from "../utils/api"
-import { withLayout } from "../components/Layout"
+import page from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 import PageTitle from "../components/PageTitle"
@@ -27,4 +27,4 @@ Event.getInitialProps = async ({ query: { id: uid } }) => {
   return { content: res.data }
 }
 
-export default withLayout(Event)
+export default page(Event)

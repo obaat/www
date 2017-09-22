@@ -7,13 +7,7 @@ import Icon from "./Icon"
 import { Flex, Box } from "../ui"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
 import Menu, { MenuItem, SecondaryMenu } from "./Menu"
-import NProgress from "nprogress"
-import Router from "next/router"
 import Link from "next/link"
-
-Router.onRouteChangeStart = () => NProgress.start()
-Router.onRouteChangeComplete = () => NProgress.done()
-Router.onRouteChangeError = () => NProgress.done()
 
 const dockedBackground =
   "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)"

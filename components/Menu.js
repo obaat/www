@@ -35,7 +35,7 @@ const menuItems = [
   {
     title: "Volunteer With Us",
     items: [{ title: "General Information", href: "/volunteering" }],
-    getChildren: props => toVolunteeringMenu(props.volunteering),
+    getChildren: props => toVolunteeringMenu(props.volunteering || []),
   },
   {
     title: "Bursary",

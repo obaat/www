@@ -2,10 +2,11 @@ import React from "react"
 import g from "glamorous"
 import get from "lodash/get"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
-import { withLayout } from "../components/Layout"
+import page from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import Link from "next/link"
 import { Flex, Relative, Absolute, Box, Border, BackgroundImage } from "../ui"
+import Icon from "../components/Icon"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 import { HumanDate } from "../utils/date"
@@ -13,7 +14,7 @@ import SidebarHeader from "../components/SidebarHeader"
 
 const Overlay = g(Absolute)({
   pointerEvents: "none",
-  background: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5))",
+  background: "linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2))",
 }).withProps({
   top: true,
   bottom: true,
@@ -32,18 +33,21 @@ const Event = ({ uid, data }) => (
         src={get(data, "header_image.url")}
       >
         <Overlay>
-          {data.title && (
-            <PrismicRichText
-              forceType="heading4"
-              color="#fff"
-              source={data.title}
-            />
-          )}
-          {data.date_start && <HumanDate iso={data.date_start} />}
+          <Absolute bottom left p={2}>
+            {data.title && (
+              <PrismicRichText
+                forceType="heading4"
+                color="#fff"
+                source={data.title}
+                xmb={0}
+              />
+            )}
+            {data.date_start && <HumanDate iso={data.date_start} />}
+          </Absolute>
         </Overlay>
 
         <Absolute bottom right p={2}>
-          See More
+          <Icon name="chevron-right" />
         </Absolute>
       </BackgroundImage>
     </Link>
@@ -111,4 +115,4 @@ Spread.getInitialProps = async () => {
   return { content: page.data, events }
 }
 
-export default withLayout(Spread)
+export default page(Spread)

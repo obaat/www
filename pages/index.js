@@ -1,16 +1,16 @@
 import React from "react"
-import { space, color } from "styled-system"
-import { visible } from "../styleHelpers"
-import { withLayout } from "../components/Layout"
-import { colors } from "../theme"
-import Container from "../components/Container"
+import g from "glamorous"
+import { color } from "styled-system"
 import get from "lodash/get"
 import chunk from "lodash/chunk"
-import Button from "../components/Button"
 import Helmet from "react-helmet"
-import g from "glamorous"
-import { getByType, getSingleton, types } from "../utils/api"
 import Link from "next/link"
+import CountUp, { startAnimation } from "react-countup"
+import VisibilitySensor from "react-visibility-sensor"
+
+import Button from "../components/Button"
+import page from "../hoc/page"
+import { getByType, getSingleton, types } from "../utils/api"
 import Icon from "../components/Icon"
 import PrismicRichText from "../components/PrismicRichText"
 import {
@@ -33,8 +33,6 @@ import {
 } from "../ui"
 import SlideShow from "../components/SlideShow"
 import Statement from "../components/Statement"
-import CountUp, { startAnimation } from "react-countup"
-import VisibilitySensor from "react-visibility-sensor"
 import hoc from "../ui/hoc"
 import { menuHeightDocked } from "../utils/constants"
 
@@ -78,10 +76,7 @@ const ActionButton = ({ prismicUrl, href, ...props }) => {
   )
 }
 
-const Fill = g(Relative)({
-  width: "100%",
-  height: "100%",
-})
+const Fill = g(Relative)({})
 
 const Mission = g(Measure)({
   textAlign: "left",
@@ -169,15 +164,14 @@ class IndexPage extends React.Component {
             <Box w={1 / 3}>
               <SlideShow hideZoom hidePaging hideArrows index={visibleSlide}>
                 {hero.map(({ image, lead, strapline, button_text, url }, i) => (
-                  <Fill
-                    key={i}
-                    px={2}
-                    pt={menuHeightDocked}
+                  <BackgroundImage
+                    style={{ position: "relative" }}
+                    ratio={3 / 2}
                     palette={sideColors[i]}
                     invert
                   >
                     <Lead>{get(lead, "0.text")}</Lead>
-                    <Sub visible>{get(strapline, "0.text")}</Sub>
+                    <Sub>{get(strapline, "0.text")}</Sub>
                     <Absolute bottom right left m={2}>
                       <ActionButton
                         w={1}
@@ -189,7 +183,8 @@ class IndexPage extends React.Component {
                         {button_text || "Find Out More"}
                       </ActionButton>
                     </Absolute>
-                  </Fill>
+                  </BackgroundImage>
+                ))}
                 ))}
               </SlideShow>
             </Box>
@@ -206,11 +201,11 @@ class IndexPage extends React.Component {
           </Box>
         </Panel>
 
-        <VisibilitySensor onChange={this.onVisible} />
         <Panel py={4} direction="row" palette="blue" invert>
           <Box w={1}>
             <Heading>Our Impact</Heading>
           </Box>
+          <VisibilitySensor onChange={this.onVisible} />
           <Box w={1 / 4} p={3}>
             <Icon f={50} mb={2} name="clock-o" />
             <H5 mb={2}>Years Experience in Uganda</H5>
@@ -294,14 +289,10 @@ class IndexPage extends React.Component {
   }
 }
 
-IndexPage.componentDidMount = () => {
-  window.setInterval
-}
-
 IndexPage.getInitialProps = async () => {
   const res = await getSingleton(types.HOME)
   const statements = await getByType(types.VOLUNTEER_STATEMENT)
   return { content: res.data, statements }
 }
 
-export default withLayout(IndexPage)
+export default page(IndexPage)

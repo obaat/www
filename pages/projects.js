@@ -1,7 +1,7 @@
 import React from "react"
 import Button from "../components/Button"
 import ApplyNow from "../components/ApplyNow"
-import g from "glamorous"
+import page from "../hoc/page"
 import Link from "next/link"
 import {
   getByUID,
@@ -10,29 +10,14 @@ import {
   getByType,
   types,
 } from "../utils/api"
-import { withLayout } from "../components/Layout"
+
 import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 import Accordion, { AccordionSection } from "../components/Accordion"
-import {
-  Absolute,
-  Relative,
-  BackgroundImage,
-  Flex,
-  Box,
-  Border,
-  ButtonOutline,
-  Panel,
-  PanelHeader,
-  Heading,
-  SubHead,
-  Text,
-  H3,
-} from "../ui"
+import { Absolute, Relative, BackgroundImage, Flex, Box } from "../ui"
 import get from "lodash/get"
-import { withProps } from "recompose"
 // import Error from "next/error"
 
 const Project = ({ content = {} }) => {
@@ -123,4 +108,4 @@ Page.getInitialProps = async ({ query: { status, id: uid } }) => {
   }
 }
 
-export default withLayout(Page)
+export default page(Page)

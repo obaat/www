@@ -1,6 +1,6 @@
 import React from "react"
 import { getSingleton, getByIDs, types } from "../utils/api"
-import { withLayout } from "../components/Layout"
+import page from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 import PageTitle from "../components/PageTitle"
@@ -15,4 +15,4 @@ const Shop = ({ members = [], content = {} }) => {
   )
 }
 
-export default withLayout(Shop)
+export default page(Shop)

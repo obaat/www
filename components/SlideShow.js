@@ -98,10 +98,7 @@ const Paging = ({ total, page, onPageClick }) => (
   </Absolute>
 )
 
-const Fill = g(Relative)({
-  width: "100%",
-  height: "100%",
-})
+const Fill = g(Relative)({})
 
 export default class SlideShow extends Component {
   static defaultProps = {

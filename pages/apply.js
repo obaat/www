@@ -1,6 +1,6 @@
 import React from "react"
 import { getSingleton, getByIDs, types } from "../utils/api"
-import { withLayout } from "../components/Layout"
+import page from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Embed, Box, Border, BackgroundImage } from "../ui"
 import PageTitle from "../components/PageTitle"
@@ -52,4 +52,4 @@ Apply.getInitialProps = async () => {
   return { content: page.data }
 }
 
-export default withLayout(Apply)
+export default page(Apply)

@@ -1,7 +1,7 @@
 import React from "react"
 import { getByUID, types } from "../utils/api"
 import ApplyNow from "../components/ApplyNow"
-import { withLayout } from "../components/Layout"
+import page from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
 import {
@@ -15,7 +15,6 @@ import {
 } from "../ui"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
-import get from "lodash/get"
 
 const Location = ({ content = {} }) => {
   return (
@@ -52,4 +51,4 @@ Location.getInitialProps = async ({ query }) => {
   return { content: location.data }
 }
 
-export default withLayout(Location)
+export default page(Location)

@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "postinstall": "sh scripts/createDefaultConfig.sh",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node .",
-    "build": "next build",
-    "preexport": "npm run build",
-    "export": "next export",
+    "build": "NODE_ENV=production next build",
+    "preexport": "NODE_ENV=production npm run build",
+    "export": "NODE_ENV=production next export",
     "prestart": "npm run export",
     "start": "serve out"
   },
@@ -17,6 +18,7 @@
   "description": "",
   "dependencies": {
     "asyncro": "^2.0.1",
+    "babel-plugin-transform-define": "^1.3.0",
     "chroma-js": "^1.3.4",
     "date-fns": "^1.28.5",
     "express": "^4.15.4",
@@ -31,6 +33,7 @@
     "react": "^15.6.1",
     "react-countup": "^2.2.0",
     "react-dom": "^15.6.1",
+    "react-ga": "^2.2.0",
     "react-helmet": "^5.2.0",
     "react-lorem-component": "^0.12.2",
     "react-powerplug": "^0.0.2",
@@ -52,5 +55,24 @@
     "eslint-plugin-prettier": "^2.2.0",
     "eslint-plugin-react": "^7.3.0",
     "prettier": "^1.6.1"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "env",
+            {
+              "targets": {
+                "node": "current"
+              }
+            }
+          ],
+          "next/babel"
+        ]
+      }
+    },
+    "presets": ["next/babel", "flow"],
+    "plugins": ["sitrep", ["transform-define", "./config.js"]]
   }
 }

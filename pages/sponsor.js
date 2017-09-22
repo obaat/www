@@ -1,8 +1,5 @@
 import React from "react"
-import { getSingleton, getByIDs, types } from "../utils/api"
-import { withLayout } from "../components/Layout"
-import PrismicRichText from "../components/PrismicRichText"
-import { Flex, Box, Border, BackgroundImage } from "../ui"
+import page from "../hoc/page"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 
@@ -15,4 +12,4 @@ const Sponsor = ({ members = [], content = {} }) => {
   )
 }
 
-export default withLayout(Sponsor)
+export default page(Sponsor)

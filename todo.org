@@ -1,10 +1,6 @@
 #+TITLE: Obaat
 * TODO Add meta tags
 
-1 vid buhinga
-2 vid kiterasa
-3rd buhinga
-
 * DONE header menu make pretty + fix
 * DONE form for submitting
 * DONE volunteer opp location page
@@ -18,5 +14,5 @@
 * DONE reviews from volunteers + image view
 * DONE fix stupid menubar
 * DONE zoom for slideshow
-* INPROGRESS logo / chris
+* INPROGRESS logo / megan
 * browser version locking
