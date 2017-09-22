@@ -76,27 +76,30 @@ const Zoom = ({ isZoomed, controlSize, controlColor, onClick }) => (
   </Absolute>
 )
 
-const Paging = ({ total, page, onPageClick }) => (
-  <Absolute left right bottom style={{ margin: "0 auto" }} pb={2}>
-    <Flex
-      style={{
-        height: "20px",
-        width: `${20 * total}px`,
-        margin: "0 auto",
-      }}
-    >
-      {range(total).map(i => (
-        <DotButton
-          color="rgba(255,255,255,0.8)"
-          w={1}
-          key={i}
-          active={i === page}
-          onClick={() => onPageClick(i)}
-        />
-      ))}
-    </Flex>
-  </Absolute>
-)
+const Paging = ({ total, page, onPageClick }) => {
+  const showPages = Math.min(total, 10)
+  return (
+    <Absolute left right bottom style={{ margin: "0 auto" }} pb={2}>
+      <Flex
+        style={{
+          height: "20px",
+          width: `${20 * showPages}px`,
+          margin: "0 auto",
+        }}
+      >
+        {range(showPages).map(i => (
+          <DotButton
+            color="rgba(255,255,255,0.8)"
+            w={1}
+            key={i}
+            active={i === page}
+            onClick={() => onPageClick(i)}
+          />
+        ))}
+      </Flex>
+    </Absolute>
+  )
+}
 
 const Fill = g(Relative)({})
 
