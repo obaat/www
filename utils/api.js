@@ -25,11 +25,10 @@ const types = {
 // const accessToken =
 //   "MC5XWWhTS2lZQUFOLUtDUFZy.77-977-9MzHvv73vv73vv71L77-9YUnvv73vv70_77-9LSF9Le-_vR3vv73vv70lUihUNSrvv73vv73vv70"
 
-const apiBuilder = memoize(() =>
+const apiBuilder = () =>
   Prismic.api("https://one-brick.cdn.prismic.io/api/v2", {
     // accessToken,
-  }),
-)
+  })
 
 const getSingleton = async type => {
   const api = await apiBuilder()
