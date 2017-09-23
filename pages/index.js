@@ -144,7 +144,7 @@ class IndexPage extends React.Component {
     const { visibleSlide } = this.state
     const { hero, mission, mission_title } = content
     const chunkedStatements = chunk(get(statements, "results", []), 2)
-
+    const { image, lead, strapline, button_text, url } = hero[visibleSlide]
     return (
       <div>
         <Helmet title="One Brick at a Time" />
@@ -163,23 +163,20 @@ class IndexPage extends React.Component {
                 ))}
               </SlideShow>
             </Box>
-            <Box w={1 / 3}>
-              <SlideShow hideZoom hidePaging hideArrows index={visibleSlide}>
-                {hero.map(({ image, lead, strapline, button_text, url }, i) => (
-                  <Box
-                    palette={sideColors[i]}
-                    invert
-                    key={i}
-                    pt={menuHeightDocked}
-                    px={3}
-                    w={1}
-                    style={{ height: "100%" }}
-                  >
-                    <Lead>{get(lead, "0.text")}</Lead>
-                    <Sub>{get(strapline, "0.text")}</Sub>
-                  </Box>
-                ))}
-              </SlideShow>
+            <Box w={1 / 3} style={{ position: "relative" }}>
+              <Absolute top bottom left right>
+                <Box
+                  palette={sideColors[visibleSlide]}
+                  invert
+                  pt={menuHeightDocked}
+                  px={3}
+                  w={1}
+                  style={{ height: "100%" }}
+                >
+                  <Lead>{get(lead, "0.text")}</Lead>
+                  <Sub>{get(strapline, "0.text")}</Sub>
+                </Box>
+              </Absolute>
             </Box>
           </Flex>
         </Panel>
