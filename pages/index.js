@@ -164,15 +164,17 @@ class IndexPage extends React.Component {
               </SlideShow>
             </Box>
             <Box w={1 / 3} style={{ position: "relative" }}>
-              <Absolute top bottom left right>
-                <Box
-                  palette={sideColors[visibleSlide]}
-                  invert
-                  pt={menuHeightDocked}
-                  px={3}
-                  w={1}
-                  style={{ height: "100%" }}
-                >
+              <Absolute
+                top
+                bottom
+                left
+                right
+                palette={sideColors[visibleSlide]}
+                invert
+                pt={menuHeightDocked}
+                px={3}
+              >
+                <Box>
                   <Lead>{get(lead, "0.text")}</Lead>
                   <Sub>{get(strapline, "0.text")}</Sub>
                 </Box>
