@@ -21,6 +21,8 @@ export default class MyDocument extends Document {
       <html lang="en">
         <Head>
           <title>One Brick at a Time</title>
+          {/* fixme: only on IE */}
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js" />
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
