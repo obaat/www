@@ -20,6 +20,7 @@ const types = {
   APPLY_PAGE_CONTENT: "apply_page",
   ABOUT_PAGE_CONTENT: "about_page",
   SPREAD_THE_WORD_PAGE_CONTENT: "spread_the_word",
+  NEWS: "news",
 }
 
 // const accessToken =

@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import g from "glamorous"
 import Link from "next/link"
 import { css } from "glamor"
-import { Flex, Box, Relative, Link as UILink } from "../ui"
+import { Flex, Text, H6, Box, Relative, Link as UILink } from "../ui"
 import { space } from "../styleHelpers"
 import { Set } from "react-powerplug"
 import enhanceWithClickOutside from "react-click-outside"
@@ -176,7 +176,7 @@ export default props => {
                 {...props}
               >
                 <SelectedMenuItem key={title} {...props} color="#000" bg="#fff">
-                  {title}
+                  <Text mb={0}>{title}</Text>
                 </SelectedMenuItem>
               </SecondaryMenu>
             ) : (
@@ -185,7 +185,7 @@ export default props => {
                 onMouseOver={() => set("visibleMenu", title)}
                 {...props}
               >
-                {title}
+                <Text mb={0}>{title}</Text>
               </MenuItem>
             )
           })}

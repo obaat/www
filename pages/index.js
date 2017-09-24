@@ -8,10 +8,11 @@ import Helmet from "react-helmet"
 import Link from "next/link"
 import CountUp, { startAnimation } from "react-countup"
 import VisibilitySensor from "react-visibility-sensor"
+import NewsMasonry from "../components/NewsMasonry"
 
 import Button from "../components/Button"
 import page from "../hoc/page"
-import { getByType, getSingleton, types } from "../utils/api"
+import { getByType, getByIDs, getSingleton, types } from "../utils/api"
 import Icon from "../components/Icon"
 import PrismicRichText from "../components/PrismicRichText"
 import {
@@ -140,7 +141,7 @@ class IndexPage extends React.Component {
   setVisibleSlideIndex = idx => this.setState({ visibleSlide: idx })
 
   render() {
-    const { content, statements } = this.props
+    const { content, statements, news } = this.props
     const { visibleSlide } = this.state
     const { hero, mission, mission_title } = content
     const chunkedStatements = chunk(get(statements, "results", []), 2)
@@ -183,15 +184,26 @@ class IndexPage extends React.Component {
           </Flex>
         </Panel>
         <Panel>
-          <Box w={1 / 2} p={3} align="right">
-            <Subhead>One Brick at a time</Subhead>
-          </Box>
-          <Box w={1 / 2} p={3} align="justify">
+          <Box py={90} align="center">
             <Measure>
-              <PrismicRichText source={mission} />
+              <PrismicRichText
+                bold={700}
+                source={mission}
+                forceType="heading6"
+              />
             </Measure>
           </Box>
         </Panel>
+        {/* {news &&
+          news.body &&
+          news.body.length > 0 && (
+            <Panel py={4} direction="row" palette="black" invert>
+              <Box align="center" w={1}>
+                <Heading>News</Heading>
+                <NewsMasonry items={news.results} />
+              </Box>
+            </Panel>
+          )} */}
 
         <Panel py={4} direction="row" palette="blue" invert>
           <Box w={1}>
@@ -288,8 +300,11 @@ class IndexPage extends React.Component {
 
 IndexPage.getInitialProps = async () => {
   const res = await getSingleton(types.HOME)
-  const statements = await getByType(types.VOLUNTEER_STATEMENT)
-  return { content: res.data, statements }
+  const news = await getSingleton(types.NEWS)
+  const { quotes } = res.data
+  const ids = (quotes && quotes.map(l => l.quote.id)) || []
+  const additionalData = ids.length ? await getByIDs(ids) : { results: [] }
+  return { content: res.data, news: news.data, statements: additionalData }
 }
 
 export default page(IndexPage)

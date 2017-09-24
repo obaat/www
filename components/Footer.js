@@ -1,50 +1,23 @@
 import React from "react"
 import g from "glamorous"
 import Link from "next/link"
-import { Flex, Box } from "../ui"
-import Icon from "./Icon"
-
-const Slink = ({ icon, href, children, ...props }) => (
-  <a href={href} target="_blank">
-    <Icon {...props} />
-    {children}
-  </a>
-)
+import Social from "./Social"
+import { Flex, Box, H6 } from "../ui"
 
 const w = [1, 1, 1, 1 / 3]
 
+const social = [
+  { url: "https://facebook.com/onebrickngo/", network: "facebook" },
+  { url: "https://instagram.com/onebrickngo/", network: "instagram" },
+  { url: "https://twitter.com/onebrickngo/", network: "twitter" },
+  { url: "mailto:enquirires@onebrick.org.uk", network: "email" },
+]
+
 export default () => (
-  <Flex palette="brick" wrap="wrap" invert>
+  <Flex palette="black" wrap="wrap" invert>
     <Box w={w} p={3}>
-      <div>Become part of our story</div>
-      <Slink
-        color="#fff"
-        f={"40px"}
-        mr={1}
-        name="facebook-official"
-        href="https://facebook.com/onebrickngo/"
-      />
-      <Slink
-        mr={1}
-        f="40px"
-        color="#fff"
-        name="instagram"
-        href="https://instagram.com/onebrickngo/"
-      />
-      <Slink
-        mr={1}
-        f="40px"
-        color="#fff"
-        name="twitter"
-        href="https://twitter.com/onebrickngo/"
-      />
-      <Slink
-        mr={1}
-        f="40px"
-        color="#fff"
-        name="envelope"
-        href="mailto:enquirires@onebrick.org.uk"
-      />
+      <H6>Become part of our story</H6>
+      <Social />
     </Box>
 
     <Box w={w} p={3}>

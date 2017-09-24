@@ -4,6 +4,7 @@ import get from "lodash/get"
 import { space, color as ssColor, width, fontSize } from "styled-system"
 import { bool, string, number, oneOf, oneOfType } from "prop-types"
 import isNil from "lodash/isNil"
+import { SocialIcon } from "react-social-icons"
 const numberOrString = oneOfType([number, string])
 const theme = ({ theme, palette, invert }) =>
   get(
@@ -312,7 +313,9 @@ const components = [
       is: "h6",
       fontSize: 2,
     },
-    style: {},
+    style: {
+      lineHeight: "1.25em",
+    },
   },
   {
     name: "Small",
@@ -1329,6 +1332,12 @@ const components = [
   {
     name: "Table",
     type: "table",
+    props: {},
+    style: {},
+  },
+  {
+    name: "SocialIcon",
+    type: SocialIcon,
     props: {},
     style: {},
   },

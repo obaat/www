@@ -23,7 +23,9 @@ const Statement = ({ data: { description, avatar, name, role } }) => (
           </Box>
         </Flex>
         <PrismicRichText forceType="paragraph" source={description} />
-        <PrismicRichText forceType="small" source={role} />
+        <Box align="right">
+          <PrismicRichText forceType="small" source={role} />
+        </Box>
       </Box>
       <Box alignSelf="flex-end">
         <Icon f={50} name="quote-right" />
