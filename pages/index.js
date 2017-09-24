@@ -183,15 +183,15 @@ class IndexPage extends React.Component {
             </Box>
           </Flex>
         </Panel>
-        <Panel>
-          <Box py={90} align="center">
-            <Measure>
-              <PrismicRichText
-                bold={700}
-                source={mission}
-                forceType="heading6"
-              />
-            </Measure>
+        <Panel palette="black">
+          <Box px={2} py={90} w={1} align="center">
+            <PrismicRichText
+              style={{ lineHeight: 1.7 }}
+              xmb={0}
+              bold={700}
+              source={mission}
+              forceType="heading6"
+            />
           </Box>
         </Panel>
         {/* {news &&
