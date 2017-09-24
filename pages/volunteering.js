@@ -222,21 +222,22 @@ const VolunteeringOpportunity = ({ content, locations }) => {
         </PageTitle>
       </Relative>
       <Container py={4}>
+        <BreadCrumbs
+          route={[
+            { title: "Volunteering", href: "/volunteering" },
+            {
+              title: (
+                <PrismicRichText
+                  forceType="unformatted"
+                  source={content.title}
+                />
+              ),
+            },
+          ]}
+        />
+
         <Flex>
           <Box w={[1, 1, 1, 2 / 3]} pr={3}>
-            <BreadCrumbs
-              route={[
-                { title: "Volunteering", href: "/volunteering" },
-                {
-                  title: (
-                    <PrismicRichText
-                      forceType="unformatted"
-                      source={content.title}
-                    />
-                  ),
-                },
-              ]}
-            />
             <Section
               id="about"
               title="About the Programme"
@@ -244,7 +245,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
             />
             {mainSlices}
           </Box>
-          <Box w={[1, 1, 1, 1 / 3]} px={2}>
+          <Box w={[1, 1, 1, 1 / 3]} px={2} pt={2}>
             {locations.results &&
               locations.results.length > 0 && (
                 <SidebarHeader>Available Locations</SidebarHeader>
