@@ -8,7 +8,7 @@ const convert = mapValues(hsl => chroma.hsl(hsl).css())
 const transparent = "transparent"
 
 const palette = convert({
-  black: [1, 0, 0.17],
+  black: [1, 0, 0.14],
   blackBis: [0, 0, 0.07],
   blackTer: [0, 0, 0.14],
   greyDarker: [0, 0, 0.21],
