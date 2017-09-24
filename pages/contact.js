@@ -12,14 +12,7 @@ const Contact = ({ content = {} }) => {
       <PageTitle content={content} />
       <Container py={4}>
         <Flex wrap="wrap">
-          <Box w={[1, 1, 1, 2 / 3]} pr={[0, 0, 0, 3]}>
-            <iframe
-              width="100%"
-              height="1100px"
-              src="//timecounts.org/embed/form/one-brick-at-a-time/8529.iframe"
-            />
-          </Box>
-          <Box w={[1, 1, 1, 1 / 3]} pr={[0, 0, 0, 3]}>
+          <Box w={1}>
             <PrismicRichText source={content.description} />
           </Box>
         </Flex>
