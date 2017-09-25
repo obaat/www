@@ -18,6 +18,7 @@
   "description": "",
   "dependencies": {
     "asyncro": "^2.0.1",
+    "babel-macros": "^1.0.2",
     "babel-plugin-transform-define": "^1.3.0",
     "chroma-js": "^1.3.4",
     "circular-shift": "^1.0.1",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "babel-eslint": "8.0.0",
+    "babel-plugin-inline-react-svg": "^0.4.0",
     "babel-plugin-sitrep": "^1.2.3",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
@@ -56,6 +58,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.2.0",
     "eslint-plugin-react": "^7.3.0",
+    "import-all.macro": "^1.0.0",
     "prettier": "^1.6.1",
     "webpack-bundle-analyzer": "^2.9.0"
   },
@@ -75,16 +78,12 @@
         ]
       }
     },
-    "presets": [
-      "next/babel",
-      "flow"
-    ],
+    "presets": ["next/babel", "flow"],
     "plugins": [
+      "inline-react-svg",
+      "babel-macros",
       "sitrep",
-      [
-        "transform-define",
-        "./config.js"
-      ]
+      ["transform-define", "./config.js"]
     ]
   }
 }

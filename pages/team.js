@@ -1,10 +1,8 @@
 import React from "react"
 import { getSingleton, getByIDs, types } from "../utils/api"
-import page from "../hoc/page"
+import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
-import PageTitle from "../components/PageTitle"
-import Container from "../components/Container"
 
 export const TeamMember = ({
   uid,
@@ -42,13 +40,10 @@ export const TeamMember = ({
 const Team = ({ members = [], content = {} }) => {
   return (
     <div>
-      <PageTitle content={content} />
-      <Container py={4}>
-        <PrismicRichText color="#fff" source={content.description} />
-        {members.map((props, i) => (
-          <TeamMember {...props} key={props.uid} odd={!!(i % 2)} />
-        ))}
-      </Container>
+      <PrismicRichText color="#fff" source={content.description} />
+      {members.map((props, i) => (
+        <TeamMember {...props} key={props.uid} odd={!!(i % 2)} />
+      ))}
     </div>
   )
 }
@@ -59,4 +54,4 @@ Team.getInitialProps = async () => {
   return { members: members.results, content: page.data }
 }
 
-export default page(Team)
+export default pageWithTitle()(Team)

@@ -2,13 +2,11 @@ import React from "react"
 import g from "glamorous"
 import get from "lodash/get"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
-import page from "../hoc/page"
+import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import Link from "next/link"
 import { Flex, Relative, Absolute, Box, Border, BackgroundImage } from "../ui"
 import Icon from "../components/Icon"
-import PageTitle from "../components/PageTitle"
-import Container from "../components/Container"
 import { HumanDate } from "../utils/date"
 import SidebarHeader from "../components/SidebarHeader"
 
@@ -90,22 +88,17 @@ const Location = ({ uid, data }) => (
 )
 const Spread = ({ events, content = {} }) => {
   return (
-    <div>
-      <PageTitle content={content} />
-      <Container>
-        <Flex>
-          <Box w={[1, 1, 1, 2 / 3]} pr={3}>
-            <PrismicRichText source={content.description} />
-          </Box>
-          <Box w={[1, 1, 1, 1 / 3]} px={3}>
-            <SidebarHeader>Events</SidebarHeader>
-            {events &&
-              events.results &&
-              events.results.map((props, i) => <Event key={i} {...props} />)}
-          </Box>
-        </Flex>
-      </Container>
-    </div>
+    <Flex>
+      <Box w={[1, 1, 1, 2 / 3]} pr={3}>
+        <PrismicRichText source={content.description} />
+      </Box>
+      <Box w={[1, 1, 1, 1 / 3]} px={3}>
+        <SidebarHeader>Events</SidebarHeader>
+        {events &&
+          events.results &&
+          events.results.map((props, i) => <Event key={i} {...props} />)}
+      </Box>
+    </Flex>
   )
 }
 
@@ -115,4 +108,4 @@ Spread.getInitialProps = async () => {
   return { content: page.data, events }
 }
 
-export default page(Spread)
+export default pageWithTitle()(Spread)

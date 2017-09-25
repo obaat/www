@@ -1,15 +1,11 @@
 import React from "react"
-import page from "../hoc/page"
-import PageTitle from "../components/PageTitle"
-import Container from "../components/Container"
+import { getSingleton, getByIDs, types } from "../utils/api"
+import { pageWithTitle } from "../hoc/page"
+import PrismicRichText from "../components/PrismicRichText"
+import { Flex, Box, Border, BackgroundImage } from "../ui"
 
 const Sponsor = ({ members = [], content = {} }) => {
-  return (
-    <div>
-      <PageTitle title="Sponsor" />
-      <Container py={4}>Coming Soon</Container>
-    </div>
-  )
+  return <div>Coming Soon</div>
 }
 
-export default page(Sponsor)
+export default pageWithTitle({ title: "Sponsor" })(Sponsor)

@@ -1,7 +1,7 @@
 import React from "react"
 import Button from "../components/Button"
 import ApplyNow from "../components/ApplyNow"
-import page from "../hoc/page"
+import { pageWithTitle } from "../hoc/page"
 import Link from "next/link"
 import {
   getByUID,
@@ -13,8 +13,6 @@ import {
 
 import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
-import PageTitle from "../components/PageTitle"
-import Container from "../components/Container"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import { Absolute, Relative, BackgroundImage, Flex, Box } from "../ui"
 import get from "lodash/get"
@@ -22,29 +20,18 @@ import get from "lodash/get"
 
 const Project = ({ content = {} }) => {
   return (
-    <div>
-      <Relative>
-        <PageTitle content={content}>
-          <Absolute bottom right p={3}>
-            <ApplyNow />
-          </Absolute>
-        </PageTitle>
-      </Relative>
-      <Container py={4}>
-        <Flex wrap="wrap">
-          <Box w={[1, 1, 1, 1 / 3]}>
-            <SlideShow autoplay controlSize={18}>
-              {content.image_gallery.map(({ image, description }, i) => (
-                <BackgroundImage src={image.url} key={i} />
-              ))}
-            </SlideShow>
-          </Box>
-          <Box w={[1, 1, 1, 2 / 3]} pl={3}>
-            <PrismicRichText source={content.description} />
-          </Box>
-        </Flex>
-      </Container>
-    </div>
+    <Flex wrap="wrap">
+      <Box w={[1, 1, 1, 1 / 3]}>
+        <SlideShow autoplay controlSize={18}>
+          {content.image_gallery.map(({ image, description }, i) => (
+            <BackgroundImage src={image.url} key={i} />
+          ))}
+        </SlideShow>
+      </Box>
+      <Box w={[1, 1, 1, 2 / 3]} pl={3}>
+        <PrismicRichText source={content.description} />
+      </Box>
+    </Flex>
   )
 }
 
@@ -72,15 +59,12 @@ const ProjectPreview = ({ uid, data, slug }) => (
 const ProjectsIndex = ({ projects, content }) => {
   return (
     <div>
-      <PageTitle content={content} />
-      <Container py={4}>
-        <PrismicRichText source={content.description} />
-        <Flex wrap="wrap">
-          {projects.results.map(props => (
-            <ProjectPreview key={props.uid} {...props} />
-          ))}
-        </Flex>
-      </Container>
+      <PrismicRichText source={content.description} />
+      <Flex wrap="wrap">
+        {projects.results.map(props => (
+          <ProjectPreview key={props.uid} {...props} />
+        ))}
+      </Flex>
     </div>
   )
 }
@@ -108,4 +92,4 @@ Page.getInitialProps = async ({ query: { status, id: uid } }) => {
   }
 }
 
-export default page(Page)
+export default pageWithTitle()(Page)

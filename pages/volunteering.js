@@ -12,11 +12,9 @@ import {
   types,
 } from "../utils/api"
 
-import page from "../hoc/page"
+import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
-import PageTitle from "../components/PageTitle"
-import Container from "../components/Container"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import SidebarHeader from "../components/SidebarHeader"
 import BreadCrumbs from "../components/Breadcrumbs"
@@ -164,41 +162,24 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
     .map(renderSliceToAccordion)
 
   return (
-    <div>
-      <Relative>
-        <PageTitle content={content}>
-          <Absolute bottom right p={3}>
-            <ApplyNow />
-          </Absolute>
-        </PageTitle>
-      </Relative>
-      <Container pt={3}>
-        <Flex wrap="wrap">
-          <Box w={[1, 1, 1, 2 / 3]} pr={[0, 0, 0, 3]}>
-            <BreadCrumbs
-              route={[
-                { title: "Volunteering" },
-                { title: "General Information" },
-              ]}
-            />
-            <Section id="description" source={content.description} mb={3} />
-            <Accordion items={accordionItems} />
-          </Box>
-          <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
-            <SidebarHeader>Available Placements</SidebarHeader>
-            <Border top bottom left right p={2} borderColor="greyLighter">
-              {opportunities &&
-                opportunities.results &&
-                opportunities.results.map((props, i) => (
-                  <Opportunity key={i} {...props} />
-                ))}
-            </Border>
-            <H6 mt={2}>Volunteer Experiences</H6>
-            {quotes && <Quotes items={quotes.items} data={additionalData} />}
-          </Box>
-        </Flex>
-      </Container>
-    </div>
+    <Flex wrap="wrap">
+      <Box w={[1, 1, 1, 2 / 3]} pr={[0, 0, 0, 3]}>
+        <Section id="description" source={content.description} mb={3} />
+        <Accordion items={accordionItems} />
+      </Box>
+      <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
+        <SidebarHeader>Available Placements</SidebarHeader>
+        <Border top bottom left right p={2} borderColor="greyLighter">
+          {opportunities &&
+            opportunities.results &&
+            opportunities.results.map((props, i) => (
+              <Opportunity key={i} {...props} />
+            ))}
+        </Border>
+        <H6 mt={2}>Volunteer Experiences</H6>
+        {quotes && <Quotes items={quotes.items} data={additionalData} />}
+      </Box>
+    </Flex>
   )
 }
 
@@ -213,51 +194,24 @@ const VolunteeringOpportunity = ({ content, locations }) => {
     .filter(b => !sidebarTypes[b.slice_type])
     .map((props, i) => <PrismicSlice key={i} {...props} />)
   return (
-    <div>
-      <Relative>
-        <PageTitle content={content}>
-          <Absolute bottom right p={3}>
-            <ApplyNow />
-          </Absolute>
-        </PageTitle>
-      </Relative>
-      <Container py={4}>
-        <BreadCrumbs
-          route={[
-            { title: "Volunteering", href: "/volunteering" },
-            {
-              title: (
-                <PrismicRichText
-                  forceType="unformatted"
-                  source={content.title}
-                />
-              ),
-            },
-          ]}
+    <Flex>
+      <Box w={[1, 1, 1, 2 / 3]} pr={3}>
+        <Section
+          id="about"
+          title="About the Programme"
+          source={content.description}
         />
-
-        <Flex>
-          <Box w={[1, 1, 1, 2 / 3]} pr={3}>
-            <Section
-              id="about"
-              title="About the Programme"
-              source={content.description}
-            />
-            {mainSlices}
-          </Box>
-          <Box w={[1, 1, 1, 1 / 3]} px={2} pt={2}>
-            {locations.results &&
-              locations.results.length > 0 && (
-                <SidebarHeader>Available Locations</SidebarHeader>
-              )}
-            {locations.results.map((props, i) => (
-              <Location key={i} {...props} />
-            ))}
-            {sidebarSlices}
-          </Box>
-        </Flex>
-      </Container>
-    </div>
+        {mainSlices}
+      </Box>
+      <Box w={[1, 1, 1, 1 / 3]} px={2} pt={2}>
+        {locations.results &&
+          locations.results.length > 0 && (
+            <SidebarHeader>Available Locations</SidebarHeader>
+          )}
+        {locations.results.map((props, i) => <Location key={i} {...props} />)}
+        {sidebarSlices}
+      </Box>
+    </Flex>
   )
 }
 
@@ -295,4 +249,7 @@ Page.getInitialProps = async ({ query }) => {
   }
 }
 
-export default page(Page)
+export default pageWithTitle({
+  route: [{ title: "Volunteering", href: "/volunteering" }],
+  withApply: true,
+})(Page)

@@ -1,6 +1,10 @@
 import flowRight from "lodash/flowRight"
 import withAnalytics from "./withAnalytics"
 import withLayout from "./withLayout"
+import withHeader from "./withHeader"
 
 export const pageWithoutLayout = flowRight(withAnalytics)
-export default flowRight(pageWithoutLayout, withLayout)
+const normal = flowRight(pageWithoutLayout, withLayout)
+export const pageWithTitle = config =>
+  flowRight(withAnalytics, withLayout, withHeader(config))
+export default normal

@@ -37,8 +37,33 @@ import SlideShow from "../components/SlideShow"
 import Statement from "../components/Statement"
 import hoc from "../ui/hoc"
 import { menuHeightDocked } from "../utils/constants"
+import Icons from "../components/SvgIcons"
 
 const Count = hoc()(CountUp)
+
+const stats = [
+  {
+    title: "Years Experience in Uganda",
+    icon: Icons.Map,
+    value: 10,
+  },
+  {
+    title: "Trained Local People",
+    icon: Icons.HeadCog,
+    value: 10,
+  },
+  {
+    title: "Projects Completed",
+    icon: Icons.School,
+    value: 10,
+  },
+  {
+    title: "Opportunities Created",
+    icon: Icons.User,
+    value: 10,
+    postfix: "for education, jobs and access to health care",
+  },
+]
 
 const sideColors = ["blue", "brick", "greyLighter"]
 
@@ -86,13 +111,14 @@ const Mission = g(Measure)({
 
 const Panel = g(Flex)(
   {
-    alignItems: "center",
     textAlign: "center",
     justifyContent: "center",
     flexWrap: "wrap",
   },
   color,
-)
+).withProps({
+  align: "center",
+})
 
 const Lead = g(Heading)({
   lineHeight: 1.3,
@@ -184,7 +210,7 @@ class IndexPage extends React.Component {
           </Flex>
         </Panel>
         <Panel palette="black">
-          <Box px={2} py={90} w={1} align="center">
+          <Box px={2} py={90} w={[1, 1, 1, 900]} align="center">
             <PrismicRichText
               style={{ lineHeight: 1.7 }}
               xmb={0}
@@ -205,66 +231,31 @@ class IndexPage extends React.Component {
             </Panel>
           )} */}
 
-        <Panel py={4} direction="row" palette="blue" invert>
+        <Panel py={4} direction="row" palette="blue" align="flex-start" invert>
           <Box w={1}>
             <Heading>Our Impact</Heading>
           </Box>
           <VisibilitySensor onChange={this.onVisible} />
-          <Box w={1 / 4} p={3}>
-            <Icon f={50} mb={2} name="clock-o" />
-            <H5 mb={2}>Years Experience in Uganda</H5>
-            <Count
-              innerRef={c => this.counters.push(c)}
-              start={0}
-              end={10}
-              f={40}
-              duration={2.75}
-              useEasing={true}
-              suffix="+"
-            />
-          </Box>
-          <Box w={1 / 4} p={3}>
-            <Icon f={50} mb={2} name="wrench" />
-            <H5 mb={2}>Trained Local People</H5>
-            <Count
-              innerRef={c => this.counters.push(c)}
-              start={0}
-              end={300}
-              f={40}
-              duration={2.75}
-              useEasing={true}
-              suffix="+"
-            />
-          </Box>
-          <Box w={1 / 4} p={3}>
-            <Icon f={50} mb={2} name="hospital-o" />
-            <H5 mb={2}>Projects Completed</H5>
-            <Count
-              innerRef={c => this.counters.push(c)}
-              start={0}
-              end={23}
-              f={40}
-              duration={2.75}
-              useEasing={true}
-              suffix="+"
-            />
-          </Box>
-          <Box w={1 / 4} p={3}>
-            <Icon f={50} mb={2} name="users" />
-            <H5 mb={0}>Opportunities Created</H5>
-            <Text fontSize={0} mb={2}>
-              for education, jobs and access to health care
-            </Text>
-            <Count
-              innerRef={c => this.counters.push(c)}
-              start={0}
-              end={1500}
-              f={40}
-              duration={2.75}
-              useEasing={true}
-              suffix="+"
-            />
-          </Box>
+          {stats.map(({ title, icon: Icon, value, postfix }) => (
+            <Box w={1 / 4} p={3}>
+              <Icon color="#fff" size={50} />
+              <Box mt={1}>
+                <Count
+                  innerRef={c => this.counters.push(c)}
+                  start={0}
+                  end={value}
+                  f={40}
+                  duration={2.75}
+                  useEasing={true}
+                  suffix="+"
+                />
+              </Box>
+              <H5 mt={2} mb={1}>
+                {title}
+              </H5>
+              {postfix && <Text>{postfix}</Text>}
+            </Box>
+          ))}
           <ActionButton palette="blue" href="/projects">
             See Our Projects
           </ActionButton>

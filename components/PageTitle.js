@@ -1,16 +1,14 @@
 import React from "react"
 import g from "glamorous"
-import get from "lodash/get"
 import { backgroundImageCover } from "../styleHelpers"
-import { Flex, Heading } from "../ui"
-import Helmet from "react-helmet"
-import PrismicRichText from "../components/PrismicRichText"
+import { Flex } from "../ui"
 import { menuHeightDocked } from "../utils/constants"
 
 const Container = g(Flex)(
   {
     minHeight: "300px",
     backgroundColor: "#000",
+    position: "relative",
   },
   backgroundImageCover,
 ).withProps({
@@ -20,23 +18,12 @@ const Container = g(Flex)(
   direction: "column",
 })
 
-const Title = g(Heading)({
-  textShadow: "0 2px 2px rgba(0,0,0,0.5)",
-  color: "#fff",
-})
-
-export default ({ content, children, title: _title, ...props }) => {
-  const image = get(
-    content,
-    ["header_image", "url"],
-    get(content, ["image_gallery", 0, "image", "url"]),
-  )
-  const title = get(content, "title.0.text", _title)
+export default ({ children, image, ...props }) => {
   return (
-    <Container image={image} pt={menuHeightDocked}>
-      <Helmet title={title} />
-      <Title mt={-60}>{title}</Title>
-      {children}
-    </Container>
+    <div>
+      <Container image={image} pt={menuHeightDocked}>
+        {children}
+      </Container>
+    </div>
   )
 }

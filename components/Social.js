@@ -8,5 +8,7 @@ const social = [
 ]
 
 export default () => (
-  <div>{social.map(props => <SocialIcon mr={1} {...props} />)}</div>
+  <div>
+    {social.map(props => <SocialIcon key={props.network} mr={1} {...props} />)}
+  </div>
 )

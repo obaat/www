@@ -1,11 +1,9 @@
 import React from "react"
 import { getSingleton, getByIDs, types } from "../utils/api"
-import page from "../hoc/page"
+import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, Image, BackgroundImage } from "../ui"
 import Link from "../components/Link"
-import PageTitle from "../components/PageTitle"
-import Container from "../components/Container"
 
 const Partner = ({ title, description, logo, website, uid, odd }) => (
   <div>
@@ -38,13 +36,10 @@ const Partner = ({ title, description, logo, website, uid, odd }) => (
 const Partnerships = ({ content = {} }) => {
   return (
     <div>
-      <PageTitle content={content} />
-      <Container py={4}>
-        {content.partner &&
-          content.partner.map((props, i) => (
-            <Partner {...props} uid={i} key={i} odd={!!(i % 2)} />
-          ))}
-      </Container>
+      {content.partner &&
+        content.partner.map((props, i) => (
+          <Partner {...props} uid={i} key={i} odd={!!(i % 2)} />
+        ))}
     </div>
   )
 }
@@ -54,4 +49,4 @@ Partnerships.getInitialProps = async () => {
   return { content: page.data }
 }
 
-export default page(Partnerships)
+export default pageWithTitle()(Partnerships)
