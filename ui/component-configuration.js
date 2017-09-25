@@ -96,9 +96,7 @@ const components = [
   {
     name: "ButtonOutlineFilled",
     type: "ButtonOutline",
-    props: {
-      px: 3,
-    },
+    props: {},
     style: withPalette(props => ({
       backgroundColor: props.background,
     })),
@@ -116,9 +114,7 @@ const components = [
   {
     name: "ButtonCircleOutline",
     type: "Button",
-    props: {
-      px: 3,
-    },
+    props: {},
     style: withPalette(props => ({
       boxShadow: `inset 0 0 0 2px ${props.background}`,
       backgroundColor: "transparent",
@@ -133,9 +129,7 @@ const components = [
   {
     name: "ButtonCircleOutlineFilled",
     type: "ButtonCircleOutline",
-    props: {
-      px: 3,
-    },
+    props: {},
     style: withPalette(props => ({
       backgroundColor: props.foreground,
     })),
