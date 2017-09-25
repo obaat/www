@@ -9,6 +9,7 @@ import Link from "next/link"
 import CountUp, { startAnimation } from "react-countup"
 import VisibilitySensor from "react-visibility-sensor"
 import NewsMasonry from "../components/NewsMasonry"
+import Container from "../components/Container"
 
 import Button from "../components/Button"
 import page from "../hoc/page"
@@ -236,26 +237,28 @@ class IndexPage extends React.Component {
             <Heading>Our Impact</Heading>
           </Box>
           <VisibilitySensor onChange={this.onVisible} />
-          {stats.map(({ title, icon: Icon, value, postfix }) => (
-            <Box w={1 / 4} p={3}>
-              <Icon color="#fff" size={50} />
-              <Box mt={1}>
-                <Count
-                  innerRef={c => this.counters.push(c)}
-                  start={0}
-                  end={value}
-                  f={40}
-                  duration={2.75}
-                  useEasing={true}
-                  suffix="+"
-                />
+          <Flex w={1} justify="center">
+            {stats.map(({ title, icon: Icon, value, postfix }) => (
+              <Box w={250} p={3}>
+                <Icon color="#fff" size={50} />
+                <Box mt={3}>
+                  <Count
+                    innerRef={c => this.counters.push(c)}
+                    start={0}
+                    end={value}
+                    f={40}
+                    duration={2.75}
+                    useEasing={true}
+                    suffix="+"
+                  />
+                </Box>
+                <H5 mt={1} mb={1}>
+                  {title}
+                </H5>
+                {postfix && <Text>{postfix}</Text>}
               </Box>
-              <H5 mt={2} mb={1}>
-                {title}
-              </H5>
-              {postfix && <Text>{postfix}</Text>}
-            </Box>
-          ))}
+            ))}
+          </Flex>
           <ActionButton palette="blue" href="/projects">
             See Our Projects
           </ActionButton>
