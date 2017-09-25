@@ -16,8 +16,8 @@
 * DONE zoom for slideshow
 * DONE finish breadcrumbs and move into pagetitle component
 * DONE move titles down into page
-* INPROGRESS logo / megan
-* browser version locking
+* DONE logo / megan
 * fix slideshow zoom
 * fix news on front page
 * add social icons to top right bar on frontpage
+* browser version locking

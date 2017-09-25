@@ -10,6 +10,7 @@ import Menu, { MenuItem, SecondaryMenu } from "./Menu"
 import Link from "next/link"
 import LogoIcon from "../svg/logo.svg"
 import withProps from "recompose/withProps"
+import theme from "../theme"
 
 const Logo = withProps({ height: "35px", width: "130px" })(LogoIcon)
 
@@ -101,7 +102,7 @@ export default class Header extends Component {
             py={[2, 2, 2, 0]}
             scrolled={scrolled}
           >
-            <Logo />
+            <Logo fill={scrolled ? theme.colors.brick[0] : "#fff"} />
             <Menu volunteering={this.props.volunteering} />
             <Box grow={1} align="right">
               <Donate amount={1500} scrolled={scrolled} />
