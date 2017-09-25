@@ -51,17 +51,17 @@ const stats = [
   {
     title: "Trained Local People",
     icon: Icons.HeadCog,
-    value: 10,
+    value: 300,
   },
   {
     title: "Projects Completed",
     icon: Icons.School,
-    value: 10,
+    value: 23,
   },
   {
     title: "Opportunities Created",
     icon: Icons.User,
-    value: 10,
+    value: 1500,
     postfix: "for education, jobs and access to health care",
   },
 ]
@@ -249,7 +249,6 @@ class IndexPage extends React.Component {
                     f={40}
                     duration={2.75}
                     useEasing={true}
-                    suffix="+"
                   />
                 </Box>
                 <H5 mt={1} mb={1}>
