@@ -4,6 +4,7 @@ import ApplyNow from "../components/ApplyNow"
 import Icon from "../components/Icon"
 import g from "glamorous"
 import Link from "../components/Link"
+import { ArrowRight } from "../components/SvgIcons"
 import {
   getByUID,
   getByIDs,
@@ -60,14 +61,10 @@ const Opportunity = ({ uid, data }) => (
     <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
       <Flex>
         <Box>
-          <PrismicRichText
-            forceType="unformatted"
-            bold={700}
-            source={data.title}
-          />
+          <PrismicRichText forceType="unformatted" source={data.title} />
         </Box>
-        <Box>
-          <Icon pl={1} f={0} name="chevron-right" />
+        <Box pl={1}>
+          <ArrowRight color="#000" size={12} />
         </Box>
       </Flex>
     </Link>
@@ -169,13 +166,11 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
         <SidebarHeader>Available Placements</SidebarHeader>
-        <Border top bottom left right p={2} borderColor="greyLighter">
-          {opportunities &&
-            opportunities.results &&
-            opportunities.results.map((props, i) => (
-              <Opportunity key={i} {...props} />
-            ))}
-        </Border>
+        {opportunities &&
+          opportunities.results &&
+          opportunities.results.map((props, i) => (
+            <Opportunity key={i} {...props} />
+          ))}
         <H6 mt={2}>Volunteer Experiences</H6>
         {quotes && <Quotes items={quotes.items} data={additionalData} />}
       </Box>
