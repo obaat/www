@@ -12,7 +12,9 @@ import LogoIcon from "../svg/logo.svg"
 import withProps from "recompose/withProps"
 import theme from "../theme"
 
-const Logo = withProps({ height: "35px", width: "130px" })(LogoIcon)
+const Logo = withProps({ height: "35px", width: "130px", cursor: "pointer" })(
+  LogoIcon,
+)
 
 const dockedBackground =
   "linear-gradient(to bottom, rgba(0,0,0,0.5) 20%,rgba(0,0,0,0) 100%)"
@@ -102,7 +104,9 @@ export default class Header extends Component {
             py={[2, 2, 2, 0]}
             scrolled={scrolled}
           >
-            <Logo fill={scrolled ? theme.colors.brick[0] : "#fff"} />
+            <Link href="/">
+              <Logo fill={scrolled ? theme.colors.brick[0] : "#fff"} />
+            </Link>
             <Menu volunteering={this.props.volunteering} />
             <Box grow={1} align="right">
               <Donate amount={1500} scrolled={scrolled} />
