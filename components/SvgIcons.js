@@ -15,10 +15,10 @@ import withProps from "recompose/withProps"
 const icons = { HeadCog, ArrowRight, School, Home, Home2, Map, Building, User }
 
 module.exports = mapValues(icons, icon =>
-  withProps(({ size = 24, color = "#fff" }) => ({
+  withProps(({ width, height, size = 24, color = "#fff" }) => ({
     fill: color,
     viewBox: "0 0 24 24",
-    width: size,
-    height: size,
+    width: width || size,
+    height: height || size,
   }))(icon),
 )
