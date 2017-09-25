@@ -21,3 +21,4 @@
 * fix news on front page
 * add social icons to top right bar on frontpage
 * browser version locking
+* top images for partners, projects, volunteer building maint + teaching, shop, spread the word, sponsor child

@@ -13,7 +13,7 @@ export const TeamMember = ({
     <a id={uid} />
     <Flex wrap="wrap" mb={1} style={{ textAlign: odd ? "right" : "left" }}>
       <Border w={1} bottom mb={1} pb={2} borderColor="grey">
-        <PrismicRichText xmb={0} forceType="heading2" source={name} />
+        <PrismicRichText xmb={0} forceType="heading6" source={name} />
         <PrismicRichText xmb={0} forceType="paragraph" source={job_title} />
       </Border>
       <Box w={1}>

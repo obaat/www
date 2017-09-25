@@ -3,7 +3,7 @@ import g from "glamorous"
 import Icon from "../components/Icon"
 import Link from "next/link"
 import { Home2, ArrowRight } from "./SvgIcons"
-import { Flex, Box, H6 } from "../ui"
+import { Flex, Box, H6, Text } from "../ui"
 
 const Bread = g(Flex)({})
 
@@ -15,7 +15,9 @@ const A = g.a({
   },
 })
 
-const Crumb = g(Box)({})
+const Crumb = g(Box)({
+  fontStyle: "italic",
+})
 
 const LinkCrumb = ({ href, ...props }) =>
   href ? (
@@ -29,18 +31,16 @@ const LinkCrumb = ({ href, ...props }) =>
   )
 
 const BreadCrumbs = ({ route }) => (
-  <Bread mb={1} align="center">
+  <Bread mb={2} align="center">
     <LinkCrumb href="/" mb="-4px">
-      <Home2 color="#000" size={15} />
+      <Home2 color="#000" size={13} />
     </LinkCrumb>
     {route.map(({ title, href }, i) => [
       <Crumb px={1} key="arrow">
-        <ArrowRight size={12} color="#000" />
+        <ArrowRight size={10} color="#000" />
       </Crumb>,
       <LinkCrumb href={href} key="path">
-        <H6 bold={i === route.length - 1 ? 700 : 300} mb={0}>
-          {title}
-        </H6>
+        <Text mb={0}>{title}</Text>
       </LinkCrumb>,
     ])}
   </Bread>
