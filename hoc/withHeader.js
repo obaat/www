@@ -31,7 +31,7 @@ export default (config = {}) => ComposedComponent =>
       return (
         <div>
           <PageTitle image={image}>
-            {this.props.withApply && (
+            {config.withApply && (
               <Absolute bottom right p={3}>
                 <ApplyNow />
               </Absolute>
