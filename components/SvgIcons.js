@@ -12,7 +12,16 @@ import withProps from "recompose/withProps"
 // import importAll from "import-all.macro"
 // const icons = importAll.sync("../svg/*.svg")
 
-const icons = { HeadCog, ArrowRight, School, Home, Home2, Map, Building, User }
+const icons = {
+  HeadCog,
+  ArrowRight,
+  School,
+  Home,
+  Home2,
+  Map,
+  Building,
+  User,
+}
 
 module.exports = mapValues(icons, icon =>
   withProps(({ width, height, size = 24, color = "#fff" }) => ({

@@ -8,6 +8,10 @@ import { Flex, Box } from "../ui"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
 import Menu, { MenuItem, SecondaryMenu } from "./Menu"
 import Link from "next/link"
+import LogoIcon from "../svg/logo.svg"
+import withProps from "recompose/withProps"
+
+const Logo = withProps({ height: "35px", width: "130px" })(LogoIcon)
 
 const dockedBackground =
   "linear-gradient(to bottom, rgba(0,0,0,0.5) 20%,rgba(0,0,0,0) 100%)"
@@ -34,17 +38,6 @@ const menuDocked = css.keyframes({
     height: menuHeightDocked,
   },
 })
-
-const Logo = g.div(
-  {
-    backgroundSize: "cover",
-    width: "105px",
-    height: "40px",
-  },
-  ({ logo }) => ({
-    backgroundImage: `url(/static/images/${logo})`,
-  }),
-)
 
 const Container = g.div({})
 
@@ -108,6 +101,7 @@ export default class Header extends Component {
             py={[2, 2, 2, 0]}
             scrolled={scrolled}
           >
+            <Logo />
             <Menu volunteering={this.props.volunteering} />
             <Box grow={1} align="right">
               <Donate amount={1500} scrolled={scrolled} />
