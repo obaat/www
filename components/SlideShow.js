@@ -15,7 +15,7 @@ import { Motion, spring } from "react-motion"
 const PRELOAD_MAX = 3
 
 const Fullscreen = g(Fixed)({
-  backgroundColor: "rgba(255,255,255, 0.8)",
+  backgroundColor: "rgba(0,0,0, 0.8)",
   height: "100VH",
   overflow: "hidden",
   zIndex: 999999,
@@ -270,8 +270,13 @@ export default class SlideShow extends Component {
     )
 
     return zoom ? (
-      <Fullscreen>
-        <Absolute top bottom left right m={2} style={{ overflow: "hidden" }}>
+      <Fullscreen onClick={this.toggleZoom} p={2}>
+        <Relative
+          w={[1, 1, 1, "70%"]}
+          style={{ margin: "0 auto", overflow: "hidden" }}
+          onClick={e => e.stopPropagation()}
+          bg="#fff"
+        >
           {selectedIndex > 0 && (
             <Arrow
               direction="left"
@@ -297,7 +302,7 @@ export default class SlideShow extends Component {
             isZoomed
           />
           {children[selectedIndex]}
-        </Absolute>
+        </Relative>
       </Fullscreen>
     ) : (
       container

@@ -61,14 +61,19 @@ let cycleCount = 0
 const renderers = {
   video: ({ content }) => <Embed {...content} width="100%" height="100%" />,
   unknown: type => () => <span>{type}???</span>,
-  text: ({ content, background_color, color }) => (
-    <Background bg={background_color} color={color}>
-      <Absolute top left p={2}>
-        <PrismicRichText forceType="paragraph" source={content} />
-      </Absolute>
+  text: ({ content, background_color, theme, color }) => (
+    <Background
+      palette={theme}
+      invert
+      bg={background_color}
+      color={color}
+      align="center"
+      p={2}
+    >
+      <PrismicRichText source={content} />
     </Background>
   ),
-  page: ({ content, data, count }) => {
+  page: ({ content, theme, data, count }) => {
     const src = data[content.id] || {}
     const image = get(
       src,
@@ -79,7 +84,7 @@ const renderers = {
       <Link {...pageToLink(content)}>
         <Background
           src={image}
-          palette={themeCycle[count % themeCycle.length]}
+          palette={theme || themeCycle[count % themeCycle.length]}
           color={image && "#fff"}
           invert
         >

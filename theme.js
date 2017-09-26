@@ -35,7 +35,10 @@ export const colors = {
   blue: [palette.blue, palette.white],
   normal: [palette.greyDark, palette.white],
 
-  primary: [palette.orange, palette.white],
+  primary: [palette.brick, palette.white],
+  secondary: [palette.blue, palette.white],
+  tertiary: [palette.orange, palette.white],
+
   info: [palette.blue, palette.white],
   success: [palette.green, palette.white],
   warning: [palette.yellow, palette.white],

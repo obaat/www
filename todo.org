@@ -17,8 +17,8 @@
 * DONE finish breadcrumbs and move into pagetitle component
 * DONE move titles down into page
 * DONE logo / megan
+* DONE news on front page
 * fix slideshow zoom
-* fix news on front page
 * add social icons to top right bar on frontpage
 * browser version locking
 * top images for partners, projects, volunteer building maint + teaching, shop, spread the word, sponsor child
