@@ -16,7 +16,7 @@ const social = [
 export default () => (
   <div>
     <Flex palette="black" wrap="wrap" invert>
-      <Box w={w} p={3}>
+      <Box w={[1, 1, 1, 1 / 2]} p={3}>
         <H6>Become part of our story</H6>
         <Social />
       </Box>
@@ -24,7 +24,7 @@ export default () => (
       <img src="https://api.mapbox.com/styles/v1/mapbox/streets-v10/static/30.287619,0.670685,12/300x200?access_token=pk.eyJ1IjoicGFwZXJjcmVhdHVyZXMiLCJhIjoiY2o3ejF3bXllMXZzYzJ3bzR3eWprOHQyaCJ9.oiyWWuJWI-tXXBwY7U1cMw" />
     </Box> */}
 
-      <Box w={w} p={3}>
+      <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <addr>
           OBAAT UK<br />
           Charity number 1155099<br />
@@ -34,7 +34,7 @@ export default () => (
           England
         </addr>
       </Box>
-      <Box w={w} p={3}>
+      <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <addr>
           OBAAT Uganda<br />
           NGO registration number 11726<br />

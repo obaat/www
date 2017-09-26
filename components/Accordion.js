@@ -19,6 +19,7 @@ const AccordionBody = g(Box)({
 
 const ToggleIcon = g(Icon)({
   float: "right",
+  marginTop: "4px",
 })
 
 const AccordionSection = ({ open, toggleOpen, title, id, description }) => {

@@ -37,7 +37,7 @@ import {
 import SlideShow from "../components/SlideShow"
 import Statement from "../components/Statement"
 import hoc from "../ui/hoc"
-import { menuHeightDocked } from "../utils/constants"
+import { menuHeightDocked, themeCycle as sideColors } from "../utils/constants"
 import Icons from "../components/SvgIcons"
 
 const Count = hoc()(CountUp)
@@ -65,8 +65,6 @@ const stats = [
     postfix: "for education, jobs and access to health care",
   },
 ]
-
-const sideColors = ["blue", "brick", "greyLighter"]
 
 const LeadButton = g(Button)({
   minWidth: "250px",
@@ -149,6 +147,8 @@ const cursorOpts = {
   show: false,
 }
 
+const BOX_WIDTH = [1, 1, 1, 1000]
+
 const transitionSpeed = 6 * 1000
 
 class IndexPage extends React.Component {
@@ -168,7 +168,7 @@ class IndexPage extends React.Component {
   setVisibleSlideIndex = idx => this.setState({ visibleSlide: idx })
 
   render() {
-    const { content, statements, news } = this.props
+    const { content, statements, news, newsArticles } = this.props
     const { visibleSlide } = this.state
     const { hero, mission, mission_title } = content
     const chunkedStatements = chunk(get(statements, "results", []), 2)
@@ -221,32 +221,31 @@ class IndexPage extends React.Component {
             />
           </Box>
         </Panel>
-        {/* {news &&
+        {news &&
           news.body &&
           news.body.length > 0 && (
             <Panel py={4} direction="row" palette="black" invert>
-              <Box align="center" w={1}>
-                <Heading>News</Heading>
-                <NewsMasonry items={news.results} />
+              <Box align="center" w={BOX_WIDTH}>
+                <NewsMasonry items={news.body} data={newsArticles} />
               </Box>
             </Panel>
-          )} */}
+          )}
 
         <Panel py={4} direction="row" palette="blue" align="flex-start" invert>
           <Box w={1}>
             <Heading>Our Impact</Heading>
           </Box>
           <VisibilitySensor onChange={this.onVisible} />
-          <Flex w={1} justify="center">
+          <Flex w={1} justify="center" w={BOX_WIDTH}>
             {stats.map(({ title, icon: Icon, value, postfix }) => (
-              <Box w={250} p={3}>
+              <Box p={3}>
                 <Icon color="#fff" size={50} />
                 <Box mt={3}>
                   <Count
                     innerRef={c => this.counters.push(c)}
                     start={0}
                     end={value}
-                    f={40}
+                    f={50}
                     duration={2.75}
                     useEasing={true}
                   />
@@ -258,15 +257,17 @@ class IndexPage extends React.Component {
               </Box>
             ))}
           </Flex>
-          <ActionButton palette="blue" href="/projects">
-            See Our Projects
-          </ActionButton>
+          <Box w={1}>
+            <ActionButton palette="blue" href="/projects">
+              See Our Projects
+            </ActionButton>
+          </Box>
         </Panel>
         <Panel py={4} direction="row" palette="greyLighter" invert>
           <Box w={1}>
             <Heading>Volunteer Experiences</Heading>
           </Box>
-          <Box w={1} p={3}>
+          <Box align="center" w={BOX_WIDTH}>
             <SlideShow
               autoplay
               controlColor={theme.colors.greyLighter[1]}
@@ -282,22 +283,36 @@ class IndexPage extends React.Component {
               ))}
             </SlideShow>
           </Box>
-          <ActionButton palette="greyLighter" href="/volunteering">
-            Learn More About Volunteering
-          </ActionButton>
+          <Box w={1}>
+            <ActionButton palette="greyLighter" href="/volunteering">
+              Learn More About Volunteering
+            </ActionButton>
+          </Box>
         </Panel>
       </div>
     )
   }
 }
 
+const byId = things =>
+  things.results.reduce((a, t) => ({ ...a, [t.id]: t.data }), {})
+
 IndexPage.getInitialProps = async () => {
   const res = await getSingleton(types.HOME)
   const news = await getSingleton(types.NEWS)
   const { quotes } = res.data
   const ids = (quotes && quotes.map(l => l.quote.id)) || []
-  const additionalData = ids.length ? await getByIDs(ids) : { results: [] }
-  return { content: res.data, news: news.data, statements: additionalData }
+  const statements = ids.length ? await getByIDs(ids) : { results: [] }
+
+  const newsIds = news.data.body
+    .filter(b => b.slice_type === "page")
+    .map(b => b.primary.content.id)
+
+  const newsArticles = byId(
+    newsIds.length ? await getByIDs(newsIds) : { results: [] },
+  )
+
+  return { content: res.data, news: news.data, statements, newsArticles }
 }
 
 export default page(IndexPage)

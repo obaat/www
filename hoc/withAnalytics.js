@@ -1,11 +1,6 @@
 import { Component } from "react"
 import { loadGetInitialProps } from "next/dist/lib/utils"
-
-// TODO expose file as React component and wrap in a <NoSSR> component
-let ReactGA
-if (process.browser) {
-  ReactGA = require("react-ga") // eslint-disable-line global-require
-}
+import ReactGA from "react-ga"
 
 export default ComposedComponent =>
   class WithAnalytics extends Component {

@@ -5,26 +5,33 @@ import Icon from "../components/Icon"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Border, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 
-const Unknown = ({ slice_type }) => <div> {slice_type} ???</div>
+export const Unknown = ({ slice_type }) => (
+  <div> Unknown slice: {slice_type}</div>
+)
 
 const Video = ({ items = [] }) => {
   return (
     <div>
-      {items.map(({ description, embed }, i) => (
+      {items.map(({ description, content, embed }, i) => (
         <Box mb={2} key={i}>
-          <PrismicRichText w={1} forceType="heading5" source={description} />
-          <Embed {...embed} />
+          {description && (
+            <PrismicRichText w={1} forceType="heading5" source={description} />
+          )}
+          <Embed {...embed || content} />
         </Box>
       ))}
     </div>
   )
 }
 
+const Text = ({ primary, items }) => {
+  const value = primary.description || primary.content
+  return value && <PrismicRichText source={value} />
+}
+
 export const renderers = {
   video: Video,
-  embeds: Video,
-  text_only: ({ primary, items }) =>
-    primary.description && <PrismicRichText source={primary.description} />,
+  text_only: Text,
   faq: ({ items = [] }) => (
     <Box>
       {items.map(({ question, answer }, i) => (
@@ -97,7 +104,11 @@ const PrismicSlice = ({ slice_type, items, primary }) => {
   return (
     <div>
       {title}
-      <Component primary={primary} items={items} />
+      <Component
+        primary={primary}
+        items={items}
+        slice_type={slice_type || "No slice type"}
+      />
     </div>
   )
 }

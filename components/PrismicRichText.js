@@ -49,7 +49,7 @@ const styling = {
   ...ourTypes,
 }
 
-const Unknown = ({ type }) => <div>??? {type} </div>
+const unknown = type => () => <div>??? {type} </div>
 
 const handler = {
   hyperlink: Link,
@@ -60,7 +60,7 @@ const handler = {
 
 const PrismicRichText = ({ source, forceType, mb, mt, xmb, xmt, ...props }) => {
   if (!Array.isArray(source)) {
-    return <Unknown>???</Unknown>
+    return <div>no source</div>
   }
   const flatContent = source.map((s, i) => {
     if (!s.type) {
@@ -75,7 +75,7 @@ const PrismicRichText = ({ source, forceType, mb, mt, xmb, xmt, ...props }) => {
         </Flex>
       )
     } else {
-      const Container = styling[forceType || s.type] || Unknown
+      const Container = styling[forceType || s.type] || unknown(type)
 
       // split the text into pieces
       let content = s.text
@@ -95,7 +95,7 @@ const PrismicRichText = ({ source, forceType, mb, mt, xmb, xmt, ...props }) => {
           }
 
           const part = s.text.slice(start, end)
-          const Component = handler[type] || Unknown
+          const Component = handler[type] || unknown(type)
           prevEnd = end
 
           toAdd.push(

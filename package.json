@@ -78,12 +78,18 @@
         ]
       }
     },
-    "presets": ["next/babel", "flow"],
+    "presets": [
+      "next/babel",
+      "flow"
+    ],
     "plugins": [
       "inline-react-svg",
       "babel-macros",
       "sitrep",
-      ["transform-define", "./config.js"]
+      [
+        "transform-define",
+        "./config.js"
+      ]
     ]
   }
 }
