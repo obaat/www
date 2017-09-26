@@ -238,7 +238,7 @@ class IndexPage extends React.Component {
           <VisibilitySensor onChange={this.onVisible} />
           <Flex w={1} justify="center" w={BOX_WIDTH}>
             {stats.map(({ title, icon: Icon, value, postfix }) => (
-              <Box p={3}>
+              <Box p={3} key={title}>
                 <Icon color="#fff" size={50} />
                 <Box mt={3}>
                   <Count

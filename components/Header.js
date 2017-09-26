@@ -88,7 +88,7 @@ export default class Header extends Component {
   }
 
   handleScroll = event => {
-    const { scrollTop } = event.srcElement.body
+    const { scrollTop } = document.scrollingElement || event.srcElement.body
     this.setState({ scrolled: scrollTop > 100 })
   }
 
