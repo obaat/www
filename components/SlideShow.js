@@ -111,7 +111,6 @@ const Carousel = g(Flex)({
 })
 
 const CarouselSeat = g.section({
-  background: "#ddd",
   position: "relative",
   flex: "1 0 100%",
 })

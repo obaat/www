@@ -27,6 +27,7 @@ export default () => (
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <addr>
           OBAAT UK<br />
+          Charity number 1155099<br />
           Liverpool Hope University Taggart Avenue<br />
           Liverpool<br />
           L16 9JD<br />
@@ -36,6 +37,7 @@ export default () => (
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <addr>
           OBAAT Uganda<br />
+          NGO registration number 11726<br />
           Bankside Road<br />
           Njara-Mukasenyi P. O. BOX 349<br />
           Fort Portal<br />
