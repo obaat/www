@@ -66,10 +66,25 @@ const Background = g(Absolute)(({ src }) => ({
   right: true,
 })
 
-const pageToLink = ({ type, slug }) => ({
-  href: `/${type}?id=${slug}`,
-  as: `/${type}/${slug}`,
-})
+const mapType = {
+  project: "projects",
+  team_page: "team",
+}
+
+const pageToLink = ({ type, slug }) => {
+  const mappedType = mapType[type] || type
+  if ((slug = ~/_page$/)) {
+    return {
+      href: `/${mappedType}`,
+      as: `/${mappedType}`,
+    }
+  } else {
+    return {
+      href: `/${mappedType}?id=${slug}`,
+      as: `/${mappedType}/${slug}`,
+    }
+  }
+}
 
 let cycleCount = 0
 
@@ -143,8 +158,8 @@ const GridItem = g
     gridRowEnd: endRow,
     msGridColumnSpan: endColumn.replace("span ", "") + ";",
     msGridRowSpan: endRow.replace("span ", "") + ";",
-    msGridRow: startRow + ";",
-    msGridColumn: startColumn + ";",
+    msGridRow: startRow,
+    msGridColumn: startColumn,
     gridRowGap: 4,
     position: "relative",
   }))
