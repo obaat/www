@@ -1,10 +1,13 @@
 import chroma from "chroma-js"
 import { mapValues } from "lodash/fp"
 import reduce from "lodash/reduce"
+import hello from "hello-color"
 const black = "#0a0a0a"
 const white = "white"
 
-const convert = mapValues(hsl => chroma.hsl(hsl).css())
+const convert = mapValues(
+  hsl => (Array.isArray(hsl) ? chroma.hsl(hsl).css() : hsl),
+)
 const transparent = "transparent"
 
 const palette = convert({
@@ -22,12 +25,17 @@ const palette = convert({
   white: [0, 0, 100],
   orange: [14, 1, 0.53],
   yellow: [48, 1, 0.67],
-  green: [141, 0.71, 0.48],
+  // green: [141, 0.71, 0.48],
   turquoise: [171, 100, 0.41],
   blue: [200, 1, 0.4],
   purple: [271, 1, 0.71],
   red: [348, 1, 0.61],
   brick: [10, 0.8, 0.44],
+  green: "#16ca34",
+  yellow: "#acca16",
+  cyan: "#16acca",
+  blue: "#3416ca",
+  pink: "#ca16ac",
 })
 
 export const colors = {
@@ -36,8 +44,8 @@ export const colors = {
   normal: [palette.greyDark, palette.white],
 
   primary: [palette.brick, palette.white],
-  secondary: [palette.blue, palette.white],
-  tertiary: [palette.orange, palette.white],
+  secondary: [palette.green, palette.white],
+  tertiary: [palette.cyan, palette.white],
 
   info: [palette.blue, palette.white],
   success: [palette.green, palette.white],

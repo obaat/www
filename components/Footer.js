@@ -25,24 +25,24 @@ export default () => (
     </Box> */}
 
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
-        <addr>
+        <address>
           OBAAT UK<br />
           Charity number 1155099<br />
           Liverpool Hope University Taggart Avenue<br />
           Liverpool<br />
           L16 9JD<br />
           England
-        </addr>
+        </address>
       </Box>
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
-        <addr>
+        <address>
           OBAAT Uganda<br />
           NGO registration number 11726<br />
           Bankside Road<br />
           Njara-Mukasenyi P. O. BOX 349<br />
           Fort Portal<br />
           Uganda<br />
-        </addr>
+        </address>
       </Box>
     </Flex>
     <Flex p={3} bg="#000" color="#fff">

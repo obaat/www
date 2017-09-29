@@ -1,4 +1,5 @@
-import { Component, PropTypes } from "react"
+import { Component } from "react"
+import PropTypes from "prop-types"
 import { getByType, types } from "../utils/api"
 import g from "glamorous"
 import Helmet from "react-helmet"

@@ -20,6 +20,21 @@ const Grid = g.div(
     width,
     height,
     display: "grid",
+    "@supports  (-ms-accelerator:true)": {
+      display: "-ms-grid",
+      msGridRows: "200px 200px 200px 200px",
+      msGridColumns: "33% 33% 33%",
+    },
+    "@supports (-ms-ime-align:auto)": {
+      display: "-ms-grid",
+      msGridRows: "200px 200px 200px 200px",
+      msGridColumns: "33% 33% 33%",
+    },
+    "@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)": {
+      display: "-ms-grid",
+      msGridRows: "200px 200px 200px 200px",
+      msGridColumns: "33% 33% 33%",
+    },
     gridTemplateRows: rowConfig,
     gridTemplateColumns: columnConfig,
     gridAutoRows: autoRowConfig,
@@ -120,14 +135,20 @@ const Panel = ({ slice_type, primary, data, count }) => {
   )
 }
 
-const GridItem = g.div(({ startColumn, endColumn, startRow, endRow }) => ({
-  gridColumnStart: startColumn,
-  gridColumnEnd: endColumn,
-  gridRowStart: startRow,
-  gridRowEnd: endRow,
-  gridRowGap: 4,
-  position: "relative",
-}))
+const GridItem = g
+  .div(({ startColumn, endColumn, startRow, endRow }) => ({
+    gridColumnStart: startColumn,
+    gridColumnEnd: endColumn,
+    gridRowStart: startRow,
+    gridRowEnd: endRow,
+    msGridColumnSpan: endColumn.replace("span ", "") + ";",
+    msGridRowSpan: endRow.replace("span ", "") + ";",
+    msGridRow: startRow + ";",
+    msGridColumn: startColumn + ";",
+    gridRowGap: 4,
+    position: "relative",
+  }))
+  .withProps(({ startRow, startColumn, endColumn, endRow }) => {})
 
 const COLUMNS = 3
 
