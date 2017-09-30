@@ -9,16 +9,32 @@ import {
   types,
 } from "../utils/api"
 
+import SidebarHeader from "../components/SidebarHeader"
 import PrismicRichText from "../components/PrismicRichText"
 import PrismicSlice from "../components/PrismicSlice"
 import SlideShow from "../components/SlideShow"
 import Accordion, { AccordionSection } from "../components/Accordion"
-import { Absolute, Relative, BackgroundImage, Flex, Box } from "../ui"
+import { Absolute, Relative, BackgroundImage, Flex, Box, Image } from "../ui"
+import UILink from "../components/Link"
 import get from "lodash/get"
 
-const Project = ({ content = {} }) => {
+const Partner = ({ data: { title, description, logo, website }, uid }) => (
+  <Box w={1 / 3} mb={3}>
+    <UILink target="_blank" href={website.url}>
+      {logo ? (
+        <Image src={logo.url} />
+      ) : (
+        <PrismicRichText mb={0} forceType="heading2" source={title} />
+      )}
+    </UILink>
+  </Box>
+)
+
+const Project = ({ content = {}, partners }) => {
   const sections = content.body.map((props, i) => (
-    <PrismicSlice mb={2} key={i} {...props} />
+    <Box key={i} mb={2}>
+      <PrismicSlice {...props} />
+    </Box>
   ))
   return (
     <Flex wrap="wrap">
@@ -26,6 +42,10 @@ const Project = ({ content = {} }) => {
         <PrismicRichText source={content.description} />
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} pl={3}>
+        <SidebarHeader>Partners</SidebarHeader>
+        <Flex>
+          {partners.map((props, i) => <Partner {...props} uid={i} key={i} />)}
+        </Flex>
         {sections}
       </Box>
     </Flex>
@@ -72,8 +92,10 @@ const Page = ({ project, ...props }) =>
 Page.getInitialProps = async ({ query: { status, id: uid } }) => {
   if (uid) {
     const res = await getByUID(types.PROJECT)(uid)
+    const partners = await getByIDs(res.data.partners.map(l => l.partner.id))
     return {
       content: res.data,
+      partners: partners.results,
       project: true,
     }
   } else {

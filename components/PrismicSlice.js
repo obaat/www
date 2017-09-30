@@ -87,7 +87,7 @@ export const renderers = {
 
   image_gallery: ({ items = [] }) => {
     return (
-      <SlideShow autoplay controlSize={18}>
+      <SlideShow controlSize={18}>
         {items.map(({ gallery_image: { url } }, i) => (
           <BackgroundImage src={url} key={i} />
         ))}
