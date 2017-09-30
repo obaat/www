@@ -18,17 +18,38 @@ import { Absolute, Relative, BackgroundImage, Flex, Box, Image } from "../ui"
 import UILink from "../components/Link"
 import get from "lodash/get"
 
-const Partner = ({ data: { title, description, logo, website }, uid }) => (
-  <Box w={1 / 3} mb={3}>
-    <UILink target="_blank" href={website.url}>
-      {logo ? (
+const Partner = ({ data: { title, description, logo, website }, uid }) => {
+  const content = (
+    <div>
+      {logo && logo.url ? (
         <Image src={logo.url} />
       ) : (
-        <PrismicRichText mb={0} forceType="heading2" source={title} />
+        <PrismicRichText
+          mb={0}
+          pt={2}
+          style={{ textAlign: "center" }}
+          textAlign="center"
+          align="center"
+          justify="center"
+          forceType="small"
+          source={title}
+        />
       )}
-    </UILink>
-  </Box>
-)
+    </div>
+  )
+
+  return (
+    <Box w={1 / 3} mb={3}>
+      {website && website.url ? (
+        <UILink target="_blank" href={website.url}>
+          {content}
+        </UILink>
+      ) : (
+        content
+      )}
+    </Box>
+  )
+}
 
 const Project = ({ content = {}, partners }) => {
   const sections = content.body.map((props, i) => (
