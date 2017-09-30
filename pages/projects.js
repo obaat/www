@@ -74,7 +74,7 @@ const Project = ({ content = {}, partners }) => {
 }
 
 const ProjectPreview = ({ uid, data, slug }) => (
-  <Box w={[1, 1, 1, 1 / 2]} p={1} color="#fff">
+  <Box w={[1, 1, 1, 1 / 3]} p={1} color="#fff">
     <Relative>
       <Link href={`/projects/?id=${uid}`} as={`/projects/${uid}`}>
         <BackgroundImage
@@ -83,9 +83,9 @@ const ProjectPreview = ({ uid, data, slug }) => (
           src={get(data, "header_image.url")}
         >
           <Absolute top left p={2}>
-            <PrismicRichText forceType="heading2" source={data.title} />
+            <PrismicRichText forceType="heading4" source={data.title} />
           </Absolute>
-          <Absolute bottom right p={2} fontSize={4}>
+          <Absolute bottom right p={2} fontSize={3}>
             See More
           </Absolute>
         </BackgroundImage>
