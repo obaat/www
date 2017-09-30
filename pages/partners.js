@@ -5,13 +5,15 @@ import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, Image, BackgroundImage } from "../ui"
 import Link from "../components/Link"
 
-const Partner = ({ title, description, logo, website, uid, odd }) => (
+const Partner = ({ data: { title, description, logo, website }, uid, odd }) => (
   <div>
     <a id={uid} />
     <Flex>
-      <Box w={1 / 5} mb={3} order={odd ? 2 : 1}>
-        <Image src={logo.url} />
-      </Box>
+      {logo && (
+        <Box w={1 / 5} mb={3} order={odd ? 2 : 1}>
+          <Image src={logo.url} />
+        </Box>
+      )}
       <Box
         w={4 / 5}
         pl={odd ? 0 : 3}
@@ -33,20 +35,20 @@ const Partner = ({ title, description, logo, website, uid, odd }) => (
   </div>
 )
 
-const Partnerships = ({ content = {} }) => {
+const Partnerships = ({ partners = [], content = {} }) => {
   return (
     <div>
-      {content.partner &&
-        content.partner.map((props, i) => (
-          <Partner {...props} uid={i} key={i} odd={!!(i % 2)} />
-        ))}
+      {partners.map((props, i) => (
+        <Partner {...props} uid={i} key={i} odd={!!(i % 2)} />
+      ))}
     </div>
   )
 }
 
 Partnerships.getInitialProps = async () => {
   const page = await getSingleton(types.PARTNERSHIPS_PAGE_CONTENT)
-  return { content: page.data }
+  const partners = await getByIDs(page.data.partners.map(l => l.partner.id))
+  return { partners: partners.results, content: page.data }
 }
 
 export default pageWithTitle()(Partnerships)
