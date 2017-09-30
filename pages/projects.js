@@ -1,6 +1,4 @@
 import React from "react"
-import Button from "../components/Button"
-import ApplyNow from "../components/ApplyNow"
 import { pageWithTitle } from "../hoc/page"
 import Link from "next/link"
 import {
@@ -12,24 +10,23 @@ import {
 } from "../utils/api"
 
 import PrismicRichText from "../components/PrismicRichText"
+import PrismicSlice from "../components/PrismicSlice"
 import SlideShow from "../components/SlideShow"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import { Absolute, Relative, BackgroundImage, Flex, Box } from "../ui"
 import get from "lodash/get"
-// import Error from "next/error"
 
 const Project = ({ content = {} }) => {
+  const sections = content.body.map((props, i) => (
+    <PrismicSlice mb={2} key={i} {...props} />
+  ))
   return (
     <Flex wrap="wrap">
-      <Box w={[1, 1, 1, 1 / 3]}>
-        <SlideShow autoplay controlSize={18}>
-          {content.image_gallery.map(({ image, description }, i) => (
-            <BackgroundImage src={image.url} key={i} />
-          ))}
-        </SlideShow>
-      </Box>
       <Box w={[1, 1, 1, 2 / 3]} pl={3}>
         <PrismicRichText source={content.description} />
+      </Box>
+      <Box w={[1, 1, 1, 1 / 3]} pl={3}>
+        {sections}
       </Box>
     </Flex>
   )
@@ -92,4 +89,6 @@ Page.getInitialProps = async ({ query: { status, id: uid } }) => {
   }
 }
 
-export default pageWithTitle()(Page)
+export default pageWithTitle({
+  route: [{ title: "Project", href: "/projects" }],
+})(Page)

@@ -177,38 +177,18 @@ class IndexPage extends React.Component {
       <div>
         <Helmet title="One Brick at a Time" />
         <Panel p={0} direction="row">
-          <Flex w={1}>
-            <Box w={2 / 3}>
-              <SlideShow
-                autoplay
-                hideZoom
-                autoplaySpeed={transitionSpeed}
-                onChange={this.setVisibleSlideIndex}
-                controlColor={theme.colors[sideColors[visibleSlide]][0]}
-              >
-                {hero.map(({ image, lead, strapline, button_text, url }, i) => (
-                  <BackgroundImage ratio={2 / 3} src={image.url} key={i} />
-                ))}
-              </SlideShow>
-            </Box>
-            <Box w={1 / 3} style={{ position: "relative" }}>
-              <Absolute
-                top
-                bottom
-                left
-                right
-                palette={sideColors[visibleSlide]}
-                invert
-                pt={menuHeightDocked}
-                px={3}
-              >
-                <Box>
-                  <Lead>{get(lead, "0.text")}</Lead>
-                  <Sub>{get(strapline, "0.text")}</Sub>
-                </Box>
-              </Absolute>
-            </Box>
-          </Flex>
+          <Box w={1}>
+            <SlideShow
+              autoplay
+              hideZoom
+              autoplaySpeed={transitionSpeed}
+              onChange={this.setVisibleSlideIndex}
+            >
+              {hero.map(({ image, lead, strapline, button_text, url }, i) => (
+                <BackgroundImage ratio={1 / 3} src={image.url} key={i} />
+              ))}
+            </SlideShow>
+          </Box>
         </Panel>
         <Panel palette="black">
           <Box px={2} py={90} w={[1, 1, 1, 900]} align="center">
