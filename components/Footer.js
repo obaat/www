@@ -28,7 +28,6 @@ export default () => (
           zoom={12}
           center={{ lat: 0.670188, lng: 30.287467 }}
           height="200px"
-          theme={mapDark}
         />
       </Box>
 

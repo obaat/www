@@ -1,6 +1,8 @@
 import React from "react"
 import { pageWithTitle } from "../hoc/page"
 import Link from "next/link"
+import Icon from "../components/Icon"
+import { HumanDate } from "../utils/date"
 import {
   getByUID,
   getByIDs,
@@ -63,6 +65,13 @@ const Project = ({ content = {}, partners }) => {
         <PrismicRichText source={content.description} />
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} pl={3}>
+        {content.date_completed && (
+          <Box mb={2}>
+            <SidebarHeader>
+              Completed <HumanDate iso={content.date_completed} />
+            </SidebarHeader>
+          </Box>
+        )}
         {content.location &&
           content.location.latitude && (
             <Box mb={2}>
@@ -73,7 +82,7 @@ const Project = ({ content = {}, partners }) => {
         {partners &&
           partners.length > 0 && (
             <div>
-              <SidebarHeader>Sponsors</SidebarHeader>
+              <SidebarHeader>Partners</SidebarHeader>
               <Flex>
                 {partners.map((props, i) => (
                   <Partner {...props} uid={i} key={i} />
