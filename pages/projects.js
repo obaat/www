@@ -96,7 +96,7 @@ const ProjectPreview = ({ uid, data, slug }) => (
           ratio={1 / 1.5}
           src={get(data, "listview_image.url", get(data, "header_image.url"))}
         >
-          <Absolute top left p={2}>
+          <Absolute top left p={2} bg="rgba(0,0,0,0.2)">
             <PrismicRichText forceType="heading4" source={data.title} />
           </Absolute>
           <Absolute bottom right p={2} fontSize={3}>

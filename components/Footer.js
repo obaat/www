@@ -1,6 +1,8 @@
 import React from "react"
 import g from "glamorous"
 import Link from "next/link"
+import Map from "../components/GoogleMap"
+import mapDark from "../components/mapDark.json"
 import Social from "./Social"
 import { Flex, Box, H6, Text } from "../ui"
 
@@ -16,13 +18,19 @@ const social = [
 export default () => (
   <div>
     <Flex palette="black" wrap="wrap" invert>
-      <Box w={[1, 1, 1, 1 / 2]} p={3}>
+      <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <Text>Become part of our story</Text>
         <Social />
       </Box>
-      {/* <Box>
-      <img src="https://api.mapbox.com/styles/v1/mapbox/streets-v10/static/30.287619,0.670685,12/300x200?access_token=pk.eyJ1IjoicGFwZXJjcmVhdHVyZXMiLCJhIjoiY2o3ejF3bXllMXZzYzJ3bzR3eWprOHQyaCJ9.oiyWWuJWI-tXXBwY7U1cMw" />
-    </Box> */}
+
+      <Box w={[1, 1, 1, 1 / 4]} p={3}>
+        <Map
+          zoom={12}
+          center={{ lat: 0.670188, lng: 30.287467 }}
+          height="200px"
+          theme={mapDark}
+        />
+      </Box>
 
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <address>
