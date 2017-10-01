@@ -15,6 +15,10 @@ const A = g.a({
   },
 })
 
+const NotA = g.span({
+  borderBottom: "2px solid transparent",
+})
+
 const Crumb = g(Box)({
   fontStyle: "italic",
 })
@@ -27,7 +31,9 @@ const LinkCrumb = ({ href, ...props }) =>
       </A>
     </Link>
   ) : (
-    <Crumb {...props} />
+    <NotA>
+      <Crumb {...props} />
+    </NotA>
   )
 
 const BreadCrumbs = ({ route }) => (
