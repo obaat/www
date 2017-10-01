@@ -73,7 +73,7 @@ const Project = ({ content = {}, partners }) => {
         {partners &&
           partners.length > 0 && (
             <div>
-              <SidebarHeader>Partners</SidebarHeader>
+              <SidebarHeader>Sponsors</SidebarHeader>
               <Flex>
                 {partners.map((props, i) => (
                   <Partner {...props} uid={i} key={i} />
