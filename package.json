@@ -40,6 +40,7 @@
     "react-countup": "^2.2.0",
     "react-dom": "^16.0.0",
     "react-ga": "^2.2.0",
+    "react-google-maps": "^8.3.2",
     "react-helmet": "^5.2.0",
     "react-motion": "^0.5.1",
     "react-powerplug": "^0.1.0",

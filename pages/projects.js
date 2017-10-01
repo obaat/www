@@ -13,8 +13,8 @@ import SidebarHeader from "../components/SidebarHeader"
 import PrismicRichText from "../components/PrismicRichText"
 import PrismicSlice from "../components/PrismicSlice"
 import SlideShow from "../components/SlideShow"
-import Accordion, { AccordionSection } from "../components/Accordion"
 import { Absolute, Relative, BackgroundImage, Flex, Box, Image } from "../ui"
+import Map from "../components/GoogleMap"
 import UILink from "../components/Link"
 import get from "lodash/get"
 
@@ -63,10 +63,24 @@ const Project = ({ content = {}, partners }) => {
         <PrismicRichText source={content.description} />
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} pl={3}>
-        <SidebarHeader>Partners</SidebarHeader>
-        <Flex>
-          {partners.map((props, i) => <Partner {...props} uid={i} key={i} />)}
-        </Flex>
+        {content.location &&
+          content.location.latitude && (
+            <Box mb={2}>
+              <SidebarHeader>Location</SidebarHeader>
+              <Map center={content.location} zoom={9} />
+            </Box>
+          )}
+        {partners &&
+          partners.length > 0 && (
+            <div>
+              <SidebarHeader>Partners</SidebarHeader>
+              <Flex>
+                {partners.map((props, i) => (
+                  <Partner {...props} uid={i} key={i} />
+                ))}
+              </Flex>
+            </div>
+          )}
         {sections}
       </Box>
     </Flex>
@@ -80,7 +94,7 @@ const ProjectPreview = ({ uid, data, slug }) => (
         <BackgroundImage
           bg="#000"
           ratio={1 / 1.5}
-          src={get(data, "header_image.url")}
+          src={get(data, "listview_image.url", get(data, "header_image.url"))}
         >
           <Absolute top left p={2}>
             <PrismicRichText forceType="heading4" source={data.title} />
