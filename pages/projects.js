@@ -61,7 +61,7 @@ const Project = ({ content = {}, partners }) => {
   ))
   return (
     <Flex wrap="wrap">
-      <Box w={[1, 1, 1, 2 / 3]} pl={3}>
+      <Box w={[1, 1, 1, 2 / 3]}>
         <PrismicRichText source={content.description} />
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} pl={3}>
