@@ -15,7 +15,15 @@ import SidebarHeader from "../components/SidebarHeader"
 import PrismicRichText from "../components/PrismicRichText"
 import PrismicSlice from "../components/PrismicSlice"
 import SlideShow from "../components/SlideShow"
-import { Absolute, Relative, BackgroundImage, Flex, Box, Image } from "../ui"
+import {
+  Absolute,
+  Relative,
+  Text,
+  BackgroundImage,
+  Flex,
+  Box,
+  Image,
+} from "../ui"
 import Map from "../components/GoogleMap"
 import UILink from "../components/Link"
 import get from "lodash/get"
@@ -122,6 +130,7 @@ const ProjectsIndex = ({ projects, content }) => {
   return (
     <div>
       <PrismicRichText source={content.description} />
+      {projects.results.length === 0 && <Text>No Projects</Text>}
       <Flex wrap="wrap">
         {projects.results.map(props => (
           <ProjectPreview key={props.uid} {...props} />
