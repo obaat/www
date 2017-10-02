@@ -6,6 +6,8 @@ import Embed from "../components/Embed"
 import PrismicRichText from "../components/PrismicRichText"
 import Link from "next/link"
 import { themeCycle } from "../utils/constants"
+import srcTheme from "../theme"
+import chroma from "chroma-js"
 import { Small } from "../ui"
 
 const Grid = g.div(
@@ -66,6 +68,12 @@ const Background = g(Absolute)(({ src }) => ({
   right: true,
 })
 
+const TextBackground = g(Background)({
+  display: "flex",
+  alignItems: "center",
+  textAlign: "center",
+})
+
 const mapType = {
   project: "projects",
   team_page: "team",
@@ -88,20 +96,25 @@ const pageToLink = ({ type, slug }) => {
 
 let cycleCount = 0
 
+const typeName = {
+  project: "Project",
+  event: "Event",
+}
 const renderers = {
   video: ({ content }) => <Embed {...content} width="100%" height="100%" />,
   unknown: type => () => <span>{type}???</span>,
   text: ({ content, background_color, theme, color }) => (
-    <Background
+    <TextBackground
       palette={theme}
       invert
       bg={background_color}
       color={color}
       align="center"
+      justify="center"
       p={2}
     >
       <PrismicRichText source={content} />
-    </Background>
+    </TextBackground>
   ),
   page: ({ content, theme, data, count }) => {
     const src = data[content.id] || {}
@@ -110,20 +123,29 @@ const renderers = {
       ["header_image", "url"],
       get(content, ["image_gallery", 0, "image", "url"]),
     )
+    const palette = theme || themeCycle[count % themeCycle.length]
+    const bg = theme && chroma(srcTheme.colors[theme][0]).rgb()
     return (
       <Link {...pageToLink(content)}>
         <Background
           src={image}
-          palette={theme || themeCycle[count % themeCycle.length]}
+          palette={palette}
           color={image && "#fff"}
           invert
         >
-          <Absolute top left p={2}>
+          <Absolute
+            top
+            left
+            bottom
+            right
+            p={2}
+            bg={theme && `rgba(${bg[0]},${bg[1]},${bg[2]},0.2)`}
+          >
             <PrismicRichText forceType="heading3" source={src.title} />
           </Absolute>
           <Absolute bottom right p={2}>
             <Small mb={0} style={{ textTransform: "uppercase" }}>
-              {content.type}
+              {typeName[content.type]}
             </Small>
           </Absolute>
         </Background>
