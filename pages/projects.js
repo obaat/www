@@ -41,7 +41,7 @@ const Partner = ({ data: { title, description, logo, website }, uid }) => {
   )
 
   return (
-    <Box w={1 / 3} mb={3}>
+    <Box w={1 / 2} mb={3}>
       {website && website.url ? (
         <UILink target="_blank" href={website.url}>
           {content}
@@ -83,7 +83,7 @@ const Project = ({ content = {}, partners }) => {
           partners.length > 0 && (
             <div>
               <SidebarHeader>Partners</SidebarHeader>
-              <Flex>
+              <Flex wrap="wrap">
                 {partners.map((props, i) => (
                   <Partner {...props} uid={i} key={i} />
                 ))}
@@ -106,7 +106,8 @@ const ProjectPreview = ({ uid, data, slug }) => (
           src={get(data, "listview_image.url", get(data, "header_image.url"))}
         >
           <Absolute top left bottom right p={2} bg="rgba(0,0,0,0.3)">
-            <PrismicRichText forceType="heading4" source={data.title} />
+            <PrismicRichText forceType="heading4" xmb={0} source={data.title} />
+            {data.date_completed && <HumanDate iso={data.date_completed} />}
           </Absolute>
           <Absolute bottom right p={2} fontSize={3}>
             See More
@@ -156,5 +157,5 @@ Page.getInitialProps = async ({ query: { status, id: uid } }) => {
 }
 
 export default pageWithTitle({
-  route: [{ title: "Project", href: "/projects" }],
+  route: [{ title: "Projects", href: "/projects" }],
 })(Page)
