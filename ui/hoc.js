@@ -16,7 +16,6 @@ const palette = ({ palette, theme, invert }) => {
     ["colors", invert ? `${palette}Invert` : palette],
     def,
   )
-  console.log({ color, backgroundColor })
   return {
     color,
     backgroundColor,

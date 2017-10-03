@@ -4,7 +4,8 @@ import Link from "next/link"
 import Map from "../components/GoogleMap"
 import mapDark from "../components/mapDark.json"
 import Social from "./Social"
-import { Flex, Border, Box, H6, Text } from "../ui"
+import { Flex, Border, Box, H6, Text, Link as UILink } from "../ui"
+import { PC } from "./SvgIcons"
 
 const w = [1, 1, 1, 1 / 3]
 
@@ -52,9 +53,13 @@ export default () => (
         </address>
       </Box>
     </Flex>
-    <Flex bg="#000" color="#fff">
-      <Border w={1} top borderColor="gray3" p={3}>
-        <Box f={0}>Paper Creatures Custom</Box>
+    <Flex palette="gray9" invert>
+      <Border w={1} top borderColor="gray3" px={3} pt={2} pb={0}>
+        <UILink href="http://papercreatures.com">
+          <Box>
+            <PC viewBox="80 80 250 250" size={60} />
+          </Box>
+        </UILink>
       </Border>
     </Flex>
   </div>

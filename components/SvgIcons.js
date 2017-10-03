@@ -6,6 +6,7 @@ import Building from "../svg/building.svg"
 import ArrowRight from "../svg/arrow-right.svg"
 import User from "../svg/user.svg"
 import HeadCog from "../svg/head-cog.svg"
+import PC from "../svg/pc.svg"
 import g from "glamorous"
 import mapValues from "lodash/mapValues"
 import withProps from "recompose/withProps"
@@ -21,13 +22,16 @@ const icons = {
   Map,
   Building,
   User,
+  PC,
 }
 
 module.exports = mapValues(icons, icon =>
-  withProps(({ width, height, size = 24, color = "#fff" }) => ({
-    fill: color,
-    viewBox: "0 0 24 24",
-    width: width || size,
-    height: height || size,
-  }))(icon),
+  withProps(
+    ({ width, height, size = 24, viewBox = "0 0 24 24", color = "#fff" }) => ({
+      fill: color,
+      viewBox,
+      width: width || size,
+      height: height || size,
+    }),
+  )(icon),
 )

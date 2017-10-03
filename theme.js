@@ -27,7 +27,10 @@ const colors = reduce(
   {},
 )
 
-// console.log({ colors })
+colors.primary = colors.base
+colors.brick = colors.base
+colors.secondary = colors.green6
+colors.tertiary = colors.blue6
 
 export const invert = reduce(
   colors,

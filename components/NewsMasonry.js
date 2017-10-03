@@ -7,7 +7,6 @@ import PrismicRichText from "../components/PrismicRichText"
 import Link from "next/link"
 import { themeCycle } from "../utils/constants"
 import srcTheme from "../theme"
-import chroma from "chroma-js"
 import { Small } from "../ui"
 
 const Grid = g.div(
@@ -124,7 +123,7 @@ const renderers = {
       get(content, ["image_gallery", 0, "image", "url"]),
     )
     const palette = theme || themeCycle[count % themeCycle.length]
-    const bg = theme && chroma(srcTheme.colors[theme][0]).rgb()
+    const bg = theme && srcTheme.colors[theme][0]
     return (
       <Link {...pageToLink(content)}>
         <Background

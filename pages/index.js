@@ -216,7 +216,7 @@ class IndexPage extends React.Component {
             </Panel>
           )}
 
-        <Panel py={4} direction="row" palette="blue5" align="flex-start" invert>
+        <Panel py={4} direction="row" palette="cyan6" align="flex-start" invert>
           <Box w={1}>
             <Heading>Our Impact</Heading>
           </Box>
@@ -225,7 +225,7 @@ class IndexPage extends React.Component {
             {stats.map(({ title, icon: Icon, value, postfix }) => (
               <Box p={3} key={title}>
                 <Icon color="#fff" size={50} />
-                <Box mt={3}>
+                <Box mt={2}>
                   <Count
                     innerRef={c => this.counters.push(c)}
                     start={0}
@@ -243,7 +243,7 @@ class IndexPage extends React.Component {
             ))}
           </Flex>
           <Box w={1}>
-            <ActionButton palette="blue5" href="/projects">
+            <ActionButton palette="cyan6" href="/projects">
               See Our Projects
             </ActionButton>
           </Box>
