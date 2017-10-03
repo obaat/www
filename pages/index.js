@@ -216,7 +216,7 @@ class IndexPage extends React.Component {
             </Panel>
           )}
 
-        <Panel py={4} direction="row" palette="blue" align="flex-start" invert>
+        <Panel py={4} direction="row" palette="blue5" align="flex-start" invert>
           <Box w={1}>
             <Heading>Our Impact</Heading>
           </Box>
@@ -243,19 +243,19 @@ class IndexPage extends React.Component {
             ))}
           </Flex>
           <Box w={1}>
-            <ActionButton palette="blue" href="/projects">
+            <ActionButton palette="blue5" href="/projects">
               See Our Projects
             </ActionButton>
           </Box>
         </Panel>
-        <Panel py={4} direction="row" palette="greyLighter" invert>
+        <Panel py={4} direction="row" palette="gray2" invert>
           <Box w={1}>
             <Heading>Volunteer Experiences</Heading>
           </Box>
           <Box align="center" w={BOX_WIDTH}>
             <SlideShow
               autoplay
-              controlColor={theme.colors.greyLighter[1]}
+              controlColor={theme.colors.gray1[1]}
               hideZoom
               autoplaySpeed={transitionSpeed}
             >
@@ -269,7 +269,7 @@ class IndexPage extends React.Component {
             </SlideShow>
           </Box>
           <Box w={1}>
-            <ActionButton palette="greyLighter" href="/volunteering">
+            <ActionButton palette="gray2" href="/volunteering">
               Learn More About Volunteering
             </ActionButton>
           </Box>

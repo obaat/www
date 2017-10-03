@@ -129,7 +129,7 @@ const renderers = {
       <Link {...pageToLink(content)}>
         <Background
           src={image}
-          palette={palette}
+          palette={!image && palette}
           color={image && "#fff"}
           invert
         >

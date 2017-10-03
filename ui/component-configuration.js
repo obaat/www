@@ -160,7 +160,7 @@ const components = [
     name: "Link",
     type: "a",
     props: {
-      palette: "blue",
+      palette: "blue5",
     },
     style: withPalette(props => ({
       backgroundColor: "inherit",
@@ -1122,7 +1122,6 @@ const components = [
     type: "div",
     props: {
       color: "white",
-      bg: "black",
     },
     style: withPalette(props => ({
       display: "inline-block",

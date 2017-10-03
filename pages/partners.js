@@ -21,7 +21,7 @@ const Partner = ({ data: { title, description, logo, website }, uid, odd }) => (
         order={odd ? 1 : 2}
         style={{ textAlign: odd ? "right" : "left" }}
       >
-        <Border bottom mb={2} borderColor="greyLighter">
+        <Border bottom mb={2} borderColor="gray4">
           <PrismicRichText mb={0} forceType="heading2" source={title} />
           {website && (
             <Link target="_blank" href={website.url}>

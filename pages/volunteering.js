@@ -131,7 +131,7 @@ const Quotes = ({ data, items = [] }) => {
   )
 
   return (
-    <Border borderColor="greyLighter" top left bottom right mt={2}>
+    <Border borderColor="gray3" top left bottom right mt={2}>
       <SlideShow
         controlSize={18}
         controlColor="#777"

@@ -16,6 +16,7 @@ const palette = ({ palette, theme, invert }) => {
     ["colors", invert ? `${palette}Invert` : palette],
     def,
   )
+  console.log({ color, backgroundColor })
   return {
     color,
     backgroundColor,
@@ -25,8 +26,8 @@ const palette = ({ palette, theme, invert }) => {
 export const defaultTraits = [
   fontSize,
   bold,
-  color,
   palette,
+  color,
   space,
   width,
   clickable,

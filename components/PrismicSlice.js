@@ -70,12 +70,12 @@ export const renderers = {
         {items.map(({ column_1, column_2 }, i) => (
           <Tr key={i} mb={1} cellpadding={0} cellspacing={0}>
             <Td w={1 / 2}>
-              <Border top borderColor="greyLighter" borderWidth={i > 0 ? 1 : 0}>
+              <Border top borderColor="gray4" borderWidth={i > 0 ? 1 : 0}>
                 <PrismicRichText mt={i > 0 ? 2 : 0} source={column_1} />
               </Border>
             </Td>
             <Td>
-              <Border top borderColor="greyLighter" borderWidth={i > 0 ? 1 : 0}>
+              <Border top borderColor="gray4" borderWidth={i > 0 ? 1 : 0}>
                 <PrismicRichText mt={i > 0 ? 2 : 0} source={column_2} />
               </Border>
             </Td>

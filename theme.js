@@ -1,67 +1,40 @@
-import chroma from "chroma-js"
-import { mapValues } from "lodash/fp"
+import palx from "palx"
 import reduce from "lodash/reduce"
-import hello from "hello-color"
+import hex2rgb from "hex2rgb"
+
+const base = "#cf3415"
 const black = "#0a0a0a"
 const white = "white"
 
-const convert = mapValues(
-  hsl => (Array.isArray(hsl) ? chroma.hsl(hsl).css() : hsl),
+const palette = palx(base)
+// const colors = mapValues(palette, p => [p[0], hello(p[0])])
+
+const contrast = s => (hex2rgb(s).yiq === "black" ? black : white)
+
+const colors = reduce(
+  palette,
+  (a, v, k) => {
+    if (Array.isArray(v)) {
+      const shades = v.reduce(
+        (b, c, i) => ({ ...b, [k + (i > 0 ? i : "")]: [c, contrast(c)] }),
+        {},
+      )
+      return { ...a, ...shades }
+    } else {
+      return { ...a, [k]: [v, contrast(v)] }
+    }
+  },
+  {},
 )
-const transparent = "transparent"
 
-const palette = convert({
-  black: [1, 0, 0.14],
-  blackBis: [0, 0, 0.07],
-  blackTer: [0, 0, 0.14],
-  greyDarker: [0, 0, 0.21],
-  greyDark: [0, 0, 0.29],
-  grey: [0, 0, 0.48],
-  greyLight: [0, 0, 0.71],
-  greyLighter: [0, 0, 0.86],
-  greyLighterStill: [0, 0, 0.94],
-  whiteTer: [0, 0, 0.96],
-  whiteBis: [0, 0, 0.98],
-  white: [0, 0, 100],
-  orange: [14, 1, 0.53],
-  yellow: [48, 1, 0.67],
-  // green: [141, 0.71, 0.48],
-  turquoise: [171, 100, 0.41],
-  blue: [200, 1, 0.4],
-  purple: [271, 1, 0.71],
-  red: [348, 1, 0.61],
-  brick: [10, 0.8, 0.44],
-  green: "#16ca34",
-  yellow: "#acca16",
-  cyan: "#16acca",
-  blue: "#3416ca",
-  pink: "#ca16ac",
-})
-
-export const colors = {
-  black: [palette.black, palette.white],
-  blue: [palette.blue, palette.white],
-  normal: [palette.greyDark, palette.white],
-
-  primary: [palette.brick, palette.white],
-  secondary: [palette.green, palette.white],
-  tertiary: [palette.cyan, palette.white],
-
-  info: [palette.blue, palette.white],
-  success: [palette.green, palette.white],
-  warning: [palette.yellow, palette.white],
-  danger: [palette.red, palette.white],
-  greyLighter: [palette.greyLighter, palette.black],
-  greyLighterStill: [palette.greyLighterStill, palette.black],
-  grey: [palette.grey, palette.black],
-  brick: [palette.brick, palette.white],
-}
+// console.log({ colors })
 
 export const invert = reduce(
   colors,
   (a, v, k) => ({ [`${k}Invert`]: v.slice().reverse(), ...a }),
   {},
 )
+
 const theme = {
   colors: { ...colors, ...invert },
   font: {

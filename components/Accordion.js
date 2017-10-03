@@ -28,7 +28,7 @@ const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
       <AccordionHeader
         id={id}
         mb={-2}
-        palette="greyLighter"
+        palette="gray1"
         invert
         p={2}
         onClick={toggleOpen(id)}
@@ -37,7 +37,7 @@ const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
         {title}
       </AccordionHeader>
       {open && (
-        <AccordionBody p={2} palette="greyLighterStill" invert>
+        <AccordionBody p={2} palette="gray2" invert>
           {description}
         </AccordionBody>
       )}

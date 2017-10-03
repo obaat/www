@@ -4,7 +4,7 @@ import Link from "next/link"
 import Map from "../components/GoogleMap"
 import mapDark from "../components/mapDark.json"
 import Social from "./Social"
-import { Flex, Box, H6, Text } from "../ui"
+import { Flex, Border, Box, H6, Text } from "../ui"
 
 const w = [1, 1, 1, 1 / 3]
 
@@ -17,7 +17,7 @@ const social = [
 
 export default () => (
   <div>
-    <Flex palette="black" wrap="wrap" invert>
+    <Flex palette="gray9" wrap="wrap" invert>
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <Text>Become part of our story</Text>
         <Social />
@@ -52,8 +52,10 @@ export default () => (
         </address>
       </Box>
     </Flex>
-    <Flex p={3} bg="#000" color="#fff">
-      <Box f={0}>Paper Creatures Custom</Box>
+    <Flex bg="#000" color="#fff">
+      <Border w={1} top borderColor="gray3" p={3}>
+        <Box f={0}>Paper Creatures Custom</Box>
+      </Border>
     </Flex>
   </div>
 )

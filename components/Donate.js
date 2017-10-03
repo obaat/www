@@ -127,7 +127,7 @@ class StripeDonate extends Component {
 const DonateJustGiving = ({ scrolled }) => (
   <a href="https://www.justgiving.com/onebrickatatime">
     <Button
-      context="brick"
+      palette="base"
       invert={scrolled}
       icon="heart"
       iconSize={0}

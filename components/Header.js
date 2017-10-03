@@ -105,7 +105,7 @@ export default class Header extends Component {
             scrolled={scrolled}
           >
             <Link href="/">
-              <Logo fill={scrolled ? theme.colors.brick[0] : "#fff"} />
+              <Logo fill={scrolled ? theme.colors.base[0] : "#fff"} />
             </Link>
             <Menu volunteering={this.props.volunteering} />
             <Box grow={1} align="right">
