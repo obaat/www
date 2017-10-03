@@ -13,7 +13,7 @@ import { Small } from "../ui"
 const Grid = g.div(
   ({
     width = "100%",
-    height = "750px",
+    height,
     rowConfig,
     columnConfig,
     autoRowConfig,
@@ -192,7 +192,7 @@ const COLUMNS = 3
 const NewsMasonry = ({ items = [], data }) => {
   return (
     <Grid
-      rowConfig={`repeat(${Math.ceil(items.length / COLUMNS)}, 1fr)`}
+      rowConfig={`repeat(2, 180px)`}
       columnConfig={`repeat(${COLUMNS}, 1fr)`}
       autoRowConfig="1fr"
     >

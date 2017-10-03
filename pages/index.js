@@ -190,8 +190,8 @@ class IndexPage extends React.Component {
             </SlideShow>
           </Box>
         </Panel>
-        <Panel palette="black">
-          <Box px={2} py={90} w={[1, 1, 1, 900]} align="center">
+        <Panel py={4} palette="black">
+          <Box px={2} py={2} w={[1, 1, 1, 900]} align="center">
             <PrismicRichText
               style={{ lineHeight: 1.7 }}
               xmb={0}
@@ -199,6 +199,11 @@ class IndexPage extends React.Component {
               source={mission}
               forceType="heading6"
             />
+          </Box>
+          <Box w={1}>
+            <ActionButton palette="black" invert href="/about">
+              What we do
+            </ActionButton>
           </Box>
         </Panel>
         {news &&
