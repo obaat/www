@@ -33,6 +33,7 @@ import {
   ButtonOutline,
   Measure,
   BackgroundImage,
+  ButtonCircle,
 } from "../ui"
 import SlideShow from "../components/SlideShow"
 import Statement from "../components/Statement"
@@ -97,7 +98,7 @@ const ActionButton = ({ prismicUrl, href, ...props }) => {
   const local = href ? href : toLocalRelativeUrl(prismicUrl)
   return (
     <Link href={local} as={resolved}>
-      <LeadButton {...props} />
+      <LeadButton {...props} as={ButtonCircle} />
     </Link>
   )
 }
@@ -185,7 +186,7 @@ class IndexPage extends React.Component {
               onChange={this.setVisibleSlideIndex}
             >
               {hero.map(({ image, lead, strapline, button_text, url }, i) => (
-                <BackgroundImage ratio={1 / 3} src={image.url} key={i} />
+                <BackgroundImage ratio={1 / 2.5} src={image.url} key={i} />
               ))}
             </SlideShow>
           </Box>
@@ -201,7 +202,12 @@ class IndexPage extends React.Component {
             />
           </Box>
           <Box w={1}>
-            <ActionButton palette="black" invert href="/about">
+            <ActionButton
+              palette="black"
+              as={ButtonCircle}
+              invert
+              href="/about"
+            >
               What we do
             </ActionButton>
           </Box>
@@ -217,9 +223,6 @@ class IndexPage extends React.Component {
           )}
 
         <Panel py={4} direction="row" palette="cyan6" align="flex-start" invert>
-          <Box w={1}>
-            <Heading>Our Impact</Heading>
-          </Box>
           <VisibilitySensor onChange={this.onVisible} />
           <Flex w={1} justify="center" w={BOX_WIDTH}>
             {stats.map(({ title, icon: Icon, value, postfix }) => (
@@ -248,8 +251,8 @@ class IndexPage extends React.Component {
             </ActionButton>
           </Box>
         </Panel>
-        <Panel py={4} direction="row" palette="gray2" invert>
-          <Box w={1}>
+        <Panel py={3} direction="row" palette="gray2" invert>
+          <Box w={1} mb={2}>
             <Heading>Volunteer Experiences</Heading>
           </Box>
           <Box align="center" w={BOX_WIDTH}>
