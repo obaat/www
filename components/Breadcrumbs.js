@@ -2,7 +2,7 @@ import React from "react"
 import g from "glamorous"
 import Icon from "../components/Icon"
 import Link from "next/link"
-import { Home2, ArrowRight } from "./SvgIcons"
+import { Home, ArrowRight } from "./SvgIcons"
 import { Flex, Box, H6, Text } from "../ui"
 
 const Bread = g(Flex)({})
