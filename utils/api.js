@@ -20,6 +20,7 @@ const types = {
   APPLY_PAGE_CONTENT: "apply_page",
   ABOUT_PAGE_CONTENT: "about_page",
   SHOP_PAGE_CONTENT: "shop_page",
+  SPONSOR_PAGE_CONTENT: "sponsor_page",
   SPREAD_THE_WORD_PAGE_CONTENT: "spread_the_word",
   NEWS: "news",
 }
