@@ -8,11 +8,15 @@ const mapping = {
 
 const Link = ({ url, slug, href, target, ...props }) => {
   const _href = slug ? `/${mapping[slug] || slug}` : href
-  return (
-    <NxLink href={_href}>
-      <UILink {...props} href={_href} target={target} rel="noopener" />
-    </NxLink>
-  )
+  if (_href) {
+    return (
+      <NxLink href={_href}>
+        <UILink {...props} href={_href} target={target} rel="noopener" />
+      </NxLink>
+    )
+  } else {
+    return <UILink {...props} href={url} target="_blank" rel="noopener" />
+  }
 }
 
 export default Link

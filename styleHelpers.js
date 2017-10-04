@@ -21,4 +21,5 @@ export const backgroundImageCover = ({ image }) =>
     backgroundColor: "#000",
     backgroundImage: `url(${JSON.stringify(image)})`,
     backgroundSize: "cover",
+    backgroundPosition: "center",
   }
