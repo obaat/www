@@ -39,7 +39,7 @@ const LinkCrumb = ({ href, ...props }) =>
 const BreadCrumbs = ({ route }) => (
   <Bread mb={2} align="center">
     <LinkCrumb href="/" mb="-4px">
-      <Home2 color="#000" size={13} />
+      <Home color="#000" size={13} />
     </LinkCrumb>
     {route.map(({ title, href }, i) => [
       <Crumb px={1} key="arrow">
