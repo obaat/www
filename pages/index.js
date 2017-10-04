@@ -172,7 +172,11 @@ class IndexPage extends React.Component {
               onChange={this.setVisibleSlideIndex}
             >
               {hero.map(({ image, lead, strapline, button_text, url }, i) => (
-                <BackgroundImage ratio={1 / 2.5} src={image.url} key={i} />
+                <BackgroundImage
+                  ratio={[1, 1 / 2.5, 1 / 2.5, 1 / 2.5]}
+                  src={image.url}
+                  key={i}
+                />
               ))}
             </SlideShow>
           </Box>
@@ -210,9 +214,9 @@ class IndexPage extends React.Component {
 
         <Panel py={4} direction="row" palette="gray9" align="flex-start" invert>
           <VisibilitySensor onChange={this.onVisible} />
-          <Flex w={1} justify="center" w={BOX_WIDTH}>
+          <Flex w={1} justify="center" wrap="wrap" w={BOX_WIDTH}>
             {stats.map(({ title, icon: Icon, value, postfix }) => (
-              <Box p={3} key={title}>
+              <Box p={3} w={[1, 1, 1, 1 / 4]} key={title}>
                 <Icon palette="cyan5" size={50} />
                 <Box mt={3}>
                   <Count
@@ -250,9 +254,9 @@ class IndexPage extends React.Component {
               autoplaySpeed={transitionSpeed}
             >
               {chunkedStatements.map((statements, i) => (
-                <Flex key={i} justify="center">
+                <Flex key={i} wrap="wrap" justify="center">
                   {statements.map((props, i) => (
-                    <Statement key={i} {...props} />
+                    <Statement w={[1, 1, 1, 1 / 2]} key={i} {...props} />
                   ))}
                 </Flex>
               ))}

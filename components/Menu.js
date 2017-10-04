@@ -1,10 +1,13 @@
 import React, { Component } from "react"
+import withSizes from "react-sizes"
 import g from "glamorous"
 import Link from "next/link"
 import { css } from "glamor"
 import { Flex, Text, H6, Box, Relative, Link as UILink } from "../ui"
 import { space } from "../styleHelpers"
 import { Set } from "react-powerplug"
+import ExecutionEnvironment from "exenv"
+
 import enhanceWithClickOutside from "react-click-outside"
 
 const toVolunteeringMenu = src =>
@@ -153,13 +156,16 @@ export const SecondaryMenu = enhanceWithClickOutside(
   },
 )
 
-export default props => {
+const Menu = ({ hideMenu = false, ...props }) => {
   const _menuItems = menuItems.map(
     i =>
       i.getChildren
         ? { ...i, items: (i.items || []).concat(i.getChildren(props)) }
         : i,
   )
+  if (hideMenu) {
+    return null
+  }
   return (
     <Set initial={{ visibleMenu: null }}>
       {({ set, get }) => (
@@ -191,3 +197,11 @@ export default props => {
     </Set>
   )
 }
+
+const mapSizesToProps = ({ width }) => ({
+  hideMenu: width < 900,
+})
+
+export default (ExecutionEnvironment.canUseDOM
+  ? withSizes(mapSizesToProps)(Menu)
+  : Menu)

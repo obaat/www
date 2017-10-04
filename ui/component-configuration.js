@@ -1,12 +1,20 @@
 import React from "react"
 import { Flex, Box } from "./Grid"
 import get from "lodash/get"
-import { space, color as ssColor, width, fontSize } from "styled-system"
+import toArray from "lodash/toArray"
+import {
+  space,
+  color as ssColor,
+  width,
+  fontSize,
+  responsiveStyle,
+} from "styled-system"
 import { bool, string, number, oneOf, oneOfType } from "prop-types"
 import { Field as RawField } from "formik"
 import isNil from "lodash/isNil"
 import { SocialIcon } from "react-social-icons"
 const numberOrString = oneOfType([number, string])
+const ratio = responsiveStyle("paddingBottom", "ratio")
 const theme = ({ theme, palette, invert }) =>
   get(
     theme,
@@ -572,13 +580,16 @@ const components = [
       // ratio: 3/4 // How does styled-components handle this??
       // Fix this once non-whitelisted styled-components is out
     },
-    style: props => ({
-      backgroundImage: props.src ? `url(${props.src})` : "none",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      height: 0,
-      paddingBottom: (props.ratio || 3 / 4) * 100 + "%",
-    }),
+    style: props => {
+      console.log(ratio(props))
+      return {
+        backgroundImage: props.src ? `url(${props.src})` : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: 0,
+        ...ratio({ ratio: toArray(props.ratio).map(r => r * 100 + "%") }),
+      }
+    },
     propTypes: {
       src: string,
       ratio: number,
