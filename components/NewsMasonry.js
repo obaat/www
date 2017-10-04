@@ -78,20 +78,14 @@ const TextBackground = g(Background)({
 const mapType = {
   project: "projects",
   team_page: "team",
+  gallery_page: "gallery",
 }
 
-const pageToLink = ({ type, slug }) => {
+const pageToLink = ({ type, uid }) => {
   const mappedType = mapType[type] || type
-  if ((slug = ~/_page$/)) {
-    return {
-      href: `/${mappedType}`,
-      as: `/${mappedType}`,
-    }
-  } else {
-    return {
-      href: `/${mappedType}?id=${slug}`,
-      as: `/${mappedType}/${slug}`,
-    }
+  return {
+    href: `/${mappedType}?id=${uid}`,
+    as: `/${mappedType}/${uid}`,
   }
 }
 
@@ -100,6 +94,7 @@ let cycleCount = 0
 const typeName = {
   project: "Project",
   event: "Event",
+  gallery: "Gallery",
 }
 const renderers = {
   video: ({ content }) => <Embed {...content} width="100%" height="100%" />,

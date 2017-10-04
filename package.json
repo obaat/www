@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "postinstall":
-      "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg",
+    "postinstall": "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node .",
     "build": "NODE_ENV=production next build",
@@ -53,7 +52,7 @@
     "react-powerplug": "^0.1.1",
     "react-social-icons": "^2.7.0",
     "react-stripe-checkout": "^2.6.3",
-    "react-visibility-sensor": "^3.10.1",
+    "react-visibility-sensor": "^3.11.0",
     "recompose": "^0.25.0",
     "reline": "^1.0.0-beta.3",
     "styled-system": "^1.0.5",
@@ -90,7 +89,10 @@
         ]
       }
     },
-    "presets": ["next/babel", "flow"],
+    "presets": [
+      "next/babel",
+      "flow"
+    ],
     "plugins": [
       [
         "inline-react-svg",
@@ -111,7 +113,10 @@
       ],
       "babel-macros",
       "sitrep",
-      ["transform-define", "./config.js"]
+      [
+        "transform-define",
+        "./config.js"
+      ]
     ]
   }
 }
