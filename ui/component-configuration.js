@@ -21,6 +21,8 @@ export const withPalette = cb => props => {
       background: props.bg || background,
       ...props,
     })
+  } else {
+    return cb(props)
   }
 }
 
