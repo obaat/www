@@ -138,6 +138,7 @@ const Quotes = ({ data, items = [] }) => {
         px={1}
         hideZoom
         hidePaging
+        autoplay
       >
         {filled.map(({ data: { description, name, role } }, i) => (
           <Box py={2} px={3} key={i}>
