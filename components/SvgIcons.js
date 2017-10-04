@@ -20,6 +20,7 @@ module.exports = mapValues(icons, ({ exported: Icon }) =>
   ).withProps(
     ({ width, height, size = 24, viewBox = "0 0 24 24", color = "#fff" }) => ({
       viewBox,
+      fill: color,
       width: width || size,
       height: height || size,
     }),
