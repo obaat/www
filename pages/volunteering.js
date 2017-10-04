@@ -58,7 +58,7 @@ const Section = ({ title, id, ...props }) =>
 
 const Opportunity = ({ uid, data }) => (
   <Box>
-    <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
+    <Link as={`/volunteering/?id=${uid}`} href={`/volunteering/${uid}`}>
       <Flex>
         <Box>
           <PrismicRichText forceType="unformatted" source={data.title} />

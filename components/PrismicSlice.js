@@ -31,6 +31,7 @@ const Text = ({ primary, items }) => {
 
 export const renderers = {
   video: Video,
+  embeds: Video,
   text_only: Text,
   faq: ({ items = [] }) => (
     <Box>

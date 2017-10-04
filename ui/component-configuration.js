@@ -165,7 +165,8 @@ const components = [
     name: "Link",
     type: "a",
     props: {
-      palette: "blue5",
+      palette: "cyan6",
+      bold: 700,
     },
     style: withPalette(props => ({
       backgroundColor: "inherit",

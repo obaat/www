@@ -8,11 +8,11 @@ export default () => (
     <Button
       bold
       invert
-      icon="check"
-      palette="brick"
+      icon="File"
+      palette="cyan6"
       px={2}
       fontSize={1}
-      iconSize={0}
+      iconSize={20}
       style={{ marginBottom: "-90px" }}
       as={ButtonOutlineFilled}
     >
