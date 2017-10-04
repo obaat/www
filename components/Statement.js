@@ -4,8 +4,8 @@ import Container from "../components/Container"
 import { QuoteOpen, QuoteClose } from "../components/SvgIcons"
 import { Flex, Box, Avatar } from "../ui"
 
-const Statement = ({ data: { description, avatar, name, role } }) => (
-  <Container maxWidth="600px" py={0}>
+const Statement = ({ w, data: { description, avatar, name, role } }) => (
+  <Container maxWidth="600px" py={0} w={w}>
     <Flex align="flex-start">
       <Box>
         <QuoteOpen palette="gray2" invert size={32} />
