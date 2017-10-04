@@ -6,6 +6,7 @@ const repeaters = [
   { type: types.PROJECT, url: "/projects" },
   { type: types.VOLUNTEERING_OPPORTUNITY_LOCATION, url: "/location" },
   { type: types.EVENT, url: "/event" },
+  { type: types.GALLERY, url: "/gallery" },
 ]
 
 module.exports = {

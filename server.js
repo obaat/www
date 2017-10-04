@@ -34,6 +34,12 @@ app
       app.render(req, res, actualPage, queryParams)
     })
 
+    server.get("/gallery/:id", (req, res) => {
+      const actualPage = "/gallery"
+      const queryParams = { id: req.params.id }
+      app.render(req, res, actualPage, queryParams)
+    })
+
     server.get("*", (req, res) => {
       return handle(req, res)
     })
