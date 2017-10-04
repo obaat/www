@@ -34,6 +34,7 @@
     "hex2rgb": "^2.2.0",
     "import-index-generator": "^0.2.0",
     "isomorphic-unfetch": "^2.0.0",
+    "keycode": "^2.1.9",
     "lodash": "^4.17.4",
     "net": "^1.0.2",
     "next": "^4.0.0-beta.2",

@@ -34,6 +34,7 @@ import {
   Measure,
   BackgroundImage,
   ButtonCircle,
+  ButtonCircleOutline,
 } from "../ui"
 import SlideShow from "../components/SlideShow"
 import Statement from "../components/Statement"
@@ -93,21 +94,15 @@ const toLocalRelativeUrl = ({ type, ...props }) => {
   return (mappingLocal[type] || (() => "unknown"))(props)
 }
 
-const ActionButton = ({ prismicUrl, href, ...props }) => {
+const ActionButton = ({ prismicUrl, as, href, ...props }) => {
   const resolved = href ? href : toRelativeUrl(prismicUrl)
   const local = href ? href : toLocalRelativeUrl(prismicUrl)
   return (
     <Link href={local} as={resolved}>
-      <LeadButton {...props} as={ButtonCircle} />
+      <LeadButton {...props} as={as || ButtonCircle} />
     </Link>
   )
 }
-
-const Fill = g(Relative)({})
-
-const Mission = g(Measure)({
-  textAlign: "left",
-})
 
 const Panel = g(Flex)(
   {
@@ -138,15 +133,6 @@ const Sub = g(hoc()(Subhead))({
   bold: 400,
   fontSize: [1, 1, 1, 3, 5],
 })
-
-const BoxOut = g(Absolute)({
-  maxWidth: "700px",
-  textAlign: "left",
-})
-
-const cursorOpts = {
-  show: false,
-}
 
 const BOX_WIDTH = [1, 1, 1, 1000]
 
@@ -191,7 +177,7 @@ class IndexPage extends React.Component {
             </SlideShow>
           </Box>
         </Panel>
-        <Panel py={4} palette="black">
+        <Panel py={4} palette="gray2" invert>
           <Box px={2} py={2} w={[1, 1, 1, 900]} align="center">
             <PrismicRichText
               style={{ lineHeight: 1.7 }}
@@ -201,11 +187,11 @@ class IndexPage extends React.Component {
               forceType="heading6"
             />
           </Box>
-          <Box w={1}>
+          <Box w={1} mt={2}>
             <ActionButton
-              palette="black"
-              as={ButtonCircle}
+              palette="gray9"
               invert
+              as={ButtonCircle}
               href="/about"
             >
               What we do
@@ -215,20 +201,20 @@ class IndexPage extends React.Component {
         {news &&
           news.body &&
           news.body.length > 0 && (
-            <Panel py={4} direction="row" palette="black" invert>
-              <Box align="center" w={BOX_WIDTH}>
+            <Panel pt={1} pb={4} direction="row" palette="gray2" invert>
+              <Box align="center" w={[1, 1, 1, "80%"]}>
                 <NewsMasonry items={news.body} data={newsArticles} />
               </Box>
             </Panel>
           )}
 
-        <Panel py={4} direction="row" palette="cyan6" align="flex-start" invert>
+        <Panel py={4} direction="row" palette="gray9" align="flex-start" invert>
           <VisibilitySensor onChange={this.onVisible} />
           <Flex w={1} justify="center" w={BOX_WIDTH}>
             {stats.map(({ title, icon: Icon, value, postfix }) => (
               <Box p={3} key={title}>
-                <Icon color="#fff" size={50} />
-                <Box mt={2}>
+                <Icon palette="cyan5" size={50} />
+                <Box mt={3}>
                   <Count
                     innerRef={c => this.counters.push(c)}
                     start={0}
@@ -238,7 +224,7 @@ class IndexPage extends React.Component {
                     useEasing={true}
                   />
                 </Box>
-                <H5 mt={1} mb={1}>
+                <H5 mt={1} mb={1} bold={200}>
                   {title}
                 </H5>
                 {postfix && <Text>{postfix}</Text>}
@@ -246,7 +232,11 @@ class IndexPage extends React.Component {
             ))}
           </Flex>
           <Box w={1}>
-            <ActionButton palette="cyan6" href="/projects">
+            <ActionButton
+              palette="gray9"
+              href="/projects"
+              as={ButtonCircleOutline}
+            >
               See Our Projects
             </ActionButton>
           </Box>
@@ -269,9 +259,21 @@ class IndexPage extends React.Component {
             </SlideShow>
           </Box>
           <Box w={1}>
-            <ActionButton palette="gray2" href="/volunteering">
+            <ActionButton palette="gray9" invert href="/volunteering">
               Learn More About Volunteering
             </ActionButton>
+          </Box>
+        </Panel>
+        <Panel py={4} direction="row" palette="cyan6" invert>
+          <Box w={BOX_WIDTH}>
+            <Text
+              fontSize={40}
+              style={{ fontStyle: "italic", lineHeight: "1.2em" }}
+            >
+              It is what we make out of what we have, not what we are given,
+              that separates one person from another.
+            </Text>
+            <Text>Nelson Mandela</Text>
           </Box>
         </Panel>
       </div>

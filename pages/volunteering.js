@@ -162,7 +162,10 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
     <Flex wrap="wrap">
       <Box w={[1, 1, 1, 2 / 3]} pr={[0, 0, 0, 3]}>
         <Section id="description" source={content.description} mb={3} />
-        <Accordion items={accordionItems} />
+        <Accordion
+          items={accordionItems}
+          initialOpen={accordionItems.length - 1}
+        />
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
         <SidebarHeader>Available Placements</SidebarHeader>

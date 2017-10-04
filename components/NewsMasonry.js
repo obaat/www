@@ -135,7 +135,7 @@ const renderers = {
             bottom
             right
             p={2}
-            bg={`rgba(${bg[0]},${bg[1]},${bg[2]},0.3)`}
+            bg={`rgba(${bg[0]},${bg[1]},${bg[2]},${theme ? "0.8" : "0.2"})`}
           >
             <PrismicRichText forceType="heading3" source={src.title} />
           </Absolute>
@@ -188,7 +188,7 @@ const COLUMNS = 3
 const NewsMasonry = ({ items = [], data }) => {
   return (
     <Grid
-      rowConfig={`repeat(2, 180px)`}
+      rowConfig={`repeat(2, 14.5VW)`}
       columnConfig={`repeat(${COLUMNS}, 1fr)`}
       autoRowConfig="1fr"
     >

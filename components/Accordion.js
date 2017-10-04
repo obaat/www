@@ -3,6 +3,7 @@ import g from "glamorous"
 import { withRouter } from "next/router"
 import Icon from "./Icon"
 import { compose, withState, withHandlers } from "recompose"
+import isNil from "lodash/isNil"
 
 import { Flex, Box, Panel, PanelHeader, Heading } from "../ui"
 
@@ -46,7 +47,11 @@ const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
 }
 
 const oneOpen = compose(
-  withState("openSection", "setOpenSection", null),
+  withState(
+    "openSection",
+    "setOpenSection",
+    ({ initialOpen }) => (isNil(initialOpen) ? null : initialOpen),
+  ),
   withHandlers(({ router }) => {
     return {
       toggleOpen: ({ openSection, setOpenSection }) => curIndex => id => e => {

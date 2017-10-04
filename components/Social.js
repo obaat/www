@@ -1,5 +1,6 @@
 import React from "react"
 import { SocialIcon } from "../ui"
+import theme from "../theme"
 
 const social = [
   { url: "https://facebook.com/onebrickngo/", network: "facebook" },
@@ -9,6 +10,8 @@ const social = [
 
 export default () => (
   <div>
-    {social.map(props => <SocialIcon key={props.network} mr={1} {...props} />)}
+    {social.map((props, i) => (
+      <SocialIcon key={props.network} mr={1} {...props} />
+    ))}
   </div>
 )

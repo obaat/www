@@ -4,13 +4,12 @@ import { css } from "glamor"
 import Icon from "./Icon"
 import { overlay } from "../styleHelpers"
 import range from "lodash/range"
-import { Chevron } from "reline"
 import isNil from "lodash/isNil"
 import { withProps } from "recompose"
 import { Flex, Fixed, Box, Absolute, Relative, DotButton, Close } from "../ui"
+import { ArrowLeft, ArrowRight, Undo1 as Undo } from "../components/SvgIcons"
 import { Motion, spring } from "react-motion"
-// import Transition from "react-transition-group/Transition"
-// import TransitionGroup from "react-transition-group/TransitionGroup"
+import keycode from "keycode"
 
 const PRELOAD_MAX = 3
 
@@ -34,6 +33,19 @@ const AbsMiddle = g(Flex)(({ direction }) => ({
   right: direction === "right" ? 0 : "auto",
 }))
 
+const Restart = ({ px, size, color, onPageClick }) => (
+  <AbsMiddle
+    direction="right"
+    controlSize={size}
+    align="center"
+    justify="center"
+    onClick={() => onPageClick(0)}
+    px={px}
+  >
+    <Undo size={size} color={color} />
+  </AbsMiddle>
+)
+
 const Arrow = ({
   controlSize = 48,
   color = "#fff",
@@ -41,23 +53,21 @@ const Arrow = ({
   onPageClick,
   direction,
   px = 2,
-}) => (
-  <AbsMiddle
-    direction={direction}
-    controlSize={controlSize}
-    align="center"
-    justify="center"
-    onClick={() => onPageClick(page + (direction === "left" ? -1 : 1))}
-    px={px}
-  >
-    <Chevron
-      size={controlSize}
-      color={color}
-      left={direction === "left"}
-      right={direction === "right"}
-    />
-  </AbsMiddle>
-)
+}) => {
+  const Chevron = direction === "left" ? ArrowLeft : ArrowRight
+  return (
+    <AbsMiddle
+      direction={direction}
+      controlSize={controlSize}
+      align="center"
+      justify="center"
+      onClick={() => onPageClick(page + (direction === "left" ? -1 : 1))}
+      px={px}
+    >
+      <Chevron size={controlSize} color={color} />
+    </AbsMiddle>
+  )
+}
 
 const Zoom = ({ isZoomed, controlSize, controlColor, onClick }) => (
   <Absolute left bottom pb={2} pl={2} onClick={onClick}>
@@ -130,8 +140,26 @@ export default class SlideShow extends Component {
     }
   }
 
+  _handleKeyDown = ev => {
+    const key = keycode(ev.keyCode)
+    switch (key) {
+      case "esc":
+        this.setState({ zoom: false })
+        break
+      case "left":
+        this.prevSlide()
+        break
+      case "right":
+        this.nextSlide()
+        break
+      default:
+        break
+    }
+  }
+
   componentDidMount() {
     window.addEventListener("blur", this.pause)
+    window.addEventListener("keydown", this._handleKeyDown)
     if (this.props.autoplay) {
       window.addEventListener("focus", this.play)
       this.play()
@@ -141,6 +169,7 @@ export default class SlideShow extends Component {
   componentWillUnmount() {
     window.removeEventListener("focus", this.play)
     window.removeEventListener("blur", this.pause)
+    window.removeEventListener("keydown", this._handleKeyDown)
     this.pause()
   }
 
@@ -247,6 +276,15 @@ export default class SlideShow extends Component {
               controlSize={controlSize}
               color={controlColor}
               page={selectedIndex}
+              onPageClick={this.onPageClick}
+              px={px}
+            />
+          )}
+        {!hideArrows &&
+          selectedIndex === this.totalSlides() - 1 && (
+            <Restart
+              size={controlSize}
+              color={controlColor}
               onPageClick={this.onPageClick}
               px={px}
             />
