@@ -7,6 +7,8 @@ import PrismicRichText from "../components/PrismicRichText"
 import Link from "next/link"
 import { themeCycle } from "../utils/constants"
 import srcTheme from "../theme"
+import hexRgb from "hex-rgb"
+
 import { Small } from "../ui"
 
 const Grid = g.div(
@@ -16,7 +18,7 @@ const Grid = g.div(
     rowConfig,
     columnConfig,
     autoRowConfig,
-    gap = "0.5em",
+    gap = "8px",
   }) => ({
     width,
     height,
@@ -123,7 +125,7 @@ const renderers = {
       get(content, ["image_gallery", 0, "image", "url"]),
     )
     const palette = theme || themeCycle[count % themeCycle.length]
-    const bg = theme && srcTheme.colors[theme][0]
+    const bg = hexRgb(theme ? srcTheme.colors[theme][0] : "#000")
     return (
       <Link {...pageToLink(content)}>
         <Background
@@ -138,7 +140,7 @@ const renderers = {
             bottom
             right
             p={2}
-            bg={theme && `rgba(${bg[0]},${bg[1]},${bg[2]},0.2)`}
+            bg={`rgba(${bg[0]},${bg[1]},${bg[2]},0.3)`}
           >
             <PrismicRichText forceType="heading3" source={src.title} />
           </Absolute>

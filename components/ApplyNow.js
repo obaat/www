@@ -10,6 +10,7 @@ export default () => (
       invert
       icon="check"
       palette="brick"
+      px={2}
       fontSize={1}
       iconSize={0}
       style={{ marginBottom: "-90px" }}

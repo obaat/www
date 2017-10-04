@@ -251,10 +251,7 @@ class IndexPage extends React.Component {
             </ActionButton>
           </Box>
         </Panel>
-        <Panel py={3} direction="row" palette="gray2" invert>
-          <Box w={1} mb={2}>
-            <Heading>Volunteer Experiences</Heading>
-          </Box>
+        <Panel py={4} direction="row" palette="gray2" invert>
           <Box align="center" w={BOX_WIDTH}>
             <SlideShow
               autoplay

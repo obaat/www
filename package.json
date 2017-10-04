@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "postinstall": "sh scripts/createDefaultConfig.sh",
+    "postinstall":
+      "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node .",
     "build": "NODE_ENV=production next build",
@@ -23,12 +24,16 @@
     "bowser": "^1.7.3",
     "circular-shift": "^1.0.1",
     "colorable": "^1.0.5",
+    "create-index": "^2.2.0",
     "date-fns": "^1.28.5",
     "express": "^4.16.1",
+    "formik": "^0.9.3",
     "glamor": "^2.20.40",
     "glamorous": "^4.6.0",
     "hello-color": "^1.0.1",
+    "hex-rgb": "^1.0.0",
     "hex2rgb": "^2.2.0",
+    "import-index-generator": "^0.2.0",
     "isomorphic-unfetch": "^2.0.0",
     "lodash": "^4.17.4",
     "net": "^1.0.2",
@@ -42,7 +47,7 @@
     "react-countup": "^2.3.0",
     "react-dom": "^16.0.0",
     "react-ga": "^2.3.5",
-    "react-google-maps": "^8.3.3",
+    "react-google-maps": "^8.3.4",
     "react-helmet": "^5.2.0",
     "react-motion": "^0.5.2",
     "react-powerplug": "^0.1.1",
@@ -66,7 +71,7 @@
     "eslint-plugin-prettier": "^2.2.0",
     "eslint-plugin-react": "^7.4.0",
     "import-all.macro": "^2.0.0",
-    "prettier": "^1.7.3",
+    "prettier": "^1.7.4",
     "webpack-bundle-analyzer": "^2.9.0"
   },
   "babel": {
@@ -85,10 +90,7 @@
         ]
       }
     },
-    "presets": [
-      "next/babel",
-      "flow"
-    ],
+    "presets": ["next/babel", "flow"],
     "plugins": [
       [
         "inline-react-svg",
@@ -109,10 +111,7 @@
       ],
       "babel-macros",
       "sitrep",
-      [
-        "transform-define",
-        "./config.js"
-      ]
+      ["transform-define", "./config.js"]
     ]
   }
 }

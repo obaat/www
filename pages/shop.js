@@ -4,8 +4,17 @@ import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 
-const Shop = ({ members = [], content = {} }) => {
-  return <div>Coming Soon</div>
+const Shop = ({ members = [], content = {} }) => (
+  <Flex>
+    <Box w={[1, 1, 1, 2 / 3]} pr={3}>
+      <PrismicRichText source={content.description} />
+    </Box>
+  </Flex>
+)
+
+Spread.getInitialProps = async () => {
+  const page = await getSingleton(types.SHOP_PAGE_CONTENT)
+  return { content: page.data }
 }
 
-export default pageWithTitle({ title: "Shop" })(Shop)
+export default pageWithTitle()(Shop)

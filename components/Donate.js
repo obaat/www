@@ -1,6 +1,11 @@
 import React, { Component } from "react"
 import StripeCheckout from "react-stripe-checkout"
-import { ButtonCircle, ButtonFilled } from "../ui"
+import {
+  ButtonCircle,
+  ButtonCircleOutline,
+  ButtonOutline,
+  ButtonFilled,
+} from "../ui"
 import Modal from "./Modal"
 import Button from "./Button"
 import Link from "next/link"
@@ -128,12 +133,11 @@ const DonateJustGiving = ({ scrolled }) => (
   <a href="https://www.justgiving.com/onebrickatatime">
     <Button
       palette="base"
-      invert={scrolled}
       icon="heart"
       iconSize={0}
       py={1}
       px={3}
-      as={scrolled ? ButtonFilled : ButtonCircle}
+      as={scrolled ? ButtonOutline : Button}
     >
       DONATE
     </Button>

@@ -46,7 +46,7 @@ const theme = {
       "'Open Sans','San Francisco', 'Helvetica Neue', 'Lucida Grande', 'Segoe UI',Verdana,Arial,Helvetica,sans-serif",
   },
 
-  radius: 0,
+  radius: 2,
   breakpoints: ["575px", "768px", "992px", "1200px"],
   fontSizes: ["0.88em", "1em", "1.3em", "1.5em", "1.60em", "2em", "3em"],
 }

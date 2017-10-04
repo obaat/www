@@ -3,6 +3,7 @@ import { Flex, Box } from "./Grid"
 import get from "lodash/get"
 import { space, color as ssColor, width, fontSize } from "styled-system"
 import { bool, string, number, oneOf, oneOfType } from "prop-types"
+import { Field as RawField } from "formik"
 import isNil from "lodash/isNil"
 import { SocialIcon } from "react-social-icons"
 const numberOrString = oneOfType([number, string])
@@ -10,15 +11,17 @@ const theme = ({ theme, palette, invert }) =>
   get(
     theme,
     ["colors", invert ? `${palette}Invert` : palette],
-    ["purple", "orange"],
+    ["red", "yellow"],
   )
-const withPalette = cb => props => {
-  const [foreground, background] = theme(props)
-  return cb({
-    foreground: props.color || foreground,
-    background: props.bg || background,
-    ...props,
-  })
+export const withPalette = cb => props => {
+  if (props.palette) {
+    const [foreground, background] = theme(props)
+    return cb({
+      foreground: props.color || foreground,
+      background: props.bg || background,
+      ...props,
+    })
+  }
 }
 
 const color = ({ theme }) => n => get(theme, ["colors", n, 0], "purple")
@@ -425,13 +428,14 @@ const components = [
   },
   {
     name: "Input",
-    type: "input",
+    type: RawField,
     props: {
       type: "text",
       fontSize: "inherit",
       p: 1,
       m: 0,
       w: 1,
+      mb: 1,
       color: "inherit",
       bg: "transparent",
     },
@@ -459,9 +463,11 @@ const components = [
     props: {
       p: 1,
       m: 0,
+      mb: 1,
       w: 1,
       color: "inherit",
       bg: "transparent",
+      type: "textarea",
     },
     style: props => ({
       fontFamily: "inherit",

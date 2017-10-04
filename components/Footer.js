@@ -5,7 +5,7 @@ import Map from "../components/GoogleMap"
 import mapDark from "../components/mapDark.json"
 import Social from "./Social"
 import { Flex, Border, Box, H6, Text, Link as UILink } from "../ui"
-import { PC } from "./SvgIcons"
+import { PaperCreatures } from "./SvgIcons"
 
 const w = [1, 1, 1, 1 / 3]
 
@@ -22,14 +22,6 @@ export default () => (
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <Text>Become part of our story</Text>
         <Social />
-      </Box>
-
-      <Box w={[1, 1, 1, 1 / 4]} p={3}>
-        <Map
-          zoom={12}
-          center={{ lat: 0.670188, lng: 30.287467 }}
-          height="200px"
-        />
       </Box>
 
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
@@ -52,12 +44,19 @@ export default () => (
           Uganda<br />
         </address>
       </Box>
+      <Box w={[1, 1, 1, 1 / 4]} p={3}>
+        <Map
+          zoom={12}
+          center={{ lat: 0.670188, lng: 30.287467 }}
+          height="200px"
+        />
+      </Box>
     </Flex>
     <Flex palette="gray9" invert>
       <Border w={1} top borderColor="gray3" px={3} pt={2} pb={0}>
         <UILink href="http://papercreatures.com">
           <Box>
-            <PC viewBox="80 80 250 250" size={60} />
+            <PaperCreatures viewBox="80 80 250 250" size={60} />
           </Box>
         </UILink>
       </Border>

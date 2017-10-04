@@ -1,14 +1,14 @@
 import React from "react"
 import PrismicRichText from "../components/PrismicRichText"
 import Container from "../components/Container"
-import Icon from "../components/Icon"
+import { QuoteOpen, QuoteClose } from "../components/SvgIcons"
 import { Flex, Box, Avatar } from "../ui"
 
 const Statement = ({ data: { description, avatar, name, role } }) => (
   <Container maxWidth="600px" py={0}>
     <Flex align="flex-start">
       <Box>
-        <Icon f={50} name="quote-left" />
+        <QuoteOpen palette="gray2" invert size={32} />
       </Box>
       <Box p={3} align="justify">
         <Flex align="center">
@@ -28,7 +28,7 @@ const Statement = ({ data: { description, avatar, name, role } }) => (
         </Box>
       </Box>
       <Box alignSelf="flex-end">
-        <Icon f={50} name="quote-right" />
+        <QuoteClose palette="gray2" invert size={32} />
       </Box>
     </Flex>
   </Container>

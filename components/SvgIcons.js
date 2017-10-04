@@ -1,37 +1,27 @@
-import School from "../svg/school.svg"
-import Home from "../svg/home.svg"
-import Home2 from "../svg/home-2.svg"
-import Map from "../svg/map.svg"
-import Building from "../svg/building.svg"
-import ArrowRight from "../svg/arrow-right.svg"
-import User from "../svg/user.svg"
-import HeadCog from "../svg/head-cog.svg"
-import PC from "../svg/pc.svg"
+import rawicons from "../svg"
 import g from "glamorous"
 import mapValues from "lodash/mapValues"
 import withProps from "recompose/withProps"
-// import importAll from "import-all.macro"
-// const icons = importAll.sync("../svg/*.svg")
+import keyBy from "lodash/keyBy"
+import camelCase from "lodash/camelCase"
+import upperFirst from "lodash/upperFirst"
+import { withPalette } from "../ui/component-configuration"
 
-const icons = {
-  HeadCog,
-  ArrowRight,
-  School,
-  Home,
-  Home2,
-  Map,
-  Building,
-  User,
-  PC,
-}
+const icons = keyBy(rawicons, v => {
+  const [file, ext] = v.filename.split(".")
+  return upperFirst(camelCase(file))
+})
 
-module.exports = mapValues(icons, icon =>
-  withProps(
+module.exports = mapValues(icons, ({ exported: Icon }) =>
+  g(Icon)(
+    withPalette(props => ({
+      fill: props.foreground,
+    })),
+  ).withProps(
     ({ width, height, size = 24, viewBox = "0 0 24 24", color = "#fff" }) => ({
-      fill: color,
       viewBox,
       width: width || size,
       height: height || size,
     }),
-  )(icon),
+  ),
 )

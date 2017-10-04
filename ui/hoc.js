@@ -7,7 +7,7 @@ export const hide = ({ hide }) => hide && { display: "none" }
 export const bold = ({ bold }) =>
   bold && { fontWeight: bold > 0 ? bold : "bold" }
 
-const def = ["purple", "orange"]
+const def = ["red", "yellow"]
 
 const palette = ({ palette, theme, invert }) => {
   if (!palette) return

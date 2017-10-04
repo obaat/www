@@ -19,6 +19,7 @@ const types = {
   CONTACT_PAGE_CONTENT: "contact_page",
   APPLY_PAGE_CONTENT: "apply_page",
   ABOUT_PAGE_CONTENT: "about_page",
+  SHOP_PAGE_CONTENT: "shop_page",
   SPREAD_THE_WORD_PAGE_CONTENT: "spread_the_word",
   NEWS: "news",
 }
