@@ -24,12 +24,9 @@ const aboutItems = [
 ]
 
 const whatItems = [
-  { title: "Our Projects", href: "/projects?status=complete" },
+  { title: "Completed Projects", href: "/projects?status=complete" },
   { title: "Planned Projects", href: "/projects?status=planned" },
-  {
-    title: "Bursary",
-    items: [{ title: "Sponsor a Child", href: "/sponsor" }],
-  },
+  { title: "Sponsor a Child", href: "/sponsor" },
 ]
 
 const menuItems = [
