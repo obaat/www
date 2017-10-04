@@ -32,6 +32,7 @@
     "hello-color": "^1.0.1",
     "hex-rgb": "^1.0.0",
     "hex2rgb": "^2.2.0",
+    "humanize-url": "^1.0.1",
     "import-index-generator": "^0.2.0",
     "isomorphic-unfetch": "^2.0.0",
     "keycode": "^2.1.9",

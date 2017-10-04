@@ -4,6 +4,7 @@ import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, Image, BackgroundImage } from "../ui"
 import Link from "../components/Link"
+import humanizeUrl from "humanize-url"
 
 const Partner = ({ data: { title, description, logo, website }, uid, odd }) => (
   <div>
@@ -25,7 +26,7 @@ const Partner = ({ data: { title, description, logo, website }, uid, odd }) => (
           <PrismicRichText mb={0} forceType="heading2" source={title} />
           {website && (
             <Link target="_blank" href={website.url}>
-              {website.url}
+              {humanizeUrl(website.url)}
             </Link>
           )}
         </Border>
@@ -38,9 +39,7 @@ const Partner = ({ data: { title, description, logo, website }, uid, odd }) => (
 const Partnerships = ({ partners = [], content = {} }) => {
   return (
     <div>
-      {partners.map((props, i) => (
-        <Partner {...props} uid={i} key={i} odd={!!(i % 2)} />
-      ))}
+      {partners.map((props, i) => <Partner {...props} uid={i} key={i} />)}
     </div>
   )
 }
