@@ -26,6 +26,10 @@ const aboutItems = [
 const whatItems = [
   { title: "Our Projects", href: "/projects?status=complete" },
   { title: "Planned Projects", href: "/projects?status=planned" },
+  {
+    title: "Bursary",
+    items: [{ title: "Sponsor a Child", href: "/sponsor" }],
+  },
 ]
 
 const menuItems = [
@@ -37,10 +41,6 @@ const menuItems = [
     title: "Volunteer With Us",
     items: [{ title: "General Information", href: "/volunteering" }],
     getChildren: props => toVolunteeringMenu(props.volunteering || []),
-  },
-  {
-    title: "Bursary",
-    items: [{ title: "Sponsor a Child", href: "/sponsor" }],
   },
   {
     title: "One Brick Supply",

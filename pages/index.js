@@ -237,7 +237,7 @@ class IndexPage extends React.Component {
               href="/projects"
               as={ButtonCircleOutline}
             >
-              See Our Projects
+              Completed Projects
             </ActionButton>
           </Box>
         </Panel>

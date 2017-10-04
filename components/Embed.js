@@ -1,16 +1,18 @@
 import React from "react"
 import g from "glamorous"
 
-const Container = g.iframe(({ width = "100%", height = "100%" }) => ({
-  position: width === "100%" ? "absolute" : "relative",
-  width,
-  height,
-  top: 0,
-  bottom: 0,
-  left: 0,
-  border: 0,
-  backgroundColor: "#000",
-}))
+const Container = g
+  .iframe(({ width = "100%", height = "100%" }) => ({
+    position: width === "100%" ? "absolute" : "relative",
+    width,
+    height,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    border: 0,
+    backgroundColor: "#000",
+  }))
+  .withProps({ allowFullScreen: true })
 
 const Embed = ({
   type,
