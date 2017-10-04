@@ -1,20 +1,25 @@
 import React, { Component } from "react"
 import g from "glamorous"
 import { css } from "glamor"
-import Icon from "./Icon"
 import { overlay } from "../styleHelpers"
 import range from "lodash/range"
 import isNil from "lodash/isNil"
 import { withProps } from "recompose"
-import { Flex, Fixed, Box, Absolute, Relative, DotButton, Close } from "../ui"
-import { ArrowLeft, ArrowRight, Undo1 as Undo } from "../components/SvgIcons"
+import { Flex, Fixed, Box, Absolute, Relative, DotButton } from "../ui"
+import {
+  ArrowLeft,
+  ArrowRight,
+  X,
+  Magnifier,
+  Undo1 as Undo,
+} from "../components/SvgIcons"
 import { Motion, spring } from "react-motion"
 import keycode from "keycode"
 
 const PRELOAD_MAX = 3
 
 const Fullscreen = g(Fixed)({
-  backgroundColor: "rgba(0,0,0, 0.8)",
+  backgroundColor: "rgba(0,0,0, 0.9)",
   height: "100VH",
   overflow: "hidden",
   zIndex: 999999,
@@ -69,16 +74,14 @@ const Arrow = ({
   )
 }
 
-const Zoom = ({ isZoomed, controlSize, controlColor, onClick }) => (
-  <Absolute left bottom pb={2} pl={2} onClick={onClick}>
-    <Icon
-      f={controlSize}
-      color={controlColor}
-      name={isZoomed ? "close" : "arrows-alt"}
-      onClick={onClick}
-    />
-  </Absolute>
-)
+const Zoom = ({ isZoomed, controlSize, controlColor, onClick }) => {
+  const Component = isZoomed ? X : Magnifier
+  return (
+    <Absolute left bottom pb={1} pl={2} onClick={onClick}>
+      <Component size={controlSize} color={controlColor} onClick={onClick} />
+    </Absolute>
+  )
+}
 
 const Paging = ({ total, page, onPageClick }) => {
   const showPages = Math.min(total, 10)
@@ -334,7 +337,7 @@ export default class SlideShow extends Component {
           )}
           <Zoom
             onClick={this.toggleZoom}
-            controlSize={48}
+            controlSize={36}
             controlColor={controlColor}
             isZoomed
           />
