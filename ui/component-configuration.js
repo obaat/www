@@ -581,13 +581,15 @@ const components = [
       // Fix this once non-whitelisted styled-components is out
     },
     style: props => {
-      console.log(ratio(props))
       return {
         backgroundImage: props.src ? `url(${props.src})` : "none",
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: 0,
-        ...ratio({ ratio: toArray(props.ratio).map(r => r * 100 + "%") }),
+
+        ...(Array.isArray(props.ratio)
+          ? ratio({ ratio: props.ratio.map(r => r * 100 + "%") })
+          : { paddingBottom: (props.ratio || 3 / 4) * 100 + "%" }),
       }
     },
     propTypes: {
