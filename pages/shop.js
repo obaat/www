@@ -12,9 +12,9 @@ const Shop = ({ members = [], content = {} }) => (
   </Flex>
 )
 
-Spread.getInitialProps = async () => {
+Shop.getInitialProps = async () => {
   const page = await getSingleton(types.SHOP_PAGE_CONTENT)
-  return { content: page.data }
+  return { content: page && page.data }
 }
 
 export default pageWithTitle()(Shop)
