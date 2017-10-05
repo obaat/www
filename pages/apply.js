@@ -8,7 +8,7 @@ import Yup from "yup"
 import range from "lodash/range"
 import PrismicRichText from "../components/PrismicRichText"
 import { Index } from "react-powerplug"
-import { ArrowNextStage } from "../components/SvgIcons"
+import { ArrowNextStage, Checkbox } from "../components/SvgIcons"
 import Quotes from "../components/SidebarQuote"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import months from "months"
@@ -162,7 +162,15 @@ const aboutValidation = Yup.object().shape({
   dob_year: Yup.number().required("DOB required"),
 })
 
-const Done = props => <div />
+const Done = props => (
+  <Flex wrap="wrap" justify="center">
+    <Checkbox palette="black" size={40} />
+    <Box ml={2}>
+      <Subhead>Thanks for your interest</Subhead>
+    </Box>
+    <Box>We will get back to you shortly</Box>
+  </Flex>
+)
 
 const pages = [
   {

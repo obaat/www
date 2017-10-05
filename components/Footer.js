@@ -1,6 +1,5 @@
 import React from "react"
 import g from "glamorous"
-import Link from "next/link"
 import Map from "../components/GoogleMap"
 import mapDark from "../components/mapDark.json"
 import Social from "./Social"

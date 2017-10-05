@@ -10,7 +10,7 @@ const Link = ({ url, slug, href, target, ...props }) => {
   const _href = slug ? `/${mapping[slug] || slug}` : href
   if (_href) {
     return (
-      <NxLink href={_href}>
+      <NxLink href={_href} prefetch>
         <UILink {...props} href={_href} target={target} rel="noopener" />
       </NxLink>
     )

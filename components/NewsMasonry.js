@@ -122,7 +122,7 @@ const renderers = {
     const palette = theme || themeCycle[count % themeCycle.length]
     const bg = hexRgb(theme ? srcTheme.colors[theme][0] : "#000")
     return (
-      <Link {...pageToLink(content)}>
+      <Link {...pageToLink(content)} prefetch>
         <Background
           src={image}
           palette={!image && palette}

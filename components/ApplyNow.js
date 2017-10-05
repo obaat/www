@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ButtonOutlineFilled } from "../ui"
 
 export default () => (
-  <Link as="/apply" href="/apply">
+  <Link as="/apply" href="/apply" prefetch>
     <Button
       bold
       invert

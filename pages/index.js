@@ -98,7 +98,7 @@ const ActionButton = ({ prismicUrl, as, href, ...props }) => {
   const resolved = href ? href : toRelativeUrl(prismicUrl)
   const local = href ? href : toLocalRelativeUrl(prismicUrl)
   return (
-    <Link href={local} as={resolved}>
+    <Link href={local} as={resolved} prefetch>
       <LeadButton {...props} as={as || ButtonCircle} />
     </Link>
   )

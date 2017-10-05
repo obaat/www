@@ -8,7 +8,6 @@ import {
 } from "../ui"
 import Modal from "./Modal"
 import Button from "./Button"
-import Link from "next/link"
 
 // TODO: move to primitives + traits
 const VIA_STRIPE = false
