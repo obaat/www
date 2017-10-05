@@ -456,15 +456,18 @@ const components = [
       display: "inline-block",
       verticalAlign: "middle",
       border: 0,
-      boxShadow: `inset 0 0 0 1px ${color(props)("gray2")}`,
+      boxShadow: `inset 0 0 0 1px ${color(props)("gray5")}`,
       borderRadius: px(props.theme.radius),
       appearance: "none",
       "&:focus": {
         outline: "none",
-        boxShadow: `inset 0 0 0 1px ${color(props)("blue")}`,
+        boxShadow: `inset 0 0 0 1px ${color(props)("green7")}`,
       },
       "&:disabled": {
         opacity: 1 / 4,
+      },
+      "::placeholder": {
+        color: color(props)("gray4"),
       },
     }),
   },
@@ -484,7 +487,7 @@ const components = [
       fontFamily: "inherit",
       fontSize: "inherit",
       border: 0,
-      boxShadow: `inset 0 0 0 1px ${color(props)("gray2")}`,
+      boxShadow: `inset 0 0 0 1px ${color(props)("gray5")}`,
       borderRadius: px(props.theme.radius),
       appearance: "none",
       "&:focus": {
@@ -531,7 +534,7 @@ const components = [
       cursor: "pointer",
       color: "inherit",
       borderRadius: px(99999),
-      backgroundColor: color(props)("gray2"),
+      backgroundColor: color(props)("gray5"),
       appearance: "none",
       "&::-webkit-slider-thumb": {
         width: px(16),
@@ -1218,6 +1221,32 @@ const components = [
         backgroundColor: props.checked ? props.background : props.foreground,
       },
     })),
+  },
+
+  {
+    name: "Select",
+    type: "select",
+    props: {},
+    style: props => ({
+      fontFamily: "inherit",
+      fontSize: "inherit",
+      lineHeight: "inherit",
+      width: "100%",
+      margin: 0,
+      color: "inherit",
+      backgroundColor: "transparent",
+      appearance: "none",
+      borderRadius: px(props.theme.radius),
+      padding: "8px",
+      border: 0,
+      boxShadow: `inset 0 0 0 1px ${color(props)("gray5")}`,
+    }),
+  },
+  {
+    name: "Option",
+    type: "option",
+    props: {},
+    style: {},
   },
 
   {

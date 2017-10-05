@@ -9,7 +9,9 @@ const justify = responsiveStyle("justifyContent", "justify")
 const column = props => (props.column ? { flexDirection: "column" } : null)
 
 export default g(Box, { displayName: "Flex" })(
-  { display: "flex" },
+  ({ inline }) => ({
+    display: inline ? "inline-flex" : "flex",
+  }),
   wrap,
   column,
   direction,

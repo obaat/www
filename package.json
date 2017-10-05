@@ -38,8 +38,9 @@
     "isomorphic-unfetch": "^2.0.0",
     "keycode": "^2.1.9",
     "lodash": "^4.17.4",
+    "months": "^2.0.0",
     "net": "^1.0.2",
-    "next": "^4.0.0-beta.2",
+    "next": "^4.0.0-beta.3",
     "nprogress": "^0.2.0",
     "palx": "^1.0.2",
     "polished": "^1.7.0",
@@ -59,7 +60,7 @@
     "react-visibility-sensor": "^3.11.0",
     "recompose": "^0.25.0",
     "reline": "^1.0.0-beta.3",
-    "styled-system": "^1.0.5",
+    "styled-system": "^1.0.6",
     "tls": "^0.0.1"
   },
   "devDependencies": {
@@ -69,7 +70,7 @@
     "eslint": "^4.8.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-flowtype": "^2.37.0",
+    "eslint-plugin-flowtype": "^2.38.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.2.0",
     "eslint-plugin-react": "^7.4.0",

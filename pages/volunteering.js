@@ -19,6 +19,7 @@ import SlideShow from "../components/SlideShow"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import SidebarHeader from "../components/SidebarHeader"
 import BreadCrumbs from "../components/Breadcrumbs"
+import Quotes from "../components/SidebarQuote"
 import PrismicSlice, {
   renderers as sliceRenderers,
 } from "../components/PrismicSlice"
@@ -123,34 +124,6 @@ const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
       <Component primary={primary} items={items} slice_type={slice_type} />
     ),
   }
-}
-
-const Quotes = ({ data, items = [] }) => {
-  const filled = items.map(({ quote: { id } }) =>
-    data.results.find(r => r.id === id),
-  )
-
-  return (
-    <Border borderColor="gray3" top left bottom right mt={2}>
-      <SlideShow
-        controlSize={18}
-        controlColor="#777"
-        px={1}
-        hideZoom
-        hidePaging
-        autoplay
-      >
-        {filled.map(({ data: { description, name, role } }, i) => (
-          <Box py={2} px={3} key={i}>
-            <PrismicRichText forceType="paragraph" source={description} />
-            <Box align="right" mt={2}>
-              <PrismicRichText bold={700} forceType="paragraph" source={name} />
-            </Box>
-          </Box>
-        ))}
-      </SlideShow>
-    </Border>
-  )
 }
 
 const Volunteering = ({ content, opportunities, additionalData }) => {

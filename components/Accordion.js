@@ -1,7 +1,7 @@
 import React from "react"
 import g from "glamorous"
 import { withRouter } from "next/router"
-import Icon from "./Icon"
+import { ArrowDown as IconArrowDown, ArrowUp as IconArrowUp } from "./SvgIcons"
 import { compose, withState, withHandlers } from "recompose"
 import isNil from "lodash/isNil"
 
@@ -18,9 +18,14 @@ const AccordionBody = g(Box)({
   borderTop: "2px solid #fff",
 })
 
-const ToggleIcon = g(Icon)({
+const ArrowDown = g(IconArrowDown)({
   float: "right",
-  marginTop: "4px",
+  marginTop: "6px",
+})
+
+const ArrowUp = g(IconArrowUp)({
+  float: "right",
+  marginTop: "6px",
 })
 
 const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
@@ -34,7 +39,11 @@ const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
         p={2}
         onClick={toggleOpen(id)}
       >
-        <ToggleIcon name={open ? "chevron-up" : "chevron-down"} />
+        {open ? (
+          <ArrowUp size={15} palette="black" />
+        ) : (
+          <ArrowDown size={15} palette="black" />
+        )}
         {title}
       </AccordionHeader>
       {open && (

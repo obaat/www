@@ -24,7 +24,7 @@ export default ({
   let iconPart = null
   if (icon && SvgIcons[icon]) {
     const Component = SvgIcons[icon]
-    iconPart = <Component size={iconSize} />
+    iconPart = <Component size={iconSize} palette={passProps.palette} invert />
   } else {
     iconPart = <Icon f={iconSize} name={icon} />
   }

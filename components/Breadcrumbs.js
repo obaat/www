@@ -1,6 +1,5 @@
 import React from "react"
 import g from "glamorous"
-import Icon from "../components/Icon"
 import Link from "next/link"
 import { Home, ArrowRight } from "./SvgIcons"
 import { Flex, Box, H6, Text } from "../ui"
@@ -19,15 +18,13 @@ const NotA = g.span({
   borderBottom: "2px solid transparent",
 })
 
-const Crumb = g(Box)({
-  fontStyle: "italic",
-})
+const Crumb = g(Box)({})
 
 const LinkCrumb = ({ href, ...props }) =>
   href ? (
     <Link href={href}>
       <A onClick={href}>
-        <Crumb {...props} />
+        <Crumb bold={200} {...props} />
       </A>
     </Link>
   ) : (
@@ -39,11 +36,11 @@ const LinkCrumb = ({ href, ...props }) =>
 const BreadCrumbs = ({ route }) => (
   <Bread mb={2} align="center">
     <LinkCrumb href="/" mb="-4px">
-      <Home color="#000" size={13} />
+      <Home palette="black" size={13} />
     </LinkCrumb>
     {route.map(({ title, href }, i) => [
       <Crumb px={1} key="arrow">
-        <ArrowRight size={10} color="#000" />
+        <ArrowRight size={8} palette="black" />
       </Crumb>,
       <LinkCrumb href={href} key="path">
         <Text mb={0}>{title}</Text>
