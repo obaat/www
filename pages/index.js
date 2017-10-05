@@ -56,7 +56,7 @@ const stats = [
     value: 300,
   },
   {
-    title: "Projects Completed",
+    title: "Building Projects Completed",
     icon: Icons.School,
     value: 23,
   },
@@ -272,6 +272,7 @@ class IndexPage extends React.Component {
           <Box w={BOX_WIDTH}>
             <Text
               fontSize={40}
+              bold={200}
               style={{ fontStyle: "italic", lineHeight: "1.2em" }}
             >
               It is what we make out of what we have, not what we are given,
