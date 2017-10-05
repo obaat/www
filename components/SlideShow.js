@@ -335,6 +335,15 @@ export default class SlideShow extends Component {
               onPageClick={this.onPageClick}
             />
           )}
+          {selectedIndex === this.totalSlides() - 1 && (
+            <Restart
+              size={controlSize}
+              color={controlColor}
+              size={48}
+              onPageClick={this.onPageClick}
+              px={px}
+            />
+          )}
           <Zoom
             onClick={this.toggleZoom}
             controlSize={36}
