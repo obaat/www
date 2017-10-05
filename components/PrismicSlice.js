@@ -1,7 +1,6 @@
 import React from "react"
 import Embed from "../components/Embed"
 import SlideShow from "../components/SlideShow"
-import Icon from "../components/Icon"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Border, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 
@@ -38,10 +37,7 @@ export const renderers = {
       {items.map(({ question, answer }, i) => (
         <Box key={i} w={1}>
           <Flex>
-            <Box pr={1}>
-              <Icon name="comment-o" f={14} />
-            </Box>
-            <Box w={1} pt="3px">
+            <Box w={1} mb={1}>
               <PrismicRichText
                 forceType="paragraph"
                 bold={900}
@@ -52,12 +48,13 @@ export const renderers = {
           </Flex>
           <Flex>
             <Box w={1} pt="3px">
-              <PrismicRichText
-                w={1}
-                forceType="paragraph"
-                source={answer}
-                mb={3}
-              />
+              <Border left borderWidth={2} mb={2} pl={2} borderColor="gray6">
+                <PrismicRichText
+                  forceType="paragraph"
+                  source={answer}
+                  xmb={0}
+                />
+              </Border>
             </Box>
           </Flex>
         </Box>

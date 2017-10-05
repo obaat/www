@@ -190,9 +190,9 @@ const WizardStep = ({ title, i, last, active, done, ...props }) => {
           size={40}
           style={{
             position: "absolute",
-            right: "-19px",
+            right: "-24px",
             top: "2px",
-            zIndex: 99999,
+            zIndex: 9,
           }}
           palette={done ? "gray1" : active ? "blackInvert" : `gray${i + 2}`}
         />
