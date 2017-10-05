@@ -2,6 +2,7 @@ import React from "react"
 import { Formik, Form } from "formik"
 import g from "glamorous"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
+import get from "lodash/get"
 import { pageWithTitle } from "../hoc/page"
 import Yup from "yup"
 import range from "lodash/range"
@@ -59,9 +60,14 @@ const RangeDropdown = ({ start = 1, end, step = 1, ...props }) => (
   />
 )
 
-const AboutVolunteering = props => (
+const AboutVolunteering = ({ opportunities }) => (
   <Form>
     <Label>Role you're interested in</Label>
+    <Select
+      options={opportunities.results.map(o => ({
+        value: get(o, "data.title[0].text"),
+      }))}
+    />
     <Label>How long would you like to volunteer?</Label>
     <Flex>
       <Box w={1 / 2} mr={1}>
@@ -156,12 +162,7 @@ const aboutValidation = Yup.object().shape({
   dob_year: Yup.number().required("DOB required"),
 })
 
-const Done = props => (
-  <Form>
-    <Label>Role you're interested in</Label>
-    <Label>How long would you like to volunteer?</Label>
-  </Form>
-)
+const Done = props => <div />
 
 const pages = [
   {
@@ -170,8 +171,8 @@ const pages = [
     validation: aboutValidation,
     initialValues: { email: "" },
   },
-  { title: "Your Trip", Component: AboutVolunteering },
-  { title: "Done", Component: Done },
+  { title: "Trip Details", Component: AboutVolunteering },
+  { title: "Complete", Component: Done },
 ]
 
 const WizardStep = ({ title, i, last, active, done, ...props }) => {
@@ -201,16 +202,17 @@ const WizardStep = ({ title, i, last, active, done, ...props }) => {
   )
 }
 
-const FormWizard = () => (
+const FormWizard = props => (
   <Index initial={0}>
     {({ index, setIndex }) => {
       const { Component, validation, initialValues } = pages[index]
       const next = () => setIndex(index + 1)
+      const onSubmit = pages[index + 1] ? next : submit
       return (
         <Formik
           initialValues={initialValues}
-          validationSchema={validation}
-          onSubmit={submit}
+          /* validationSchema={validation} */
+          onSubmit={onSubmit}
           render={({ handleSubmit, errors }) => {
             return (
               <Box palette="gray1" invert p={2}>
@@ -230,21 +232,23 @@ const FormWizard = () => (
                   ))}
                 </Flex>
                 <Box palette="black" p={2}>
-                  <Component />
+                  <Component {...props} />
                 </Box>
-                <Box mt={1} align="right">
-                  <Button
-                    py={1}
-                    palette="cyan6"
-                    icon="ArrowRight"
-                    iconPosition="right"
-                    iconSize={12}
-                    onClick={handleSubmit}
-                    invert
-                  >
-                    Next
-                  </Button>
-                </Box>
+                {pages[index + 1] && (
+                  <Box mt={2} align="right">
+                    <Button
+                      py={1}
+                      palette="cyan6"
+                      icon="ArrowRight"
+                      iconPosition="right"
+                      iconSize={12}
+                      onClick={handleSubmit}
+                      invert
+                    >
+                      {pages[index + 1].title}
+                    </Button>
+                  </Box>
+                )}
               </Box>
             )
           }}
@@ -268,14 +272,20 @@ const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
   }
 }
 
-const Apply = ({ content = {}, quotes, main = [], additionalData }) => {
+const Apply = ({
+  content = {},
+  quotes,
+  main = [],
+  opportunities,
+  additionalData,
+}) => {
   const accordionItems = main.map(renderSliceToAccordion)
 
   return (
     <Flex wrap="wrap">
       <Box w={[1, 1, 1, 0.6]} pr={[0, 0, 0, 2]}>
         <PrismicRichText source={content.description} />
-        <FormWizard />
+        <FormWizard opportunities={opportunities} />
       </Box>
       <Box w={[1, 1, 1, 0.4]}>
         <Accordion items={accordionItems} />
