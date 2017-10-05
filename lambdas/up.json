@@ -1,0 +1,16 @@
+{
+  "name": "mail",
+  "profile": "default",
+  "regions": ["eu-west-1"],
+  "cors": {
+    "enable": true
+  },
+  "stages": {
+    "development": {
+      "domain": "dev.api.onebrick.org.uk"
+    },
+    "production": {
+      "domain": "api.onebrick.org.uk"
+    }
+  }
+}

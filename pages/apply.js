@@ -19,16 +19,25 @@ import {
 import SidebarHeader from "../components/SidebarHeader"
 import Link from "../components/Link"
 
+const submit = async (values, actions) => {
+  const res = await fetch(
+    "https://lv00fuasu7.execute-api.eu-west-1.amazonaws.com/development/volunteer_application",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        content: values,
+      }),
+    },
+  )
+  const data = await res.json()
+  actions.setSubmitting(false)
+}
+
 const Example = () => (
   <div>
     <Formik
       initialValues={{ email: "", color: "red", firstName: "" }}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          actions.setSubmitting(false)
-        }, 1000)
-      }}
+      onSubmit={submit}
       render={props => (
         <Form>
           <Subhead>About You</Subhead>
@@ -100,6 +109,18 @@ const Apply = ({ content = {} }) => {
 
 Apply.getInitialProps = async () => {
   const page = await getSingleton(types.APPLY_PAGE_CONTENT)
+  const opportunities = await getByType(types.VOLUNTEERING)
+  const volunteering = await getSingleton(types.VOLUNTEERING_PAGE_CONTENT)
+  const quotes = volunteering.data.body.find(s => s.slice_type === "quotes")
+  const ids = (quotes && quotes.items.map(l => l.quote.id)) || []
+  const additionalData = ids.length ? await getByIDs(ids) : { results: [] }
+  return {
+    content: res.data,
+    volunteering,
+    additionalData,
+    opportunities,
+    meta: res,
+  }
   return { content: page.data }
 }
 

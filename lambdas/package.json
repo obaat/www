@@ -1,0 +1,14 @@
+{
+  "name": "sls-form-mail",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {},
+  "dependencies": {
+    "aws-sdk": "^2.127.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "html-entities": "^1.2.1",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {}
+}
