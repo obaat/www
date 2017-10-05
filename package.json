@@ -61,7 +61,8 @@
     "recompose": "^0.25.0",
     "reline": "^1.0.0-beta.3",
     "styled-system": "^1.0.6",
-    "tls": "^0.0.1"
+    "tls": "^0.0.1",
+    "yup": "^0.22.0"
   },
   "devDependencies": {
     "babel-eslint": "8.0.1",

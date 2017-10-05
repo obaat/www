@@ -3,6 +3,7 @@ import { Formik, Form } from "formik"
 import g from "glamorous"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
+import Yup from "yup"
 import range from "lodash/range"
 import PrismicRichText from "../components/PrismicRichText"
 import { Index } from "react-powerplug"
@@ -143,6 +144,18 @@ const AboutYou = props => (
   </Form>
 )
 
+const aboutValidation = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required!"),
+  firstName: Yup.string().required("First Name is required!"),
+  lastName: Yup.string().required("Last name is required!"),
+  phone: Yup.string().required("Phone is required!"),
+  dob_day: Yup.number().required("DOB required"),
+  dob_month: Yup.number().required("DOB required"),
+  dob_year: Yup.number().required("DOB required"),
+})
+
 const Done = props => (
   <Form>
     <Label>Role you're interested in</Label>
@@ -151,7 +164,12 @@ const Done = props => (
 )
 
 const pages = [
-  { title: "About You", Component: AboutYou },
+  {
+    title: "About You",
+    Component: AboutYou,
+    validation: aboutValidation,
+    initialValues: { email: "" },
+  },
   { title: "Your Trip", Component: AboutVolunteering },
   { title: "Done", Component: Done },
 ]
@@ -184,53 +202,56 @@ const WizardStep = ({ title, i, last, active, done, ...props }) => {
 }
 
 const FormWizard = () => (
-  <Formik
-    initialValues={{ email: "", color: "red", firstName: "" }}
-    onSubmit={submit}
-    render={props => (
-      <Index initial={0}>
-        {({ index, setIndex }) => {
-          const { Component } = pages[index]
-          const next = () => setIndex(index + 1)
-          return (
-            <Box palette="gray1" invert p={2}>
-              <Flex justify="center" align="center">
-                {pages.map((page, i) => (
-                  <WizardStep
-                    key={i}
-                    last={i === pages.length - 1}
-                    onClick={() => index > i && setIndex(i)}
-                    w={1 / pages.length}
-                    i={i}
-                    active={index === i}
-                    done={index > i}
-                    ml={i && 1}
-                    {...page}
-                  />
-                ))}
-              </Flex>
-              <Box palette="black" p={2}>
-                <Component />
+  <Index initial={0}>
+    {({ index, setIndex }) => {
+      const { Component, validation, initialValues } = pages[index]
+      const next = () => setIndex(index + 1)
+      return (
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validation}
+          onSubmit={submit}
+          render={({ handleSubmit, errors }) => {
+            return (
+              <Box palette="gray1" invert p={2}>
+                <Flex justify="center" align="center">
+                  {pages.map((page, i) => (
+                    <WizardStep
+                      key={i}
+                      last={i === pages.length - 1}
+                      onClick={() => index > i && setIndex(i)}
+                      w={1 / pages.length}
+                      i={i}
+                      active={index === i}
+                      done={index > i}
+                      ml={i && 1}
+                      {...page}
+                    />
+                  ))}
+                </Flex>
+                <Box palette="black" p={2}>
+                  <Component />
+                </Box>
+                <Box mt={1} align="right">
+                  <Button
+                    py={1}
+                    palette="cyan6"
+                    icon="ArrowRight"
+                    iconPosition="right"
+                    iconSize={12}
+                    onClick={handleSubmit}
+                    invert
+                  >
+                    Next
+                  </Button>
+                </Box>
               </Box>
-              <Box mt={1} align="right">
-                <Button
-                  py={1}
-                  palette="cyan6"
-                  icon="ArrowRight"
-                  iconPosition="right"
-                  iconSize={12}
-                  onClick={next}
-                  invert
-                >
-                  Next
-                </Button>
-              </Box>
-            </Box>
-          )
-        }}
-      </Index>
-    )}
-  />
+            )
+          }}
+        />
+      )
+    }}
+  </Index>
 )
 
 const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
