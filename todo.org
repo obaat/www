@@ -23,3 +23,6 @@
 * DONE top images for partners, projects, volunteer building maint + teaching, shop, spread the word, sponsor child
 * DONE opengraph hints throughout
 * browser version locking
+* sitemap.xml 
+* favicon.ico
+* SSL fix

@@ -11,8 +11,10 @@ const Gallery = ({ content = {} }) => {
     <PrismicSlice key={i} inline {...props} />
   ))
   return (
-    <Flex>
-      <PrismicRichText color="#fff" source={content.description} />
+    <Flex wrap="wrap">
+      <Box w={1}>
+        <PrismicRichText source={content.description} />
+      </Box>
       <Box w={1}>{galleries}</Box>
     </Flex>
   )
