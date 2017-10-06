@@ -7,10 +7,9 @@ import SidebarHeader from "../components/SidebarHeader"
 import Link from "../components/Link"
 
 const About = ({ content = {} }) => {
-  console.log({ content })
   return (
     <Flex wrap="wrap">
-      <Box w={[1, 1, 1, 2 / 3]} pr={[0, 0, 0, 3]}>
+      <Box w={1}>
         {content.section.map((section, i) => (
           <Border bottom borderColor="gray4" mb={4}>
             <Flex>
@@ -24,21 +23,6 @@ const About = ({ content = {} }) => {
             </Flex>
           </Border>
         ))}
-      </Box>
-      <Box w={[1, 1, 1, 1 / 3]} pr={[0, 0, 0, 3]}>
-        <SidebarHeader>Related Information</SidebarHeader>
-        <Box>
-          <Link href="/trustees">Trustees</Link>
-        </Box>
-        <Box>
-          <Link href="/volunteering">Volunteer With Us</Link>
-        </Box>
-        <Box>
-          <Link href="/projects?status=complete">Completed Projects</Link>
-        </Box>
-        <Box>
-          <Link href="/contact">Contact Us</Link>
-        </Box>
       </Box>
     </Flex>
   )
