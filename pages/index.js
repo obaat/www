@@ -148,7 +148,7 @@ const Centered = g(Flex)({
   justify: "center",
 })
 
-const BOX_WIDTH = [1, 1, 1, 1000]
+const BOX_WIDTH = [1, 1, 1, 1200]
 
 const transitionSpeed = 6 * 1000
 
@@ -325,10 +325,14 @@ class IndexPage extends React.Component {
               bold={300}
               style={{ fontStyle: "italic", lineHeight: "1.2em" }}
             >
-              It is what we make out of what we have, not what we are given,
-              that separates one person from another.
+              It is through education that the daughter of a peasant can become
+              a doctor, that the son of a mineworker can become the head of a
+              mine, or that a child of farmworkers can become the president of a
+              great nation.
             </Heading>
-            <Text>Nelson Mandela</Text>
+            <Text style={{ float: "right" }} fontSize={20} mr={2}>
+              Nelson Mandela
+            </Text>
           </Box>
         </Panel>
       </div>
