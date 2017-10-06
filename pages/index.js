@@ -118,39 +118,9 @@ const Panel = g(Flex)(
   align: "center",
 })
 
-const Lead = g(Heading)({
-  lineHeight: 1.3,
-  padding: "0.5rem",
-  textAlign: "left",
-  maxWidth: "800px",
-}).withProps({
-  bold: 700,
-  fontSize: [1, 1, 1, 5, 6],
-})
-
-const Sub = g(hoc()(Subhead))({
-  padding: "0.5rem",
-  maxWidth: "800px",
-  textAlign: "left",
-}).withProps({
-  bold: 400,
-  fontSize: [1, 1, 1, 3, 5],
-})
-
-const Centered = g(Flex)({
-  position: "absolute",
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-}).withProps({
-  align: "center",
-  justify: "center",
-})
-
 const BOX_WIDTH = [1, 1, 1, 1200]
 
-const transitionSpeed = 6 * 1000
+const transitionSpeed = 7 * 1000
 
 class IndexPage extends React.Component {
   counters = []
