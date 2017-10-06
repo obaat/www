@@ -142,6 +142,7 @@ const PrismicRichText = ({ source, forceType, mb, mt, xmb, xmt, ...props }) => {
           </Ul>,
         )
         list.length = 0
+        finalContent.push(item)
       } else if (item === flatContent[flatContent.length - 1]) {
         finalContent.push(
           <Ul key={`ul-${i}`} ml={1}>
