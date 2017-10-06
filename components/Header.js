@@ -102,16 +102,11 @@ export default class Header extends Component {
     return (
       <Container>
         <Fixed>
-          <HeaderContainer
-            wrap="wrap"
-            px={3}
-            py={[2, 2, 2, 0]}
-            scrolled={scrolled}
-          >
+          <HeaderContainer wrap="wrap" px={3} scrolled={scrolled}>
             <Link href="/">
               <Logo color={scrolled ? theme.colors.base[0] : "#fff"} />
             </Link>
-            <Menu volunteering={this.props.volunteering} />
+            <Menu volunteering={this.props.volunteering} scrolled={scrolled} />
             <Box grow={1} align="right">
               <Donate amount={1500} scrolled={scrolled} />
             </Box>

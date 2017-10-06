@@ -219,7 +219,10 @@ const Menu = ({ hideMenu = false, ...props }) => {
         <Toggle initial={false}>
           {({ on, toggle }) => (
             <Box mt={1}>
-              <MenuIcon onClick={toggle} />
+              <MenuIcon
+                palette={props.scrolled ? "black" : "blackInvert"}
+                onClick={toggle}
+              />
               {on && <MobileMenu items={_menuItems} onClose={toggle} />}
             </Box>
           )}

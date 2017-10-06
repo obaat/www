@@ -290,9 +290,9 @@ class IndexPage extends React.Component {
           </Box>
         </Panel>
         <Panel py={4} direction="row" palette="cyan6" invert>
-          <Box w={BOX_WIDTH}>
+          <Box w={BOX_WIDTH} mx={1}>
             <Heading
-              fontSize={35}
+              fontSize={[24, 24, 24, 35]}
               bold={300}
               style={{ fontStyle: "italic", lineHeight: "1.2em" }}
             >

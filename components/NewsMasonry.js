@@ -94,8 +94,9 @@ let cycleCount = 0
 const typeName = {
   project: "Project",
   event: "Event",
-  gallery: "Gallery",
+  gallery_page: "Gallery",
 }
+
 const renderers = {
   video: ({ content }) => <Embed {...content} width="100%" height="100%" />,
   unknown: type => () => <span>{type}???</span>,
