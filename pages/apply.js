@@ -28,6 +28,7 @@ import {
   Box,
   Input,
   Textarea,
+  Small,
   Subhead,
   Label,
 } from "../ui"
@@ -38,28 +39,37 @@ import Link from "../components/Link"
 const curYear = new Date().getFullYear()
 
 const submit = cb => async (values, actions) => {
-  const res = await fetch(
-    "https://lv00fuasu7.execute-api.eu-west-1.amazonaws.com/production/volunteer_application",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
+  actions.setErrors()
+  try {
+    const res = await fetch(
+      "https://wug9lonkm7.execute-api.eu-west-1.amazonaws.com/production/volunteer_application",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: values,
+        }),
       },
-      body: JSON.stringify({
-        content: values,
-      }),
-    },
-  )
-  const data = await res.json()
-  const success = res.ok && data.result === "OK"
-  actions.setSubmitting(false)
-  if (!success) {
+    )
+    const data = await res.json()
+    const success = res.ok && data.result === "OK"
+    actions.setSubmitting(false)
+    if (!success) {
+      actions.setErrors({
+        unknown: "There was an issue submitting your request, Please try again",
+      })
+    }
+    cb(success)
+  } catch (e) {
+    actions.setSubmitting(false)
     actions.setErrors({
       unknown: "There was an issue submitting your request, Please try again",
     })
+    cb(false)
   }
-  cb(success)
 }
 
 const Select = ({ options, ...props }) => (
@@ -123,21 +133,24 @@ const AboutVolunteering = ({ opportunities }) => (
         <RangeDropdown start={curYear} end={curYear + 2} name="start_year" />
       </Box>
     </Flex>
+    <Label>Any additional information relevant to your application</Label>
+    <Small mt="-12px">i.e experience and education</Small>
+    <Textarea name="additional_info" />
   </div>
 )
 
 const AboutYou = props => (
   <div>
     <Label>E-mail</Label>
-    <Input type="email" name="email" placeholder="volunteer@example.com" />
+    <Input type="email" name="email" placeholder="elizabeth@example.com" />
     <Flex>
       <Box w={1 / 2} mr={1}>
         <Label>First Name</Label>
-        <Input name="firstName" placeholder="Jane" />
+        <Input name="firstName" placeholder="Elizabeth" />
       </Box>
       <Box w={1 / 2}>
         <Label>Last Name</Label>
-        <Input name="lastName" placeholder="Doe" />
+        <Input name="lastName" placeholder="El" />
       </Box>
     </Flex>
     <Flex>
@@ -186,10 +199,10 @@ const aboutValidation = Yup.object().shape({
 const Done = props => (
   <Flex wrap="wrap" justify="center">
     <Checkbox palette="black" size={40} />
-    <Box ml={2}>
+    <Box ml={2} w={1}>
       <Subhead>Thanks for your interest</Subhead>
     </Box>
-    <Box>We will get back to you shortly</Box>
+    <Box w={1}>We will get back to you shortly</Box>
   </Flex>
 )
 

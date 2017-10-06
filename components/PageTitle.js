@@ -1,5 +1,6 @@
 import React from "react"
 import g from "glamorous"
+import Helmet from "react-helmet"
 import { backgroundImageCover } from "../styleHelpers"
 import { Flex } from "../ui"
 import { menuHeightDocked } from "../utils/constants"
@@ -21,6 +22,12 @@ const Container = g(Flex)(
 export default ({ children, image, ...props }) => {
   return (
     <div>
+      <Helmet
+        meta={[
+          { property: "og:image", content: image },
+          // { property: "og:title", content: image },
+        ]}
+      />
       <Container image={image} pt={menuHeightDocked}>
         {children}
       </Container>

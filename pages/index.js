@@ -163,6 +163,16 @@ class IndexPage extends React.Component {
     return (
       <div>
         <Helmet title="One Brick at a Time" />
+
+        {image &&
+          image.url && (
+            <Helmet
+              meta={[
+                { property: "og:image", content: image.url },
+                // { property: "og:title", content: image },
+              ]}
+            />
+          )}
         <Panel p={0} direction="row">
           <Box w={1}>
             <SlideShow
