@@ -12,6 +12,7 @@ const Gallery = ({ content = {} }) => {
   ))
   return (
     <Flex>
+      <PrismicRichText color="#fff" source={content.description} />
       <Box w={1}>{galleries}</Box>
     </Flex>
   )
