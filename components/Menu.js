@@ -47,7 +47,6 @@ const menuItems = [
   { title: "About Us", items: aboutItems },
   { title: "What We Do", items: whatItems },
   // { title: 'Projects', getChildren: props => toMenu(props.projects) },
-  // { title: 'Blog', getChildren: props => toMenu(props.blog) },
   {
     title: "Volunteer With Us",
     items: [{ title: "General Information", href: "/volunteering" }],
@@ -58,6 +57,7 @@ const menuItems = [
     items: [
       { title: "Shop", href: "/shop" },
       { title: "Spread the Word", href: "/spreadtheword" },
+      { title: "Blog", href: "/blog" },
     ],
   },
 ]
