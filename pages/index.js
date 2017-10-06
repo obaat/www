@@ -173,7 +173,7 @@ class IndexPage extends React.Component {
                 >
                   <Absolute bottom left right mx={4} my={3}>
                     <PrismicRichText
-                      w={[1, 1, 1, 1 / 2]}
+                      w={[1, 1, 1, 2 / 3]}
                       source={lead}
                       style={{
                         textShadow: "0px 0px 3px rgba(0,0,0,0.3)",

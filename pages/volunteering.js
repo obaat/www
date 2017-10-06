@@ -90,7 +90,7 @@ const Location = ({ uid, data }) => (
     <Absolute bottom right p={1}>
       <Link href={`/location/?id=${uid}`} as={`/location/${uid}`}>
         <Button
-          palette="normal"
+          palette="black"
           color="#fff"
           bg="rgba(0,0,0,0.3)"
           invert

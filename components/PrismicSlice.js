@@ -83,9 +83,9 @@ export const renderers = {
     </Table>
   ),
 
-  image_gallery: ({ items = [] }) => {
+  image_gallery: ({ items = [], ...props }) => {
     return (
-      <SlideShow controlSize={18} autoplay>
+      <SlideShow controlSize={18} autoplay {...props}>
         {items.map(({ gallery_image: { url } }, i) => (
           <BackgroundImage src={url} key={i} />
         ))}
@@ -94,7 +94,7 @@ export const renderers = {
   },
 }
 
-const PrismicSlice = ({ slice_type, items, primary }) => {
+const PrismicSlice = ({ slice_type, items, primary, ...props }) => {
   const title = primary.title && (
     <PrismicRichText forceType="heading6" source={primary.title} />
   )
@@ -106,6 +106,7 @@ const PrismicSlice = ({ slice_type, items, primary }) => {
         primary={primary}
         items={items}
         slice_type={slice_type || "No slice type"}
+        {...props}
       />
     </div>
   )

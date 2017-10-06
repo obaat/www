@@ -74,10 +74,17 @@ const Arrow = ({
   )
 }
 
-const Zoom = ({ isZoomed, controlSize, controlColor, onClick }) => {
+const Zoom = ({
+  isZoomed,
+  controlSize,
+  controlColor,
+  onClick,
+  pb = 1,
+  pl = 2,
+}) => {
   const Component = isZoomed ? X : Magnifier
   return (
-    <Absolute left bottom pb={1} pl={2} onClick={onClick}>
+    <Absolute left bottom pb={pb} pl={pl} onClick={onClick}>
       <Component size={controlSize} color={controlColor} onClick={onClick} />
     </Absolute>
   )
@@ -223,12 +230,74 @@ export default class SlideShow extends Component {
     this.setSlide(index)
   }
 
-  toggleZoom = () => {
+  toggleZoom = index => e => {
     this.pause()
-    this.setState({ zoom: !this.state.zoom })
+    this.setState({
+      selectedIndex: isNil(index) ? this.state.selectedIndex : index,
+      zoom: !this.state.zoom,
+    })
   }
 
-  render() {
+  renderZoomed = children => {
+    const { selectedIndex } = this.state
+    const {
+      controlSize = 48,
+      index,
+      hidePaging,
+      hideZoom,
+      hideArrows,
+      controlColor = "#fff",
+      vertical,
+      px = 2,
+    } = this.props
+    return (
+      <Fullscreen onClick={this.toggleZoom()} p={2}>
+        <Relative
+          w={[1, 1, 1, "70%"]}
+          style={{ margin: "0 auto", overflow: "hidden" }}
+          onClick={e => e.stopPropagation()}
+          bg="#fff"
+        >
+          {selectedIndex > 0 && (
+            <Arrow
+              direction="left"
+              controlSize={48}
+              color={controlColor}
+              page={selectedIndex}
+              onPageClick={this.onPageClick}
+            />
+          )}
+          {selectedIndex < this.totalSlides() - 1 && (
+            <Arrow
+              direction="right"
+              controlSize={48}
+              color={controlColor}
+              page={selectedIndex}
+              onPageClick={this.onPageClick}
+            />
+          )}
+          {selectedIndex === this.totalSlides() - 1 && (
+            <Restart
+              size={controlSize}
+              color={controlColor}
+              size={48}
+              onPageClick={this.onPageClick}
+              px={px}
+            />
+          )}
+          <Zoom
+            onClick={this.toggleZoom()}
+            controlSize={36}
+            controlColor={controlColor}
+            isZoomed
+          />
+          {children[selectedIndex]}
+        </Relative>
+      </Fullscreen>
+    )
+  }
+
+  renderSlideShow = children => {
     const { selectedIndex, zoom } = this.state
     const {
       controlSize = 48,
@@ -240,12 +309,9 @@ export default class SlideShow extends Component {
       vertical,
       px = 2,
     } = this.props
-    const children = React.Children
-      .toArray(this.props.children)
-      .slice(0, Math.max(PRELOAD_MAX, selectedIndex + PRELOAD_MAX))
     const visibleIndex = isNil(index) ? selectedIndex : index
 
-    const container = (
+    return (
       <CarouselContainer>
         <Motion style={{ x: visibleIndex * 100 }}>
           {({ x }) => (
@@ -301,60 +367,46 @@ export default class SlideShow extends Component {
         )}
         {!hideZoom && (
           <Zoom
-            onClick={this.toggleZoom}
+            onClick={this.toggleZoom()}
             controlSize={controlSize}
             controlColor={controlColor}
           />
         )}
       </CarouselContainer>
     )
+  }
 
-    return zoom ? (
-      <Fullscreen onClick={this.toggleZoom} p={2}>
-        <Relative
-          w={[1, 1, 1, "70%"]}
-          style={{ margin: "0 auto", overflow: "hidden" }}
-          onClick={e => e.stopPropagation()}
-          bg="#fff"
-        >
-          {selectedIndex > 0 && (
-            <Arrow
-              direction="left"
-              controlSize={48}
-              color={controlColor}
-              page={selectedIndex}
-              onPageClick={this.onPageClick}
-            />
-          )}
-          {selectedIndex < this.totalSlides() - 1 && (
-            <Arrow
-              direction="right"
-              controlSize={48}
-              color={controlColor}
-              page={selectedIndex}
-              onPageClick={this.onPageClick}
-            />
-          )}
-          {selectedIndex === this.totalSlides() - 1 && (
-            <Restart
-              size={controlSize}
-              color={controlColor}
-              size={48}
-              onPageClick={this.onPageClick}
-              px={px}
-            />
-          )}
-          <Zoom
-            onClick={this.toggleZoom}
-            controlSize={36}
-            controlColor={controlColor}
-            isZoomed
-          />
-          {children[selectedIndex]}
-        </Relative>
-      </Fullscreen>
-    ) : (
-      container
+  renderInline = () => {
+    const { hideZoom, controlSize, controlColor } = this.props
+    return (
+      <Flex wrap="wrap">
+        {this.props.children.map((c, i) => (
+          <Box style={{ position: "relative" }} p={1} w={1 / 3}>
+            {c}
+            {!hideZoom && (
+              <Zoom
+                pb={2}
+                pl={3}
+                onClick={this.toggleZoom(i)}
+                controlSize={controlSize}
+                controlColor={controlColor}
+              />
+            )}
+          </Box>
+        ))}
+      </Flex>
     )
+  }
+
+  render() {
+    const { selectedIndex, zoom } = this.state
+    const { inline } = this.props
+    const children = React.Children
+      .toArray(this.props.children)
+      .slice(0, Math.max(PRELOAD_MAX, selectedIndex + PRELOAD_MAX))
+
+    return zoom
+      ? this.renderZoomed(children)
+      : inline ? this.renderInline(children) : this.renderSlideShow(children)
   }
 }

@@ -7,13 +7,12 @@ import PrismicSlice from "../components/PrismicSlice"
 
 const Gallery = ({ content = {} }) => {
   const body = content.body || []
-  const galleries = body.map((props, i) => <PrismicSlice key={i} {...props} />)
+  const galleries = body.map((props, i) => (
+    <PrismicSlice key={i} inline {...props} />
+  ))
   return (
     <Flex>
-      <Box w={1}>
-        <PrismicRichText source={content.description} />
-        {galleries}
-      </Box>
+      <Box w={1}>{galleries}</Box>
     </Flex>
   )
 }
