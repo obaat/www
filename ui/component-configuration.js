@@ -484,8 +484,9 @@ const components = [
   },
   {
     name: "Textarea",
-    type: "textarea",
+    type: RawField,
     props: {
+      component: "textarea",
       p: 1,
       m: 0,
       mb: 1,

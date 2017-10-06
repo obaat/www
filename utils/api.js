@@ -13,7 +13,7 @@ const types = {
   HOME: "home",
   VOLUNTEER_STATEMENT: "volunteer_statement",
   FINANCIALS_PAGE_CONTENT: "financials_page",
-  BLOG_PAGE_CONTENT: "blog_page",
+  BLOG_PAGE_CONTENT: "blog_page_content",
   PARTNERSHIPS_PAGE_CONTENT: "partnerships",
   TEAM_MEMBERS: "team",
   TEAM_PAGE_CONTENT: "team_page",
