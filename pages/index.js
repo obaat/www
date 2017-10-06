@@ -190,7 +190,7 @@ class IndexPage extends React.Component {
                       w={[1, 1, 1, 2 / 3]}
                       source={strapline}
                       forceType="headingasdiv"
-                      bold={400}
+                      bold={500}
                       fontSize={[12, 12, 12, 24]}
                       color="black"
                       bg={`rgba(${bg[0]},${bg[1]},${bg[2]},0.8)`}
