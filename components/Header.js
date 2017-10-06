@@ -9,11 +9,15 @@ import Menu, { MenuItem, SecondaryMenu } from "./Menu"
 import Link from "next/link"
 import LogoIcon from "../svg/logo.svg"
 import withProps from "recompose/withProps"
+import { Home } from "./SvgIcons"
 import theme from "../theme"
 
-const Logo = withProps({ height: "35px", width: "130px", cursor: "pointer" })(
-  LogoIcon,
-)
+const Logo = withProps({
+  // height: "35px",
+  // width: "130px",
+  width: "70px",
+  cursor: "pointer",
+})(Home)
 
 const dockedBackground =
   "linear-gradient(to bottom, rgba(0,0,0,0.5) 20%,rgba(0,0,0,0) 100%)"
@@ -104,9 +108,9 @@ export default class Header extends Component {
             py={[2, 2, 2, 0]}
             scrolled={scrolled}
           >
-            {/* <Link href="/">
-              <Logo fill={scrolled ? theme.colors.base[0] : "#fff"} />
-            </Link> */}
+            <Link href="/">
+              <Logo color={scrolled ? theme.colors.base[0] : "#fff"} />
+            </Link>
             <Menu volunteering={this.props.volunteering} />
             <Box grow={1} align="right">
               <Donate amount={1500} scrolled={scrolled} />
