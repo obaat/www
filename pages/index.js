@@ -14,7 +14,6 @@ import Container from "../components/Container"
 import Button from "../components/Button"
 import page from "../hoc/page"
 import { getByType, getByIDs, getSingleton, types } from "../utils/api"
-import Icon from "../components/Icon"
 import PrismicRichText from "../components/PrismicRichText"
 import {
   Flex,

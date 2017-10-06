@@ -1,10 +1,10 @@
 import g from "glamorous"
 import { space, width } from "styled-system"
 import React, { Component } from "react"
-import Icon from "./Icon"
+import X from "./SvgIcons"
 import { show, overlay } from "../styleHelpers"
 
-const ModalIcon = g(Icon)({
+const ModalIcon = g(X)({
   background: "none",
   position: "absolute",
   right: 0,
@@ -49,12 +49,11 @@ export default class Modal extends Component {
       <ModalWrapper show={this.props.isOpen}>
         <ModalBackground onClick={this.props.onRequestClose} />
         <ModalContent>
-          {canClose &&
-            <ModalIcon
-              name="close"
-              m={2}
-              onClick={this.props.onRequestClose}
-            />}
+          {canClose && (
+            <Box m={2} onClick={this.props.onRequestClose}>
+              <X size={24} />
+            </Box>
+          )}
           {this.props.children}
         </ModalContent>
       </ModalWrapper>

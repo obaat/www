@@ -31,6 +31,7 @@ colors.primary = colors.base
 colors.brick = colors.red8
 colors.secondary = colors.green8
 colors.tertiary = colors.blue8
+colors.black = [black, white]
 
 export const invert = reduce(
   colors,

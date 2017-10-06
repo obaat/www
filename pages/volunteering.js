@@ -1,7 +1,6 @@
 import React from "react"
 import Button from "../components/Button"
 import ApplyNow from "../components/ApplyNow"
-import Icon from "../components/Icon"
 import g from "glamorous"
 import Link from "../components/Link"
 import { ArrowRight } from "../components/SvgIcons"
@@ -95,7 +94,8 @@ const Location = ({ uid, data }) => (
           color="#fff"
           bg="rgba(0,0,0,0.3)"
           invert
-          icon="chevron-right"
+          icon="ArrowRight"
+          iconSize={12}
           w={1}
           py={1}
           as={ButtonOutline}

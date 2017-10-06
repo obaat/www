@@ -6,7 +6,7 @@ import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import Link from "next/link"
 import { Flex, Relative, Absolute, Box, Border, BackgroundImage } from "../ui"
-import Icon from "../components/Icon"
+import { ArrowRight } from "../components/SvgIcons"
 import { HumanDate } from "../utils/date"
 import SidebarHeader from "../components/SidebarHeader"
 
@@ -45,7 +45,7 @@ const Event = ({ uid, data }) => (
         </Overlay>
 
         <Absolute bottom right p={2}>
-          <Icon name="chevron-right" />
+          <ArrowRight />
         </Absolute>
       </BackgroundImage>
     </Link>
@@ -75,7 +75,8 @@ const Location = ({ uid, data }) => (
           color="#fff"
           bg="rgba(0,0,0,0.3)"
           invert
-          icon="chevron-right"
+          icon="ArrowRight"
+          iconSize={12}
           w={1}
           py={1}
           as={ButtonOutline}

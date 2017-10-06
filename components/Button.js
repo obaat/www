@@ -1,6 +1,5 @@
 import React from "react"
 import g from "glamorous"
-import Icon from "./Icon"
 import { Flex, Box, Button, Relative, Absolute } from "../ui"
 import * as SvgIcons from "./SvgIcons"
 import memoize from "lodash/memoize"
@@ -24,11 +23,14 @@ export default ({
   let iconPart = null
   if (icon && SvgIcons[icon]) {
     const Component = SvgIcons[icon]
-    iconPart = <Component size={iconSize} palette={passProps.palette} invert />
-  } else {
-    iconPart = <Icon f={iconSize} name={icon} />
+    iconPart = (
+      <Component
+        size={iconSize}
+        palette={passProps.palette}
+        invert={passProps.invert}
+      />
+    )
   }
-
   return (
     <Component palette={context} {...passProps}>
       <Flex align="center" justify="center">
