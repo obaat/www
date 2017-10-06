@@ -381,7 +381,7 @@ export default class SlideShow extends Component {
     return (
       <Flex wrap="wrap">
         {this.props.children.map((c, i) => (
-          <Box style={{ position: "relative" }} p={1} w={1 / 3}>
+          <Box style={{ position: "relative" }} p={1} w={[1, 1, 1, 1 / 3]}>
             {c}
             {!hideZoom && (
               <Zoom
