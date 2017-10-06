@@ -1225,14 +1225,16 @@ const components = [
 
   {
     name: "Select",
-    type: "select",
-    props: {},
+    type: RawField,
+    props: {
+      mb: 1,
+      component: "select",
+    },
     style: props => ({
       fontFamily: "inherit",
       fontSize: "inherit",
       lineHeight: "inherit",
       width: "100%",
-      margin: 0,
       color: "inherit",
       backgroundColor: "transparent",
       appearance: "none",

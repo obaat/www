@@ -18,7 +18,8 @@
 * DONE move titles down into page
 * DONE logo / megan
 * DONE news on front page
-* fix slideshow zoom
-* add social icons to top right bar on frontpage
+* DONE fix slideshow zoom
+* DONE add social icons to top right bar on frontpage
+* DONE top images for partners, projects, volunteer building maint + teaching, shop, spread the word, sponsor child
+* opengraph hints throughout
 * browser version locking
-* top images for partners, projects, volunteer building maint + teaching, shop, spread the word, sponsor child

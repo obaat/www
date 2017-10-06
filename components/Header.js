@@ -70,6 +70,7 @@ const scrolled = ({ scrolled }) =>
 const HeaderContainer = g(Flex)(
   {
     alignItems: "center",
+    zIndex: 99,
   },
   scrolled,
 )

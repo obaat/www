@@ -39,7 +39,10 @@ app.post("/volunteer_application", function(req, res) {
   // const template = ReactDOMServer.renderToString(
   //   React.createElement(Email, { content: req.body.content }),
   // )
-  const message = map(content, (v, k) => k + ":\n" + entities.decode(v))
+  const message = map(
+    content,
+    (v, k) => k.replace("_", " ") + ": " + entities.decode(v),
+  )
 
   sns
     .publish({

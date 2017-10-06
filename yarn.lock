@@ -4783,7 +4783,7 @@ prop-types-exact@1.1.1:
     has "^1.0.1"
     object.assign "^4.0.4"
 
-prop-types@15.6.0, prop-types@^15.6.0:
+prop-types@15.6.0, prop-types@^15.5.7, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -4941,6 +4941,12 @@ rc@^1.1.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-block-ui@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-block-ui/-/react-block-ui-1.0.3.tgz#9e4c8ae762423143609918bcb70ce1e44dfe5d6c"
+  dependencies:
+    prop-types "^15.5.7"
 
 react-click-outside@^3.0.0:
   version "3.0.0"

@@ -13,7 +13,9 @@ const icons = keyBy(rawicons, v => {
 })
 
 module.exports = mapValues(icons, ({ exported: Icon }) =>
-  g(Icon)(
+  g(Icon, {
+    filterProps: ["invert"],
+  })(
     withPalette(props => ({
       fill: props.foreground,
     })),

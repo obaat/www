@@ -1,14 +1,20 @@
 import React from "react"
 import { Formik, Form } from "formik"
+import BlockUi from "react-block-ui"
 import g from "glamorous"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
 import get from "lodash/get"
+import map from "lodash/map"
 import { pageWithTitle } from "../hoc/page"
 import Yup from "yup"
 import range from "lodash/range"
 import PrismicRichText from "../components/PrismicRichText"
 import { Index } from "react-powerplug"
-import { ArrowNextStage, Checkbox } from "../components/SvgIcons"
+import {
+  ExclamationSquare,
+  ArrowNextStage,
+  Checkbox,
+} from "../components/SvgIcons"
 import Quotes from "../components/SidebarQuote"
 import Accordion, { AccordionSection } from "../components/Accordion"
 import months from "months"
@@ -29,26 +35,39 @@ import Button from "../components/Button"
 import SidebarHeader from "../components/SidebarHeader"
 import Link from "../components/Link"
 
-const submit = async (values, actions) => {
+const curYear = new Date().getFullYear()
+
+const submit = cb => async (values, actions) => {
   const res = await fetch(
-    "https://lv00fuasu7.execute-api.eu-west-1.amazonaws.com/development/volunteer_application",
+    "https://lv00fuasu7.execute-api.eu-west-1.amazonaws.com/production/volunteer_application",
     {
       method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         content: values,
       }),
     },
   )
   const data = await res.json()
+  const success = res.ok && data.result === "OK"
   actions.setSubmitting(false)
+  if (!success) {
+    actions.setErrors({
+      unknown: "There was an issue submitting your request, Please try again",
+    })
+  }
+  cb(success)
 }
 
-const Select = ({ options }) => (
-  <UISelect>
+const Select = ({ options, ...props }) => (
+  <UISelect mb={1} {...props}>
     {options.map(o => (
-      <Option key={o.value} value={o.value}>
-        {o.value}
-      </Option>
+      <option key={o.value} value={o.value}>
+        {o.text || o.value}
+      </option>
     ))}
   </UISelect>
 )
@@ -61,12 +80,17 @@ const RangeDropdown = ({ start = 1, end, step = 1, ...props }) => (
 )
 
 const AboutVolunteering = ({ opportunities }) => (
-  <Form>
+  <div>
     <Label>Role you're interested in</Label>
     <Select
-      options={opportunities.results.map(o => ({
-        value: get(o, "data.title[0].text"),
-      }))}
+      name="role"
+      options={[
+        { value: "Other" },
+        { value: "select", text: "Choose" },
+        ...opportunities.results.map(o => ({
+          value: get(o, "data.title[0].text"),
+        })),
+      ]}
     />
     <Label>How long would you like to volunteer?</Label>
     <Flex>
@@ -75,6 +99,7 @@ const AboutVolunteering = ({ opportunities }) => (
       </Box>
       <Box w={1 / 2} mr={1}>
         <Select
+          name="period_unit"
           options={[
             { value: "week(s)" },
             { value: "month(s)" },
@@ -95,18 +120,14 @@ const AboutVolunteering = ({ opportunities }) => (
         />
       </Box>
       <Box w={1 / 3}>
-        <RangeDropdown
-          start={new Date().getFullYear()}
-          end={new Date().getFullYear() + 1}
-          name="start_year"
-        />
+        <RangeDropdown start={curYear} end={curYear + 2} name="start_year" />
       </Box>
     </Flex>
-  </Form>
+  </div>
 )
 
 const AboutYou = props => (
-  <Form>
+  <div>
     <Label>E-mail</Label>
     <Input type="email" name="email" placeholder="volunteer@example.com" />
     <Flex>
@@ -133,12 +154,12 @@ const AboutYou = props => (
           <Box w={1 / 3} mr={1}>
             <Select
               options={months.abbr.map(value => ({ value }))}
-              name="start_month"
+              name="dob_month"
             />
           </Box>
           <Box w={1 / 3}>
             <RangeDropdown
-              start={new Date().getFullYear()}
+              start={curYear}
               end={1900}
               step={-1}
               name="dob_year"
@@ -147,19 +168,19 @@ const AboutYou = props => (
         </Flex>
       </Box>
     </Flex>
-  </Form>
+  </div>
 )
 
 const aboutValidation = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address")
-    .required("Email is required!"),
-  firstName: Yup.string().required("First Name is required!"),
-  lastName: Yup.string().required("Last name is required!"),
-  phone: Yup.string().required("Phone is required!"),
-  dob_day: Yup.number().required("DOB required"),
-  dob_month: Yup.number().required("DOB required"),
-  dob_year: Yup.number().required("DOB required"),
+    .required("Email is required"),
+  firstName: Yup.string().required("First Name is required"),
+  lastName: Yup.string().required("Last name is required"),
+  phone: Yup.string().required("Phone is required"),
+  // dob_day: Yup.number().required("DOB required"),
+  // dob_month: Yup.number().required("DOB required"),
+  // dob_year: Yup.number().required("DOB required"),
 })
 
 const Done = props => (
@@ -172,15 +193,29 @@ const Done = props => (
   </Flex>
 )
 
+const initialValues = {
+  email: "",
+  dob_day: 1,
+  dob_year: 1998,
+  dob_month: 1,
+  period_integer: 2,
+  period_unit: "1 week(s)",
+  start_day: 1,
+  start_year: curYear,
+  start_month: 1,
+  role: "select",
+}
+
 const pages = [
   {
     title: "About You",
     Component: AboutYou,
     validation: aboutValidation,
-    initialValues: { email: "" },
   },
-  { title: "Trip Details", Component: AboutVolunteering },
-  { title: "Complete", Component: Done },
+  {
+    title: "Trip Details",
+    Component: AboutVolunteering,
+  },
 ]
 
 const WizardStep = ({ title, i, last, active, done, ...props }) => {
@@ -210,54 +245,88 @@ const WizardStep = ({ title, i, last, active, done, ...props }) => {
   )
 }
 
+const Errors = ({ errors }) => {
+  if (!errors || !Object.keys(errors).length) return null
+  return (
+    <Box w={1}>
+      {map(errors, (v, k, i) => (
+        <Flex
+          key={`${k}-${i}`}
+          palette="red6"
+          invert
+          p={2}
+          mb={1}
+          align="center"
+        >
+          <ExclamationSquare />
+          <Box ml={2}>{v}</Box>
+        </Flex>
+      ))}
+    </Box>
+  )
+}
+
+const done = { Component: Done, title: "Complete" }
+
 const FormWizard = props => (
   <Index initial={0}>
     {({ index, setIndex }) => {
-      const { Component, validation, initialValues } = pages[index]
-      const next = () => setIndex(index + 1)
-      const onSubmit = pages[index + 1] ? next : submit
+      const { Component, validation } = pages[index] || done
+      const next = (values, actions) => {
+        setIndex(index + 1)
+        actions.setSubmitting(false)
+      }
+      const onSubmit = pages[index + 1]
+        ? next
+        : submit(success => success && setIndex(index + 1))
+      const steps = pages.concat(done)
       return (
         <Formik
           initialValues={initialValues}
-          /* validationSchema={validation} */
+          validationSchema={validation}
           onSubmit={onSubmit}
-          render={({ handleSubmit, errors }) => {
+          render={({ handleSubmit, isSubmitting, errors }) => {
             return (
-              <Box palette="gray1" invert p={2}>
-                <Flex justify="center" align="center">
-                  {pages.map((page, i) => (
-                    <WizardStep
-                      key={i}
-                      last={i === pages.length - 1}
-                      onClick={() => index > i && setIndex(i)}
-                      w={1 / pages.length}
-                      i={i}
-                      active={index === i}
-                      done={index > i}
-                      ml={i && 1}
-                      {...page}
-                    />
-                  ))}
-                </Flex>
-                <Box palette="black" p={2}>
-                  <Component {...props} />
-                </Box>
-                {pages[index + 1] && (
-                  <Box mt={2} align="right">
-                    <Button
-                      py={1}
-                      palette="cyan6"
-                      icon="ArrowRight"
-                      iconPosition="right"
-                      iconSize={12}
-                      onClick={handleSubmit}
-                      invert
-                    >
-                      {pages[index + 1].title}
-                    </Button>
+              <BlockUi blocking={isSubmitting}>
+                <Box palette="gray1" invert p={2}>
+                  <Flex justify="center" align="center">
+                    {steps.map((page, i) => (
+                      <WizardStep
+                        key={i}
+                        last={i === steps.length - 1}
+                        onClick={() => index > i && setIndex(i)}
+                        w={1 / steps.length}
+                        i={i}
+                        active={index === i}
+                        done={index > i}
+                        ml={i && 1}
+                        {...page}
+                      />
+                    ))}
+                  </Flex>
+                  <Box palette="black" p={2}>
+                    <Errors errors={errors} />
+                    <form>
+                      <Component {...props} />
+                    </form>
                   </Box>
-                )}
-              </Box>
+                  {pages[index] && (
+                    <Box mt={2} align="right">
+                      <Button
+                        py={1}
+                        palette="cyan6"
+                        icon="ArrowRight"
+                        iconPosition="right"
+                        iconSize={12}
+                        onClick={handleSubmit}
+                        invert
+                      >
+                        {(pages[index + 1] || done).title}
+                      </Button>
+                    </Box>
+                  )}
+                </Box>
+              </BlockUi>
             )
           }}
         />
