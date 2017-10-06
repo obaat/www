@@ -42,9 +42,9 @@ const getSingleton = async type => {
   return await api.getSingle(type)
 }
 
-const getByIDs = async ids => {
+const getByIDs = async (ids, opts) => {
   const api = await apiBuilder()
-  const res = await api.getByIDs(ids)
+  const res = await api.getByIDs(ids, opts)
   return res
 }
 

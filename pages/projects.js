@@ -156,7 +156,9 @@ Page.getInitialProps = async ({ query: { status, id: uid } }) => {
     const ids = res.data[
       status === "planned" ? "planned_projects" : "projects"
     ].map(l => l.project.id)
-    const projects = ids.length ? await getByIDs(ids) : { results: [] }
+    const projects = ids.length
+      ? await getByIDs(ids, { pageSize: 100 })
+      : { results: [] }
     return {
       content: res.data,
       projects,
