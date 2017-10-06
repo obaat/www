@@ -1,12 +1,22 @@
 import React, { Component } from "react"
-import withSizes from "react-sizes"
 import g from "glamorous"
 import Link from "next/link"
 import { css } from "glamor"
-import { Flex, Text, H6, Box, Relative, Link as UILink } from "../ui"
+import {
+  Fixed,
+  Absolute,
+  Flex,
+  Text,
+  H6,
+  Box,
+  Relative,
+  Border,
+  Link as UILink,
+} from "../ui"
 import { space } from "../styleHelpers"
 import { Set } from "react-powerplug"
-import ExecutionEnvironment from "exenv"
+import { Menu as MenuIcon, X } from "./SvgIcons"
+import { Toggle } from "react-powerplug"
 
 import enhanceWithClickOutside from "react-click-outside"
 
@@ -156,6 +166,42 @@ export const SecondaryMenu = enhanceWithClickOutside(
   },
 )
 
+const MobileTitle = g(Box)({})
+
+const MobileItem = g(Box)({})
+
+const MobileMenu = ({ items, onClose }) => (
+  <Fixed
+    top
+    left
+    bottom
+    palette="black"
+    invert
+    p={2}
+    style={{ overflowX: "scroll" }}
+  >
+    <Absolute top right onClick={onClose} m={2}>
+      <X size={14} />
+    </Absolute>
+    {items.map(i => (
+      <Box>
+        <Border bottom borderColor="gray7">
+          <Box color="gray7" py={1}>
+            {i.title}
+          </Box>
+        </Border>
+        {i.items.map(i2 => (
+          <Border bottom borderColor="gray5">
+            <Link as={i2.as} href={i2.href} prefetch>
+              <MobileItem py={1}>{i2.title}</MobileItem>
+            </Link>
+          </Border>
+        ))}
+      </Box>
+    ))}{" "}
+  </Fixed>
+)
+
 const Menu = ({ hideMenu = false, ...props }) => {
   const _menuItems = menuItems.map(
     i =>
@@ -167,41 +213,54 @@ const Menu = ({ hideMenu = false, ...props }) => {
     return null
   }
   return (
-    <Set initial={{ visibleMenu: null }}>
-      {({ set, get }) => (
-        <Flex>
-          {_menuItems.map(({ title, items, ...props }) => {
-            return get("visibleMenu") === title && items && items.length ? (
-              <SecondaryMenu
-                key={title}
-                items={items}
-                onMouseOut={() => set("visibleMenu", null)}
-                {...props}
-              >
-                <SelectedMenuItem key={title} {...props} color="#000" bg="#fff">
-                  <Text mb={0}>{title}</Text>
-                </SelectedMenuItem>
-              </SecondaryMenu>
-            ) : (
-              <MenuItem
-                key={title}
-                onMouseOver={() => set("visibleMenu", title)}
-                {...props}
-              >
-                <Text mb={0}>{title}</Text>
-              </MenuItem>
-            )
-          })}
-        </Flex>
-      )}
-    </Set>
+    <div>
+      <Box display={["block", "block", "block", "none"]}>
+        <Toggle initial={false}>
+          {({ on, toggle }) => (
+            <div>
+              <MenuIcon onClick={toggle} />
+              {on && <MobileMenu items={_menuItems} onClose={toggle} />}
+            </div>
+          )}
+        </Toggle>
+      </Box>
+      <Box display={["none", "none", "none", "block"]}>
+        <Set initial={{ visibleMenu: null }}>
+          {({ set, get }) => (
+            <Flex>
+              {_menuItems.map(({ title, items, ...props }) => {
+                return get("visibleMenu") === title && items && items.length ? (
+                  <SecondaryMenu
+                    key={title}
+                    items={items}
+                    onMouseOut={() => set("visibleMenu", null)}
+                    {...props}
+                  >
+                    <SelectedMenuItem
+                      key={title}
+                      {...props}
+                      color="#000"
+                      bg="#fff"
+                    >
+                      <Text mb={0}>{title}</Text>
+                    </SelectedMenuItem>
+                  </SecondaryMenu>
+                ) : (
+                  <MenuItem
+                    key={title}
+                    onMouseOver={() => set("visibleMenu", title)}
+                    {...props}
+                  >
+                    <Text mb={0}>{title}</Text>
+                  </MenuItem>
+                )
+              })}
+            </Flex>
+          )}
+        </Set>
+      </Box>
+    </div>
   )
 }
 
-const mapSizesToProps = ({ width }) => ({
-  hideMenu: width < 900,
-})
-
-export default (ExecutionEnvironment.canUseDOM
-  ? withSizes(mapSizesToProps)(Menu)
-  : Menu)
+export default Menu

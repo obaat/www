@@ -202,7 +202,7 @@ class IndexPage extends React.Component {
                   src={image.url}
                   key={i}
                 >
-                  <Centered pt="150px">
+                  <Centered pt="120px">
                     <PrismicRichText
                       source={lead}
                       forceType="heading6"

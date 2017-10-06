@@ -1,5 +1,12 @@
-import { space, color, width, fontSize } from "styled-system"
+import {
+  space,
+  color as ssColor,
+  width,
+  fontSize,
+  responsiveStyle,
+} from "styled-system"
 import get from "lodash/get"
+import isNil from "lodash/isNil"
 import g from "glamorous"
 
 export const clickable = ({ onClick }) => onClick && { cursor: "pointer" }
@@ -22,14 +29,33 @@ const palette = ({ palette, theme, invert }) => {
   }
 }
 
+const display = props => {
+  return responsiveStyle("display")(props)
+}
+
+const namedColor = ({ theme, invert, ...props }) => {
+  if (props.color) {
+    const palette = get(theme, [
+      "colors",
+      invert ? `${props.color}Invert` : props.color,
+    ])
+    if (palette && palette.length) {
+      console.log(ssColor({ ...props, color: palette[0] }))
+      return ssColor({ ...props, color: palette[0] })
+    }
+  }
+  return ssColor(props)
+}
+
 export const defaultTraits = [
   fontSize,
   bold,
   palette,
-  color,
+  namedColor,
   space,
   width,
   clickable,
+  display,
 ]
 
 export default (hocs = defaultTraits) => Component => g(Component)(...hocs)
