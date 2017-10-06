@@ -32,7 +32,7 @@ const aboutItems = [
   { title: "Our Team", href: "/team" },
   { title: "Trustees", href: "/trustees" },
   { title: "Our Partners", href: "/partners" },
-  // { title: "Financials", href: "/financials" },
+  { title: "Resources", href: "/resources" },
   { title: "Contact Us", href: "/contact" },
 ]
 

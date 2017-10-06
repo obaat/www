@@ -5,13 +5,13 @@ import PrismicRichText from "../components/PrismicRichText"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
 
-const Financials = ({ members = [], content = {} }) => {
+const Resources = ({ members = [], content = {} }) => {
   return <PrismicRichText color="#fff" source={content.description} />
 }
 
-Financials.getInitialProps = async () => {
+Resources.getInitialProps = async () => {
   const page = await getSingleton(types.FINANCIALS_PAGE_CONTENT)
   return { content: page.data }
 }
 
-export default pageWithTitle()(Financials)
+export default pageWithTitle()(Resources)
