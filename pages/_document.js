@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
             href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           />
           <link
-            href="https://fonts.googleapis.com/css?family=Hind+Vadodara:200,400,700|Open+Sans:400,600"
+            href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,700|Open+Sans:400,600"
             rel="stylesheet"
           />
           <meta name="referrer" content="origin" />
