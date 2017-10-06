@@ -1,7 +1,6 @@
 import React from "react"
 import { pageWithTitle } from "../hoc/page"
 import Link from "next/link"
-import Icon from "../components/Icon"
 import { HumanDate } from "../utils/date"
 import {
   getByUID,

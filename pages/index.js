@@ -41,6 +41,9 @@ import Statement from "../components/Statement"
 import hoc from "../ui/hoc"
 import { menuHeightDocked, themeCycle as sideColors } from "../utils/constants"
 import Icons from "../components/SvgIcons"
+import srcTheme from "../theme"
+import hexRgb from "hex-rgb"
+const bg = hexRgb(srcTheme.colors.gray7[0])
 
 const Count = hoc()(CountUp)
 
@@ -134,6 +137,17 @@ const Sub = g(hoc()(Subhead))({
   fontSize: [1, 1, 1, 3, 5],
 })
 
+const Centered = g(Flex)({
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+}).withProps({
+  align: "center",
+  justify: "center",
+})
+
 const BOX_WIDTH = [1, 1, 1, 1000]
 
 const transitionSpeed = 6 * 1000
@@ -183,10 +197,22 @@ class IndexPage extends React.Component {
             >
               {hero.map(({ image, lead, strapline, button_text, url }, i) => (
                 <BackgroundImage
+                  style={{ position: "relative" }}
                   ratio={[1, 1 / 2.5, 1 / 2.5, 1 / 2.5]}
                   src={image.url}
                   key={i}
-                />
+                >
+                  <Centered pt="150px">
+                    <PrismicRichText
+                      source={lead}
+                      forceType="heading6"
+                      color="gray8"
+                      bg={`rgba(${bg[0]},${bg[1]},${bg[2]},0.9)`}
+                      p={2}
+                      invert
+                    />
+                  </Centered>
+                </BackgroundImage>
               ))}
             </SlideShow>
           </Box>
