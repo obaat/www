@@ -197,21 +197,39 @@ class IndexPage extends React.Component {
             >
               {hero.map(({ image, lead, strapline, button_text, url }, i) => (
                 <BackgroundImage
-                  style={{ position: "relative" }}
+                  style={{ position: "relative", textAlign: "left" }}
                   ratio={[1, 1 / 2.5, 1 / 2.5, 1 / 2.5]}
                   src={image.url}
                   key={i}
                 >
-                  <Centered pt="120px">
+                  <Absolute bottom left mx={4} my={2}>
                     <PrismicRichText
+                      w={750}
                       source={lead}
-                      forceType="heading6"
+                      style={{
+                        textShadow: "0px 0px 3px rgba(0,0,0,0.5)",
+                        lineHeight: "1em",
+                      }}
+                      forceType="heading1"
+                      fontSize={70}
+                      bold={400}
+                      color="black"
+                      invert
+                      p={2}
+                    />
+                    <PrismicRichText
+                      w={2 / 3}
+                      source={strapline}
+                      style={{
+                        textShadow: "0px 0px 3px rgba(0,0,0,0.5)",
+                      }}
+                      bold={500}
+                      forceType="heading3"
                       color="gray8"
-                      bg={`rgba(${bg[0]},${bg[1]},${bg[2]},0.9)`}
                       p={2}
                       invert
                     />
-                  </Centered>
+                  </Absolute>
                 </BackgroundImage>
               ))}
             </SlideShow>
