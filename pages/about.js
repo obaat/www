@@ -13,7 +13,7 @@ const About = ({ content = {} }) => {
         {content.section.map((section, i) => (
           <Border bottom borderColor="gray4" mb={4}>
             <Flex>
-              <Box w={0.45} mr={i % 2 ? 4 : 0} ml={i % 4 ? 0 : 4}>
+              <Box w={0.45} mr={i % 2 ? 4 : 0} ml={i % 4 ? 0 : 4} mt={50}>
                 <BackgroundImage ratio={2 / 3} src={section.image.url} />
               </Box>
               <Box w={0.55} order={i % 2 ? 1 : -1} mb={2}>
