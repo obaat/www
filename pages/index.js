@@ -43,7 +43,7 @@ import { menuHeightDocked, themeCycle as sideColors } from "../utils/constants"
 import Icons from "../components/SvgIcons"
 import srcTheme from "../theme"
 import hexRgb from "hex-rgb"
-const bg = hexRgb(srcTheme.colors.gray7[0])
+const bg = hexRgb(srcTheme.colors.gray2[0])
 
 const Count = hoc()(CountUp)
 
@@ -202,17 +202,17 @@ class IndexPage extends React.Component {
                   src={image.url}
                   key={i}
                 >
-                  <Absolute bottom left mx={4} my={2}>
+                  <Absolute bottom left mx={4} my={3}>
                     <PrismicRichText
                       w={750}
                       source={lead}
                       style={{
-                        textShadow: "0px 0px 3px rgba(0,0,0,0.5)",
+                        textShadow: "0px 0px 3px rgba(0,0,0,0.3)",
                         lineHeight: "1em",
                       }}
                       forceType="heading1"
                       fontSize={70}
-                      bold={400}
+                      bold={500}
                       color="black"
                       invert
                       p={2}
@@ -220,14 +220,10 @@ class IndexPage extends React.Component {
                     <PrismicRichText
                       w={2 / 3}
                       source={strapline}
-                      style={{
-                        textShadow: "0px 0px 3px rgba(0,0,0,0.5)",
-                      }}
-                      bold={500}
                       forceType="heading3"
-                      color="gray8"
+                      color="black"
+                      bg={`rgba(${bg[0]},${bg[1]},${bg[2]},0.8)`}
                       p={2}
-                      invert
                     />
                   </Absolute>
                 </BackgroundImage>

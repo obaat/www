@@ -133,8 +133,7 @@ const AboutVolunteering = ({ opportunities }) => (
         <RangeDropdown start={curYear} end={curYear + 2} name="start_year" />
       </Box>
     </Flex>
-    <Label>Any additional information relevant to your application</Label>
-    <Small mt="-12px">i.e experience and education</Small>
+    <Label>Any questions or comments</Label>
     <Textarea name="additional_info" />
   </div>
 )
@@ -199,7 +198,7 @@ const aboutValidation = Yup.object().shape({
 const Done = props => (
   <Flex wrap="wrap" justify="center">
     <Checkbox palette="black" size={40} />
-    <Box ml={2} w={1}>
+    <Box ml={2}>
       <Subhead>Thanks for your interest</Subhead>
     </Box>
     <Box w={1}>We will get back to you shortly</Box>
