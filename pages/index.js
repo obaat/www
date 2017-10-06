@@ -320,7 +320,11 @@ class IndexPage extends React.Component {
         </Panel>
         <Panel py={4} direction="row" palette="cyan6" invert>
           <Box w={BOX_WIDTH}>
-            <Heading fontSize={35} bold={300} style={{ lineHeight: "1.2em" }}>
+            <Heading
+              fontSize={35}
+              bold={300}
+              style={{ fontStyle: "italic", lineHeight: "1.2em" }}
+            >
               It is what we make out of what we have, not what we are given,
               that separates one person from another.
             </Heading>
