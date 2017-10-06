@@ -40,6 +40,7 @@ const whatItems = [
   { title: "Completed Projects", href: "/projects?status=complete" },
   { title: "Planned Projects", href: "/projects?status=planned" },
   { title: "Sponsor a Child", href: "/sponsor" },
+  { title: "The Challenge", href: "/thechallenge" },
 ]
 
 const menuItems = [
