@@ -58,7 +58,7 @@ module.exports = {
       "/about": { page: "/about" },
       "/team": { page: "/team" },
       "/trustees": { page: "/trustees" },
-      "/financials": { page: "/financials" },
+      "/resources": { page: "/resources" },
       "/partners": { page: "/partners" },
       "/contact": { page: "/contact" },
       "/apply": { page: "/apply" },
