@@ -7,10 +7,23 @@ import SidebarHeader from "../components/SidebarHeader"
 import Link from "../components/Link"
 
 const About = ({ content = {} }) => {
+  console.log({ content })
   return (
     <Flex wrap="wrap">
       <Box w={[1, 1, 1, 2 / 3]} pr={[0, 0, 0, 3]}>
-        <PrismicRichText source={content.description} />
+        {content.section.map((section, i) => (
+          <Border bottom borderColor="gray4" mb={4}>
+            <Flex>
+              <Box w={0.45} mr={i % 2 ? 4 : 0} ml={i % 4 ? 0 : 4}>
+                <BackgroundImage ratio={2 / 3} src={section.image.url} />
+              </Box>
+              <Box w={0.55} order={i % 2 ? 1 : -1} mb={2}>
+                <PrismicRichText source={section.title} forceType="heading6" />
+                <PrismicRichText source={section.description} />
+              </Box>
+            </Flex>
+          </Border>
+        ))}
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} pr={[0, 0, 0, 3]}>
         <SidebarHeader>Related Information</SidebarHeader>
