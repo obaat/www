@@ -2180,9 +2180,9 @@ eslint-config-prettier@^2.6.0:
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-plugin-flowtype@^2.38.0:
-  version "2.38.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.38.0.tgz#9134849d6f92e434a9adca0215b6b9f49a3b24d7"
+eslint-plugin-flowtype@^2.39.0:
+  version "2.39.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.39.0.tgz#40d14d8799717d3fc90658ceb6fc2b6cdf2a5531"
   dependencies:
     lodash "^4.15.0"
 
@@ -2661,9 +2661,9 @@ form-data@~2.3.1:
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
 
-formik@^0.9.3:
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/formik/-/formik-0.9.3.tgz#9626e8fe4217211a6d406c7371b30de275e8d831"
+formik@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/formik/-/formik-0.9.4.tgz#e284620539c54d7d052c1950230b1e44c5acc6a4"
   dependencies:
     lodash.isequal "4.5.0"
     prop-types "^15.5.10"
@@ -4979,9 +4979,9 @@ react-ga@^2.3.5:
   dependencies:
     object-assign "^4.1.1"
 
-react-google-maps@^8.3.4:
-  version "8.3.4"
-  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.3.4.tgz#883ece40f092a191c32cd0cd475b0b15a44f0907"
+react-google-maps@^8.3.5:
+  version "8.3.5"
+  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.3.5.tgz#52a8fa9de0815a74027c6a0bc1a42a517c5e5a7c"
   dependencies:
     babel-runtime "^6.11.6"
     can-use-dom "^0.1.0"
@@ -5890,9 +5890,9 @@ styled-jsx@^2.0.0-beta.1:
     string-hash "1.1.1"
     stylis "3.2.18"
 
-styled-system@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-1.0.6.tgz#d99c8f819f380962388658afd2199f40b323df91"
+styled-system@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-1.0.7.tgz#3780625e800f903340d7742af3cf5ee43c1c023c"
   dependencies:
     prop-types "^15.6.0"
 

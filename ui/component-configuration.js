@@ -326,6 +326,17 @@ const components = [
     },
   },
   {
+    name: "HeadingAsDiv",
+    type: "H5",
+    props: {
+      is: "div",
+      fontSize: 2,
+    },
+    style: {
+      lineHeight: "1.25em",
+    },
+  },
+  {
     name: "Small",
     type: "Text",
     props: {

@@ -40,7 +40,6 @@ const namedColor = ({ theme, invert, ...props }) => {
       invert ? `${props.color}Invert` : props.color,
     ])
     if (palette && palette.length) {
-      console.log(ssColor({ ...props, color: palette[0] }))
       return ssColor({ ...props, color: palette[0] })
     }
   }

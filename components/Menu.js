@@ -218,10 +218,10 @@ const Menu = ({ hideMenu = false, ...props }) => {
       <Box display={["block", "block", "block", "none"]}>
         <Toggle initial={false}>
           {({ on, toggle }) => (
-            <div>
+            <Box mt={1}>
               <MenuIcon onClick={toggle} />
               {on && <MobileMenu items={_menuItems} onClose={toggle} />}
-            </div>
+            </Box>
           )}
         </Toggle>
       </Box>

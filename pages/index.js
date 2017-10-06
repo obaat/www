@@ -202,25 +202,26 @@ class IndexPage extends React.Component {
                   src={image.url}
                   key={i}
                 >
-                  <Absolute bottom left mx={4} my={3}>
+                  <Absolute bottom left right mx={4} my={3}>
                     <PrismicRichText
-                      w={750}
+                      w={[1, 1, 1, 1 / 2]}
                       source={lead}
                       style={{
                         textShadow: "0px 0px 3px rgba(0,0,0,0.3)",
                         lineHeight: "1em",
                       }}
-                      forceType="heading1"
-                      fontSize={70}
+                      forceType="headingasdiv"
+                      fontSize="4.5vw"
                       bold={500}
                       color="black"
                       invert
                       p={2}
                     />
                     <PrismicRichText
-                      w={2 / 3}
+                      w={[1, 1, 1, 2 / 3]}
                       source={strapline}
-                      forceType="heading3"
+                      forceType="headingasdiv"
+                      fontSize={[12, 12, 12, 24]}
                       color="black"
                       bg={`rgba(${bg[0]},${bg[1]},${bg[2]},0.8)`}
                       p={2}

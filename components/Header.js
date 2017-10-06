@@ -73,7 +73,7 @@ const scrolled = ({ scrolled }) =>
 const HeaderContainer = g(Flex)(
   {
     alignItems: "center",
-    zIndex: 99,
+    zIndex: 999999,
   },
   scrolled,
 )
@@ -93,7 +93,7 @@ export default class Header extends Component {
 
   handleScroll = event => {
     const { scrollTop } = document.scrollingElement || event.srcElement.body
-    this.setState({ scrolled: scrollTop > 100 })
+    this.setState({ scrolled: scrollTop > 70 })
   }
 
   render() {

@@ -17,6 +17,7 @@ import {
   Li,
   Ol,
   Ul,
+  HeadingAsDiv,
 } from "../ui"
 
 const ourTypes = {
@@ -26,6 +27,7 @@ const ourTypes = {
   heading4: H4,
   heading5: H5,
   heading6: H6,
+  headingasdiv: HeadingAsDiv,
   small: Small,
   paragraph: Text,
   "list-item": Li,
