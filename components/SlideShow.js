@@ -157,9 +157,11 @@ export default class SlideShow extends Component {
         this.setState({ zoom: false })
         break
       case "left":
+        this.pause()
         this.prevSlide()
         break
       case "right":
+        this.pause()
         this.nextSlide()
         break
       default:

@@ -272,7 +272,7 @@ class IndexPage extends React.Component {
               autoplay
               controlColor={theme.colors.gray1[1]}
               hideZoom
-              autoplaySpeed={transitionSpeed}
+              autoplaySpeed={transitionSpeed * 2}
             >
               {chunkedStatements.map((statements, i) => (
                 <Flex key={i} wrap="wrap" justify="center">
