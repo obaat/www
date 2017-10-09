@@ -1,9 +1,8 @@
 import React from "react"
-import { Switch, Route, Link } from "react-static"
+import { Switch, Route, Link, getRouteProps } from "react-static"
 import { pageWithTitle } from "../hoc/page"
 import { HumanDate } from "../utils/date"
 import Project, { data as projectData } from "./parts/project"
-import { getRouteProps } from "react-static"
 
 import {
   getByUID,
