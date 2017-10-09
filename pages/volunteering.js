@@ -146,7 +146,10 @@ export default _Volunteering
 
 export const routes = ({ match }) => (
   <Switch>
-    <Route path={match.url} exact component={getRouteProps(_Projects)} />
-    <Route path={`${match.url}/:uid`} component={getRouteProps(Project)} />
+    <Route path={match.url} exact component={getRouteProps(_Volunteering)} />
+    <Route
+      path={`${match.url}/:uid`}
+      component={getRouteProps(VolunteeringOpp)}
+    />
   </Switch>
 )
