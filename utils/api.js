@@ -39,24 +39,25 @@ const apiBuilder = memoizee(
   { maxAge: 60 * 30 },
 )
 
-const getSingleton = async type => {
+const getSingleton = memoizee(async type => {
   const api = await apiBuilder()
   return await api.getSingle(type)
-}
+})
 
-const getByIDs = async (ids, opts) => {
+const getByIDs = memoizee(async (ids, opts) => {
   const api = await apiBuilder()
   const res = await api.getByIDs(ids, opts)
   return res
-}
+})
 
-const getByUID = type => async (id, options) => {
-  const api = await apiBuilder()
-  const res = await api.getByUID(type, id, options)
-  return res
-}
+const getByUID = type =>
+  memoizee(async (id, options) => {
+    const api = await apiBuilder()
+    const res = await api.getByUID(type, id, options)
+    return res
+  })
 
-const getByType = async type => {
+const getByType = memoizee(async type => {
   const api = await apiBuilder()
 
   const res = await api.query(Prismic.Predicates.at("document.type", type), {
@@ -65,7 +66,7 @@ const getByType = async type => {
   })
 
   return res
-}
+})
 
 module.exports = {
   types,

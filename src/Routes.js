@@ -11,15 +11,16 @@ import importAll from "import-all.macro"
 const _pages = importAll.sync("../pages/*.js")
 import path from "path"
 
+import map from "lodash/map"
 import mapKeys from "lodash/mapKeys"
 import camelCase from "lodash/camelCase"
 import upperFirst from "lodash/upperFirst"
 import { withPalette } from "../ui/component-configuration"
 
-const pageComponents = mapKeys(_pages, (v, k) => {
-  const file = path.basename(k, ".js")
-  return upperFirst(camelCase(file))
-})
+const pageComponents = map(_pages, (v, k) => ({
+  path: v.path ? v.path : "/" + path.basename(k, ".js"),
+  ...v,
+}))
 
 // const repeaters = [
 //   { type: types.VOLUNTEERING, url: "/volunteering" },
@@ -29,48 +30,32 @@ const pageComponents = mapKeys(_pages, (v, k) => {
 //   { type: types.GALLERY, url: "/gallery" },
 // ]
 
-export const data = [
-  {
-    path: "/",
-    getProps: pageComponents.Home.data,
-  },
-  {
-    path: "/about",
-    getProps: pageComponents.About.data,
-  },
-]
+export const data = pageComponents.map(p => ({
+  getProps: p.data,
+  ...p,
+}))
 
-export const pages = [
-  {
-    path: "/",
-    Component: getRouteProps(pageComponents.Home.default),
-  },
-  {
-    path: "/about",
-    Component: getRouteProps(pageComponents.About.default),
-  },
-  // { path: "/volunteering", Component: Volunteering, children: [] },
-  // { path: "/projects", Component: Projects, children: [] },
-  // { path: "/about", Component: About  },
-  // { path: "/team", Component: Team  },
-  // { path: "/trustees", Component:  },
-  // { path: "/resources", Component:  },
-  // { path: "/partners", Component:  },
-  // { path: "/contact", Component:  },
-  // { path: "/apply", Component:  },
-  // { path: "/spreadtheword", Component:  },
-  // { path: "/shop", Component:  },
-]
-
-// extract data from getInitialProps
-// export const data =
+export const pages = pageComponents.map(p => ({
+  component: p.routes ? getRouteProps(p.routes) : getRouteProps(p.default),
+  exact: p.routes ? false : true,
+  ...p,
+}))
+// { path: "/volunteering", Component: Volunteering, children: [] },
+// { path: "/projects", Component: Projects, children: [] },
+// { path: "/about", Component: About  },
+// { path: "/team", Component: Team  },
+// { path: "/trustees", Component:  },
+// { path: "/resources", Component:  },
+// { path: "/partners", Component:  },
+// { path: "/contact", Component:  },
+// { path: "/apply", Component:  },
+// { path: "/spreadtheword", Component:  },
+// { path: "/shop", Component:  },
 
 export default () => (
   <Router>
     <Switch>
-      {pages.map(({ path, Component }) => (
-        <Route key={path} exact path={path} component={Component} />
-      ))}
+      {pages.map(props => <Route key={path} {...props} />)}
       <Redirect to="/" />
     </Switch>
   </Router>

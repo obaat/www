@@ -184,6 +184,9 @@ const components = [
       ":hover": {
         textDecoration: "underline",
       },
+      ":visited": {
+        color: props.foreground || "inherit",
+      },
     })),
   },
   {

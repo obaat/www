@@ -61,11 +61,14 @@ const oneOpen = compose(
     "setOpenSection",
     ({ initialOpen }) => (isNil(initialOpen) ? null : initialOpen),
   ),
-  withHandlers(({ router }) => {
+  withHandlers(({ history, location }) => {
     return {
       toggleOpen: ({ openSection, setOpenSection }) => curIndex => id => e => {
         setOpenSection(openSection === curIndex ? null : curIndex)
-        window.setTimeout(() => router.replace(router.pathname + "#" + id), 20)
+        window.setTimeout(
+          () => history.replace(location.pathname + "#" + id),
+          20,
+        )
       },
     }
   }),

@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "postinstall": "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg",
+    "postinstall":
+      "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg",
     "start": "react-static start",
     "build": "react-static build",
+    "export": "react-static build",
     "serve": "serve dist -p 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -98,10 +100,7 @@
         ]
       }
     },
-    "presets": [
-      "next/babel",
-      "flow"
-    ],
+    "presets": ["next/babel", "flow"],
     "plugins": [
       [
         "inline-react-svg",
@@ -122,10 +121,7 @@
       ],
       "babel-macros",
       "sitrep",
-      [
-        "transform-define",
-        "./config.js"
-      ]
+      ["transform-define", "./config.js"]
     ]
   }
 }

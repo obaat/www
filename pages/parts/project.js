@@ -1,18 +1,18 @@
 import React from "react"
-import { pageWithTitle } from "../hoc/page"
-import { HumanDate } from "../utils/date"
+import { pageWithTitle } from "../../hoc/page"
+import { HumanDate } from "../../utils/date"
 import {
   getByUID,
   getByIDs,
   getSingleton,
   getByType,
   types,
-} from "../utils/api"
+} from "../../utils/api"
 
-import SidebarHeader from "../components/SidebarHeader"
-import PrismicRichText from "../components/PrismicRichText"
-import PrismicSlice from "../components/PrismicSlice"
-import SlideShow from "../components/SlideShow"
+import SidebarHeader from "../../components/SidebarHeader"
+import PrismicRichText from "../../components/PrismicRichText"
+import PrismicSlice from "../../components/PrismicSlice"
+import SlideShow from "../../components/SlideShow"
 import {
   Absolute,
   Relative,
@@ -21,9 +21,9 @@ import {
   Flex,
   Box,
   Image,
-} from "../ui"
-import Map from "../components/GoogleMap"
-import UILink from "../components/Link"
+} from "../../ui"
+import Map from "../../components/GoogleMap"
+import UILink from "../../components/Link"
 
 const Partner = ({ data: { title, description, logo, website }, uid }) => {
   const content = (
@@ -101,7 +101,7 @@ const Project = ({ content = {}, partners }) => {
   )
 }
 
-export const data = async () => {
+export const data = uid => async () => {
   const res = await getByUID(types.PROJECT)(uid)
   const partners = await getByIDs(res.data.partners.map(l => l.partner.id))
   return {

@@ -4,27 +4,38 @@ import { renderStatic } from "glamor/server"
 import mapValues from "lodash/mapValues"
 import { getByType, types } from "./utils/api"
 import { data } from "./src/Routes"
+const { map } = require("asyncro")
 
 export default {
   getRoutes: async () => {
     const volunteering = await getByType(types.VOLUNTEERING)
+    const allPages = {
+      volunteering: volunteering.results,
+    }
+    const augment = target => async (...args) => {
+      const rest = await target({ ...allPages, ...args })
+      return {
+        ...allPages,
+        ...rest,
+      }
+    }
 
-    const mappedData = data.map(v => {
-      const { getProps } = v
+    const mappedData = await map(data, async v => {
+      const { getProps, children: generateChildren } = v
+      const children = generateChildren && (await generateChildren(allPages))
+
       return {
         ...v,
-        getProps: async (...args) => {
-          const rest = await getProps(...args)
-          return {
-            volunteering: volunteering.results,
-            opportunities: volunteering.results,
-            ...rest,
-          }
-        },
+        children:
+          children &&
+          children.map(c => ({
+            ...c,
+            getProps: augment(c.getProps),
+          })),
+        getProps: augment(getProps),
       }
     })
 
-    console.log({ mappedData })
     return mappedData
   },
   postRenderMeta: async html => ({

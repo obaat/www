@@ -1,23 +1,23 @@
 import React from "react"
-import Button from "../components/Button"
 import g from "glamorous"
-import Link from "../components/Link"
-import { ArrowRight } from "../components/SvgIcons"
+import Button from "../../components/Button"
+import Link from "../../components/Link"
+import { ArrowRight } from "../../components/SvgIcons"
 import {
   getByUID,
   getByIDs,
   getSingleton,
   getByType,
   types,
-} from "../utils/api"
+} from "../../utils/api"
 
-import { pageWithTitle } from "../hoc/page"
-import PrismicRichText from "../components/PrismicRichText"
-import SlideShow from "../components/SlideShow"
-import SidebarHeader from "../components/SidebarHeader"
+import { pageWithTitle } from "../../hoc/page"
+import PrismicRichText from "../../components/PrismicRichText"
+import SlideShow from "../../components/SlideShow"
+import SidebarHeader from "../../components/SidebarHeader"
 import PrismicSlice, {
   renderers as sliceRenderers,
-} from "../components/PrismicSlice"
+} from "../../components/PrismicSlice"
 import {
   Absolute,
   Relative,
@@ -30,7 +30,7 @@ import {
   Subhead,
   Border,
   H6,
-} from "../ui"
+} from "../../ui"
 
 const Overlay = g(Absolute)({
   pointerEvents: "none",
@@ -120,8 +120,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
   )
 }
 
-export const data = async ({ query }) => {
-  const uid = query.id
+export const data = uid => async () => {
   const res = await getByUID(types.VOLUNTEERING)(uid)
   const locations = await getByIDs(res.data.locations.map(l => l.location.id))
   return {

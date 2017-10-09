@@ -1,7 +1,10 @@
 import React from "react"
+import { Switch, Route, Link } from "react-static"
 import { pageWithTitle } from "../hoc/page"
-import { Link } from "react-static"
 import { HumanDate } from "../utils/date"
+import Project, { data as projectData } from "./parts/project"
+import { getRouteProps } from "react-static"
+
 import {
   getByUID,
   getByIDs,
@@ -30,6 +33,7 @@ const ProjectPreview = ({ uid, data, slug }) => (
       <Link to={`/projects/${uid}`}>
         <BackgroundImage
           bg="#000"
+          color="#fff"
           ratio={1 / 1.5}
           src={get(data, "listview_image.url", get(data, "header_image.url"))}
         >
@@ -47,6 +51,9 @@ const ProjectPreview = ({ uid, data, slug }) => (
 )
 
 const Projects = ({ projects, content }) => {
+  if (!content) {
+    return <div>No Data</div>
+  }
   return (
     <div>
       <PrismicRichText source={content.description} />
@@ -61,6 +68,7 @@ const Projects = ({ projects, content }) => {
 }
 
 export const data = async () => {
+  const status = ""
   const res = await getSingleton(types.PROJECT_PAGE_CONTENT)
   const ids = res.data[
     status === "planned" ? "planned_projects" : "projects"
@@ -74,6 +82,21 @@ export const data = async () => {
   }
 }
 
-export default pageWithTitle({
-  route: [{ title: "Projects", href: "/projects" }],
-})(Projects)
+export const children = async (...args) => {
+  const { projects } = await data(...args)
+  const pages = projects.results.map(({ uid }) => ({
+    path: "/" + uid,
+    getProps: projectData(uid),
+  }))
+  return pages
+}
+
+const _Projects = pageWithTitle()(Projects)
+export default _Projects
+
+export const routes = ({ match }) => (
+  <Switch>
+    <Route path={match.url} exact component={getRouteProps(_Projects)} />
+    <Route path={`${match.url}/:uid`} component={getRouteProps(Project)} />
+  </Switch>
+)

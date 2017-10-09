@@ -3,6 +3,10 @@ import Button from "../components/Button"
 import ApplyNow from "../components/ApplyNow"
 import g from "glamorous"
 import Link from "../components/Link"
+import { Switch, Route, getRouteProps } from "react-static"
+import VolunteeringOpp, {
+  data as oppData,
+} from "./parts/volunteering_opportunity"
 import { ArrowRight } from "../components/SvgIcons"
 import {
   getByUID,
@@ -58,16 +62,16 @@ const Section = ({ title, id, ...props }) =>
 
 const Opportunity = ({ uid, data }) => (
   <Box>
-    <Link to={`/volunteering/${uid}`}>
-      <Flex>
-        <Box>
+    <Flex inline justify="center">
+      <Box>
+        <Link to={`/volunteering/${uid}`}>
           <PrismicRichText forceType="unformatted" source={data.title} />
-        </Box>
-        <Box pl={1}>
-          <ArrowRight color="#000" size={12} />
-        </Box>
-      </Flex>
-    </Link>
+        </Link>
+      </Box>
+      <Box pl={1}>
+        <ArrowRight color="#000" size={12} />
+      </Box>
+    </Flex>
   </Box>
 )
 
@@ -90,7 +94,7 @@ const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
   }
 }
 
-const Volunteering = ({ content, opportunities, additionalData }) => {
+const Volunteering = ({ content, volunteering, additionalData }) => {
   const quotes = content.body.find(s => s.slice_type === "quotes")
   const accordionItems = content.body
     .filter(s => s.slice_type !== "quotes")
@@ -107,11 +111,7 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
         <SidebarHeader>Available Placements</SidebarHeader>
-        {opportunities &&
-          opportunities.results &&
-          opportunities.results.map((props, i) => (
-            <Opportunity key={i} {...props} />
-          ))}
+        {volunteering.map((props, i) => <Opportunity key={i} {...props} />)}
         <H6 mt={2}>Volunteer Experiences</H6>
         {quotes && <Quotes items={quotes.items} data={additionalData} />}
       </Box>
@@ -127,12 +127,26 @@ export const data = async ({ query }) => {
   return {
     content: res.data,
     additionalData,
-    opportunities,
-    meta: res,
   }
 }
 
-export default pageWithTitle({
+export const children = async ({ volunteering }) => {
+  return volunteering.map(({ uid }) => ({
+    path: "/" + uid,
+    getProps: oppData(uid),
+  }))
+}
+
+const _Volunteering = pageWithTitle({
   route: [{ title: "Volunteering", href: "/volunteering" }],
   withApply: true,
 })(Volunteering)
+
+export default _Volunteering
+
+export const routes = ({ match }) => (
+  <Switch>
+    <Route path={match.url} exact component={getRouteProps(_Projects)} />
+    <Route path={`${match.url}/:uid`} component={getRouteProps(Project)} />
+  </Switch>
+)

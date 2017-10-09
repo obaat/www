@@ -70,6 +70,9 @@ const Link = g(RawLink)(
       cursor: "pointer",
       color: "inherit",
     },
+    ":visited": {
+      color: "inherit",
+    },
   },
   space,
 )

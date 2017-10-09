@@ -1,8 +1,7 @@
 import React from "react"
 import g from "glamorous"
-import { Link } from "react-static"
 import { Home, ArrowRight } from "./SvgIcons"
-import { Flex, Box, H6, Text } from "../ui"
+import { Flex, Box, H6, Text, Link } from "../ui"
 
 const Bread = g(Flex)({})
 
@@ -33,7 +32,7 @@ const LinkCrumb = ({ href, ...props }) =>
 
 const BreadCrumbs = ({ route }) => (
   <Bread mb={2} align="center">
-    <LinkCrumb href="/" mb="-4px">
+    <LinkCrumb href="/">
       <Home palette="black" size={13} />
     </LinkCrumb>
     {route.map(({ title, href }, i) => [

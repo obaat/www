@@ -314,6 +314,8 @@ class IndexPage extends React.Component {
 const byId = things =>
   things.results.reduce((a, t) => ({ ...a, [t.id]: t.data }), {})
 
+export const path = "/"
+
 export const data = async () => {
   const res = await getSingleton(types.HOME)
   const news = await getSingleton(types.NEWS)
