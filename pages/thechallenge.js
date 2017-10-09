@@ -12,7 +12,7 @@ const TheChallenge = ({ members = [], content = {} }) => (
   </Flex>
 )
 
-TheChallenge.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.THE_CHALLENGE_PAGE_CONTENT)
   return { content: page && page.data }
 }

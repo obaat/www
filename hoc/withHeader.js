@@ -6,7 +6,6 @@ import ApplyNow from "../components/ApplyNow"
 import get from "lodash/get"
 import g from "glamorous"
 import BreadCrumbs from "../components/Breadcrumbs"
-import { loadGetInitialProps } from "next/dist/lib/utils"
 import { Absolute, Heading } from "../ui"
 
 const Title = g(Heading)({
@@ -15,10 +14,6 @@ const Title = g(Heading)({
 
 export default (config = {}) => ComposedComponent =>
   class WithPageTitle extends Component {
-    static async getInitialProps(ctx) {
-      return loadGetInitialProps(ComposedComponent, ctx)
-    }
-
     render() {
       const { content, title: _title } = this.props
       const title = get(content, "title.0.text", _title || config.title)

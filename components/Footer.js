@@ -53,7 +53,7 @@ export default () => (
     </Flex>
     <Flex palette="gray9" invert>
       <Border w={1} top borderColor="gray6" px={3} pt={2} pb={0}>
-        <UILink href="http://papercreatures.com">
+        <UILink to="http://papercreatures.com">
           <Box>
             <PaperCreatures viewBox="80 80 250 250" size={60} />
           </Box>

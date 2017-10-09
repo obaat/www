@@ -20,7 +20,7 @@ const Gallery = ({ content = {} }) => {
   )
 }
 
-Gallery.getInitialProps = async ({ query: { id } }) => {
+export const data = async ({ query: { id } }) => {
   const res = await getByUID(types.GALLERY)(id)
   return { content: res.data }
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import g from "glamorous"
-import { withRouter } from "next/router"
+import { withRouter } from "react-static"
 import { ArrowDown as IconArrowDown, ArrowUp as IconArrowUp } from "./SvgIcons"
 import { compose, withState, withHandlers } from "recompose"
 import isNil from "lodash/isNil"

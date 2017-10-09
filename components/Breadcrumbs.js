@@ -1,6 +1,6 @@
 import React from "react"
 import g from "glamorous"
-import Link from "next/link"
+import { Link } from "react-static"
 import { Home, ArrowRight } from "./SvgIcons"
 import { Flex, Box, H6, Text } from "../ui"
 
@@ -22,10 +22,8 @@ const Crumb = g(Box)({})
 
 const LinkCrumb = ({ href, ...props }) =>
   href ? (
-    <Link href={href}>
-      <A onClick={href}>
-        <Crumb bold={200} {...props} />
-      </A>
+    <Link to={href}>
+      <Crumb bold={200} {...props} />
     </Link>
   ) : (
     <NotA>

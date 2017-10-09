@@ -1,10 +1,9 @@
 import React from "react"
 import Button from "../components/Button"
-import Link from "next/link"
-import { ButtonOutlineFilled } from "../ui"
+import { ButtonOutlineFilled, Link } from "../ui"
 
 export default () => (
-  <Link as="/apply" href="/apply" prefetch>
+  <Link to="/apply">
     <Button
       bold
       invert

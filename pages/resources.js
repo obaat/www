@@ -9,7 +9,7 @@ const Resources = ({ members = [], content = {} }) => {
   return <PrismicRichText color="#fff" source={content.description} />
 }
 
-Resources.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.FINANCIALS_PAGE_CONTENT)
   return { content: page.data }
 }

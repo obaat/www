@@ -11,7 +11,7 @@ const About = ({ content = {} }) => {
     <Flex wrap="wrap">
       <Box w={1}>
         {content.section.map((section, i) => (
-          <Border bottom borderColor="gray4" mb={4}>
+          <Border bottom borderColor="gray4" key={i} mb={4}>
             <Flex>
               <Box w={0.45} mr={i % 2 ? 4 : 0} ml={i % 4 ? 0 : 4} mt={50}>
                 <BackgroundImage ratio={2 / 3} src={section.image.url} />
@@ -28,7 +28,7 @@ const About = ({ content = {} }) => {
   )
 }
 
-About.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.ABOUT_PAGE_CONTENT)
   return { content: page.data }
 }

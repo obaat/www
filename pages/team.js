@@ -48,7 +48,7 @@ const Team = ({ members = [], content = {} }) => {
   )
 }
 
-Team.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.TEAM_PAGE_CONTENT)
   const members = await getByIDs(page.data.team_members.map(l => l.member.id))
   return { members: members.results, content: page.data }

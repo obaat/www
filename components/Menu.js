@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import g from "glamorous"
-import Link from "next/link"
 import { css } from "glamor"
 import {
+  Link as RawLink,
   Fixed,
   Absolute,
   Flex,
@@ -11,7 +11,6 @@ import {
   Box,
   Relative,
   Border,
-  Link as UILink,
 } from "../ui"
 import { space } from "../styleHelpers"
 import { Set } from "react-powerplug"
@@ -23,8 +22,7 @@ import enhanceWithClickOutside from "react-click-outside"
 const toVolunteeringMenu = src =>
   src.map(({ uid, data: { title } }) => ({
     title: title[0].text,
-    as: `/volunteering/${uid}`,
-    href: `/volunteering?id=${uid}`,
+    href: `/volunteering/${uid}`,
   }))
 
 const aboutItems = [
@@ -61,7 +59,8 @@ const menuItems = [
     ],
   },
 ]
-const A = g.a(
+
+const Link = g(RawLink)(
   {
     textTransform: "uppercase",
     textDecoration: "none",
@@ -75,41 +74,28 @@ const A = g.a(
   space,
 )
 
+const LinkLike = Link.withComponent("div")
+
 const MenuContainer = g(Box)({
   borderLeft: "1px solid transparent",
   borderRight: "1px solid transparent",
   borderTop: "1px solid transparent",
 })
 
-export const MenuItem = ({
-  items,
-  as,
-  onMouseOver,
-  href,
-  children,
-  ...props
-}) => {
+export const MenuItem = ({ items, onMouseOver, href, children, ...props }) => {
   const item = (
-    <A>
-      <MenuContainer
-        px={2}
-        py={1}
-        onTouchStart={onMouseOver}
-        onMouseOver={onMouseOver}
-        {...props}
-      >
-        {children}
-      </MenuContainer>
-    </A>
+    <MenuContainer
+      px={2}
+      py={1}
+      onTouchStart={onMouseOver}
+      onMouseOver={onMouseOver}
+      {...props}
+    >
+      {children}
+    </MenuContainer>
   )
 
-  return href ? (
-    <Link as={as} href={href} prefetch>
-      {item}
-    </Link>
-  ) : (
-    item
-  )
+  return href ? <Link to={href}>{item}</Link> : <LinkLike>{item}</LinkLike>
 }
 
 const SelectedMenuItem = g(MenuItem)({
@@ -193,7 +179,7 @@ const MobileMenu = ({ items, onClose }) => (
         </Border>
         {i.items.map(i2 => (
           <Border bottom borderColor="gray5">
-            <Link as={i2.as} href={i2.href} prefetch>
+            <Link to={i2.href}>
               <MobileItem py={1}>{i2.title}</MobileItem>
             </Link>
           </Border>

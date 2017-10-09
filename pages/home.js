@@ -5,7 +5,7 @@ import theme from "../theme"
 import get from "lodash/get"
 import chunk from "lodash/chunk"
 import Helmet from "react-helmet"
-import Link from "next/link"
+import { Link } from "react-static"
 import CountUp, { startAnimation } from "react-countup"
 import VisibilitySensor from "react-visibility-sensor"
 import NewsMasonry from "../components/NewsMasonry"
@@ -100,7 +100,7 @@ const ActionButton = ({ prismicUrl, as, href, ...props }) => {
   const resolved = href ? href : toRelativeUrl(prismicUrl)
   const local = href ? href : toLocalRelativeUrl(prismicUrl)
   return (
-    <Link href={local} as={resolved} prefetch>
+    <Link to={resolved}>
       <LeadButton {...props} as={as || ButtonCircle} />
     </Link>
   )
@@ -314,7 +314,7 @@ class IndexPage extends React.Component {
 const byId = things =>
   things.results.reduce((a, t) => ({ ...a, [t.id]: t.data }), {})
 
-IndexPage.getInitialProps = async () => {
+export const data = async () => {
   const res = await getSingleton(types.HOME)
   const news = await getSingleton(types.NEWS)
   const { quotes } = res.data

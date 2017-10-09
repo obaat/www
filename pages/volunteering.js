@@ -58,7 +58,7 @@ const Section = ({ title, id, ...props }) =>
 
 const Opportunity = ({ uid, data }) => (
   <Box>
-    <Link href={`/volunteering/?id=${uid}`} as={`/volunteering/${uid}`}>
+    <Link to={`/volunteering/${uid}`}>
       <Flex>
         <Box>
           <PrismicRichText forceType="unformatted" source={data.title} />
@@ -69,42 +69,6 @@ const Opportunity = ({ uid, data }) => (
       </Flex>
     </Link>
   </Box>
-)
-
-const Location = ({ uid, data }) => (
-  <Relative mb={2}>
-    <SlideShow hidePaging controlSize={18}>
-      {data.image_gallery.map(({ image, description }, i) => (
-        <BackgroundImage src={image.url} key={i} />
-      ))}
-    </SlideShow>
-    <Overlay>
-      {data.title && (
-        <PrismicRichText
-          forceType="heading5"
-          color="#fff"
-          source={data.title}
-        />
-      )}
-    </Overlay>
-    <Absolute bottom right p={1}>
-      <Link href={`/location/?id=${uid}`} as={`/location/${uid}`}>
-        <Button
-          palette="black"
-          color="#fff"
-          bg="rgba(0,0,0,0.3)"
-          invert
-          icon="ArrowRight"
-          iconSize={12}
-          w={1}
-          py={1}
-          as={ButtonOutline}
-        >
-          More
-        </Button>
-      </Link>
-    </Absolute>
-  </Relative>
 )
 
 const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
@@ -155,73 +119,20 @@ const Volunteering = ({ content, opportunities, additionalData }) => {
   )
 }
 
-const sidebarTypes = { image_gallery: true }
-
-const VolunteeringOpportunity = ({ content, locations }) => {
-  const body = content.body || []
-  const sidebarSlices = body
-    .filter(b => sidebarTypes[b.slice_type])
-    .map((props, i) => <PrismicSlice key={i} {...props} />)
-  const mainSlices = body
-    .filter(b => !sidebarTypes[b.slice_type])
-    .map((props, i) => <PrismicSlice key={i} {...props} />)
-  return (
-    <Flex>
-      <Box w={[1, 1, 1, 2 / 3]} pr={3}>
-        <Section
-          id="about"
-          title="About the Programme"
-          source={content.description}
-        />
-        {mainSlices}
-      </Box>
-      <Box w={[1, 1, 1, 1 / 3]} px={2} pt={2}>
-        {locations.results &&
-          locations.results.length > 0 && (
-            <SidebarHeader>Available Locations</SidebarHeader>
-          )}
-        {locations.results.map((props, i) => <Location key={i} {...props} />)}
-        {sidebarSlices}
-      </Box>
-    </Flex>
-  )
-}
-
-const Page = ({ opportunity, ...props }) =>
-  opportunity ? (
-    <VolunteeringOpportunity {...props} />
-  ) : (
-    <Volunteering {...props} />
-  )
-
-Page.getInitialProps = async ({ query }) => {
-  const opportunities = await getByType(types.VOLUNTEERING)
-  if (query.id) {
-    const uid = query.id
-    const res = await getByUID(types.VOLUNTEERING)(uid)
-    const locations = await getByIDs(res.data.locations.map(l => l.location.id))
-    return {
-      content: res.data,
-      meta: res,
-      opportunities,
-      locations,
-      opportunity: true,
-    }
-  } else {
-    const res = await getSingleton(types.VOLUNTEERING_PAGE_CONTENT)
-    const quotes = res.data.body.find(s => s.slice_type === "quotes")
-    const ids = (quotes && quotes.items.map(l => l.quote.id)) || []
-    const additionalData = ids.length ? await getByIDs(ids) : { results: [] }
-    return {
-      content: res.data,
-      additionalData,
-      opportunities,
-      meta: res,
-    }
+export const data = async ({ query }) => {
+  const res = await getSingleton(types.VOLUNTEERING_PAGE_CONTENT)
+  const quotes = res.data.body.find(s => s.slice_type === "quotes")
+  const ids = (quotes && quotes.items.map(l => l.quote.id)) || []
+  const additionalData = ids.length ? await getByIDs(ids) : { results: [] }
+  return {
+    content: res.data,
+    additionalData,
+    opportunities,
+    meta: res,
   }
 }
 
 export default pageWithTitle({
   route: [{ title: "Volunteering", href: "/volunteering" }],
   withApply: true,
-})(Page)
+})(Volunteering)

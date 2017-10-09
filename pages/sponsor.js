@@ -12,7 +12,7 @@ const Sponsor = ({ members = [], content = {} }) => (
   </Flex>
 )
 
-Sponsor.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.SPONSOR_PAGE_CONTENT)
   return { content: page && page.data }
 }

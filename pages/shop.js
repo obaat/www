@@ -12,7 +12,7 @@ const Shop = ({ members = [], content = {} }) => (
   </Flex>
 )
 
-Shop.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.SHOP_PAGE_CONTENT)
   return { content: page && page.data }
 }

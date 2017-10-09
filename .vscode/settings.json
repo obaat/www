@@ -1,0 +1,24 @@
+{
+  "search.exclude": {
+    ".cache/": true,
+    ".DS_Store": true,
+    "node_modules/": true,
+    "coverage/": true,
+    "out/": true,
+    "secrets.json": true,
+    ".next/": true,
+    ".webpack": true,
+    ".serverless": true
+  },
+  "files.exclude": {
+    ".cache/": true,
+    ".DS_Store": true,
+    "node_modules/": true,
+    "coverage/": true,
+    "out/": true,
+    ".next/": true,
+    ".webpack": true,
+    ".serverless": true
+  },
+  "editor.formatOnSave": true
+}

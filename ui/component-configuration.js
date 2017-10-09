@@ -2,6 +2,7 @@ import React from "react"
 import { Flex, Box } from "./Grid"
 import get from "lodash/get"
 import toArray from "lodash/toArray"
+import { Link } from "react-static"
 import {
   space,
   color as ssColor,
@@ -171,10 +172,9 @@ const components = [
   },
   {
     name: "Link",
-    type: "a",
+    type: Link,
     props: {
       palette: "cyan6",
-      bold: 700,
     },
     style: withPalette(props => ({
       backgroundColor: "inherit",

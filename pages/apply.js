@@ -384,7 +384,7 @@ const Apply = ({
   )
 }
 
-Apply.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.APPLY_PAGE_CONTENT)
   const opportunities = await getByType(types.VOLUNTEERING)
   const volunteering = await getSingleton(types.VOLUNTEERING_PAGE_CONTENT)

@@ -23,7 +23,7 @@ const Location = ({ content = {} }) => {
   )
 }
 
-Location.getInitialProps = async ({ query }) => {
+export const data = async ({ query }) => {
   const location = await getByUID(types.VOLUNTEERING_OPPORTUNITY_LOCATION)(
     query.id,
   )

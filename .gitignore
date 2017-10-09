@@ -10,4 +10,4 @@ secrets.json
 .next/
 .webpack
 .serverless
-.vscode/
+.vscode/dist/

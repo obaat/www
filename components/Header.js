@@ -6,7 +6,7 @@ import { css } from "glamor"
 import { Flex, Box } from "../ui"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
 import Menu, { MenuItem, SecondaryMenu } from "./Menu"
-import Link from "next/link"
+import { Link } from "react-static"
 import LogoIcon from "../svg/logo.svg"
 import withProps from "recompose/withProps"
 import { Home } from "./SvgIcons"
@@ -103,7 +103,7 @@ export default class Header extends Component {
       <Container>
         <Fixed>
           <HeaderContainer wrap="wrap" px={3} scrolled={scrolled}>
-            <Link href="/">
+            <Link to="/">
               <Logo color={scrolled ? theme.colors.base[0] : "#fff"} />
             </Link>
             <Menu volunteering={this.props.volunteering} scrolled={scrolled} />

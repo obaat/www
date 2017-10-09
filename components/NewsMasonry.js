@@ -4,7 +4,7 @@ import get from "lodash/get"
 import g from "glamorous"
 import Embed from "../components/Embed"
 import PrismicRichText from "../components/PrismicRichText"
-import Link from "next/link"
+import { Link } from "react-static"
 import { themeCycle } from "../utils/constants"
 import srcTheme from "../theme"
 import hexRgb from "hex-rgb"
@@ -84,8 +84,8 @@ const mapType = {
 const pageToLink = ({ type, uid }) => {
   const mappedType = mapType[type] || type
   return {
-    href: `/${mappedType}?id=${uid}`,
-    as: `/${mappedType}/${uid}`,
+    // href: `/${mappedType}?id=${uid}`,
+    to: `/${mappedType}/${uid}`,
   }
 }
 
@@ -123,7 +123,7 @@ const renderers = {
     const palette = theme || themeCycle[count % themeCycle.length]
     const bg = hexRgb(theme ? srcTheme.colors[theme][0] : "#000")
     return (
-      <Link {...pageToLink(content)} prefetch>
+      <Link {...pageToLink(content)}>
         <Background
           src={image}
           palette={!image && palette}

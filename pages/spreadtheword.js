@@ -4,7 +4,7 @@ import get from "lodash/get"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
-import Link from "next/link"
+import { Link } from "react-static"
 import { Flex, Relative, Absolute, Box, Border, BackgroundImage } from "../ui"
 import { ArrowRight } from "../components/SvgIcons"
 import { HumanDate } from "../utils/date"
@@ -23,7 +23,7 @@ const Overlay = g(Absolute)({
 
 const Event = ({ uid, data }) => (
   <Relative mb={2}>
-    <Link href={`/event/?id=${uid}`} as={`/event/${uid}`}>
+    <Link to={`/event/${uid}`}>
       <BackgroundImage
         bg="#000"
         color="#fff"
@@ -69,7 +69,7 @@ const Location = ({ uid, data }) => (
       )}
     </Overlay>
     <Absolute bottom right p={1}>
-      <Link href={`/location/?id=${uid}`} as={`/location/${uid}`}>
+      <Link to={`/location/${uid}`}>
         <Button
           palette="normal"
           color="#fff"
@@ -103,7 +103,7 @@ const Spread = ({ events, content = {} }) => {
   )
 }
 
-Spread.getInitialProps = async () => {
+export const data = async () => {
   const events = await getByType(types.EVENT)
   const page = await getSingleton(types.SPREAD_THE_WORD_PAGE_CONTENT)
   return { content: page.data, events }

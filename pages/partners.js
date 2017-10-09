@@ -25,7 +25,7 @@ const Partner = ({ data: { title, description, logo, website }, uid, odd }) => (
         <Border bottom mb={2} borderColor="gray4">
           <PrismicRichText mb={0} forceType="heading2" source={title} />
           {website && (
-            <Link target="_blank" href={website.url}>
+            <Link target="_blank" to={website.url}>
               {humanizeUrl(website.url)}
             </Link>
           )}
@@ -44,7 +44,7 @@ const Partnerships = ({ partners = [], content = {} }) => {
   )
 }
 
-Partnerships.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.PARTNERSHIPS_PAGE_CONTENT)
   const partners = await getByIDs(page.data.partners.map(l => l.partner.id))
   return { partners: partners.results, content: page.data }

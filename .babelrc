@@ -1,0 +1,41 @@
+{
+  "extends": "react-static/.babelrc",
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ],
+        "next/babel"
+      ]
+    }
+  },
+  "presets": ["next/babel", "flow"],
+  "plugins": [
+    [
+      "inline-react-svg",
+      {
+        "svgo": {
+          "plugins": [
+            {
+              "removeAttrs": {
+                "attrs": "(data-name)"
+              }
+            },
+            {
+              "cleanupIDs": true
+            }
+          ]
+        }
+      }
+    ],
+    "babel-macros",
+    "sitrep",
+    ["transform-define", "./config.js"]
+  ]
+}

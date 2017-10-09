@@ -17,7 +17,7 @@ const Event = ({ content = {} }) => {
   )
 }
 
-Event.getInitialProps = async ({ query: { id: uid } }) => {
+export const data = async ({ query: { id: uid } }) => {
   const res = await getByUID(types.EVENT)(uid)
   return { content: res.data }
 }

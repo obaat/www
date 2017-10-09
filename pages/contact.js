@@ -16,7 +16,7 @@ const Contact = ({ content = {} }) => {
   )
 }
 
-Contact.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.CONTACT_PAGE_CONTENT)
   return { content: page.data }
 }

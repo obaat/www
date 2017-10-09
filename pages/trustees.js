@@ -18,7 +18,7 @@ const Trustees = ({ members = [], content = {} }) => {
   )
 }
 
-Trustees.getInitialProps = async () => {
+export const data = async () => {
   const page = await getSingleton(types.TRUSTEES_PAGE_CONTENT)
   const members = await getByIDs(page.data.trustees.map(l => l.trustee.id))
   return { members: members.results, content: page.data }
