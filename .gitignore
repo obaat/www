@@ -11,3 +11,4 @@ secrets.json
 .webpack
 .serverless
 .vscode/dist/
+dist/

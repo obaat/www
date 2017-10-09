@@ -22,14 +22,6 @@ const pageComponents = map(_pages, (v, k) => ({
   ...v,
 }))
 
-// const repeaters = [
-//   { type: types.VOLUNTEERING, url: "/volunteering" },
-//   { type: types.PROJECT, url: "/projects" },
-//   { type: types.VOLUNTEERING_OPPORTUNITY_LOCATION, url: "/location" },
-//   { type: types.EVENT, url: "/event" },
-//   { type: types.GALLERY, url: "/gallery" },
-// ]
-
 export const data = pageComponents.map(p => ({
   getProps: p.data,
   ...p,
@@ -40,17 +32,6 @@ export const pages = pageComponents.map(p => ({
   exact: p.routes ? false : true,
   ...p,
 }))
-// { path: "/volunteering", Component: Volunteering, children: [] },
-// { path: "/projects", Component: Projects, children: [] },
-// { path: "/about", Component: About  },
-// { path: "/team", Component: Team  },
-// { path: "/trustees", Component:  },
-// { path: "/resources", Component:  },
-// { path: "/partners", Component:  },
-// { path: "/contact", Component:  },
-// { path: "/apply", Component:  },
-// { path: "/spreadtheword", Component:  },
-// { path: "/shop", Component:  },
 
 export default () => (
   <Router>
