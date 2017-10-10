@@ -3,15 +3,15 @@ import g from "glamorous"
 import { Home, ArrowRight } from "./SvgIcons"
 import { Flex, Box, H6, Text, Link } from "../ui"
 
-const Crumb = g(Box)({})
-
-const LinkCrumb = ({ href, ...props }) =>
+const LinkCrumb = ({ href, children, ...props }) =>
   href ? (
-    <Link to={href} palette="black">
-      <Box bold={200} {...props} />
-    </Link>
+    <Box bold={200} {...props}>
+      <Link to={href} palette="black">
+        {children}
+      </Link>
+    </Box>
   ) : (
-    <Box {...props} />
+    <Box {...props}>{children}</Box>
   )
 
 const BreadCrumbs = ({ route }) => (

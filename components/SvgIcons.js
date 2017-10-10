@@ -16,6 +16,9 @@ module.exports = mapValues(icons, ({ exported: Icon }) =>
   g(Icon, {
     filterProps: ["invert"],
   })(
+    {
+      display: "block",
+    },
     withPalette(props => ({
       fill: props.foreground,
     })),
