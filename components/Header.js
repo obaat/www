@@ -18,7 +18,10 @@ var canUseDOM = !!(
   window.document.createElement
 )
 
-const Logo = g(LogoIcon, { rootEl: "svg" })(({ docked }) => ({
+const Logo = g(LogoIcon, {
+  rootEl: "svg",
+  filterProps: ["docked"],
+})(({ docked }) => ({
   marginTop: docked && "30px",
   display: "block",
   // backgroundColor: docked && "#fff",

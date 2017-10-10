@@ -167,7 +167,7 @@ class IndexPage extends React.Component {
               {hero.map(({ image, lead, strapline, button_text, url }, i) => (
                 <BackgroundImage
                   style={{ position: "relative", textAlign: "left" }}
-                  ratio={[1, 1 / 2.5, 1 / 2.5, 1 / 2.5]}
+                  ratio={[1, 1, 1 / 2.5, 1 / 2.5]}
                   src={image.url}
                   key={i}
                 >
