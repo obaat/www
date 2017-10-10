@@ -62,16 +62,16 @@ const Section = ({ title, id, ...props }) =>
 
 const Opportunity = ({ uid, data }) => (
   <Box>
-    <Flex inline justify="center">
-      <Box>
-        <Link to={`/volunteering/${uid}`}>
+    <Link to={`/volunteering/${uid}`}>
+      <Flex inline align="center">
+        <Box>
           <PrismicRichText forceType="unformatted" source={data.title} />
-        </Link>
-      </Box>
-      <Box pl={1}>
-        <ArrowRight color="#000" size={12} />
-      </Box>
-    </Flex>
+        </Box>
+        <Box pl={1}>
+          <ArrowRight color="#000" size={12} />
+        </Box>
+      </Flex>
+    </Link>
   </Box>
 )
 
