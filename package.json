@@ -1,7 +1,6 @@
 {
   "name": "obaat",
   "version": "1.0.0",
-  "main": "server.js",
   "scripts": {
     "postinstall":
       "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg && echo 'import React from \"react\"' >> svg/index.js",
