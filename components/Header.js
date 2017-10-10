@@ -118,7 +118,7 @@ export default class Header extends Component {
             <Link to="/">
               <Logo
                 color={scrolled ? theme.colors.base[0] : "#fff"}
-                size={16}
+                size={20}
               />
             </Link>
             <Menu volunteering={this.props.volunteering} scrolled={scrolled} />
