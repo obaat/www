@@ -94,10 +94,11 @@ const SWITCH_PIXELS = 70
 export default class Header extends Component {
   constructor(props) {
     super(props)
-    const src =
-      document && (document.scrollingElement || document.documentElement)
+    const { scrollTop } = document
+      ? document.scrollingElement || document.documentElement
+      : { scrollTop: 0 }
     this.state = {
-      scrolled: src && src.scrollTop > SWITCH_PIXELS,
+      scrolled: scrollTop > SWITCH_PIXELS,
     }
   }
 
