@@ -13,7 +13,7 @@ import { Home } from "./SvgIcons"
 import theme from "../theme"
 
 const Logo = g(LogoIcon, { rootEl: "svg" })(({ docked }) => ({
-  marginTop: docked && "60px",
+  marginTop: docked && "30px",
   display: "block",
   // backgroundColor: docked && "#fff",
   transition: "height 0.15s, width 0.15s, margin-top 0.15s",
@@ -27,8 +27,8 @@ const Logo = g(LogoIcon, { rootEl: "svg" })(({ docked }) => ({
     fill: docked ? "#fff" : "#263e50",
   },
 })).withProps(({ docked }) => ({
-  height: docked ? "75px" : "44px",
-  width: docked ? "300px" : "170px",
+  height: docked ? "65px" : "44px",
+  width: docked ? "250px" : "170px",
 }))
 
 const dockedBackground =
