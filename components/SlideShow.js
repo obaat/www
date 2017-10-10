@@ -118,12 +118,10 @@ const CarouselContainer = g.div({
   overflow: "hidden",
   position: "relative",
   width: "100%",
-  height: "100%",
 })
 
 const Carousel = g(Flex)({
   width: "100%",
-  height: "100%",
   margin: "0",
   padding: "0",
   transition: "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)",
