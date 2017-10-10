@@ -12,6 +12,12 @@ import withProps from "recompose/withProps"
 import { Home } from "./SvgIcons"
 import theme from "../theme"
 
+var canUseDOM = !!(
+  typeof window !== "undefined" &&
+  window.document &&
+  window.document.createElement
+)
+
 const Logo = g(LogoIcon, { rootEl: "svg" })(({ docked }) => ({
   marginTop: docked && "30px",
   display: "block",
@@ -94,10 +100,9 @@ const SWITCH_PIXELS = 70
 export default class Header extends Component {
   constructor(props) {
     super(props)
-    const { scrollTop } =
-      typeof window !== undefined
-        ? document.scrollingElement || document.documentElement
-        : { scrollTop: 0 }
+    const { scrollTop } = canUseDOM
+      ? document.scrollingElement || document.documentElement
+      : { scrollTop: 0 }
     this.state = {
       scrolled: scrollTop > SWITCH_PIXELS,
     }
