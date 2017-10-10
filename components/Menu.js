@@ -35,10 +35,10 @@ const aboutItems = [
 ]
 
 const whatItems = [
+  { title: "Our Mission", href: "/mission" },
   { title: "Completed Projects", href: "/projects" },
   { title: "Planned Projects", href: "/projects/planned" },
   { title: "Sponsor a Child", href: "/sponsor" },
-  { title: "The Challenge", href: "/thechallenge" },
 ]
 
 const menuItems = [

@@ -4,7 +4,7 @@ import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 
-const TheChallenge = ({ members = [], content = {} }) => (
+const Mission = ({ members = [], content = {} }) => (
   <Flex>
     <Box w={[1, 1, 1, 2 / 3]} pr={3}>
       <PrismicRichText source={content.description} />
@@ -13,8 +13,8 @@ const TheChallenge = ({ members = [], content = {} }) => (
 )
 
 export const data = async () => {
-  const page = await getSingleton(types.THE_CHALLENGE_PAGE_CONTENT)
+  const page = await getSingleton(types.MISSION_PAGE_CONTENT)
   return { content: page && page.data }
 }
 
-export default pageWithTitle()(TheChallenge)
+export default pageWithTitle()(Mission)
