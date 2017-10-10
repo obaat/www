@@ -9,6 +9,9 @@ const Mission = ({ members = [], content = {} }) => (
     <Box w={[1, 1, 1, 2 / 3]} pr={3}>
       <PrismicRichText source={content.description} />
     </Box>
+    <Box w={[1, 1, 1, 1 / 3]}>
+      <PrismicRichText source={content.mission} />
+    </Box>
   </Flex>
 )
 
