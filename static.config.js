@@ -73,6 +73,12 @@ export default {
               href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,700|Open+Sans:400,600"
               rel="stylesheet"
             />
+
+            <script
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9RbFyhZ3NtxgeYsCIs95rN4FXPg45VfQ"
+              async
+              defer
+            />
             <meta name="referrer" content="origin" />
             <style dangerouslySetInnerHTML={{ __html: css }} />
           </Head>

@@ -83,8 +83,14 @@ export default class Header extends Component {
     scrolled: false,
   }
 
-  componentDidMount() {
+  componentWillMount() {
     window.addEventListener("scroll", this.handleScroll)
+    this.setIsScrolled()
+  }
+
+  componentDidUpdate() {
+    const { scrollTop } = document.scrollingElement
+    this.setIsScrolled()
   }
 
   componentWillUnmount() {
@@ -92,8 +98,14 @@ export default class Header extends Component {
   }
 
   handleScroll = event => {
-    const { scrollTop } = document.scrollingElement || event.srcElement.body
-    this.setState({ scrolled: scrollTop > 70 })
+    this.setIsScrolled()
+  }
+
+  setIsScrolled = () => {
+    if (!document) return
+    const { scrollTop } = document.scrollingElement || document.documentElement
+    scrollTop > 70 && !this.state.scrolled && this.setState({ scrolled: true })
+    scrollTop < 70 && this.state.scrolled && this.setState({ scrolled: false })
   }
 
   render() {

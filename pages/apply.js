@@ -5,6 +5,7 @@ import g from "glamorous"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
 import get from "lodash/get"
 import map from "lodash/map"
+import filter from "lodash/filter"
 import { pageWithTitle } from "../hoc/page"
 import Yup from "yup"
 import range from "lodash/range"
@@ -257,11 +258,11 @@ const WizardStep = ({ title, i, last, active, done, ...props }) => {
   )
 }
 
-const Errors = ({ errors }) => {
+const Errors = ({ errors, touched }) => {
   if (!errors || !Object.keys(errors).length) return null
   return (
     <Box w={1}>
-      {map(errors, (v, k, i) => (
+      {map(filter(errors, (_, id) => touched[id]), (v, k, i) => (
         <Flex
           key={`${k}-${i}`}
           palette="red6"
@@ -297,7 +298,7 @@ const FormWizard = props => (
           initialValues={initialValues}
           validationSchema={validation}
           onSubmit={onSubmit}
-          render={({ handleSubmit, isSubmitting, errors }) => {
+          render={({ handleSubmit, touched, isSubmitting, errors }) => {
             return (
               <BlockUi blocking={isSubmitting}>
                 <Box palette="gray1" invert p={2}>
@@ -317,10 +318,10 @@ const FormWizard = props => (
                     ))}
                   </Flex>
                   <Box palette="black" p={2}>
-                    <Errors errors={errors} />
                     <form>
                       <Component {...props} />
                     </form>
+                    <Errors errors={errors} touched={touched} />
                   </Box>
                   {pages[index] && (
                     <Box mt={2} align="right">
