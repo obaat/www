@@ -66,8 +66,7 @@ const Projects = ({ projects, content }) => {
   )
 }
 
-export const data = async () => {
-  const status = ""
+const dataWithStatus = status => async () => {
   const res = await getSingleton(types.PROJECT_PAGE_CONTENT)
   const ids = res.data[
     status === "planned" ? "planned_projects" : "projects"
@@ -81,12 +80,19 @@ export const data = async () => {
   }
 }
 
+export const data = dataWithStatus("completed")
+
 export const children = async (...args) => {
   const { projects } = await data(...args)
   const pages = projects.results.map(({ uid }) => ({
     path: "/" + uid,
     getProps: projectData(uid),
   }))
+
+  pages.push({
+    path: "/planned",
+    getProps: dataWithStatus("planned"),
+  })
   return pages
 }
 
@@ -96,6 +102,11 @@ export default _Projects
 export const routes = ({ match }) => (
   <Switch>
     <Route path={match.url} exact component={getRouteProps(_Projects)} />
+    <Route
+      path={`${match.url}/planned`}
+      exact
+      component={getRouteProps(_Projects)}
+    />
     <Route path={`${match.url}/:uid`} component={getRouteProps(Project)} />
   </Switch>
 )

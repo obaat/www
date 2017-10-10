@@ -21,7 +21,6 @@ const PRELOAD_MAX = 3
 const Fullscreen = g(Fixed)({
   backgroundColor: "rgba(0,0,0, 0.9)",
   height: "100VH",
-  overflow: "hidden",
   zIndex: 999999,
 }).withProps({
   top: true,
@@ -383,7 +382,12 @@ export default class SlideShow extends Component {
     return (
       <Flex wrap="wrap">
         {this.props.children.map((c, i) => (
-          <Box style={{ position: "relative" }} p={1} w={[1, 1, 1, 1 / 3]}>
+          <Box
+            key={i}
+            style={{ position: "relative" }}
+            p={1}
+            w={[1, 1, 1, 1 / 3]}
+          >
             {c}
             {!hideZoom && (
               <Zoom

@@ -106,7 +106,7 @@ const Volunteering = ({ content, volunteering, additionalData }) => {
         <Section id="description" source={content.description} mb={3} />
         <Accordion
           items={accordionItems}
-          initialOpen={accordionItems.length - 1}
+          initialOpen={accordionItems[accordionItems.length - 1].id}
         />
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>

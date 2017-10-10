@@ -1,13 +1,8 @@
-import { Component } from "react"
-// import { loadGetInitialProps } from "next/dist/lib/utils"
+import React, { Component } from "react"
 import ReactGA from "react-ga"
 
 export default ComposedComponent =>
   class WithAnalytics extends Component {
-    // static async getInitialProps(ctx) {
-    //   return loadGetInitialProps(ComposedComponent, ctx)
-    // }
-
     constructor(props) {
       super(props)
       if (process.browser) {

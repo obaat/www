@@ -35,8 +35,8 @@ const aboutItems = [
 ]
 
 const whatItems = [
-  { title: "Completed Projects", href: "/projects?status=complete" },
-  { title: "Planned Projects", href: "/projects?status=planned" },
+  { title: "Completed Projects", href: "/projects" },
+  { title: "Planned Projects", href: "/projects/planned" },
   { title: "Sponsor a Child", href: "/sponsor" },
   { title: "The Challenge", href: "/thechallenge" },
 ]

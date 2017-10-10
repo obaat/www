@@ -10,6 +10,7 @@ import {
 import importAll from "import-all.macro"
 const _pages = importAll.sync("../pages/*.js")
 import path from "path"
+import ScrollToTop from "./ScrollToTop"
 
 import map from "lodash/map"
 import mapKeys from "lodash/mapKeys"
@@ -35,9 +36,11 @@ export const pages = pageComponents.map(p => ({
 
 export default () => (
   <Router>
-    <Switch>
-      {pages.map(props => <Route key={path} {...props} />)}
-      <Redirect to="/" />
-    </Switch>
+    <ScrollToTop>
+      <Switch>
+        {pages.map(props => <Route key={path} {...props} />)}
+        <Redirect to="/" />
+      </Switch>
+    </ScrollToTop>
   </Router>
 )

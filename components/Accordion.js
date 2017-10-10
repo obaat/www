@@ -2,7 +2,7 @@ import React from "react"
 import g from "glamorous"
 import { withRouter } from "react-static"
 import { ArrowDown as IconArrowDown, ArrowUp as IconArrowUp } from "./SvgIcons"
-import { compose, withState, withHandlers } from "recompose"
+import { withProps } from "recompose"
 import isNil from "lodash/isNil"
 
 import { Flex, Box, Panel, PanelHeader, Heading } from "../ui"
@@ -28,16 +28,17 @@ const ArrowUp = g(IconArrowUp)({
   marginTop: "6px",
 })
 
-const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
+const AccordionSection = ({ open, setOpen, title, id, description }) => {
   return (
     <AccordionContainer>
+      <a name={id} />
       <AccordionHeader
         id={id}
         mb={-2}
         palette="gray1"
         invert
         p={2}
-        onClick={toggleOpen(id)}
+        onClick={setOpen}
       >
         {open ? (
           <ArrowUp size={15} palette="black" />
@@ -55,33 +56,27 @@ const AccordionSection = ({ open, toggleOpen, title, id, description }) => {
   )
 }
 
-const oneOpen = compose(
-  withState(
-    "openSection",
-    "setOpenSection",
-    ({ initialOpen }) => (isNil(initialOpen) ? null : initialOpen),
-  ),
-  withHandlers(({ history, location }) => {
-    return {
-      toggleOpen: ({ openSection, setOpenSection }) => curIndex => id => e => {
-        setOpenSection(openSection === curIndex ? null : curIndex)
-        window.setTimeout(
-          () => history.replace(location.pathname + "#" + id),
-          20,
-        )
-      },
-    }
-  }),
-)
+const oneOpen = withProps(({ history, location, initialOpen }) => {
+  return {
+    setOpen: id => e => {
+      if (location.hash === "#" + id) {
+        history.replace({ hash: "" })
+      } else {
+        history.replace({ hash: id })
+      }
+    },
+    openSection: location.hash.replace("#", "") || initialOpen,
+  }
+})
 
 export default withRouter(
-  oneOpen(({ items, openSection, toggleOpen }) => (
+  oneOpen(({ items, openSection, setOpen }) => (
     <div>
       {items.map((props, i) => (
         <AccordionSection
           key={i}
-          open={i === openSection}
-          toggleOpen={toggleOpen(i)}
+          open={props.id === openSection}
+          setOpen={setOpen(props.id)}
           {...props}
         />
       ))}

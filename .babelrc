@@ -15,7 +15,7 @@
       ]
     }
   },
-  "presets": ["next/babel", "flow"],
+  "presets": ["flow"],
   "plugins": [
     [
       "inline-react-svg",

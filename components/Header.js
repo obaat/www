@@ -104,7 +104,10 @@ export default class Header extends Component {
         <Fixed>
           <HeaderContainer wrap="wrap" px={3} scrolled={scrolled}>
             <Link to="/">
-              <Logo color={scrolled ? theme.colors.base[0] : "#fff"} />
+              <Logo
+                color={scrolled ? theme.colors.base[0] : "#fff"}
+                size={12}
+              />
             </Link>
             <Menu volunteering={this.props.volunteering} scrolled={scrolled} />
             <Box grow={1} align="right">

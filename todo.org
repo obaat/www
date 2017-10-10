@@ -22,7 +22,7 @@
 * DONE add social icons to top right bar on frontpage
 * DONE top images for partners, projects, volunteer building maint + teaching, shop, spread the word, sponsor child
 * DONE opengraph hints throughout
-* browser version locking
-* sitemap.xml 
+* DONE sitemap.xml 
+* DONE SSL fix
 * favicon.ico
-* SSL fix
+* the challenge >> our mission at top

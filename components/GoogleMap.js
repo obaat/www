@@ -1,4 +1,5 @@
 import { compose, withProps } from "recompose"
+import React from "react"
 import {
   withScriptjs,
   withGoogleMap,

@@ -1,5 +1,6 @@
 import React from "react"
-import { getByUID, types } from "../utils/api"
+import { getByUID, getByType, types } from "../utils/api"
+import { Switch, Route, Link, getRouteProps } from "react-static"
 import ApplyNow from "../components/ApplyNow"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
@@ -22,12 +23,25 @@ const Location = ({ content = {} }) => {
     </Flex>
   )
 }
+const _Location = pageWithTitle({ withApply: true })(Location)
+export default _Location
 
-export const data = async ({ query }) => {
-  const location = await getByUID(types.VOLUNTEERING_OPPORTUNITY_LOCATION)(
-    query.id,
-  )
+export const data = uid => async () => {
+  const location = await getByUID(types.VOLUNTEERING_OPPORTUNITY_LOCATION)(uid)
   return { content: location.data }
 }
 
-export default pageWithTitle({ withApply: true })(Location)
+export const children = async (...args) => {
+  const events = await getByType(types.VOLUNTEERING_OPPORTUNITY_LOCATION)
+  const pages = events.results.map(({ uid }) => ({
+    path: "/" + uid,
+    getProps: data(uid),
+  }))
+  return pages
+}
+
+export const routes = ({ match }) => (
+  <Switch>
+    <Route path={`${match.url}/:uid`} component={getRouteProps(_Location)} />
+  </Switch>
+)
