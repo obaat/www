@@ -237,7 +237,13 @@ class IndexPage extends React.Component {
           <VisibilitySensor onChange={this.onVisible} />
           <Flex w={1} justify="center" wrap="wrap" w={BOX_WIDTH}>
             {stats.map(({ title, icon: Icon, value, postfix }) => (
-              <Box p={3} w={[1, 1, 1, 1 / 4]} key={title}>
+              <Flex
+                p={3}
+                w={[1, 1, 1 / 2, 1 / 4]}
+                key={title}
+                align="center"
+                direction="column"
+              >
                 <Box>
                   <Icon palette="cyan5" size={50} />
                 </Box>
@@ -255,7 +261,7 @@ class IndexPage extends React.Component {
                   {title}
                 </H5>
                 {postfix && <Text>{postfix}</Text>}
-              </Box>
+              </Flex>
             ))}
           </Flex>
           <Box w={1}>
