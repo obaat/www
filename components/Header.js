@@ -83,7 +83,7 @@ export default class Header extends Component {
     scrolled: false,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     window.addEventListener("scroll", this.handleScroll)
     this.setIsScrolled()
   }
