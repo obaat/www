@@ -12,10 +12,11 @@ import withProps from "recompose/withProps"
 import { Home } from "./SvgIcons"
 import theme from "../theme"
 
-const Logo = g(LogoIcon)(({ docked }) => ({
+const Logo = g(LogoIcon, { rootEl: "svg" })(({ docked }) => ({
   marginTop: docked && "60px",
+  display: "block",
   // backgroundColor: docked && "#fff",
-  transition: "height 0.15s, width 0.15s",
+  transition: "height 0.15s, width 0.15s, margin-top 0.15s",
   "> g.one": {
     fill: docked ? "#fff" : "#263e50",
   },
@@ -27,7 +28,7 @@ const Logo = g(LogoIcon)(({ docked }) => ({
   },
 })).withProps(({ docked }) => ({
   height: docked ? "75px" : "44px",
-  width: "300px",
+  width: docked ? "300px" : "170px",
 }))
 
 const dockedBackground =
@@ -89,18 +90,19 @@ const HeaderContainer = g(Flex)(
   scrolled,
 )
 
+const SWITCH_PIXELS = 70
 export default class Header extends Component {
-  state = {
-    scrolled: false,
+  constructor(props) {
+    super(props)
+    const src =
+      document && (document.scrollingElement || document.documentElement)
+    this.state = {
+      scrolled: src && src.scrollTop > SWITCH_PIXELS,
+    }
   }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll)
-    this.setIsScrolled()
-  }
-
-  componentDidUpdate() {
-    const { scrollTop } = document.scrollingElement
     this.setIsScrolled()
   }
 
@@ -115,8 +117,11 @@ export default class Header extends Component {
   setIsScrolled = () => {
     if (!document) return
     const { scrollTop } = document.scrollingElement || document.documentElement
-    scrollTop > 70 && !this.state.scrolled && this.setState({ scrolled: true })
-    scrollTop < 70 && this.state.scrolled && this.setState({ scrolled: false })
+    if (scrollTop > SWITCH_PIXELS && !this.state.scrolled) {
+      this.setState({ scrolled: true })
+    } else if (scrollTop < SWITCH_PIXELS && this.state.scrolled) {
+      this.setState({ scrolled: false })
+    }
   }
 
   render() {
@@ -125,14 +130,18 @@ export default class Header extends Component {
     return (
       <Container>
         <Fixed>
-          <HeaderContainer wrap="wrap" px={3} scrolled={scrolled}>
+          <HeaderContainer inline wrap="wrap" w={1} px={3} scrolled={scrolled}>
             <Box>
               <Link to="/">
                 <Logo docked={!scrolled} size={20} />
               </Link>
             </Box>
             <Menu volunteering={this.props.volunteering} scrolled={scrolled} />
-            <Box grow={1} align="right">
+            <Box
+              grow={1}
+              display={["none", "none", "block", "block"]}
+              align="right"
+            >
               <Donate amount={1500} scrolled={scrolled} />
             </Box>
           </HeaderContainer>

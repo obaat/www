@@ -14,7 +14,7 @@ const icons = keyBy(rawicons, v => {
 
 module.exports = mapValues(icons, ({ exported: Icon }) =>
   g(Icon, {
-    filterProps: ["invert"],
+    rootEl: "svg",
   })(
     {
       display: "block",

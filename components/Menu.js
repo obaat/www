@@ -174,7 +174,7 @@ const MobileMenu = ({ items, onClose }) => (
       <X size={14} />
     </Absolute>
     {items.map(i => (
-      <Box>
+      <Box key={i}>
         <Border bottom borderColor="gray7">
           <Box color="gray7" py={1}>
             {i.title}
@@ -204,7 +204,7 @@ const Menu = ({ hideMenu = false, ...props }) => {
   }
   return (
     <div>
-      <Box display={["block", "block", "block", "none"]}>
+      <Box display={["block", "block", "block", "none"]} ml={2}>
         <Toggle initial={false}>
           {({ on, toggle }) => (
             <Box mt={1}>
