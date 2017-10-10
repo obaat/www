@@ -12,12 +12,23 @@ import withProps from "recompose/withProps"
 import { Home } from "./SvgIcons"
 import theme from "../theme"
 
-const Logo = withProps({
-  // height: "35px",
-  // width: "130px",
-  width: "70px",
-  cursor: "pointer",
-})(Home)
+const Logo = g(LogoIcon)(({ docked }) => ({
+  marginTop: docked && "60px",
+  // backgroundColor: docked && "#fff",
+  transition: "height 0.15s, width 0.15s",
+  "> g.one": {
+    fill: docked ? "#fff" : "#263e50",
+  },
+  "> g.brick": {
+    fill: "#eb5d3a",
+  },
+  "> g.at_a_time": {
+    fill: docked ? "#fff" : "#263e50",
+  },
+})).withProps(({ docked }) => ({
+  height: docked ? "75px" : "44px",
+  width: "300px",
+}))
 
 const dockedBackground =
   "linear-gradient(to bottom, rgba(0,0,0,0.5) 20%,rgba(0,0,0,0) 100%)"
@@ -117,10 +128,7 @@ export default class Header extends Component {
           <HeaderContainer wrap="wrap" px={3} scrolled={scrolled}>
             <Box>
               <Link to="/">
-                <Logo
-                  color={scrolled ? theme.colors.base[0] : "#fff"}
-                  size={20}
-                />
+                <Logo docked={!scrolled} size={20} />
               </Link>
             </Box>
             <Menu volunteering={this.props.volunteering} scrolled={scrolled} />

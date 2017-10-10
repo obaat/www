@@ -4,7 +4,7 @@
   "scripts": {
     "postinstall":
       "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg && echo 'import React from \"react\"' >> svg/index.js",
-    "start": "react-static start",
+    "run": "react-static start",
     "build": "react-static build",
     "export": "react-static build",
     "serve": "serve dist -p 3000",
