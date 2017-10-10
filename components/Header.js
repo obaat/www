@@ -23,7 +23,7 @@ const Logo = g(LogoIcon, {
   filterProps: ["docked"],
 })(({ docked }) => ({
   marginTop: docked && "30px",
-  display: "block",
+  display: "inline-block",
   // backgroundColor: docked && "#fff",
   transition: "height 0.15s, width 0.15s, margin-top 0.15s",
   "> g.one": {

@@ -238,7 +238,9 @@ class IndexPage extends React.Component {
           <Flex w={1} justify="center" wrap="wrap" w={BOX_WIDTH}>
             {stats.map(({ title, icon: Icon, value, postfix }) => (
               <Box p={3} w={[1, 1, 1, 1 / 4]} key={title}>
-                <Icon palette="cyan5" size={50} />
+                <Box>
+                  <Icon palette="cyan5" size={50} />
+                </Box>
                 <Box mt={3}>
                   <Count
                     innerRef={c => this.counters.push(c)}
