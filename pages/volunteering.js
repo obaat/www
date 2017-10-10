@@ -138,7 +138,6 @@ export const children = async ({ volunteering }) => {
 }
 
 const _Volunteering = pageWithTitle({
-  route: [{ title: "Volunteering", href: "/volunteering" }],
   withApply: true,
 })(Volunteering)
 

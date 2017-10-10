@@ -131,6 +131,6 @@ export const data = uid => async () => {
 }
 
 export default pageWithTitle({
-  route: [{ title: "Volunteering", href: "/volunteering" }],
+  route: [{ title: "Volunteer With Us", href: "/volunteering" }],
   withApply: true,
 })(VolunteeringOpportunity)
