@@ -26,21 +26,22 @@ export default () => (
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <address>
           OBAAT UK<br />
-          Charity number 1155099<br />
-          Liverpool Hope University Taggart Avenue<br />
+          Liverpool Hope University <br />
+          Taggart Avenue<br />
           Liverpool<br />
           L16 9JD<br />
-          England
+          England<br />
+          Charity number 1155099<br />
         </address>
       </Box>
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <address>
           OBAAT Uganda<br />
-          NGO registration number 11726<br />
           Bankside Road<br />
-          Njara-Mukasenyi P. O. BOX 349<br />
-          Fort Portal<br />
+          Njara-Mukasenyi<br />
+          P. O. BOX 349, Fort Portal<br />
           Uganda<br />
+          NGO registration number 11726<br />
         </address>
       </Box>
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
