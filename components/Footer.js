@@ -30,7 +30,7 @@ export default () => (
           Liverpool Hope University <br />
           Taggart Avenue<br />
           Liverpool, L16 9JD<br />
-          England<br />
+          United Kingdom<br />
           NGO number 1155099<br />
         </address>
       </Box>

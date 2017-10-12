@@ -192,6 +192,7 @@ class IndexPage extends React.Component {
                       color="black"
                       invert
                       p={2}
+                      mb={[0, 0, 2, 2]}
                     />
                     <PrismicRichText
                       w={[1, 1, 1, 2 / 3]}
