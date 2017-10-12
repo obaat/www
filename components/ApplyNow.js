@@ -2,7 +2,7 @@ import React from "react"
 import Button from "../components/Button"
 import { ButtonOutlineFilled, Link } from "../ui"
 
-export default () => (
+export default ({ w }) => (
   <Link to="/apply">
     <Button
       bold
@@ -14,6 +14,7 @@ export default () => (
       iconSize={20}
       style={{ marginBottom: "-90px" }}
       as={ButtonOutlineFilled}
+      w={w}
     >
       Apply Now
     </Button>

@@ -3,6 +3,7 @@ import g from "glamorous"
 import Button from "../../components/Button"
 import Link from "../../components/Link"
 import { ArrowRight } from "../../components/SvgIcons"
+import ApplyNow from "../../components/ApplyNow"
 import {
   getByUID,
   getByIDs,
@@ -115,6 +116,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
           )}
         {locations.results.map((props, i) => <Location key={i} {...props} />)}
         {sidebarSlices}
+        <ApplyNow w={1} />
       </Box>
     </Flex>
   )
