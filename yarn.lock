@@ -624,8 +624,8 @@ babel-plugin-inline-react-svg@^0.4.0:
     svgo "^0.7.0"
 
 babel-plugin-sitrep@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-sitrep/-/babel-plugin-sitrep-1.2.3.tgz#9302ae71b21fb1d6950a8f7be1c7a96fd9bb6b09"
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-sitrep/-/babel-plugin-sitrep-1.3.0.tgz#7ccf92e9671205b169ab8f26e0d1d565c856251f"
 
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
@@ -2027,8 +2027,8 @@ dashdash@^1.12.0:
     assert-plus "^1.0.0"
 
 date-fns@^1.28.5:
-  version "1.28.5"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.28.5.tgz#257cfc45d322df45ef5658665967ee841cd73faf"
+  version "1.29.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -5365,8 +5365,8 @@ react-ga@^2.3.5:
     object-assign "^4.1.1"
 
 react-google-maps@^8.3.5:
-  version "8.3.5"
-  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.3.5.tgz#52a8fa9de0815a74027c6a0bc1a42a517c5e5a7c"
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.4.2.tgz#65ea8e8eb21655b69f84415a344fbbab5cc3614e"
   dependencies:
     babel-runtime "^6.11.6"
     can-use-dom "^0.1.0"
@@ -5461,8 +5461,8 @@ react-social-icons@^2.7.0:
     classnames "^2.2.5"
 
 react-static@^1.0.48:
-  version "1.0.48"
-  resolved "https://registry.yarnpkg.com/react-static/-/react-static-1.0.48.tgz#b376a3ccb1d599cb24ad5c4c9e29337376b2ce61"
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/react-static/-/react-static-1.2.5.tgz#b35c690c8851afa8376f3faaee959a95dee0de5e"
   dependencies:
     autoprefixer "^7.1.4"
     axios "^0.16.2"
@@ -5475,6 +5475,7 @@ react-static@^1.0.48:
     babel-preset-react "^6.24.1"
     babel-preset-stage-0 "^6.24.1"
     babel-preset-stage-1 "^6.24.1"
+    babel-preset-stage-3 "^6.24.1"
     babel-runtime "^6.26.0"
     case-sensitive-paths-webpack-plugin "^2.1.1"
     circular-dependency-plugin "^4.2.1"

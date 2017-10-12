@@ -2,7 +2,8 @@ import React from "react"
 import Embed from "../components/Embed"
 import SlideShow from "../components/SlideShow"
 import PrismicRichText from "../components/PrismicRichText"
-import { Flex, Border, BackgroundImage, Box, Table, Tr, Td } from "../ui"
+import { FilePdf } from "../components/SvgIcons"
+import { Flex, Border, Link, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 
 export const Unknown = ({ slice_type }) => (
   <div> Unknown slice: {slice_type}</div>
@@ -28,10 +29,35 @@ const Text = ({ primary, items }) => {
   return value && <PrismicRichText source={value} />
 }
 
+const Document = ({ primary, items }) => {
+  return (
+    <Flex>
+      <Box w={1 / 2}>
+        <PrismicRichText source={primary.description || primary.content} />
+      </Box>
+      <Flex w={1 / 2} wrap="wrap">
+        {items.map(({ title, file: { kind, url } }, i) => (
+          <Link to={url} target="_blank">
+            <Flex key={i} align="center" justify="center" inline>
+              <Box pr={1}>
+                <FilePdf color="#000" size={60} />
+              </Box>
+              <Box>
+                <PrismicRichText xmb={0} forceType="small" source={title} />
+              </Box>
+            </Flex>
+          </Link>
+        ))}
+      </Flex>
+    </Flex>
+  )
+}
+
 export const renderers = {
   video: Video,
   embeds: Video,
   text_only: Text,
+  files: Document,
   faq: ({ items = [] }) => (
     <Box>
       {items.map(({ question, answer }, i) => (

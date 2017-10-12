@@ -2,8 +2,7 @@
   "name": "obaat",
   "version": "1.0.0",
   "scripts": {
-    "postinstall":
-      "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg && echo 'import React from \"react\"' >> svg/index.js",
+    "postinstall": "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg && echo 'import React from \"react\"' >> svg/index.js",
     "run": "react-static start",
     "build": "react-static build",
     "export": "react-static build",

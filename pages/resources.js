@@ -4,9 +4,17 @@ import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import PageTitle from "../components/PageTitle"
 import Container from "../components/Container"
+import PrismicSlice from "../components/PrismicSlice"
 
 const Resources = ({ members = [], content = {} }) => {
-  return <PrismicRichText color="#fff" source={content.description} />
+  const body = content.body || []
+  const slices = body.map((props, i) => <PrismicSlice key={i} {...props} />)
+  return (
+    <div>
+      <PrismicRichText source={content.description} />
+      {slices}
+    </div>
+  )
 }
 
 export const data = async () => {
