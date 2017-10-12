@@ -30,6 +30,9 @@ const Grid = g.div(
       gridTemplateColumns: columnConfig,
       gridAutoRows: autoRowConfig,
       gridGap: gap,
+      "@media screen and (max-width: 40em)": {
+        gridTemplateRows: "repeat(2, 200px)",
+      },
     },
     "@supports  (-ms-accelerator:true)": {
       display: "-ms-grid",
@@ -187,6 +190,13 @@ const GridItem = g
       gridRowGap: 4,
       height: "auto",
       width: "auto",
+      "@media screen and (max-width: 40em)": {
+        gridColumnStart: "auto",
+        gridRowStart: "auto",
+        gridRowEnd: "span 1",
+        height: "200px",
+        gridColumnEnd: "span 3",
+      },
     },
     position: "relative",
     height: "200px",
