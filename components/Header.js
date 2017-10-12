@@ -135,8 +135,7 @@ export default class Header extends Component {
   }
 
   render() {
-    const { fixed } = this.props
-    const scrolled = this.state.scrolled || fixed
+    const { scrolled } = this.state
     return (
       <Container>
         <Fixed>

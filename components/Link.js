@@ -3,13 +3,14 @@ import { Link as UILink, ExtLink } from "../ui"
 
 const mapType = {
   project: "projects",
+  projects_page: "projects",
   team_page: "team",
   gallery_page: "gallery",
 }
 
 const pageToLink = (type, uid) => {
   const mappedType = mapType[type] || type
-  return `/${mappedType}/${uid}`
+  return `/${mappedType}${uid ? `/${uid}` : ""}`
 }
 
 const mapping = {
