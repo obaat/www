@@ -37,7 +37,7 @@ const Logo = g(LogoIcon, {
   },
 })).withProps(({ docked }) => ({
   height: docked ? "65px" : "44px",
-  width: docked ? "250px" : "170px",
+  width: docked ? "300px" : "170px",
 }))
 
 const dockedBackground =
