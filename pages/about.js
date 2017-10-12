@@ -12,7 +12,7 @@ const About = ({ content = {} }) => {
       <Box w={1}>
         {content.section.map((section, i) => (
           <Border bottom borderColor="gray4" key={i} mb={4}>
-            <Flex>
+            <Flex wrap="wrap">
               <Box
                 w={[1, 1, 0.45, 0.45]}
                 mr={i % 2 ? 4 : 0}
