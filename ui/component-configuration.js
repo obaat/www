@@ -171,6 +171,25 @@ const components = [
     })),
   },
   {
+    name: "ExtLink",
+    type: "a",
+    props: {
+      palette: "cyan6",
+    },
+    style: withPalette(props => ({
+      backgroundColor: "inherit",
+      fontFamily: props.theme.font.body,
+      textDecoration: "none",
+      textDecorationSkip: "ink",
+      ":hover": {
+        textDecoration: "underline",
+      },
+      ":visited": {
+        color: props.foreground || "inherit",
+      },
+    })),
+  },
+  {
     name: "Link",
     type: Link,
     props: {

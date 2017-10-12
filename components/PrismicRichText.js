@@ -101,13 +101,7 @@ const PrismicRichText = ({ source, forceType, mb, mt, xmb, xmt, ...props }) => {
           prevEnd = end
 
           toAdd.push(
-            <Component
-              key={`${start}-${end}`}
-              {...data}
-              type={type}
-              mb={mb}
-              mt={mt}
-            >
+            <Component key={`${start}-${end}`} {...data} mb={mb} mt={mt}>
               {part}
             </Component>,
           )

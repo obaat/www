@@ -4,11 +4,10 @@ import get from "lodash/get"
 import g from "glamorous"
 import Embed from "../components/Embed"
 import PrismicRichText from "../components/PrismicRichText"
-import { Link } from "react-static"
+import Link from "../components/Link"
 import { themeCycle } from "../utils/constants"
 import srcTheme from "../theme"
 import hexRgb from "hex-rgb"
-
 import { Small } from "../ui"
 
 const Grid = g.div(
@@ -82,20 +81,6 @@ const TextBackground = g(Background)({
   textAlign: "center",
 })
 
-const mapType = {
-  project: "projects",
-  team_page: "team",
-  gallery_page: "gallery",
-}
-
-const pageToLink = ({ type, uid }) => {
-  const mappedType = mapType[type] || type
-  return {
-    // href: `/${mappedType}?id=${uid}`,
-    to: `/${mappedType}/${uid}`,
-  }
-}
-
 let cycleCount = 0
 
 const typeName = {
@@ -130,7 +115,7 @@ const renderers = {
     const palette = theme || themeCycle[count % themeCycle.length]
     const bg = hexRgb(theme ? srcTheme.colors[theme][0] : "#000")
     return (
-      <Link {...pageToLink(content)}>
+      <Link type={content.type} uid={content.uid}>
         <Background
           src={image}
           palette={!image && palette}

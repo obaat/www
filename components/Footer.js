@@ -29,8 +29,7 @@ export default () => (
           OBAAT UK<br />
           Liverpool Hope University <br />
           Taggart Avenue<br />
-          Liverpool<br />
-          L16 9JD<br />
+          Liverpool, L16 9JD<br />
           England<br />
           Charity number 1155099<br />
         </address>

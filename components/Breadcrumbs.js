@@ -3,10 +3,10 @@ import g from "glamorous"
 import { Home, ArrowRight } from "./SvgIcons"
 import { Flex, Box, H6, Text, Link } from "../ui"
 
-const LinkCrumb = ({ href, children, ...props }) =>
-  href ? (
+const LinkCrumb = ({ to, children, ...props }) =>
+  to ? (
     <Box bold={200} {...props}>
-      <Link to={href} palette="black">
+      <Link to={to} palette="black">
         {children}
       </Link>
     </Box>
@@ -16,14 +16,14 @@ const LinkCrumb = ({ href, children, ...props }) =>
 
 const BreadCrumbs = ({ route }) => (
   <Flex inline mb={2} align="center">
-    <LinkCrumb href="/">
+    <LinkCrumb to="/">
       <Home palette="black" size={13} />
     </LinkCrumb>
     {route.map(({ title, href }, i) => [
       <Box px={1} key="arrow">
         <ArrowRight size={8} palette="black" />
       </Box>,
-      <LinkCrumb href={href} key="path">
+      <LinkCrumb to={href} key="path">
         <Text mb={0}>{title}</Text>
       </LinkCrumb>,
     ])}
