@@ -7,11 +7,8 @@ import { Flex, Box, Avatar } from "../ui"
 const Statement = ({ w, data: { description, avatar, name, role } }) => (
   <Container maxWidth="600px" py={0} w={w}>
     <Flex align="flex-start">
-      <Box>
-        <QuoteOpen palette="gray2" invert size={32} />
-      </Box>
       <Box p={3} align="justify">
-        <Flex align="center">
+        <Flex align="center" mb={2}>
           {avatar &&
             avatar.url && (
               <Box w={100}>
@@ -22,13 +19,10 @@ const Statement = ({ w, data: { description, avatar, name, role } }) => (
             <PrismicRichText forceType="heading4" xmb={1} source={name} />
           </Box>
         </Flex>
-        <PrismicRichText forceType="paragraph" source={description} />
-        <Box align="right">
-          <PrismicRichText forceType="small" source={role} />
+        <Box p={2} style={{ float: "left" }}>
+          <QuoteOpen palette="gray2" invert size={32} />
         </Box>
-      </Box>
-      <Box alignSelf="flex-end">
-        <QuoteClose palette="gray2" invert size={32} />
+        <PrismicRichText forceType="paragraph" source={description} />
       </Box>
     </Flex>
   </Container>

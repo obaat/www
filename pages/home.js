@@ -167,21 +167,29 @@ class IndexPage extends React.Component {
               {hero.map(({ image, lead, strapline, button_text, url }, i) => (
                 <BackgroundImage
                   style={{ position: "relative", textAlign: "left" }}
-                  ratio={[1, 1, 1 / 2.5, 1 / 2.5]}
+                  ratio={[1, 1 / 1.5, 1 / 2.5, 1 / 2.5]}
                   src={image.url}
                   key={i}
                 >
-                  <Absolute bottom left right mx={4} my={3}>
+                  <Absolute
+                    bottom
+                    left
+                    right
+                    mx={[0, 0, 4, 4]}
+                    my={[0, 0, 4, 4]}
+                  >
                     <PrismicRichText
                       w={[1, 1, 1, 2 / 3]}
                       source={lead}
                       style={{
+                        backgroundColor: "rgba(0,0,0,0.3)",
                         textShadow: "0px 0px 3px rgba(0,0,0,0.3)",
                         lineHeight: "1em",
                       }}
                       forceType="headingasdiv"
                       fontSize="4.5vw"
                       bold={500}
+                      xmb={0}
                       color="black"
                       invert
                       p={2}
@@ -191,10 +199,13 @@ class IndexPage extends React.Component {
                       source={strapline}
                       forceType="headingasdiv"
                       bold={500}
-                      fontSize={[12, 12, 12, 24]}
+                      fontSize={[16, 16, 16, 24]}
                       color="black"
                       bg={`rgba(${bg[0]},${bg[1]},${bg[2]},0.8)`}
-                      p={2}
+                      xmb={0}
+                      pt={2}
+                      px={2}
+                      pb={[50, 50, 2, 2]}
                     />
                   </Absolute>
                 </BackgroundImage>
@@ -283,7 +294,7 @@ class IndexPage extends React.Component {
               autoplaySpeed={transitionSpeed * 2}
             >
               {chunkedStatements.map((statements, i) => (
-                <Flex key={i} wrap="wrap" justify="center">
+                <Flex key={i} wrap="wrap" justify="center" mx={3}>
                   {statements.map((props, i) => (
                     <Statement w={[1, 1, 1, 1 / 2]} key={i} {...props} />
                   ))}

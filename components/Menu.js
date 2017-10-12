@@ -163,15 +163,15 @@ const MobileItem = g(Box)({})
 const MobileMenu = ({ items, onClose }) => (
   <Fixed
     top
-    left
+    right
     bottom
     palette="black"
     invert
     p={2}
     style={{ overflowX: "scroll" }}
   >
-    <Absolute top right onClick={onClose} m={2}>
-      <X size={14} />
+    <Absolute top right onClick={onClose} p={2}>
+      <X size={24} />
     </Absolute>
     {items.map(i => (
       <Box key={i}>
@@ -204,11 +204,18 @@ const Menu = ({ hideMenu = false, ...props }) => {
   }
   return (
     <div>
-      <Box display={["block", "block", "block", "none"]} ml={2}>
+      <Fixed
+        display={["block", "block", "block", "none"]}
+        top
+        right
+        px={2}
+        py={1}
+      >
         <Toggle initial={false}>
           {({ on, toggle }) => (
             <Box mt={1}>
               <MenuIcon
+                size={24}
                 palette={props.scrolled ? "black" : "blackInvert"}
                 onClick={toggle}
               />
@@ -216,7 +223,7 @@ const Menu = ({ hideMenu = false, ...props }) => {
             </Box>
           )}
         </Toggle>
-      </Box>
+      </Fixed>
       <Box display={["none", "none", "none", "block"]}>
         <Set initial={{ visibleMenu: null }}>
           {({ set, get }) => (

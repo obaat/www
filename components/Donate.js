@@ -137,7 +137,8 @@ const DonateJustGiving = ({ scrolled }) => (
       icon="HeartFilled"
       iconSize={13}
       py={1}
-      px={3}
+      px={2}
+      mr={[3, 3, 3, 0]}
       as={scrolled ? ButtonOutline : Button}
     >
       DONATE
