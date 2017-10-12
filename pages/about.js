@@ -15,8 +15,8 @@ const About = ({ content = {} }) => {
             <Flex wrap="wrap">
               <Box
                 w={[1, 1, 0.45, 0.45]}
-                mr={i % 2 ? 4 : 0}
-                ml={i % 4 ? 0 : 4}
+                pr={i % 2 ? 4 : 0}
+                pl={i % 4 ? 0 : 4}
                 mt={50}
               >
                 <BackgroundImage ratio={2 / 3} src={section.image.url} />
