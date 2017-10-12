@@ -59,10 +59,6 @@ export default {
               name="viewport"
               content="width=device-width, initial-scale=1"
             />
-            <script
-              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9RbFyhZ3NtxgeYsCIs95rN4FXPg45VfQ"
-              async
-            />
             <link
               href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,700|Open+Sans:400,600"
               rel="stylesheet"
