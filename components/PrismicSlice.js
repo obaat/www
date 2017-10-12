@@ -37,8 +37,8 @@ const Document = ({ primary, items }) => {
       </Box>
       <Flex w={1 / 2} wrap="wrap">
         {items.map(({ title, file: { kind, url } }, i) => (
-          <Link to={url} target="_blank">
-            <Flex key={i} align="center" justify="center" inline>
+          <Link key={i} to={url} target="_blank">
+            <Flex align="center" justify="center" inline>
               <Box pr={1}>
                 <FilePdf color="#000" size={60} />
               </Box>
