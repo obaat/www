@@ -121,6 +121,15 @@ const BOX_WIDTH = [1, 1, 1, 1200]
 
 const transitionSpeed = 7 * 1000
 
+const Header = g(PrismicRichText)({
+  backgroundColor: "rgba(0,0,0,0.3)",
+  "@media screen and (min-width: 60em)": {
+    backgroundColor: "transparent",
+  },
+  textShadow: "0px 0px 3px rgba(0,0,0,0.3)",
+  lineHeight: "1em",
+})
+
 class IndexPage extends React.Component {
   counters = []
   state = {
@@ -149,12 +158,7 @@ class IndexPage extends React.Component {
 
         {image &&
           image.url && (
-            <Helmet
-              meta={[
-                { property: "og:image", content: image.url },
-                // { property: "og:title", content: image },
-              ]}
-            />
+            <Helmet meta={[{ property: "og:image", content: image.url }]} />
           )}
         <Panel p={0} direction="row">
           <Box w={1}>
@@ -178,14 +182,9 @@ class IndexPage extends React.Component {
                     mx={[0, 0, 4, 4]}
                     my={[0, 0, 4, 4]}
                   >
-                    <PrismicRichText
+                    <Header
                       w={[1, 1, 1, 2 / 3]}
                       source={lead}
-                      style={{
-                        backgroundColor: "rgba(0,0,0,0.3)",
-                        textShadow: "0px 0px 3px rgba(0,0,0,0.3)",
-                        lineHeight: "1em",
-                      }}
                       forceType="headingasdiv"
                       fontSize="4.5vw"
                       bold={500}
