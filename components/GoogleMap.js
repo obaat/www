@@ -12,6 +12,7 @@ export default compose(
   withProps(parentProps => ({
     containerElement: <div style={{ height: parentProps.height || `400px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
+    loadingElement: <div style={{ height: `100%` }} />,
     googleMapURL:
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyD9RbFyhZ3NtxgeYsCIs95rN4FXPg45VfQ",
   })),
