@@ -59,21 +59,6 @@ export default {
               name="viewport"
               content="width=device-width, initial-scale=1"
             />
-            <link
-              rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
-            />
-            <link
-              rel="stylesheet"
-              href="https://unpkg.com/tachyons-box-sizing@3.1.7/css/tachyons-box-sizing.min.css"
-            />
-            <link rel="stylesheet" href="/css/nprogress.css" />
-            <link rel="stylesheet" href="/css/react-block-ui.css" />
-            <link
-              href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,700|Open+Sans:400,600"
-              rel="stylesheet"
-            />
-
             <script
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9RbFyhZ3NtxgeYsCIs95rN4FXPg45VfQ"
               async
@@ -83,6 +68,20 @@ export default {
             <style dangerouslySetInnerHTML={{ __html: css }} />
           </Head>
           <Body>{children}</Body>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+          />
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/tachyons-box-sizing@3.1.7/css/tachyons-box-sizing.min.css"
+          />
+          <link rel="stylesheet" href="/css/nprogress.css" />
+          <link rel="stylesheet" href="/css/react-block-ui.css" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,700|Open+Sans:400,600"
+            rel="stylesheet"
+          />
         </Html>
       )
     }
