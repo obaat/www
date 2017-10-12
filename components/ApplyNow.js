@@ -1,6 +1,7 @@
 import React from "react"
 import Button from "../components/Button"
-import { ButtonOutlineFilled, Link } from "../ui"
+import { ButtonOutlineFilled } from "../ui"
+import Link from "./Link"
 
 export default ({ w }) => (
   <Link to="/apply">

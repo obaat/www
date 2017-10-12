@@ -11,6 +11,7 @@ import Yup from "yup"
 import range from "lodash/range"
 import PrismicRichText from "../components/PrismicRichText"
 import { Index } from "react-powerplug"
+import ga from "../utils/analytics"
 import {
   ExclamationSquare,
   ArrowNextStage,
@@ -291,7 +292,15 @@ const FormWizard = props => (
       }
       const onSubmit = pages[index + 1]
         ? next
-        : submit(success => success && setIndex(index + 1))
+        : submit(success => {
+            success &&
+              ga.event({
+                category: "Request",
+                action: "Applied for volunteer position",
+                label: "new_volunteer",
+              })
+            success && setIndex(index + 1)
+          })
       const steps = pages.concat(done)
       return (
         <Formik

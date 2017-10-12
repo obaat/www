@@ -17,6 +17,6 @@ export default ComposedComponent =>
     }
 
     render() {
-      return <ComposedComponent {...this.props} />
+      return <ComposedComponent {...this.props} ga={ReactGA} />
     }
   }

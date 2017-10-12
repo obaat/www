@@ -31,7 +31,7 @@ export default () => (
           Taggart Avenue<br />
           Liverpool, L16 9JD<br />
           England<br />
-          Charity number 1155099<br />
+          NGO number 1155099<br />
         </address>
       </Box>
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
@@ -41,7 +41,7 @@ export default () => (
           Njara-Mukasenyi<br />
           P. O. BOX 349, Fort Portal<br />
           Uganda<br />
-          NGO registration number 11726<br />
+          NGO number 11726<br />
         </address>
       </Box>
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
