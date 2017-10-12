@@ -39,8 +39,8 @@ export default () => (
           OBAAT Uganda<br />
           Bankside Road<br />
           Njara-Mukasenyi<br />
-          P. O. BOX 349, Fort Portal<br />
-          Uganda<br />
+          P. O. BOX 349<br />
+          Fort Portal, Uganda<br />
           NGO number 11726<br />
         </address>
       </Box>

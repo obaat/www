@@ -62,7 +62,10 @@ export default {
             <script
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9RbFyhZ3NtxgeYsCIs95rN4FXPg45VfQ"
               async
-              defer
+            />
+            <link
+              href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,700|Open+Sans:400,600"
+              rel="stylesheet"
             />
             <meta name="referrer" content="origin" />
             <style dangerouslySetInnerHTML={{ __html: css }} />
@@ -78,10 +81,6 @@ export default {
           />
           <link rel="stylesheet" href="/css/nprogress.css" />
           <link rel="stylesheet" href="/css/react-block-ui.css" />
-          <link
-            href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,700|Open+Sans:400,600"
-            rel="stylesheet"
-          />
         </Html>
       )
     }
