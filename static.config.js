@@ -64,6 +64,7 @@ export default {
               rel="stylesheet"
             />
             <meta name="referrer" content="origin" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js" />
             <style dangerouslySetInnerHTML={{ __html: css }} />
           </Head>
           <Body>{children}</Body>
