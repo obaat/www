@@ -33,12 +33,7 @@ const Grid = g.div(
         gridTemplateRows: "repeat(2, 200px)",
       },
     },
-    "@supports  (-ms-accelerator:true)": {
-      display: "-ms-grid",
-      msGridRows: "200px 200px 200px 200px",
-      msGridColumns: "33% 33% 33%",
-    },
-    "@supports (-ms-ime-align:auto)": {
+    "@supports (-ms-accelerator:true) or (-ms-ime-align:auto)": {
       display: "-ms-grid",
       msGridRows: "200px 200px 200px 200px",
       msGridColumns: "33% 33% 33%",
@@ -163,15 +158,27 @@ const Panel = ({ slice_type, primary, data, count }) => {
 
 const GridItem = g
   .div(({ startColumn, endColumn, startRow, endRow }) => ({
+    "@supports (-ms-accelerator:true) or (-ms-ime-align:auto)": {
+      height: "auto",
+      width: "auto",
+      msGridColumnSpan: endColumn.replace("span ", "") + ";",
+      msGridRowSpan: endRow.replace("span ", "") + ";",
+      msGridRow: startRow,
+      msGridColumn: startColumn,
+    },
+    "@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)": {
+      height: "auto",
+      width: "auto",
+      msGridColumnSpan: endColumn.replace("span ", "") + ";",
+      msGridRowSpan: endRow.replace("span ", "") + ";",
+      msGridRow: startRow,
+      msGridColumn: startColumn,
+    },
     "@supports (display: grid)": {
       gridColumnStart: startColumn,
       gridColumnEnd: endColumn,
       gridRowStart: startRow,
       gridRowEnd: endRow,
-      msGridColumnSpan: endColumn.replace("span ", "") + ";",
-      msGridRowSpan: endRow.replace("span ", "") + ";",
-      msGridRow: startRow,
-      msGridColumn: startColumn,
       gridRowGap: 4,
       height: "auto",
       width: "auto",
