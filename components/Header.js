@@ -66,8 +66,6 @@ const menuDocked = css.keyframes({
   },
 })
 
-const Container = g.div({})
-
 const Fixed = g.div({
   position: "fixed",
   top: 0,
@@ -94,6 +92,7 @@ const scrolled = ({ scrolled }) =>
 const HeaderContainer = g(Flex)(
   {
     alignItems: "center",
+    verticalAlign: "top",
     zIndex: 999999,
   },
   scrolled,
@@ -137,7 +136,7 @@ export default class Header extends Component {
   render() {
     const { scrolled } = this.state
     return (
-      <Container>
+      <div>
         <Fixed>
           <HeaderContainer inline wrap="wrap" w={1} px={3} scrolled={scrolled}>
             <Box>
@@ -155,7 +154,7 @@ export default class Header extends Component {
             </Box>
           </HeaderContainer>
         </Fixed>
-      </Container>
+      </div>
     )
   }
 }
