@@ -4,6 +4,7 @@ import { Link as UILink, ExtLink } from "../ui"
 const mapType = {
   project: "projects",
   projects_page: "projects",
+  volunteer_opportunity: "volunteering",
   team_page: "team",
   gallery_page: "gallery",
 }
