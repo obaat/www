@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 import React, { Component } from "react"
-import { renderStatic } from "glamor/server"
+import { renderStaticOptimized } from "glamor/server"
 import mapValues from "lodash/mapValues"
 import { getByType, types } from "./utils/api"
 import { data } from "./src/Routes"
@@ -38,19 +38,16 @@ export default {
 
     return mappedData
   },
-  postRenderMeta: async html => ({
-    glamorousData: renderStatic(() => html),
-  }),
+  renderToHtml: async (render, Comp, meta) => {
+    const html = render(<Comp />)
+    const { css } = renderStaticOptimized(() => html)
+    meta.glamStyles = css
+    return html
+  },
   siteRoot: "https://www.onebrick.org.uk",
-  Html: class CustomHtml extends Component {
+  Document: class CustomDocument extends Component {
     render() {
-      const {
-        Html,
-        Head,
-        Body,
-        children,
-        staticMeta: { glamorousData: { css } = {} } = {},
-      } = this.props
+      const { Html, Head, Body, children, renderMeta } = this.props
 
       return (
         <Html>
@@ -65,7 +62,9 @@ export default {
             />
             <meta name="referrer" content="origin" />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js" />
-            <style dangerouslySetInnerHTML={{ __html: css }} />
+            <style
+              dangerouslySetInnerHTML={{ __html: renderMeta.glamStyles }}
+            />
           </Head>
           <Body>{children}</Body>
           <link
