@@ -100,14 +100,13 @@ export const children = async (...args) => {
 const _Projects = pageWithTitle()(Projects)
 export default _Projects
 
+const projectsWithProps = getRouteProps(_Projects)
+const projectWithProps = getRouteProps(Project)
+
 export const routes = ({ match }) => (
   <Switch>
-    <Route path={match.url} exact component={getRouteProps(_Projects)} />
-    <Route
-      path={`${match.url}/planned`}
-      exact
-      component={getRouteProps(_Projects)}
-    />
-    <Route path={`${match.url}/:uid`} component={getRouteProps(Project)} />
+    <Route path={match.url} exact component={projectsWithProps} />
+    <Route path={`${match.url}/planned`} exact component={projectsWithProps} />
+    <Route exact path={`${match.url}/:uid`} component={projectWithProps} />
   </Switch>
 )

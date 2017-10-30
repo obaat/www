@@ -38,8 +38,9 @@ export const children = async (...args) => {
 const _Gallery = pageWithTitle()(Gallery)
 export default _Gallery
 
+const galleryWithProps = getRouteProps(_Gallery)
 export const routes = ({ match }) => (
   <Switch>
-    <Route path={`${match.url}/:uid`} component={getRouteProps(_Gallery)} />
+    <Route path={`${match.url}/:uid`} component={galleryWithProps} />
   </Switch>
 )

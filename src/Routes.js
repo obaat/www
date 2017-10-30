@@ -28,7 +28,7 @@ export const data = pageComponents.map(p => ({
 }))
 
 export const pages = pageComponents.map(p => ({
-  component: p.routes ? getRouteProps(p.routes) : getRouteProps(p.default),
+  component: p.routes || getRouteProps(p.default),
   exact: p.routes ? false : true,
   ...p,
 }))

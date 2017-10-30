@@ -383,11 +383,11 @@ export const Apply = ({
 
   return (
     <Flex wrap="wrap">
-      <Box w={[1, 1, 1, 0.6]} pr={[0, 0, 0, 2]}>
+      <Box w={[1, 1, 1, 0.5]} pr={[0, 0, 0, 2]}>
         <PrismicRichText source={content.description} />
         <FormWizard opportunities={opportunities} />
       </Box>
-      <Box w={[1, 1, 1, 0.4]}>
+      <Box w={[1, 1, 1, 0.5]}>
         <Accordion items={accordionItems} />
         {quotes && <Quotes items={quotes.items} data={additionalData} />}
       </Box>

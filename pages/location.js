@@ -40,8 +40,9 @@ export const children = async (...args) => {
   return pages
 }
 
+const locationWithProps = getRouteProps(_Location)
 export const routes = ({ match }) => (
   <Switch>
-    <Route path={`${match.url}/:uid`} component={getRouteProps(_Location)} />
+    <Route path={`${match.url}/:uid`} component={locationWithProps} />
   </Switch>
 )

@@ -35,8 +35,9 @@ export const children = async (...args) => {
   return pages
 }
 
+const eventWithProps = getRouteProps(_Event)
 export const routes = ({ match }) => (
   <Switch>
-    <Route path={`${match.url}/:uid`} component={getRouteProps(_Event)} />
+    <Route path={`${match.url}/:uid`} component={eventWithProps} />
   </Switch>
 )

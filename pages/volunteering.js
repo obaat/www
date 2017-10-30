@@ -4,6 +4,7 @@ import ApplyNow from "../components/ApplyNow"
 import g from "glamorous"
 import Link from "../components/Link"
 import { Switch, Route, getRouteProps } from "react-static"
+import get from "lodash/get"
 import VolunteeringOpp, {
   data as oppData,
 } from "./parts/volunteering_opportunity"
@@ -85,8 +86,9 @@ const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
     />
   )
   const Component = sliceRenderers[slice_type] || Unknown
+  const id = get(primary, "title[0].text", `s-${i}`)
   return {
-    id: `s-${i}`,
+    id,
     title,
     description: (
       <Component primary={primary} items={items} slice_type={slice_type} />
@@ -144,12 +146,12 @@ const _Volunteering = pageWithTitle({
 
 export default _Volunteering
 
+const vWithProps = getRouteProps(_Volunteering)
+const opWithProps = getRouteProps(VolunteeringOpp)
+
 export const routes = ({ match }) => (
   <Switch>
-    <Route path={match.url} exact component={getRouteProps(_Volunteering)} />
-    <Route
-      path={`${match.url}/:uid`}
-      component={getRouteProps(VolunteeringOpp)}
-    />
+    <Route path={match.url} exact component={vWithProps} />
+    <Route path={`${match.url}/:uid`} component={opWithProps} />
   </Switch>
 )
