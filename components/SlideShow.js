@@ -316,6 +316,7 @@ export default class SlideShow extends Component {
           {({ x }) => (
             <Carousel
               direction={vertical ? "column" : "row"}
+              onClick={!hideZoom && this.toggleZoom()}
               style={{
                 transform: `translate${vertical ? "Y" : "X"}(-${x}%)`,
               }}
