@@ -1,5 +1,6 @@
 import React from "react"
 import { Link as UILink, ExtLink } from "../ui"
+import { HashLink } from "react-router-hash-link"
 
 const mapType = {
   project: "projects",
@@ -31,25 +32,42 @@ const Link = ({
 }) => {
   const _href = slug ? `/${mapping[slug] || slug}` : href
   if (url || href) {
-    return (
-      <ExtLink
-        className={className}
-        href={url || href}
-        target={target || "_blank"}
-        rel="noopener"
-      >
-        {children}
-      </ExtLink>
-    )
+    const _href = url || href
+    if (_href.charAt(0) === "#") {
+      return (
+        <HashLink className={className} to={_href}>
+          {children}
+        </HashLink>
+      )
+    } else {
+      return (
+        <ExtLink
+          className={className}
+          href={_href}
+          target={target || "_blank"}
+          rel="noopener"
+        >
+          {children}
+        </ExtLink>
+      )
+    }
   }
 
   const to = _to ? _to : pageToLink(type, uid)
   if (to) {
-    return (
-      <UILink className={className} to={to} target={target} rel="noopener">
-        {children}
-      </UILink>
-    )
+    if (to.charAt(0) === "#") {
+      return (
+        <HashLink className={className} to={to}>
+          {children}
+        </HashLink>
+      )
+    } else {
+      return (
+        <UILink className={className} to={to} target={target} rel="noopener">
+          {children}
+        </UILink>
+      )
+    }
   } else {
     return <span>?{children}</span>
   }

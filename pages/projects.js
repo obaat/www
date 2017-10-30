@@ -83,8 +83,9 @@ const dataWithStatus = status => async () => {
 export const data = dataWithStatus("completed")
 
 export const children = async (...args) => {
-  const { projects } = await data(...args)
-  const pages = projects.results.map(({ uid }) => ({
+  const allProjects = await getByType(types.PROJECT)
+  // const { projects } = await data(...args)
+  const pages = allProjects.results.map(({ uid }) => ({
     path: "/" + uid,
     getProps: projectData(uid),
   }))

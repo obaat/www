@@ -362,8 +362,9 @@ const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
     <PrismicRichText forceType="paragraph" bold={300} source={primary.title} />
   )
   const Component = sliceRenderers[slice_type] || Unknown
+  const id = get(primary, "title[0].text", `s-${i}`)
   return {
-    id: `s-${i}`,
+    id,
     title,
     description: (
       <Component primary={primary} items={items} slice_type={slice_type} />
@@ -371,7 +372,7 @@ const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
   }
 }
 
-const Apply = ({
+export const Apply = ({
   content = {},
   quotes,
   main = [],

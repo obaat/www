@@ -1,6 +1,8 @@
 import React from "react"
 import { pageWithTitle } from "../../hoc/page"
 import { HumanDate } from "../../utils/date"
+import isFuture from "date-fns/is_future"
+import { Apply, data as applyData } from "../apply"
 import {
   getByUID,
   getByIDs,
@@ -13,6 +15,12 @@ import SidebarHeader from "../../components/SidebarHeader"
 import PrismicRichText from "../../components/PrismicRichText"
 import PrismicSlice from "../../components/PrismicSlice"
 import SlideShow from "../../components/SlideShow"
+import {
+  FlagFinish,
+  Rocket,
+  SymbolPound,
+  QuestionInBubble,
+} from "../../components/SvgIcons"
 import {
   Absolute,
   Relative,
@@ -58,7 +66,8 @@ const Partner = ({ data: { title, description, logo, website }, uid }) => {
   )
 }
 
-const Project = ({ content = {}, partners }) => {
+const Project = ({ content = {}, partners, applyData }) => {
+  const plannedOrCurrent = isFuture(content.date_completed)
   const sections = content.body.map((props, i) => (
     <Box key={i} mb={2}>
       <PrismicSlice {...props} />
@@ -70,13 +79,50 @@ const Project = ({ content = {}, partners }) => {
         <PrismicRichText source={content.description} />
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} pl={3}>
-        {content.date_completed && (
-          <Box mb={2}>
-            <SidebarHeader>
-              Completed <HumanDate iso={content.date_completed} />
-            </SidebarHeader>
+        {!plannedOrCurrent &&
+          content.date_completed && (
+            <Box mb={2}>
+              <SidebarHeader>
+                Completed <HumanDate iso={content.date_completed} />
+              </SidebarHeader>
+            </Box>
+          )}
+        {plannedOrCurrent && (
+          <Box>
+            <Flex wrap="wrap" mb={2}>
+              <Box w={30} pr={2}>
+                <Rocket size={24} palette="black" />
+              </Box>
+              <Box pr={2}>
+                <HumanDate iso={content.date_start} />
+              </Box>
+            </Flex>
+            <Flex wrap="wrap" mb={2}>
+              <Box w={30} pr={2}>
+                <FlagFinish size={24} palette="black" />
+              </Box>
+              <Box pr={2}>
+                <HumanDate iso={content.date_completed} />
+              </Box>
+            </Flex>
+            <Flex wrap="wrap" mb={2}>
+              <Box w={30} pr={2}>
+                <SymbolPound size={24} palette="black" />
+              </Box>
+              <Box>
+                <Flex align="center">
+                  <Box>Starting from £{content.price}</Box>
+                  <Box pl={1}>
+                    <UILink to="#Costs">
+                      <QuestionInBubble size={20} palette="black" />
+                    </UILink>
+                  </Box>
+                </Flex>
+              </Box>
+            </Flex>
           </Box>
         )}
+        {sections}
         {content.location &&
           content.location.latitude && (
             <Box mb={2}>
@@ -84,7 +130,8 @@ const Project = ({ content = {}, partners }) => {
               <Map center={content.location} zoom={9} />
             </Box>
           )}
-        {partners &&
+        {!plannedOrCurrent &&
+          partners &&
           partners.length > 0 && (
             <div>
               <SidebarHeader>Partners</SidebarHeader>
@@ -95,8 +142,12 @@ const Project = ({ content = {}, partners }) => {
               </Flex>
             </div>
           )}
-        {sections}
       </Box>
+      {plannedOrCurrent && (
+        <Box w={1}>
+          <Apply {...applyData} />
+        </Box>
+      )}
     </Flex>
   )
 }
@@ -104,10 +155,12 @@ const Project = ({ content = {}, partners }) => {
 export const data = uid => async () => {
   const res = await getByUID(types.PROJECT)(uid)
   const partners = await getByIDs(res.data.partners.map(l => l.partner.id))
+  const apply = await applyData()
   return {
     content: res.data,
     partners: partners.results,
     project: true,
+    applyData: apply,
   }
 }
 

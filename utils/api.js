@@ -50,18 +50,19 @@ const getByIDs = memoizee(async (ids, opts) => {
   return res
 })
 
-const getByUID = type =>
+const getByUID = memoizee(type =>
   memoizee(async (id, options) => {
     const api = await apiBuilder()
     const res = await api.getByUID(type, id, options)
     return res
-  })
+  }),
+)
 
 const getByType = memoizee(async type => {
   const api = await apiBuilder()
 
   const res = await api.query(Prismic.Predicates.at("document.type", type), {
-    pageSize: 10,
+    pageSize: 100,
     orderings: `[my.${type}.first_publication_date]`,
   })
 
