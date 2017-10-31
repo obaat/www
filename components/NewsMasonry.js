@@ -28,35 +28,29 @@ const Grid = g.div(
       gridTemplateRows: rowConfig,
       gridTemplateColumns: columnConfig,
       gridAutoRows: autoRowConfig,
+      gridTemplateAreas: `
+      "p1 p1 s1"
+      "p1 p1 s2"
+      "s3 p2 p2"
+      "s4 p2 p2"
+      `,
       gridGap: gap,
       "@media screen and (max-width: 40em)": {
-        gridTemplateRows: "repeat(2, 200px)",
+        gridTemplateColumns: "1fr",
+        gridTemplateRows: "1fr",
+        gridTemplateRows: "repeat(6, 200px)",
+        gridTemplateAreas: `
+        "p1"
+        "s1"
+        "s2"
+        "p2"
+        "s3"
+        "s4"
+        `,
       },
-    },
-    "@supports (-ms-accelerator:true) or (-ms-ime-align:auto)": {
-      display: "-ms-grid",
-      msGridRows: "200px 200px 200px 200px",
-      msGridColumns: "33% 33% 33%",
-    },
-    "@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)": {
-      display: "-ms-grid",
-      msGridRows: "200px 200px 200px 200px",
-      msGridColumns: "33% 33% 33%",
     },
   }),
 )
-
-const rowConfig = i => [
-  { y: 1, x: 1 + i * 2, w: 2, h: 2 },
-  { y: 3, x: 1 + i * 2, w: 1, h: 1 },
-  { y: 3, x: 2 + i * 2, w: 1, h: 1 },
-]
-
-const rowConfigOdd = i => [
-  { y: 1, x: 1 + i * 2, w: 1, h: 1 },
-  { y: 1, x: 2 + i * 2, w: 1, h: 1 },
-  { y: 2, x: 1 + i * 2, w: 2, h: 2 },
-]
 
 const Background = g(Absolute)(({ src }) => ({
   backgroundImage: src ? `url(${src})` : "none",
@@ -72,8 +66,6 @@ const Background = g(Absolute)(({ src }) => ({
 
 const TextBackground = g(Background)({
   display: "flex",
-  alignItems: "center",
-  textAlign: "center",
 })
 
 let cycleCount = 0
@@ -93,11 +85,9 @@ const renderers = {
       invert
       bg={background_color}
       color={color}
-      align="center"
-      justify="center"
       p={2}
     >
-      <PrismicRichText source={content} />
+      <PrismicRichText source={content} forceType="heading2" />
     </TextBackground>
   ),
   page: ({ content, theme, data, count }) => {
@@ -156,67 +146,31 @@ const Panel = ({ slice_type, primary, data, count }) => {
   )
 }
 
-const GridItem = g
-  .div(({ startColumn, endColumn, startRow, endRow }) => ({
-    "@supports (-ms-accelerator:true) or (-ms-ime-align:auto)": {
-      height: "auto",
-      width: "auto",
-      msGridColumnSpan: endColumn.replace("span ", "") + ";",
-      msGridRowSpan: endRow.replace("span ", "") + ";",
-      msGridRow: startRow,
-      msGridColumn: startColumn,
-    },
-    "@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)": {
-      height: "auto",
-      width: "auto",
-      msGridColumnSpan: endColumn.replace("span ", "") + ";",
-      msGridRowSpan: endRow.replace("span ", "") + ";",
-      msGridRow: startRow,
-      msGridColumn: startColumn,
-    },
-    "@supports (display: grid)": {
-      gridColumnStart: startColumn,
-      gridColumnEnd: endColumn,
-      gridRowStart: startRow,
-      gridRowEnd: endRow,
-      gridRowGap: 4,
-      height: "auto",
-      width: "auto",
-      "@media screen and (max-width: 40em)": {
-        gridColumnStart: "auto",
-        gridRowStart: "auto",
-        gridRowEnd: "span 1",
-        height: "200px",
-        gridColumnEnd: "span 3",
-      },
-    },
-    position: "relative",
-    height: "200px",
-    width: "33%",
-  }))
-  .withProps(({ startRow, startColumn, endColumn, endRow }) => {})
+const GridItem = g.div(({ gridArea }) => ({
+  "@supports (display: grid)": {
+    height: "auto",
+    width: "auto",
+    border: 0,
+    gridArea,
+  },
+  position: "relative",
+  height: "200px",
+  width: "33%",
+  border: "5px solid transparent",
+}))
 
 const COLUMNS = 3
 
+const areas = ["p1", "s1", "s2", "s3", "s4", "p2"]
 const NewsMasonry = ({ items = [], data }) => {
   return (
     <Grid
-      rowConfig={`repeat(2, 14.5VW)`}
+      autoRowConfig="minmax(14.5VW, auto)"
       columnConfig={`repeat(${COLUMNS}, 1fr)`}
-      autoRowConfig="1fr"
     >
       {items.map((item, i) => {
-        const row = Math.floor(i / COLUMNS)
-        const op = row % 2 ? rowConfigOdd : rowConfig
-        const { x, y, w, h } = op(row)[i % COLUMNS]
         return (
-          <GridItem
-            key={i}
-            startRow={x}
-            endRow={`span ${w}`}
-            startColumn={y}
-            endColumn={`span ${h}`}
-          >
+          <GridItem gridArea={areas[i]} key={i}>
             <Panel {...item} data={data} count={i} />
           </GridItem>
         )
