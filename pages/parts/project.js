@@ -142,7 +142,8 @@ const Project = class Project extends Component {
             </Box>
           )}
           {sections}
-          {content.location &&
+          {!plannedOrCurrent &&
+            content.location &&
             content.location.latitude && (
               <Box mb={2}>
                 <SidebarHeader>Location</SidebarHeader>

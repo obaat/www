@@ -90,7 +90,7 @@ const renderers = {
       <PrismicRichText source={content} forceType="heading2" />
     </TextBackground>
   ),
-  page: ({ content, theme, data, count }) => {
+  page: ({ description, content, theme, data, count }) => {
     const src = data[content.id] || {}
     const image = get(
       src,
@@ -116,6 +116,7 @@ const renderers = {
             bg={`rgba(${bg[0]},${bg[1]},${bg[2]},${theme ? "0.8" : "0.2"})`}
           >
             <PrismicRichText forceType="heading3" source={src.title} />
+            {description && <PrismicRichText source={description} />}
           </Absolute>
           <Absolute bottom right p={2}>
             <Small mb={0} style={{ textTransform: "uppercase" }}>
