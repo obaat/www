@@ -97,7 +97,7 @@ const Project = class Project extends Component {
                 <Box w={35}>
                   <Rocket size={24} palette="brick" />
                 </Box>
-                <Box>
+                <Box bold={500}>
                   <HumanDate iso={content.date_start} />
                 </Box>
               </Flex>
@@ -105,7 +105,7 @@ const Project = class Project extends Component {
                 <Box w={35}>
                   <FlagFinish size={24} palette="brick" />
                 </Box>
-                <Box>
+                <Box bold={500}>
                   <HumanDate iso={content.date_completed} />
                 </Box>
               </Flex>
@@ -115,7 +115,7 @@ const Project = class Project extends Component {
                 </Box>
                 <Box>
                   <Flex align="center">
-                    <Box>Starting from £{content.price}</Box>
+                    <Box bold={500}>Starting from £{content.price}</Box>
                     <Box pl={1}>
                       <UILink to="#Costs">
                         <QuestionInBubble size={20} palette="black" />
