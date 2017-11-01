@@ -17,7 +17,7 @@ const Grid = g.div(
     rowConfig,
     columnConfig,
     autoRowConfig,
-    gap = "8px",
+    gap = "15px",
   }) => ({
     width,
     height,
