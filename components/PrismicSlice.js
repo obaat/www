@@ -17,7 +17,11 @@ const Video = ({ items = [] }) => {
           {description && (
             <PrismicRichText w={1} forceType="heading5" source={description} />
           )}
-          <Embed {...embed || content} />
+          <Embed
+            {...embed || content}
+            containerWidth="auto"
+            containerHeight="auto"
+          />
         </Box>
       ))}
     </div>
@@ -56,6 +60,7 @@ const Document = ({ primary, items }) => {
 export const renderers = {
   video: Video,
   embeds: Video,
+  embed: Video,
   text_only: Text,
   files: Document,
   faq: ({ items = [] }) => (

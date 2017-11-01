@@ -19,6 +19,8 @@ const Embed = ({
   provider_name,
   uri,
   embed_url,
+  containerWidth,
+  containerHeight,
   width,
   html,
   height,
@@ -30,8 +32,8 @@ const Embed = ({
       return (
         <Container
           src={`https://www.youtube.com/embed/${id}`}
-          width={width}
-          height={height}
+          width={containerWidth || width}
+          height={containerHeight || height}
         />
       )
     }
@@ -40,8 +42,8 @@ const Embed = ({
       return (
         <Container
           src={`https://player.vimeo.com/video/${id}`}
-          width={width}
-          height={height}
+          width={containerWidth || width}
+          height={containerHeight || height}
         />
       )
     }
