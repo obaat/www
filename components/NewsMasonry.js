@@ -115,7 +115,7 @@ const renderers = {
             p={2}
             bg={`rgba(${bg[0]},${bg[1]},${bg[2]},${theme ? "0.8" : "0.2"})`}
           >
-            {title ? (
+            {title && title[0] ? (
               <PrismicRichText forceType="heading3" source={title} />
             ) : (
               <PrismicRichText forceType="heading3" source={src.title} />
