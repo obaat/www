@@ -56,17 +56,17 @@ export default {
               name="viewport"
               content="width=device-width, initial-scale=1"
             />
-            <link
-              href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,700|Open+Sans:400,600"
-              rel="stylesheet"
-            />
             <meta name="referrer" content="origin" />
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js" />
+            <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
             <style
               dangerouslySetInnerHTML={{ __html: renderMeta.glamStyles }}
             />
           </Head>
           <Body>{children}</Body>
+          <link
+            href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,700|Open+Sans:400,600"
+            rel="stylesheet"
+          />
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
