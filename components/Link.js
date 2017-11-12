@@ -6,6 +6,8 @@ const mapType = {
   project: "projects",
   projects_page: "projects",
   volunteer_opportunity: "volunteering",
+  volunteering_page: "volunteering",
+  trustees_page: "trustees",
   team_page: "team",
   gallery_page: "gallery",
 }

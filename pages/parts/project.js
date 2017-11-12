@@ -35,6 +35,8 @@ import {
 import Map from "../../components/GoogleMap"
 import UILink from "../../components/Link"
 
+import Link from "../../components/Link"
+
 const Partner = ({ data: { title, description, logo, website }, uid }) => {
   const content = (
     <div>
@@ -58,9 +60,9 @@ const Partner = ({ data: { title, description, logo, website }, uid }) => {
   return (
     <Box w={1 / 2} mb={3}>
       {website && website.url ? (
-        <UILink target="_blank" to={website.url}>
+        <Link target="_blank" to={website.url}>
           {content}
-        </UILink>
+        </Link>
       ) : (
         content
       )}
@@ -134,7 +136,8 @@ const Project = class Project extends Component {
                       duration: 500,
                       smooth: true,
                       offset: -70,
-                    })}
+                    })
+                  }
                 >
                   More Information & Apply
                 </Button>
