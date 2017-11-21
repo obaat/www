@@ -55,6 +55,9 @@ const unknown = type => () => <div>??? {type} </div>
 
 const handler = {
   hyperlink: Link,
+  em: g.em({
+    fontStyle: "italic",
+  }),
   strong: g.strong({
     fontWeight: "bold",
   }),
