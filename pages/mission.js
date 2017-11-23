@@ -2,6 +2,7 @@ import React from "react"
 import { getSingleton, getByIDs, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
+import { QuoteOpen, QuoteClose } from "../components/SvgIcons"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 
 const Mission = ({ members = [], content = {} }) => (
@@ -10,7 +11,16 @@ const Mission = ({ members = [], content = {} }) => (
       <PrismicRichText source={content.description} />
     </Box>
     <Box w={[1, 1, 1, 1 / 3]}>
-      <PrismicRichText source={content.mission} />
+      <Border
+        left
+        borderWidth={4}
+        borderColor="base"
+        palette="gray2"
+        p={2}
+        invert
+      >
+        <PrismicRichText source={content.mission} />
+      </Border>
     </Box>
   </Flex>
 )
