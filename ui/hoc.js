@@ -9,7 +9,8 @@ import get from "lodash/get"
 import isNil from "lodash/isNil"
 import g from "glamorous"
 
-export const clickable = ({ onClick }) => onClick && { cursor: "pointer" }
+export const clickable = ({ onClick }) =>
+  onClick ? { cursor: "pointer" } : undefined
 export const hide = ({ hide }) => hide && { display: "none" }
 export const bold = ({ bold }) =>
   bold && { fontWeight: bold > 0 ? bold : "bold" }

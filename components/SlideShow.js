@@ -316,7 +316,7 @@ export default class SlideShow extends Component {
           {({ x }) => (
             <Carousel
               direction={vertical ? "column" : "row"}
-              onClick={!hideZoom && this.toggleZoom()}
+              onClick={!hideZoom ? this.toggleZoom() : undefined}
               style={{
                 transform: `translate${vertical ? "Y" : "X"}(-${x}%)`,
               }}
@@ -406,9 +406,10 @@ export default class SlideShow extends Component {
   render() {
     const { selectedIndex, zoom } = this.state
     const { inline } = this.props
-    const children = React.Children
-      .toArray(this.props.children)
-      .slice(0, Math.max(PRELOAD_MAX, selectedIndex + PRELOAD_MAX))
+    const children = React.Children.toArray(this.props.children).slice(
+      0,
+      Math.max(PRELOAD_MAX, selectedIndex + PRELOAD_MAX),
+    )
 
     return zoom
       ? this.renderZoomed(children)

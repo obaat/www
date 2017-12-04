@@ -4,7 +4,8 @@ import get from "lodash/get"
 
 export { space, color, width, fontSize }
 
-export const clickable = ({ onClick }) => onClick && { cursor: "pointer" }
+export const clickable = ({ onClick }) =>
+  onClick ? { cursor: "pointer" } : undefined
 export const show = ({ show }) => show || { display: "none" }
 export const visible = ({ visible }) =>
   visible ? { opacity: 1 } : { opacity: 0 }

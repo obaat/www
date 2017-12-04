@@ -5,6 +5,10 @@ import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
 import map from "lodash/map"
 import Link from "./Link"
+import { serialize, Elements } from "prismic-richtext"
+import { Link as LinkHelper } from "prismic-helpers"
+import shortid from "shortid"
+
 import {
   Small,
   Heading,
@@ -16,146 +20,95 @@ import {
   H6,
   Li,
   Ol,
+  Pre,
   Ul,
   HeadingAsDiv,
 } from "../ui"
 
 const ourTypes = {
-  heading1: Heading,
-  heading2: Subhead,
-  heading3: H3,
-  heading4: H4,
-  heading5: H5,
-  heading6: H6,
-  headingasdiv: HeadingAsDiv,
-  small: Small,
-  paragraph: Text,
-  "list-item": Li,
-  "o-list-item": Li,
-  "group-list-item": Ul,
-  "group-o-list-item": Ol,
-}
-
-const rawTypes = {
-  unformatted: g.span,
-  preformatted: g.pre,
-  em: g.em,
-  strong: g.strong,
-  image: g.img,
-  label: g.label,
-  span: g.span,
-}
-
-const styling = {
-  ...mapValues(rawTypes, (v, k) => hoc()(v({}))),
-  ...ourTypes,
+  [Elements.heading1]: Heading,
+  [Elements.heading2]: Subhead,
+  [Elements.heading3]: H3,
+  [Elements.heading4]: H4,
+  [Elements.heading5]: H5,
+  [Elements.heading6]: H6,
+  [Elements.paragraph]: Text,
+  [Elements.preformatted]: Pre,
+  [Elements.listItem]: Li,
+  [Elements.oListItem]: Li,
+  [Elements.list]: Ul,
+  [Elements.olist]: Ol,
+  //[Elements.image]:  ,
+  //[Elements.embed]:  ,
+  //[Elements.label]:  ,
+  //[Elements.hyperlink]:  ,
+  // headingasdiv: HeadingAsDiv,
+  // small: Small,
+  [Elements.strong]: g.strong({ fontWeight: 700 }),
+  [Elements.em]: g.em({ fontStyle: "italic" }),
+  [Elements.hyperlink]: Link,
 }
 
 const unknown = type => () => <div>??? {type} </div>
 
-const handler = {
-  hyperlink: Link,
-  em: g.em({
-    fontStyle: "italic",
-  }),
-  strong: g.strong({
-    fontWeight: "bold",
-  }),
+const linkResolver = link => {
+  if (link.link_type === "Document") {
+    return "???"
+  } else {
+    return link.url
+  }
 }
 
-const PrismicRichText = ({ source, forceType, mb, mt, xmb, xmt, ...props }) => {
+const span = g.span({})
+
+const doSerialize = ({ forceType, Component, xmb, xmt, ...passProps }) => (
+  prismicType,
+  element,
+  content,
+  children,
+) => {
+  if (prismicType === Elements.span) {
+    return <span key={shortid.generate()}>{content}</span>
+  } else if (prismicType === Elements.hyperlink) {
+    return (
+      <Link {...element.data} key={shortid.generate()}>
+        {children}
+      </Link>
+    )
+  }
+  const type = forceType ? Elements[forceType] || prismicType : prismicType
+  const RenderComponent =
+    forceType === "unformatted"
+      ? span
+      : Component || ourTypes[type] || unknown(type)
+  return (
+    <RenderComponent mb={xmb} mt={xmt} key={shortid.generate()} {...passProps}>
+      {children}
+    </RenderComponent>
+  )
+}
+
+const PrismicRichText = ({
+  source,
+  mb,
+  mt,
+  // forceType,
+  // Component,
+  // xmb,
+  // xmt,
+  ...props
+}) => {
   if (!Array.isArray(source)) {
     return <div>no source</div>
   }
-  const flatContent = source.map((s, i) => {
-    if (!s.type) {
-      const w = 1 / s.length
-      return (
-        <Flex>
-          {map(s, (v, k) => (
-            <Box w={w} p={2}>
-              <PrismicRichText source={v} key={k} {...props} />
-            </Box>
-          ))}
-        </Flex>
-      )
-    } else {
-      const Container = styling[forceType || s.type] || unknown(type)
-
-      // split the text into pieces
-      let content = s.text
-
-      if (s.spans && s.spans.length) {
-        let prevEnd = 0
-        content = s.spans.reduce((parts, span) => {
-          const { start, end, data, type } = span
-          const toAdd = []
-
-          if (prevEnd < start) {
-            toAdd.push(
-              <span key={`${prevEnd}-${start}`}>
-                {s.text.slice(prevEnd, start)}
-              </span>,
-            )
-          }
-
-          const part = s.text.slice(start, end)
-          const Component = handler[type] || unknown(type)
-          prevEnd = end
-
-          toAdd.push(
-            <Component key={`${start}-${end}`} {...data} mb={mb} mt={mt}>
-              {part}
-            </Component>,
-          )
-
-          return parts.concat(toAdd)
-        }, [])
-        content.push(s.text.slice(prevEnd))
-      }
-
-      return (
-        <Container {...props} type={s.type} key={i} mt={xmt} mb={xmb}>
-          {content}
-        </Container>
-      )
-    }
-  })
-
-  const finalContent = []
-  let list = []
-
-  flatContent.forEach((item, i) => {
-    const { type } = item.props
-    if (type === "list-item" || type === "o-list-item") {
-      list.push(item)
-    }
-
-    if (list.length) {
-      if (type !== "list-item" && type !== "o-list-item") {
-        finalContent.push(
-          <Ul key={`ul-${i}`} ml={1}>
-            {[...list]}
-          </Ul>,
-        )
-        list.length = 0
-        finalContent.push(item)
-      } else if (item === flatContent[flatContent.length - 1]) {
-        finalContent.push(
-          <Ul key={`ul-${i}`} ml={1}>
-            {[...list]}
-          </Ul>,
-        )
-        list.length = 0
-      }
-    } else {
-      finalContent.push(item)
-    }
-  })
-
+  const serializedChildren = serialize(
+    source,
+    doSerialize(props),
+    // htmlSerializer,
+  )
   return (
     <Box mb={mb} mt={mt}>
-      {finalContent}
+      {serializedChildren}
     </Box>
   )
 }
