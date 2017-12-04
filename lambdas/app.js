@@ -27,7 +27,9 @@ app.post("/volunteer_application", cors(), function(req, res) {
   sns
     .publish({
       Message: message.join("\n"),
-      Subject: `[volunteer-app] Application for volunteer ${content.firstName} ${content.lastName}`,
+      Subject: `[volunteer-app] Application for volunteer ${
+        content.first_name
+      } ${content.last_name}`,
       TopicArn: topicArn,
     })
     .promise()

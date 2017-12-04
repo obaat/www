@@ -5,10 +5,13 @@ import g from "glamorous"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
 import get from "lodash/get"
 import map from "lodash/map"
+import mapKeys from "lodash/mapKeys"
+import mapValues from "lodash/mapValues"
 import filter from "lodash/filter"
 import { pageWithTitle } from "../hoc/page"
 import Yup from "yup"
 import range from "lodash/range"
+import snakeCase from "lodash/snakeCase"
 import PrismicRichText from "../components/PrismicRichText"
 import { Index } from "react-powerplug"
 import ga from "../utils/analytics"
@@ -32,6 +35,7 @@ import {
   Textarea,
   Small,
   Subhead,
+  H5,
   Label,
 } from "../ui"
 import Button from "../components/Button"
@@ -40,8 +44,23 @@ import Link from "../components/Link"
 
 const curYear = new Date().getFullYear()
 
+const initialValues = {
+  email: "",
+  dobDay: "1",
+  dobYear: "1998",
+  dobMonth: "1",
+  periodInteger: "2",
+  periodUnit: "1 week(s)",
+  startDay: "1",
+  startYear: curYear,
+  startMonth: "1",
+  role: "select",
+  foundVia: "",
+}
+
 const submit = cb => async (values, actions) => {
   actions.setErrors()
+  console.log({ values, initialValues })
   try {
     const res = await fetch(
       "https://wug9lonkm7.execute-api.eu-west-1.amazonaws.com/production/volunteer_application",
@@ -52,7 +71,10 @@ const submit = cb => async (values, actions) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          content: values,
+          content: mapKeys(
+            mapValues(values, (v, k) => v || initialValues[k]),
+            (_, k) => snakeCase(k),
+          ),
         }),
       },
     )
@@ -107,11 +129,11 @@ const AboutVolunteering = ({ opportunities }) => (
     <Label>How long would you like to volunteer?</Label>
     <Flex>
       <Box w={1 / 2} mr={1}>
-        <RangeDropdown end={12} name="period_integer" />
+        <RangeDropdown end={12} name="periodInteger" />
       </Box>
       <Box w={1 / 2} mr={1}>
         <Select
-          name="period_unit"
+          name="periodUnit"
           options={[
             { value: "week(s)" },
             { value: "month(s)" },
@@ -123,20 +145,22 @@ const AboutVolunteering = ({ opportunities }) => (
     <Label>When can you start?</Label>
     <Flex w={1}>
       <Box w={1 / 3} mr={1}>
-        <RangeDropdown end={31} name="start_day" />
+        <RangeDropdown end={31} name="startDay" />
       </Box>
       <Box w={1 / 3} mr={1}>
         <Select
           options={months.abbr.map(value => ({ value }))}
-          name="start_month"
+          name="startMonth"
         />
       </Box>
       <Box w={1 / 3}>
-        <RangeDropdown start={curYear} end={curYear + 2} name="start_year" />
+        <RangeDropdown start={curYear} end={curYear + 2} name="startYear" />
       </Box>
     </Flex>
     <Label>Any questions or comments</Label>
-    <Textarea name="additional_info" />
+    <Textarea name="additionalInfo" />
+    <Label>How did you find us?</Label>
+    <Textarea name="foundVia" />
   </div>
 )
 
@@ -163,12 +187,12 @@ const AboutYou = props => (
         <Label>Date of Birth</Label>
         <Flex w={1}>
           <Box w={1 / 3} mr={1}>
-            <RangeDropdown end={31} name="dob_day" />
+            <RangeDropdown end={31} name="dobDay" />
           </Box>
           <Box w={1 / 3} mr={1}>
             <Select
               options={months.abbr.map(value => ({ value }))}
-              name="dob_month"
+              name="dobMonth"
             />
           </Box>
           <Box w={1 / 3}>
@@ -176,7 +200,7 @@ const AboutYou = props => (
               start={curYear}
               end={1900}
               step={-1}
-              name="dob_year"
+              name="dobYear"
             />
           </Box>
         </Flex>
@@ -199,26 +223,13 @@ const aboutValidation = Yup.object().shape({
 
 const Done = props => (
   <Flex wrap="wrap" justify="center">
-    <Checkbox palette="black" size={40} />
+    <Checkbox palette="black" size={70} />
     <Box ml={2}>
-      <Subhead>Thanks for your interest</Subhead>
+      <H5 mb={1}>Thank you for your interest</H5>
+      <Box w={1}>We will get back to you shortly</Box>
     </Box>
-    <Box w={1}>We will get back to you shortly</Box>
   </Flex>
 )
-
-const initialValues = {
-  email: "",
-  dob_day: 1,
-  dob_year: 1998,
-  dob_month: 1,
-  period_integer: 2,
-  period_unit: "1 week(s)",
-  start_day: 1,
-  start_year: curYear,
-  start_month: 1,
-  role: "select",
-}
 
 const pages = [
   {
