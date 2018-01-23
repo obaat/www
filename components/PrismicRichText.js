@@ -23,6 +23,7 @@ import {
   Pre,
   Ul,
   HeadingAsDiv,
+  Image,
 } from "../ui"
 
 const ourTypes = {
@@ -38,7 +39,7 @@ const ourTypes = {
   [Elements.oListItem]: Li,
   [Elements.list]: Ul,
   [Elements.olist]: Ol,
-  //[Elements.image]:  ,
+  [Elements.image]: Image,
   //[Elements.embed]:  ,
   //[Elements.label]:  ,
   //[Elements.hyperlink]:  ,
@@ -74,6 +75,16 @@ const doSerialize = ({ forceType, Component, xmb, xmt, ...passProps }) => (
       <Link {...element.data} key={shortid.generate()}>
         {children}
       </Link>
+    )
+  } else if (prismicType === Elements.image) {
+    return (
+      <Image
+        src={element.url}
+        key={shortid.generate()}
+        w={200}
+        p={1}
+        style={{ display: "inline-block" }}
+      />
     )
   }
   const type = forceType ? Elements[forceType] || prismicType : prismicType

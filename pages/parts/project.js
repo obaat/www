@@ -70,18 +70,26 @@ const Partner = ({ data: { title, description, logo, website }, uid }) => {
   )
 }
 
+const toSection = (props, i) => (
+  <Box key={i} mb={2}>
+    <PrismicSlice {...props} />
+  </Box>
+)
+
 const Project = class Project extends Component {
   render() {
     const { content = {}, partners, applyData } = this.props
     const plannedOrCurrent = isFuture(content.date_completed)
-    const sections = content.body.map((props, i) => (
-      <Box key={i} mb={2}>
-        <PrismicSlice {...props} />
-      </Box>
-    ))
+    const mainSectinos = content.body
+      .filter(({ slice_type }) => slice_type === "diary")
+      .map(toSection)
+    const sideSections = content.body
+      .filter(({ slice_type }) => slice_type !== "diary")
+      .map(toSection)
     return (
       <Flex wrap="wrap">
         <Box w={[1, 1, 1, 2 / 3]}>
+          {mainSectinos}
           <PrismicRichText source={content.description} />
         </Box>
         <Box w={[1, 1, 1, 1 / 3]} pl={3}>
@@ -144,7 +152,7 @@ const Project = class Project extends Component {
               </Box>
             </Box>
           )}
-          {sections}
+          {sideSections}
           {!plannedOrCurrent &&
             content.location &&
             content.location.latitude && (

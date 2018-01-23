@@ -4,6 +4,7 @@ import SlideShow from "../components/SlideShow"
 import PrismicRichText from "../components/PrismicRichText"
 import { FilePdf } from "../components/SvgIcons"
 import { Flex, Border, Link, BackgroundImage, Box, Table, Tr, Td } from "../ui"
+import { HumanDate } from "../utils/date"
 
 export const Unknown = ({ slice_type }) => (
   <div> Unknown slice: {slice_type}</div>
@@ -27,6 +28,18 @@ const Video = ({ items = [] }) => {
     </div>
   )
 }
+
+const BlogEntries = ({ primary, items }) => (
+  <div>
+    {items.map(({ title, date, description }, i) => (
+      <Box mb={2} key={i}>
+        {title && <PrismicRichText w={1} forceType="heading6" source={title} />}
+        {date && <HumanDate iso={date} />}
+        <PrismicRichText w={1} source={description} />
+      </Box>
+    ))}
+  </div>
+)
 
 const Text = ({ primary, items }) => {
   const value = primary.description || primary.content
@@ -62,6 +75,7 @@ export const renderers = {
   embeds: Video,
   embed: Video,
   text_only: Text,
+  diary: BlogEntries,
   files: Document,
   faq: ({ items = [] }) => (
     <Box>
