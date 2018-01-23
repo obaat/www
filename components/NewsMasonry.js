@@ -98,7 +98,9 @@ const renderers = {
       get(content, ["image_gallery", 0, "image", "url"]),
     )
     const palette = theme || themeCycle[count % themeCycle.length]
-    const bg = hexRgb(theme ? srcTheme.colors[theme][0] : "#000")
+    const bg = hexRgb(theme ? srcTheme.colors[theme][0] : "#000", {
+      format: "array",
+    })
     return (
       <Link type={content.type} uid={content.uid}>
         <Background

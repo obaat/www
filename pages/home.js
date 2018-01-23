@@ -42,7 +42,7 @@ import { menuHeightDocked, themeCycle as sideColors } from "../utils/constants"
 import Icons from "../components/SvgIcons"
 import srcTheme from "../theme"
 import hexRgb from "hex-rgb"
-const bg = hexRgb(srcTheme.colors.gray2[0])
+const bg = hexRgb(srcTheme.colors.gray2[0], { format: "array" })
 
 const Count = hoc()(CountUp)
 
