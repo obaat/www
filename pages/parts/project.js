@@ -24,6 +24,7 @@ import {
 } from "../../components/SvgIcons"
 import {
   Absolute,
+  Subhead,
   Relative,
   Text,
   BackgroundImage,
@@ -36,6 +37,30 @@ import Map from "../../components/GoogleMap"
 import UILink from "../../components/Link"
 
 import Link from "../../components/Link"
+
+const HeadlinePartner = ({
+  data: { title, description, logo, website },
+  uid,
+}) => (
+  <Flex w={1}>
+    {logo &&
+      logo.url && (
+        <Box w={1 / 3} pr={3}>
+          <Image src={logo.url} />
+        </Box>
+      )}
+    <Box w={2 / 3}>
+      <PrismicRichText
+        mb={0}
+        pt={2}
+        Component={Subhead}
+        source={title}
+        xmb={0}
+      />
+      <PrismicRichText mb={0} pt={2} source={description} />
+    </Box>
+  </Flex>
+)
 
 const Partner = ({ data: { title, description, logo, website }, uid }) => {
   const content = (
@@ -58,7 +83,7 @@ const Partner = ({ data: { title, description, logo, website }, uid }) => {
   )
 
   return (
-    <Box w={1 / 2} mb={3}>
+    <Box w={1 / 2} mb={3} key={uid}>
       {website && website.url ? (
         <Link target="_blank" to={website.url}>
           {content}
@@ -80,6 +105,7 @@ const Project = class Project extends Component {
   render() {
     const { content = {}, partners, applyData } = this.props
     const plannedOrCurrent = isFuture(content.date_completed)
+    const planned = isFuture(content.date_started)
     const mainSectinos = content.body
       .filter(({ slice_type }) => slice_type === "diary")
       .map(toSection)
@@ -89,6 +115,15 @@ const Project = class Project extends Component {
     return (
       <Flex wrap="wrap">
         <Box w={[1, 1, 1, 2 / 3]}>
+          {plannedOrCurrent &&
+            partners &&
+            partners.length > 0 && (
+              <Box w={1}>
+                {partners.map((props, i) => (
+                  <HeadlinePartner {...props} uid={i} key={i} />
+                ))}
+              </Box>
+            )}
           {mainSectinos}
           <PrismicRichText source={content.description} />
         </Box>
@@ -119,21 +154,23 @@ const Project = class Project extends Component {
                   <HumanDate iso={content.date_completed} />
                 </Box>
               </Flex>
-              <Flex wrap="wrap" mb={2}>
-                <Box w={35}>
-                  <SymbolPound size={24} palette="brick" />
-                </Box>
-                <Box>
-                  <Flex align="center">
-                    <Box bold={500}>Starting from £{content.price}</Box>
-                    <Box pl={1}>
-                      <UILink to="#Costs">
-                        <QuestionInBubble size={20} palette="black" />
-                      </UILink>
-                    </Box>
-                  </Flex>
-                </Box>
-              </Flex>
+              {planned && (
+                <Flex wrap="wrap" mb={2}>
+                  <Box w={35}>
+                    <SymbolPound size={24} palette="brick" />
+                  </Box>
+                  <Box>
+                    <Flex align="center">
+                      <Box bold={500}>Starting from £{content.price}</Box>
+                      <Box pl={1}>
+                        <UILink to="#Costs">
+                          <QuestionInBubble size={20} palette="black" />
+                        </UILink>
+                      </Box>
+                    </Flex>
+                  </Box>
+                </Flex>
+              )}
               <Box w={1} pb={2}>
                 <Button
                   w={1}

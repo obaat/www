@@ -7,6 +7,7 @@ import map from "lodash/map"
 import Link from "./Link"
 import { serialize, Elements } from "prismic-richtext"
 import { Link as LinkHelper } from "prismic-helpers"
+import SlideShow from "./SlideShow"
 import shortid from "shortid"
 
 import {
@@ -25,6 +26,7 @@ import {
   HeadingAsDiv,
   Image,
 } from "../ui"
+import { flattenProp } from "recompose"
 
 const ourTypes = {
   [Elements.heading1]: Heading,
@@ -62,40 +64,64 @@ const linkResolver = link => {
 
 const span = g.span({})
 
+const buffer = []
+
 const doSerialize = ({ forceType, Component, xmb, xmt, ...passProps }) => (
   prismicType,
   element,
   content,
   children,
 ) => {
+  let flushed_buffer = null
+  let final = null
+  if (buffer.length && prismicType !== Elements.image) {
+    //flush
+    flushed_buffer = (
+      <Box mb={2}>
+        <SlideShow key={shortid.generate()} controlSize={24}>
+          {buffer.splice(0, buffer.length)}
+        </SlideShow>
+      </Box>
+    )
+  }
+
   if (prismicType === Elements.span) {
-    return <span key={shortid.generate()}>{content}</span>
+    final = <span key={shortid.generate()}>{content}</span>
   } else if (prismicType === Elements.hyperlink) {
-    return (
+    final = (
       <Link {...element.data} key={shortid.generate()}>
         {children}
       </Link>
     )
   } else if (prismicType === Elements.image) {
-    return (
-      <Image
-        src={element.url}
+    buffer.push(<Image key={shortid.generate()} src={element.url} />)
+  } else {
+    const type = forceType ? Elements[forceType] || prismicType : prismicType
+    const RenderComponent =
+      forceType === "unformatted"
+        ? span
+        : Component || ourTypes[type] || unknown(type)
+
+    final = (
+      <RenderComponent
+        mb={xmb}
+        mt={xmt}
         key={shortid.generate()}
-        w={200}
-        p={1}
-        style={{ display: "inline-block" }}
-      />
+        {...passProps}
+      >
+        {children}
+      </RenderComponent>
     )
   }
-  const type = forceType ? Elements[forceType] || prismicType : prismicType
-  const RenderComponent =
-    forceType === "unformatted"
-      ? span
-      : Component || ourTypes[type] || unknown(type)
+  if (!flushed_buffer) {
+    return final
+  }
+
   return (
-    <RenderComponent mb={xmb} mt={xmt} key={shortid.generate()} {...passProps}>
-      {children}
-    </RenderComponent>
+    <React.Fragment>
+      {flushed_buffer}
+      {final}
+    </React.Fragment>
   )
 }
 

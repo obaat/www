@@ -380,7 +380,7 @@ export default class SlideShow extends Component {
     const { hideZoom, controlSize, controlColor } = this.props
     return (
       <Flex wrap="wrap">
-        {this.props.children.map((c, i) => (
+        {React.Children.toArray(this.props.children).map((c, i) => (
           <Box
             key={i}
             style={{ position: "relative" }}
