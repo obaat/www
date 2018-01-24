@@ -40,7 +40,7 @@ const ourTypes = {
   [Elements.listItem]: Li,
   [Elements.oListItem]: Li,
   [Elements.list]: Ul,
-  [Elements.olist]: Ol,
+  [Elements.oList]: Ol,
   [Elements.image]: Image,
   //[Elements.embed]:  ,
   //[Elements.label]:  ,
