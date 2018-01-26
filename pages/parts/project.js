@@ -124,8 +124,8 @@ const Project = class Project extends Component {
                 ))}
               </Box>
             )}
-          {mainSectinos}
           <PrismicRichText source={content.description} />
+          {mainSectinos}
         </Box>
         <Box w={[1, 1, 1, 1 / 3]} pl={3}>
           {!plannedOrCurrent &&
