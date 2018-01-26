@@ -42,7 +42,7 @@ const HeadlinePartner = ({
   data: { title, description, logo, website },
   uid,
 }) => (
-  <Flex w={1}>
+  <Flex w={1} mb={2}>
     {logo &&
       logo.url && (
         <Box w={1 / 3} pr={3}>

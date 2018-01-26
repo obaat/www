@@ -5,6 +5,7 @@ import PrismicRichText from "../components/PrismicRichText"
 import { FilePdf } from "../components/SvgIcons"
 import { Flex, Border, Link, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 import { FullHumanDate } from "../utils/date"
+import g from "glamorous"
 
 export const Unknown = ({ slice_type }) => (
   <div> Unknown slice: {slice_type}</div>
@@ -29,10 +30,42 @@ const Video = ({ items = [] }) => {
   )
 }
 
+const Paper = g.div({
+  background: "#fff",
+  boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+  padding: "24px",
+  marginBottom: "15px",
+  position: "relative",
+  ":before": {
+    content: '""',
+    height: "98%",
+    position: "absolute",
+    width: "100%",
+    zIndex: "-1",
+    background: "#fafafa",
+    boxShadow: "0 0 8px rgba(0,0,0,0.2)",
+    left: "-5px",
+    top: "4px",
+    transform: "rotate(-2.5deg)",
+  },
+  ":after": {
+    content: '""',
+    height: "98%",
+    position: "absolute",
+    width: "100%",
+    zIndex: "-1",
+    background: "#f6f6f6",
+    boxShadow: "0 0 3px rgba(0,0,0,0.2)",
+    right: "-3px",
+    top: "1px",
+    transform: "rotate(1.4deg)",
+  },
+})
+
 const BlogEntries = ({ primary, items }) => (
   <div>
     {items.map(({ title, date, description }, i) => (
-      <Border bottom borderColor="gray7">
+      <Paper>
         <Flex key={i} wrap="wrap">
           <Box mb={2} w={1}>
             {title && (
@@ -49,7 +82,7 @@ const BlogEntries = ({ primary, items }) => (
             <PrismicRichText w={1} source={description} />
           </Box>
         </Flex>
-      </Border>
+      </Paper>
     ))}
   </div>
 )

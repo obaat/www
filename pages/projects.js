@@ -50,7 +50,7 @@ const ProjectPreview = ({ uid, data, slug }) => (
 )
 
 const Projects = ({ projects, content }) => {
-  if (!content) {
+  if (!content || !projects) {
     return <div>No Data</div>
   }
   return (
