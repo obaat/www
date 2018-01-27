@@ -62,11 +62,14 @@ const Paper = g.div({
   },
 })
 
+const titleToHash = title => title[0].text.toLowerCase().replace(/ /g, "_")
+
 const BlogEntries = ({ primary, items }) => (
   <div>
     {items.map(({ title, date, description }, i) => (
       <Paper>
         <Flex key={i} wrap="wrap">
+          <a name={titleToHash(title)} />
           <Box mb={2} w={1}>
             {title && (
               <PrismicRichText

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { pageWithTitle } from "../../hoc/page"
-import { HumanDate } from "../../utils/date"
+import { HumanDate, FullHumanDate } from "../../utils/date"
 import isFuture from "date-fns/is_future"
 import { Element, scroller } from "react-scroll"
 import { Apply, data as applyData } from "../apply"
@@ -34,8 +34,6 @@ import {
   Button,
 } from "../../ui"
 import Map from "../../components/GoogleMap"
-import UILink from "../../components/Link"
-
 import Link from "../../components/Link"
 
 const HeadlinePartner = ({
@@ -101,14 +99,27 @@ const toSection = (props, i) => (
   </Box>
 )
 
+const titleToHash = title => title[0].text.toLowerCase().replace(/ /g, "_")
+
+const toNav = ({ items }, i) => (
+  <Box>
+    {items.map(({ title, date }) => (
+      <Link href={`#${titleToHash(title)}`}>
+        <PrismicRichText source={title} forceType="paragraph" />
+      </Link>
+    ))}
+  </Box>
+)
 const Project = class Project extends Component {
   render() {
     const { content = {}, partners, applyData } = this.props
     const plannedOrCurrent = isFuture(content.date_completed)
     const planned = isFuture(content.date_started)
-    const mainSectinos = content.body
-      .filter(({ slice_type }) => slice_type === "diary")
-      .map(toSection)
+    const diarySections = content.body.filter(
+      ({ slice_type }) => slice_type === "diary",
+    )
+    const diaryNav = diarySections.map(toNav)
+    const mainSections = diarySections.map(toSection)
     const sideSections = content.body
       .filter(({ slice_type }) => slice_type !== "diary")
       .map(toSection)
@@ -125,7 +136,7 @@ const Project = class Project extends Component {
               </Box>
             )}
           <PrismicRichText source={content.description} />
-          {mainSectinos}
+          {mainSections}
         </Box>
         <Box w={[1, 1, 1, 1 / 3]} pl={3}>
           {!plannedOrCurrent &&
@@ -146,6 +157,10 @@ const Project = class Project extends Component {
                   <HumanDate iso={content.date_start} />
                 </Box>
               </Flex>
+              {/* <Flex wrap="wrap">
+                <Box w={35} />
+                <Box>{diaryNav}</Box>
+              </Flex> */}
               <Flex wrap="wrap" mb={2}>
                 <Box w={35}>
                   <FlagFinish size={24} palette="brick" />
@@ -163,9 +178,9 @@ const Project = class Project extends Component {
                     <Flex align="center">
                       <Box bold={500}>Starting from £{content.price}</Box>
                       <Box pl={1}>
-                        <UILink to="#Costs">
+                        <Link to="#Costs">
                           <QuestionInBubble size={20} palette="black" />
-                        </UILink>
+                        </Link>
                       </Box>
                     </Flex>
                   </Box>
