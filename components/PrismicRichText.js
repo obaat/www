@@ -6,6 +6,7 @@ import hoc from "../ui/hoc"
 import map from "lodash/map"
 import Link from "./Link"
 import { serialize, Elements } from "prismic-richtext"
+import Embed from "./Embed"
 import { Link as LinkHelper } from "prismic-helpers"
 import SlideShow from "./SlideShow"
 import shortid from "shortid"
@@ -46,13 +47,13 @@ const ourTypes = {
   //[Elements.label]:  ,
   //[Elements.hyperlink]:  ,
   // headingasdiv: HeadingAsDiv,
-  // small: Small,
+  small: Small,
   [Elements.strong]: g.strong({ fontWeight: 700 }),
   [Elements.em]: g.em({ fontStyle: "italic" }),
   [Elements.hyperlink]: Link,
 }
 
-const unknown = type => () => <div>??? {type} </div>
+const unknown = type => () => <div>RichText? {type} </div>
 
 const linkResolver = link => {
   if (link.link_type === "Document") {
@@ -95,6 +96,15 @@ const doSerialize = ({ forceType, Component, xmb, xmt, ...passProps }) => (
     )
   } else if (prismicType === Elements.image) {
     buffer.push(<Image key={shortid.generate()} src={element.url} />)
+  } else if (prismicType === Elements.embed) {
+    final = (
+      <Embed
+        containerWidth={600}
+        containerHeight={338}
+        key={shortid.generate()}
+        {...element.oembed}
+      />
+    )
   } else {
     const type = forceType ? Elements[forceType] || prismicType : prismicType
     const RenderComponent =
