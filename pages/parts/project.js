@@ -4,6 +4,7 @@ import { HumanDate, FullHumanDate } from "../../utils/date"
 import isFuture from "date-fns/is_future"
 import { Element, scroller } from "react-scroll"
 import { Apply, data as applyData } from "../apply"
+import orderBy from "lodash/orderBy"
 import {
   getByUID,
   getByIDs,
@@ -99,14 +100,25 @@ const toSection = (props, i) => (
   </Box>
 )
 
-const titleToHash = title => title[0].text.toLowerCase().replace(/ /g, "_")
-
 const toNav = ({ items }, i) => (
   <Box>
     {items.map(({ title, date }) => (
-      <Link href={`#${titleToHash(title)}`}>
-        <PrismicRichText source={title} forceType="paragraph" />
-      </Link>
+      <Box>
+        <PrismicRichText
+          style={{ textDecoration: "underline" }}
+          onClick={() =>
+            scroller.scrollTo(title[0].text, {
+              duration: 500,
+              smooth: true,
+              offset: -70,
+            })
+          }
+          source={title}
+          forceType="paragraph"
+          xmb={0}
+        />
+        <FullHumanDate iso={date} />
+      </Box>
     ))}
   </Box>
 )
@@ -157,11 +169,11 @@ const Project = class Project extends Component {
                   <HumanDate iso={content.date_start} />
                 </Box>
               </Flex>
-              {/* <Flex wrap="wrap">
+              <Flex wrap="wrap">
                 <Box w={35} />
                 <Box>{diaryNav}</Box>
-              </Flex> */}
-              <Flex wrap="wrap" mb={2}>
+              </Flex>
+              <Flex wrap="wrap" mt={2} mb={2}>
                 <Box w={35}>
                   <FlagFinish size={24} palette="brick" />
                 </Box>

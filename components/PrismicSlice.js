@@ -2,6 +2,7 @@ import React from "react"
 import Embed from "../components/Embed"
 import SlideShow from "../components/SlideShow"
 import PrismicRichText from "../components/PrismicRichText"
+import { Element, scroller } from "react-scroll"
 import { FilePdf } from "../components/SvgIcons"
 import { Flex, Border, Link, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 import { FullHumanDate } from "../utils/date"
@@ -68,23 +69,24 @@ const BlogEntries = ({ primary, items }) => (
   <div>
     {items.map(({ title, date, description }, i) => (
       <Paper>
-        <Flex key={i} wrap="wrap">
-          <a name={titleToHash(title)} />
-          <Box mb={2} w={1}>
-            {title && (
-              <PrismicRichText
-                w={1}
-                xmb={0}
-                forceType="heading6"
-                source={title}
-              />
-            )}
-            {date && <FullHumanDate iso={date} />}
-          </Box>
-          <Box w={1}>
-            <PrismicRichText w={1} source={description} />
-          </Box>
-        </Flex>
+        <Element name={title[0].text}>
+          <Flex key={i} wrap="wrap">
+            <Box mb={2} w={1}>
+              {title && (
+                <PrismicRichText
+                  w={1}
+                  xmb={0}
+                  forceType="heading6"
+                  source={title}
+                />
+              )}
+              {date && <FullHumanDate iso={date} />}
+            </Box>
+            <Box w={1}>
+              <PrismicRichText w={1} source={description} />
+            </Box>
+          </Flex>
+        </Element>
       </Paper>
     ))}
   </div>
