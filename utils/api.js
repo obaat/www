@@ -1,5 +1,6 @@
 const Prismic = require("prismic-javascript")
 const memoizee = require("memoizee")
+const compact = require("lodash/compact")
 
 const types = {
   VOLUNTEERING: "volunteer_opportunity",
@@ -45,6 +46,10 @@ const getSingleton = memoizee(async type => {
 })
 
 const getByIDs = memoizee(async (ids, opts) => {
+  if (ids.length !== compact(ids).length) {
+    console.trace("bad parameters")
+    process.exit(1)
+  }
   const api = await apiBuilder()
   const res = await api.getByIDs(ids, opts)
   return res

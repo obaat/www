@@ -5,6 +5,7 @@ import isFuture from "date-fns/is_future"
 import { Element, scroller } from "react-scroll"
 import { Apply, data as applyData } from "../apply"
 import orderBy from "lodash/orderBy"
+import compact from "lodash/compact"
 import {
   getByUID,
   getByIDs,
@@ -252,7 +253,8 @@ const Project = class Project extends Component {
 
 export const data = uid => async () => {
   const res = await getByUID(types.PROJECT)(uid)
-  const partners = await getByIDs(res.data.partners.map(l => l.partner.id))
+  const partnerIds = compact(res.data.partners.map(l => l.partner.id))
+  const partners = await getByIDs(partnerIds)
   const apply = await applyData()
   return {
     content: res.data,
