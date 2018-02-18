@@ -4,7 +4,7 @@ import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 import PrismicSlice from "../components/PrismicSlice"
-import { Switch, Route, Link, getRouteProps } from "react-static"
+import { Switch, Route, Link, withRouteData } from "react-static"
 
 const Event = ({ content = {} }) => {
   const sections = content.body.map((props, i) => (
@@ -35,7 +35,7 @@ export const children = async (...args) => {
   return pages
 }
 
-const eventWithProps = getRouteProps(_Event)
+const eventWithProps = withRouteData(_Event)
 export const routes = ({ match }) => (
   <Switch>
     <Route path={`${match.url}/:uid`} component={eventWithProps} />

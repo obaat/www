@@ -25,7 +25,6 @@ export default ComposedComponent =>
         location: PropTypes.shape({
           pathname: PropTypes.string.isRequired,
         }).isRequired,
-        volunteering: PropTypes.array.isRequired,
       }
 
       componentDidMount() {
@@ -44,7 +43,7 @@ export default ComposedComponent =>
                 ]}
               />
               <ComposedComponent {...this.props} />
-              <Header volunteering={volunteering} />
+              <Header />
               <Footer />
             </Container>
           </ThemeProvider>

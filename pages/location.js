@@ -1,6 +1,6 @@
 import React from "react"
 import { getByUID, getByType, types } from "../utils/api"
-import { Switch, Route, Link, getRouteProps } from "react-static"
+import { Switch, Route, Link, withRouteData } from "react-static"
 import ApplyNow from "../components/ApplyNow"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
@@ -40,7 +40,7 @@ export const children = async (...args) => {
   return pages
 }
 
-const locationWithProps = getRouteProps(_Location)
+const locationWithProps = withRouteData(_Location)
 export const routes = ({ match }) => (
   <Switch>
     <Route path={`${match.url}/:uid`} component={locationWithProps} />

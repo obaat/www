@@ -1,24 +1,16 @@
 import React from "react"
-import {
-  Router,
-  Route,
-  Switch,
-  Redirect,
-  Link,
-  getRouteProps,
-} from "react-static"
-import ScrollToTop from "./ScrollToTop"
-import glamorous from "glamorous"
+import { hot } from "react-hot-loader"
+import { Router, Route } from "react-static"
 import Routes from "./Routes"
 import withAnalytics from "../hoc/withAnalytics"
 //
 // import About from "containers/About"
 // import Blog from "containers/Blog"
 
-export default () => (
+const App = () => (
   <Router>
-    <ScrollToTop>
-      <Route component={withAnalytics(Routes)} />
-    </ScrollToTop>
+    <Route component={withAnalytics(Routes)} />
   </Router>
 )
+
+export default hot(module)(App)

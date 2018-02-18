@@ -3,7 +3,7 @@ import { getByUID, getByType, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
-import { Switch, Route, Link, getRouteProps } from "react-static"
+import { Switch, Route, Link, withRouteData } from "react-static"
 import PrismicSlice from "../components/PrismicSlice"
 
 const Gallery = ({ content = {} }) => {
@@ -38,7 +38,7 @@ export const children = async (...args) => {
 const _Gallery = pageWithTitle()(Gallery)
 export default _Gallery
 
-const galleryWithProps = getRouteProps(_Gallery)
+const galleryWithProps = withRouteData(_Gallery)
 export const routes = ({ match }) => (
   <Switch>
     <Route path={`${match.url}/:uid`} component={galleryWithProps} />

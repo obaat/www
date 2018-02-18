@@ -3,7 +3,7 @@ import Button from "../components/Button"
 import ApplyNow from "../components/ApplyNow"
 import g from "glamorous"
 import Link from "../components/Link"
-import { Switch, Route, getRouteProps } from "react-static"
+import { Switch, Route, withRouteData, withSiteData } from "react-static"
 import get from "lodash/get"
 import VolunteeringOpp, {
   data as oppData,
@@ -124,17 +124,20 @@ const Volunteering = ({ content, volunteering, additionalData }) => {
 
 export const data = async ({ query }) => {
   const res = await getSingleton(types.VOLUNTEERING_PAGE_CONTENT)
+  const volunteering = await getByType(types.VOLUNTEERING)
   const quotes = res.data.body.find(s => s.slice_type === "quotes")
   const ids = (quotes && quotes.items.map(l => l.quote.id)) || []
   const additionalData = ids.length ? await getByIDs(ids) : { results: [] }
   return {
+    volunteering: volunteering.results,
     content: res.data,
     additionalData,
   }
 }
 
-export const children = async ({ volunteering }) => {
-  return volunteering.map(({ uid }) => ({
+export const children = async () => {
+  const volunteering = await getByType(types.VOLUNTEERING)
+  return volunteering.results.map(({ uid }) => ({
     path: "/" + uid,
     getProps: oppData(uid),
   }))
@@ -146,8 +149,8 @@ const _Volunteering = pageWithTitle({
 
 export default _Volunteering
 
-const vWithProps = getRouteProps(_Volunteering)
-const opWithProps = getRouteProps(VolunteeringOpp)
+const vWithProps = withRouteData(_Volunteering)
+const opWithProps = withRouteData(VolunteeringOpp)
 
 export const routes = ({ match }) => (
   <Switch>

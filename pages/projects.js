@@ -1,5 +1,5 @@
 import React from "react"
-import { Switch, Route, Link, getRouteProps } from "react-static"
+import { Switch, Route, Link, withRouteData } from "react-static"
 import { pageWithTitle } from "../hoc/page"
 import { HumanDate } from "../utils/date"
 import Project, { data as projectData } from "./parts/project"
@@ -82,9 +82,8 @@ const dataWithStatus = status => async () => {
 
 export const data = dataWithStatus("completed")
 
-export const children = async (...args) => {
+export const children = async () => {
   const allProjects = await getByType(types.PROJECT)
-  // const { projects } = await data(...args)
   const pages = allProjects.results.map(({ uid }) => ({
     path: "/" + uid,
     getProps: projectData(uid),
@@ -100,8 +99,8 @@ export const children = async (...args) => {
 const _Projects = pageWithTitle()(Projects)
 export default _Projects
 
-const projectsWithProps = getRouteProps(_Projects)
-const projectWithProps = getRouteProps(Project)
+const projectsWithProps = withRouteData(_Projects)
+const projectWithProps = withRouteData(Project)
 
 export const routes = ({ match }) => (
   <Switch>

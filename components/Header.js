@@ -6,7 +6,7 @@ import { css } from "glamor"
 import { Flex, Box } from "../ui"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
 import Menu, { MenuItem, SecondaryMenu } from "./Menu"
-import { Link } from "react-static"
+import { Link, withSiteData } from "react-static"
 import LogoIcon from "../svg/logo.svg"
 import withProps from "recompose/withProps"
 import { Home } from "./SvgIcons"
@@ -99,7 +99,7 @@ const HeaderContainer = g(Flex)(
 )
 
 const SWITCH_PIXELS = 70
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props)
     const { scrollTop } = canUseDOM
@@ -158,3 +158,4 @@ export default class Header extends Component {
     )
   }
 }
+export default withSiteData(Header)

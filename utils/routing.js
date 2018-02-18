@@ -1,6 +1,6 @@
 import NProgress from "nprogress"
-import { Router } from "react-static"
+import { onLoading } from "react-static"
 
 export default function configureLoadingProgressBar() {
-  Router.subscribe(loading => (loading ? NProgress.start() : NProgress.done()))
+  onLoading(loading => (loading ? NProgress.start() : NProgress.done()))
 }
