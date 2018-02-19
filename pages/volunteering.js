@@ -139,7 +139,7 @@ export const children = async () => {
   const volunteering = await getByType(types.VOLUNTEERING)
   return volunteering.results.map(({ uid }) => ({
     path: "/" + uid,
-    getProps: oppData(uid),
+    getData: oppData(uid),
   }))
 }
 

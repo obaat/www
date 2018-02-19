@@ -30,7 +30,7 @@ export const children = async (...args) => {
   const galleries = await getByType(types.GALLERY)
   const pages = galleries.results.map(({ uid }) => ({
     path: "/" + uid,
-    getProps: data(uid),
+    getData: data(uid),
   }))
   return pages
 }

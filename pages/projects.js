@@ -86,12 +86,12 @@ export const children = async () => {
   const allProjects = await getByType(types.PROJECT)
   const pages = allProjects.results.map(({ uid }) => ({
     path: "/" + uid,
-    getProps: projectData(uid),
+    getData: projectData(uid),
   }))
 
   pages.push({
     path: "/planned",
-    getProps: dataWithStatus("planned"),
+    getData: dataWithStatus("planned"),
   })
   return pages
 }

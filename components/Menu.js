@@ -38,7 +38,6 @@ const whatItems = [
   { title: "Our Mission", href: "/mission" },
   { title: "Completed Projects", href: "/projects" },
   { title: "Upcoming Projects", href: "/projects/planned" },
-  { title: "Sponsor a Child", href: "/sponsor" },
 ]
 
 const menuItems = [

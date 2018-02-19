@@ -35,7 +35,7 @@ export const children = async (...args) => {
   const events = await getByType(types.VOLUNTEERING_OPPORTUNITY_LOCATION)
   const pages = events.results.map(({ uid }) => ({
     path: "/" + uid,
-    getProps: data(uid),
+    getData: data(uid),
   }))
   return pages
 }
