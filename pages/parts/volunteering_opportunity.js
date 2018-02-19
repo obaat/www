@@ -124,7 +124,6 @@ const VolunteeringOpportunity = ({ content, locations }) => {
 
 export const data = uid => async () => {
   const res = await getByUID(types.VOLUNTEERING)(uid)
-  console.log({ res })
   const locations = await getByIDs(res.data.locations.map(l => l.location.id))
   return {
     content: res.data,

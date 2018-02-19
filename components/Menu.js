@@ -52,9 +52,8 @@ const menuItems = [
   {
     title: "One Brick Supply",
     items: [
-      { title: "Shop", href: "/shop" },
-      { title: "Spread the Word", href: "/spreadtheword" },
       { title: "Blog", href: "/blog" },
+      { title: "Spread the Word", href: "/spreadtheword" },
     ],
   },
 ]

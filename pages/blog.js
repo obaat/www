@@ -1,23 +1,68 @@
 import React from "react"
-import { getSingleton, getByIDs, types } from "../utils/api"
+import { getByType, getSingleton, getByIDs, types } from "../utils/api"
+import g from "glamorous"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
-import { Switch, Route, Link, withRouteData } from "react-static"
-import BlogPost, { data as blogPostData } from "./parts/blog_post"
+import { Switch, Route, withRouteData } from "react-static"
+import Link from "../components/Link"
+import { ArrowRight } from "../components/SvgIcons"
+import BlogPost, {
+  data as blogPostData,
+  BlogPostClean as Post,
+} from "./parts/blog_post"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 
-const Blog = pageWithTitle()(({ members = [], content = {} }) => (
+const PreviewPost = g(Post)({
+  maxHeight: "200px",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  content: "",
+  position: "relative",
+  ":before": {
+    content: '""',
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    left: 0,
+    top: 0,
+    background: "linear-gradient(transparent 150px, white)",
+  },
+})
+
+const LLink = ({ post, className }) => (
+  <Link to={`/blog/${post.uid}`} className={className}>
+    <Flex inline align="center">
+      <Box>See Full Post</Box>
+      <Box pl={1}>
+        <ArrowRight color="#000" size={12} />
+      </Box>
+    </Flex>
+  </Link>
+)
+
+const FullPost = g(LLink)({
+  marginBottom: "20px",
+  display: "block",
+})
+
+const Blog = pageWithTitle()(({ content = {}, posts = [] }) => (
   <Flex>
-    <Box w={[1, 1, 1, 2 / 3]} pr={3}>
+    <Box w={[1, 1, 1, 1]} pr={3}>
       <PrismicRichText source={content.description} />
+      {posts.map((post, i) => (
+        <div key={i}>
+          <PreviewPost content={post.data} />
+          <FullPost post={post} />
+        </div>
+      ))}
     </Box>
   </Flex>
 ))
 
 export const data = async () => {
   const page = await getSingleton(types.BLOG_PAGE_CONTENT)
-  const posts = await getSingleton(types.BLOG_PAGE_CONTENT)
-  return { content: page && page.data }
+  const posts = await getByType(types.BLOG_POST)
+  return { content: page && page.data, posts: posts.results }
 }
 
 export const children = async () => {

@@ -60,7 +60,6 @@ const initialValues = {
 
 const submit = cb => async (values, actions) => {
   actions.setErrors()
-  console.log({ values, initialValues })
   try {
     const res = await fetch(
       "https://wug9lonkm7.execute-api.eu-west-1.amazonaws.com/production/volunteer_application",

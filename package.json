@@ -2,8 +2,9 @@
   "name": "obaat",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg && echo 'import React from \"react\"' >> svg/index.js",
-    "run": "react-static start",
+    "postinstall":
+      "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg && echo 'import React from \"react\"' >> svg/index.js",
+    "dev": "PORT=4001 react-static start",
     "build": "react-static build",
     "export": "react-static build",
     "serve": "serve dist -p 3000",
@@ -77,6 +78,7 @@
     "import-all.macro": "^2.0.3",
     "import-index-generator": "^0.2.1",
     "prettier": "^1.10.2",
+    "react-hot-loader": "^4.0.0-beta.21",
     "serve": "^6.4.10",
     "webpack-bundle-analyzer": "^2.10.0"
   }
