@@ -71,6 +71,7 @@ const Fixed = g.div({
   top: 0,
   left: 0,
   right: 0,
+  zIndex: 9999,
 })
 
 const scrolled = ({ scrolled }) =>
