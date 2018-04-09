@@ -45,8 +45,13 @@ const getSingleton = memoizee(async type => {
 })
 
 const getByIDs = memoizee(async (ids, opts) => {
+  if (compact(ids).length === 0) {
+    return { results: [] }
+  }
+
   if (ids.length !== compact(ids).length) {
     console.trace("bad parameters")
+    console.log(ids)
     process.exit(1)
   }
   const api = await apiBuilder()
