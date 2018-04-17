@@ -25,7 +25,7 @@ export const pages = pageComponents.map(p => ({
 
 export default () => (
   <Switch>
-    {pages.map(props => <Route key={path} {...props} />)}
+    {pages.map(props => <Route key={props.path} {...props} />)}
     <Redirect to="/" />
   </Switch>
 )
