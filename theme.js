@@ -50,6 +50,7 @@ const theme = {
   radius: 2,
   breakpoints: ["575px", "768px", "992px", "1200px"],
   fontSizes: ["0.88em", "1em", "1.3em", "1.5em", "1.60em", "2em", "3em"],
+  space: [0, 8, 16, 32, 64, 128, 256, 512],
 }
 
 export default theme

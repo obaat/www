@@ -78,8 +78,8 @@ const doSerialize = ({ forceType, Component, xmb, xmt, ...passProps }) => (
   if (buffer.length && prismicType !== Elements.image) {
     //flush
     flushed_buffer = (
-      <Box mb={2}>
-        <SlideShow key={shortid.generate()} controlSize={24}>
+      <Box mb={2} key={shortid.generate()}>
+        <SlideShow controlSize={24}>
           {buffer.splice(0, buffer.length)}
         </SlideShow>
       </Box>
@@ -128,7 +128,7 @@ const doSerialize = ({ forceType, Component, xmb, xmt, ...passProps }) => (
   }
 
   return (
-    <React.Fragment>
+    <React.Fragment key={shortid.generate()}>
       {flushed_buffer}
       {final}
     </React.Fragment>

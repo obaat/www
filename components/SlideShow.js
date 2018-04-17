@@ -275,15 +275,16 @@ export default class SlideShow extends Component {
               onPageClick={this.onPageClick}
             />
           )}
-          {selectedIndex === this.totalSlides() - 1 && (
-            <Restart
-              size={controlSize}
-              color={controlColor}
-              size={48}
-              onPageClick={this.onPageClick}
-              px={px}
-            />
-          )}
+          {this.totalSlides() > 1 &&
+            selectedIndex === this.totalSlides() - 1 && (
+              <Restart
+                size={controlSize}
+                color={controlColor}
+                size={48}
+                onPageClick={this.onPageClick}
+                px={px}
+              />
+            )}
           <Zoom
             onClick={this.toggleZoom()}
             controlSize={36}
@@ -328,6 +329,7 @@ export default class SlideShow extends Component {
           )}
         </Motion>
         {!hideArrows &&
+          this.totalSlides() > 1 &&
           selectedIndex > 0 && (
             <Arrow
               direction="left"
@@ -350,6 +352,7 @@ export default class SlideShow extends Component {
             />
           )}
         {!hideArrows &&
+          this.totalSlides() > 1 &&
           selectedIndex === this.totalSlides() - 1 && (
             <Restart
               size={controlSize}
@@ -358,13 +361,14 @@ export default class SlideShow extends Component {
               px={px}
             />
           )}
-        {!hidePaging && (
-          <Paging
-            total={this.totalSlides()}
-            page={selectedIndex}
-            onPageClick={this.onPageClick}
-          />
-        )}
+        {!hidePaging &&
+          this.totalSlides() > 1 && (
+            <Paging
+              total={this.totalSlides()}
+              page={selectedIndex}
+              onPageClick={this.onPageClick}
+            />
+          )}
         {!hideZoom && (
           <Zoom
             onClick={this.toggleZoom()}
@@ -413,6 +417,8 @@ export default class SlideShow extends Component {
 
     return zoom
       ? this.renderZoomed(children)
-      : inline ? this.renderInline(children) : this.renderSlideShow(children)
+      : inline
+        ? this.renderInline(children)
+        : this.renderSlideShow(children)
   }
 }

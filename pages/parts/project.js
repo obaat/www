@@ -103,8 +103,8 @@ const toSection = (props, i) => (
 
 const toNav = ({ items }, i) => (
   <Box>
-    {items.map(({ title, date }) => (
-      <Box>
+    {items.map(({ title, date }, i) => (
+      <Box key={i}>
         <PrismicRichText
           style={{ textDecoration: "underline" }}
           onClick={() =>

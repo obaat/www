@@ -15,7 +15,10 @@ import { Field as RawField } from "formik"
 import isNil from "lodash/isNil"
 import { SocialIcon } from "react-social-icons"
 const numberOrString = oneOfType([number, string])
-const ratio = responsiveStyle("paddingBottom", "ratio")
+const ratio = responsiveStyle({
+  cssProperty: "paddingBottom",
+  prop: "ratio",
+})
 const theme = ({ theme, palette, invert }) =>
   get(
     theme,
@@ -250,7 +253,7 @@ const components = [
   // Typography
   {
     name: "Text",
-    type: "p",
+    type: "div",
     props: {
       fontSize: 1,
       mb: 2,

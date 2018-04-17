@@ -30,9 +30,9 @@ const palette = ({ palette, theme, invert }) => {
   }
 }
 
-const display = props => {
-  return responsiveStyle("display")(props)
-}
+const display = responsiveStyle({
+  prop: "display",
+})
 
 const namedColor = ({ theme, invert, ...props }) => {
   if (props.color) {
