@@ -965,8 +965,8 @@ const components = [
     },
     style: props => ({
       padding: 0,
-      width: px(get(props.theme, "space.3")),
-      height: px(get(props.theme, "space.3")),
+      width: px(24),
+      height: px(24),
       borderWidth: px(4),
       borderStyle: "solid",
       borderColor: "transparent",

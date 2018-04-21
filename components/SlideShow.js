@@ -95,8 +95,8 @@ const Paging = ({ total, page, onPageClick }) => {
     <Absolute left right bottom style={{ margin: "0 auto" }} pb={2}>
       <Flex
         style={{
-          height: "20px",
-          width: `${20 * showPages}px`,
+          height: "24px",
+          width: `${24 * showPages}px`,
           margin: "0 auto",
         }}
       >
