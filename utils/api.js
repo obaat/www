@@ -6,6 +6,7 @@ const types = {
   VOLUNTEERING: "volunteer_opportunity",
   VOLUNTEERING_PAGE_CONTENT: "volunteering_page",
   VOLUNTEERING_OPPORTUNITY_LOCATION: "volunteering_opportunity_location",
+  WHAT_WE_DO_PAGE: "what_we_do_page",
   BLOG_POST: "blog_post",
   PROJECT_PAGE_CONTENT: "projects_page",
   PROJECT: "project",

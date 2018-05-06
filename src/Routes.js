@@ -1,9 +1,16 @@
 import React from "react"
-import { Route, Switch, Redirect, withRouteData } from "react-static"
+import {
+  Route,
+  Switch,
+  NotFoundRoute,
+  Redirect,
+  withRouteData,
+} from "react-static"
 import importAll from "import-all.macro"
 import path from "path"
 import map from "lodash/map"
 import { withPalette } from "../ui/component-configuration"
+import NotFound from "../components/404"
 
 const _pages = importAll.sync("../pages/*.js")
 
@@ -26,6 +33,6 @@ export const pages = pageComponents.map(p => ({
 export default () => (
   <Switch>
     {pages.map(props => <Route key={props.path} {...props} />)}
-    <Redirect to="/" />
+    <Route component={NotFound} />
   </Switch>
 )

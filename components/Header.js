@@ -136,6 +136,7 @@ class Header extends Component {
 
   render() {
     const { scrolled } = this.state
+    const { volunteering, whatwedo } = this.props
     return (
       <div>
         <Fixed>
@@ -145,7 +146,11 @@ class Header extends Component {
                 <Logo docked={!scrolled} size={20} />
               </Link>
             </Box>
-            <Menu volunteering={this.props.volunteering} scrolled={scrolled} />
+            <Menu
+              whatwedo={whatwedo}
+              volunteering={volunteering}
+              scrolled={scrolled}
+            />
             <Box
               grow={1}
               display={["none", "none", "block", "block"]}

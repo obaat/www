@@ -19,10 +19,10 @@ import { Toggle } from "react-powerplug"
 
 import enhanceWithClickOutside from "react-click-outside"
 
-const toVolunteeringMenu = src =>
-  src.map(({ uid, data: { title } }) => ({
-    title: title[0].text,
-    href: `/volunteering/${uid}`,
+const toMenu = slug => src =>
+  src.map(({ uid, data: { menu_item_title, title } }) => ({
+    title: menu_item_title ? menu_item_title[0].text : title[0].text,
+    href: `/${slug}/${uid}`,
   }))
 
 const aboutItems = [
@@ -42,12 +42,16 @@ const whatItems = [
 
 const menuItems = [
   { title: "About Us", items: aboutItems },
-  { title: "What We Do", items: whatItems },
+  {
+    title: "What We Do",
+    items: whatItems,
+    getChildren: props => toMenu("us")(props.whatwedo || []),
+  },
   // { title: 'Projects', getChildren: props => toMenu(props.projects) },
   {
     title: "Volunteer With Us",
     items: [{ title: "General Information", href: "/volunteering" }],
-    getChildren: props => toVolunteeringMenu(props.volunteering || []),
+    getChildren: props => toMenu("volunteering")(props.volunteering || []),
   },
   {
     title: "One Brick Supply",

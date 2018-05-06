@@ -9,18 +9,29 @@ import { map } from "asyncro"
 export default {
   getSiteData: async () => {
     const volunteering = await getByType(types.VOLUNTEERING)
+    const whatwedo = await getByType(types.WHAT_WE_DO_PAGE)
     return {
       volunteering: volunteering.results,
+      whatwedo: whatwedo.results,
     }
   },
   getRoutes: async () => {
-    return await map(data, async v => {
+    const routes = await map(data, async v => {
       const { children: generateChildren } = v
       // resolve parent getData and pass to children
       const children = generateChildren && (await generateChildren())
       return { ...v, children }
     })
+
+    return [
+      ...routes,
+      {
+        is404: true,
+        component: "components/404",
+      },
+    ]
   },
+
   renderToHtml: async (render, Comp, meta) => {
     const html = render(<Comp />)
     const { css } = renderStaticOptimized(() => html)
@@ -39,7 +50,6 @@ export default {
               name="viewport"
               content="width=device-width, initial-scale=1"
             />
-            <meta name="referrer" content="origin" />
             <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
             <style
               dangerouslySetInnerHTML={{ __html: renderMeta.glamStyles }}

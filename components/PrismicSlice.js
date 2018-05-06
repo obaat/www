@@ -8,7 +8,7 @@ import { Flex, Border, Link, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 import { FullHumanDate } from "../utils/date"
 import g from "glamorous"
 
-export const Unknown = ({ slice_type }) => (
+export const UnknownRenderer = ({ slice_type }) => (
   <div> Unknown slice: {slice_type}</div>
 )
 
@@ -93,7 +93,7 @@ const BlogEntries = ({ primary, items }) => (
 )
 
 const Text = ({ primary, items }) => {
-  const value = primary.description || primary.content
+  const value = primary.text || primary.description || primary.content
   return value && <PrismicRichText source={value} />
 }
 
@@ -126,6 +126,7 @@ export const renderers = {
   embeds: Video,
   embed: Video,
   text_only: Text,
+  text: Text,
   diary: BlogEntries,
   files: Document,
   faq: ({ items = [] }) => (
@@ -194,7 +195,7 @@ const PrismicSlice = ({ slice_type, items, primary, ...props }) => {
   const title = primary.title && (
     <PrismicRichText forceType="heading6" source={primary.title} />
   )
-  const Component = renderers[slice_type] || Unknown
+  const Component = renderers[slice_type] || UnknownRenderer
   return (
     <div>
       {title}
