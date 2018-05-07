@@ -1,8 +1,8 @@
 import g from "glamorous"
 import { Box } from "../ui"
 
-const Container = g(Box)(props => ({
-  maxWidth: props.maxWidth || "1024px",
+const Container = g(Box)(({ maxWidth = "1024px" }) => ({
+  maxWidth,
   marginLeft: "auto",
   marginRight: "auto",
   // textAlign: "justify",

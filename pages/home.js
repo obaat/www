@@ -239,7 +239,7 @@ class IndexPage extends React.Component {
           news.body.length > 0 && (
             <Panel pt={1} pb={4} direction="row" palette="gray2" invert>
               <Box align="center" w={[1, 1, 1, "80%"]}>
-                <NewsMasonry items={news.body} data={newsArticles} />
+                <NewsMasonry source={news} data={newsArticles} />
               </Box>
             </Panel>
           )}

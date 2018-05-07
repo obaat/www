@@ -6,7 +6,7 @@ const config = getConfig({}, { watch: true })
 
 module.exports = {
   webpackConfig: webpackConfig({ config, stage: "dev" }),
-  components: "{ui,components}/**/*.js",
+  components: "components/**/*.js",
   styleguideComponents: {
     Wrapper: path.join(__dirname, "styleguide/ThemeWrapper"),
   },

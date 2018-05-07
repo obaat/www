@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import g from "glamorous"
 import { css } from "glamor"
+import { get } from "lodash"
 import {
   Link as RawLink,
   Fixed,
@@ -21,7 +22,7 @@ import enhanceWithClickOutside from "react-click-outside"
 
 const toMenu = slug => src =>
   src.map(({ uid, data: { menu_item_title, title } }) => ({
-    title: menu_item_title ? menu_item_title[0].text : title[0].text,
+    title: get(menu_item_title, "[0].text", get(title, "[0].text")),
     href: `/${slug}/${uid}`,
   }))
 

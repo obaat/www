@@ -10,9 +10,11 @@ const mapType = {
   trustees_page: "trustees",
   team_page: "team",
   gallery_page: "gallery",
+  what_we_do_page: "us",
+  blog_post: "blog",
 }
 
-const pageToLink = (type, uid) => {
+export const pageToLink = (type, uid) => {
   const mappedType = mapType[type] || type
   return `/${mappedType}${uid ? `/${uid}` : ""}`
 }
