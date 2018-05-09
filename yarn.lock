@@ -4045,9 +4045,9 @@ glamor@^2.20.40:
     prop-types "^15.5.10"
     through "^2.3.8"
 
-glamorous@^4.12.5:
-  version "4.12.5"
-  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.12.5.tgz#909e0ec2ab3136e4749bf82edd9f33b51745e41f"
+glamorous@^4.13.0:
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.13.0.tgz#4ac5cb05633aa49a0396d409f665dd9b614f1b5a"
   dependencies:
     brcast "^3.0.0"
     csstype "^2.2.0"
@@ -7165,9 +7165,9 @@ react-hot-loader@^4:
     prop-types "^15.6.0"
     shallowequal "^1.0.2"
 
-react-hot-loader@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.1.2.tgz#5e8025f5bc5605506586b46eb2c6cc4006fd54d7"
+react-hot-loader@^4.1.3:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.1.3.tgz#b4ceca7961cc08451f8199a24a5753a749edd9ce"
   dependencies:
     fast-levenshtein "^2.0.6"
     global "^4.3.0"
@@ -7251,16 +7251,16 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-social-icons@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/react-social-icons/-/react-social-icons-2.8.1.tgz#ba85df47d5275abb2c322ace0a58aa3b73f6dbf4"
+react-social-icons@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-social-icons/-/react-social-icons-3.0.0.tgz#667de84c08fb2247eaa79f676e3aa1d6edc59f59"
   dependencies:
     babel-runtime "^6.11.6"
     classnames "^2.2.5"
 
-react-spring@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-5.1.1.tgz#6d8425e6bccf7472e4daaa51431ca328e0c505ef"
+react-spring@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-5.1.2.tgz#bcd7aa066523f63884f8fa3048514051653c595f"
   dependencies:
     "@babel/runtime" "^7.0.0-beta.46"
 
@@ -7338,9 +7338,9 @@ react-static@5.9.1:
     webpack-flush-chunks "^1.2.3"
     webpack-node-externals "^1.6.0"
 
-react-styleguidist@7.0.9:
-  version "7.0.9"
-  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-7.0.9.tgz#57b851ac61231ec4b2d1085869b42d841ff25ed8"
+react-styleguidist@7.0.10:
+  version "7.0.10"
+  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-7.0.10.tgz#aaf38f14c5d0a12bc3026e4d7f70fc18d9c86049"
   dependencies:
     "@vxna/mini-html-webpack-template" "^0.1.6"
     acorn "^5.5.3"
@@ -9202,9 +9202,9 @@ wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
-webpack-bundle-analyzer@^2.11.1:
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.11.1.tgz#b9fbfb6a32c0a8c1c3237223e90890796b950ab9"
+webpack-bundle-analyzer@^2.11.2:
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.11.2.tgz#5ae05bfccffb16683977237bf319323653e44f9f"
   dependencies:
     acorn "^5.3.0"
     bfj-node4 "^5.2.0"
