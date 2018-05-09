@@ -60,12 +60,12 @@ const stats = [
   {
     title: "Building Projects Completed",
     icon: Icons.School,
-    value: 23,
+    value: 25,
   },
   {
     title: "Opportunities Created",
     icon: Icons.User,
-    value: 1500,
+    value: 50000,
     postfix: "for education, jobs and access to health care",
   },
 ]
