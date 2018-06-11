@@ -1,41 +1,40 @@
 {
-  "extends": "react-static/.babelrc",
-  "env": {
-    "test": {
-      "presets": [
+  extends: "react-static/.babelrc",
+  env: {
+    test: {
+      presets: [
         [
           "env",
           {
-            "targets": {
-              "node": "current"
-            }
-          }
+            targets: {
+              node: "current",
+            },
+          },
         ],
-        "next/babel"
-      ]
-    }
+        "next/babel",
+      ],
+    },
   },
-  "presets": ["flow"],
-  "plugins": [
+  presets: ["flow"],
+  plugins: [
     [
       "inline-react-svg",
       {
-        "svgo": {
-          "plugins": [
+        svgo: {
+          plugins: [
             {
-              "removeAttrs": {
-                "attrs": "(data-name)"
-              }
+              removeAttrs: {
+                attrs: "(data-name)",
+              },
             },
             {
-              "cleanupIDs": true
-            }
-          ]
-        }
-      }
+              cleanupIDs: true,
+            },
+          ],
+        },
+      },
     ],
-    "babel-macros",
-    "sitrep",
-    ["transform-define", "./config.js"]
-  ]
+    "macros",
+    ["transform-define", "./config.js"],
+  ],
 }

@@ -9,7 +9,7 @@ import mapKeys from "lodash/mapKeys"
 import mapValues from "lodash/mapValues"
 import filter from "lodash/filter"
 import { pageWithTitle } from "../hoc/page"
-import Yup from "yup"
+import { string, object } from "yup"
 import range from "lodash/range"
 import snakeCase from "lodash/snakeCase"
 import PrismicRichText from "../components/PrismicRichText"
@@ -208,13 +208,13 @@ const AboutYou = props => (
   </div>
 )
 
-const aboutValidation = Yup.object().shape({
-  email: Yup.string()
+const aboutValidation = object().shape({
+  email: string()
     .email("Invalid email address")
     .required("Email is required"),
-  firstName: Yup.string().required("First Name is required"),
-  lastName: Yup.string().required("Last name is required"),
-  phone: Yup.string().required("Phone is required"),
+  firstName: string().required("First Name is required"),
+  lastName: string().required("Last name is required"),
+  phone: string().required("Phone is required"),
   // dob_day: Yup.number().required("DOB required"),
   // dob_month: Yup.number().required("DOB required"),
   // dob_year: Yup.number().required("DOB required"),

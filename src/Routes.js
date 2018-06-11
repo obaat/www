@@ -11,7 +11,6 @@ import path from "path"
 import map from "lodash/map"
 import { withPalette } from "../ui/component-configuration"
 import NotFound from "../components/404"
-
 const _pages = importAll.sync("../pages/*.js")
 
 const pageComponents = map(_pages, (v, k) => ({
