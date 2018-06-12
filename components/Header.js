@@ -8,12 +8,7 @@ import Menu from "./Menu"
 import { Link, withSiteData } from "react-static"
 import LogoIcon from "../svg/logo.svg"
 import withProps from "recompose/withProps"
-
-var canUseDOM = !!(
-  typeof window !== "undefined" &&
-  window.document &&
-  window.document.createElement
-)
+import { canUseDOM } from "../utils"
 
 const Logo = withProps(({ docked }) => ({
   height: docked ? "65px" : "44px",
@@ -21,7 +16,7 @@ const Logo = withProps(({ docked }) => ({
 }))(
   styled(LogoIcon, {
     rootEl: "svg",
-    filterProps: ["docked"],
+    shouldForwardProp: prop => prop !== "docked",
   })(({ docked }) => ({
     marginTop: docked && "30px",
     display: "block",

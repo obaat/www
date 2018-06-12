@@ -1,13 +1,9 @@
 import React from "react"
-import { Flex, Box } from "../ui"
+import { Box } from "../ui"
 import styled from "react-emotion"
-import mapValues from "lodash/mapValues"
-import hoc from "../ui/hoc"
-import map from "lodash/map"
 import Link from "./Link"
 import { serialize, Elements } from "prismic-richtext"
 import Embed from "./Embed"
-import { Link as LinkHelper } from "prismic-helpers"
 import SlideShow from "./SlideShow"
 import shortid from "shortid"
 
@@ -65,25 +61,24 @@ const linkResolver = link => {
 
 const span = styled.span({})
 
-const buffer = []
+const renderBuffer = items => (
+  <Box mb={2} key={shortid.generate()}>
+    <SlideShow controlSize={24}>{items.splice(0, items.length)}</SlideShow>
+  </Box>
+)
 
-const doSerialize = ({ forceType, Component, xmb, xmt, ...passProps }) => (
-  prismicType,
-  element,
-  content,
-  children,
-) => {
-  let flushed_buffer = null
+const doSerialize = buffer => ({
+  forceType,
+  Component,
+  xmb,
+  xmt,
+  ...passProps
+}) => (prismicType, element, content, children) => {
+  let flushedBuffer = null
   let final = null
   if (buffer.length && prismicType !== Elements.image) {
     //flush
-    flushed_buffer = (
-      <Box mb={2} key={shortid.generate()}>
-        <SlideShow controlSize={24}>
-          {buffer.splice(0, buffer.length)}
-        </SlideShow>
-      </Box>
-    )
+    flushedBuffer = renderBuffer(buffer) // careful, mutates buffer
   }
 
   if (prismicType === Elements.span) {
@@ -123,39 +118,29 @@ const doSerialize = ({ forceType, Component, xmb, xmt, ...passProps }) => (
       </RenderComponent>
     )
   }
-  if (!flushed_buffer) {
+  if (!flushedBuffer) {
     return final
   }
 
   return (
     <React.Fragment key={shortid.generate()}>
-      {flushed_buffer}
+      {flushedBuffer}
       {final}
     </React.Fragment>
   )
 }
 
-const PrismicRichText = ({
-  source,
-  mb,
-  mt,
-  // forceType,
-  // Component,
-  // xmb,
-  // xmt,
-  ...props
-}) => {
+const PrismicRichText = ({ source, mb, mt, ...props }) => {
   if (!Array.isArray(source)) {
     return <div>no source</div>
   }
-  const serializedChildren = serialize(
-    source,
-    doSerialize(props),
-    // htmlSerializer,
-  )
+  const buffer = []
+  const serializedChildren = serialize(source, doSerialize(buffer)(props))
+  // if the buffer still has contents render them out here.
   return (
     <Box mb={mb} mt={mt}>
       {serializedChildren}
+      {buffer && renderBuffer(buffer)}
     </Box>
   )
 }

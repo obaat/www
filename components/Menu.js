@@ -7,15 +7,13 @@ import {
   Absolute,
   Flex,
   Text,
-  H6,
   Box,
   Relative,
   Border,
 } from "../ui"
 import { space } from "../styleHelpers"
-import { Set } from "react-powerplug"
+import { Map, Toggle } from "react-powerplug"
 import { Menu as MenuIcon, X } from "./SvgIcons"
-import { Toggle } from "react-powerplug"
 
 import enhanceWithClickOutside from "react-click-outside"
 
@@ -158,8 +156,6 @@ export const SecondaryMenu = enhanceWithClickOutside(
   },
 )
 
-const MobileTitle = styled(Box)({})
-
 const MobileItem = styled(Box)({})
 
 const MobileMenu = ({ items, onClose }) => (
@@ -227,7 +223,7 @@ const Menu = ({ hideMenu = false, ...props }) => {
         </Toggle>
       </Fixed>
       <Box display={["none", "none", "none", "block"]}>
-        <Set initial={{ visibleMenu: null }}>
+        <Map initial={{ visibleMenu: null }}>
           {({ set, get }) => (
             <Flex>
               {_menuItems.map(({ title, items, ...props }) => {
@@ -259,7 +255,7 @@ const Menu = ({ hideMenu = false, ...props }) => {
               })}
             </Flex>
           )}
-        </Set>
+        </Map>
       </Box>
     </div>
   )

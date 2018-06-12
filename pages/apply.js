@@ -13,7 +13,7 @@ import { string, object } from "yup"
 import range from "lodash/range"
 import snakeCase from "lodash/snakeCase"
 import PrismicRichText from "../components/PrismicRichText"
-import { Index } from "react-powerplug"
+import { Counter } from "react-powerplug"
 import ga from "../utils/analytics"
 import {
   ExclamationSquare,
@@ -293,14 +293,14 @@ const Errors = ({ errors, touched }) => {
 const done = { Component: Done, title: "Complete" }
 
 const FormWizard = props => (
-  <Index initial={0}>
-    {({ index, setIndex }) => {
-      const { Component, validation } = pages[index] || done
+  <Counter initial={0}>
+    {({ count, inc }) => {
+      const { Component, validation } = pages[count] || done
       const next = (values, actions) => {
-        setIndex(index + 1)
+        inc()
         actions.setSubmitting(false)
       }
-      const onSubmit = pages[index + 1]
+      const onSubmit = pages[count + 1]
         ? next
         : submit(success => {
             success &&
@@ -309,7 +309,7 @@ const FormWizard = props => (
                 action: "Applied for volunteer position",
                 label: "new_volunteer",
               })
-            success && setIndex(index + 1)
+            success && setIndex(count + 1)
           })
       const steps = pages.concat(done)
       return (
@@ -326,11 +326,11 @@ const FormWizard = props => (
                       <WizardStep
                         key={i}
                         last={i === steps.length - 1}
-                        onClick={() => index > i && setIndex(i)}
+                        onClick={() => count > i && setIndex(i)}
                         w={1 / steps.length}
                         i={i}
-                        active={index === i}
-                        done={index > i}
+                        active={count === i}
+                        done={count > i}
                         ml={i && 1}
                         {...page}
                       />
@@ -342,7 +342,7 @@ const FormWizard = props => (
                     </form>
                     <Errors errors={errors} touched={touched} />
                   </Box>
-                  {pages[index] && (
+                  {pages[count] && (
                     <Box mt={2} align="right">
                       <Button
                         py={1}
@@ -353,7 +353,7 @@ const FormWizard = props => (
                         onClick={handleSubmit}
                         invert
                       >
-                        {(pages[index + 1] || done).title}
+                        {(pages[count + 1] || done).title}
                       </Button>
                     </Box>
                   )}
@@ -364,7 +364,7 @@ const FormWizard = props => (
         />
       )
     }}
-  </Index>
+  </Counter>
 )
 
 const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
