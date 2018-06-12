@@ -1,6 +1,6 @@
 import { space, width, responsiveStyle } from "styled-system"
 import hoc from "./hoc"
-import g from "glamorous"
+import styled from "react-emotion"
 
 export const flex = responsiveStyle({
   prop: "flex",
@@ -23,5 +23,5 @@ export const order = responsiveStyle({
 })
 
 export default hoc()(
-  g.div({ boxSizing: "border-box" }, align, alignSelf, grow, flex, order),
+  styled.div({ boxSizing: "border-box" }, align, alignSelf, grow, flex, order),
 )

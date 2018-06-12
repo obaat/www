@@ -4,11 +4,11 @@ import Helmet from "react-helmet"
 import PageTitle from "../components/PageTitle"
 import ApplyNow from "../components/ApplyNow"
 import get from "lodash/get"
-import g from "glamorous"
+import styled from "react-emotion"
 import BreadCrumbs from "../components/Breadcrumbs"
 import { Absolute, Heading } from "../ui"
 
-const Title = g(Heading)({
+const Title = styled(Heading)({
   color: "#000",
 })
 

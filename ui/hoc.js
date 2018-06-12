@@ -7,7 +7,7 @@ import {
 } from "styled-system"
 import get from "lodash/get"
 import isNil from "lodash/isNil"
-import g from "glamorous"
+import styled from "react-emotion"
 
 export const clickable = ({ onClick }) =>
   onClick ? { cursor: "pointer" } : undefined
@@ -58,4 +58,4 @@ export const defaultTraits = [
   display,
 ]
 
-export default (hocs = defaultTraits) => Component => g(Component)(...hocs)
+export default (hocs = defaultTraits) => Component => styled(Component)(...hocs)

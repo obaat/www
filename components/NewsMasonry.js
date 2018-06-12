@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Absolute, BackgroundImage } from "../ui"
 import get from "lodash/get"
-import g from "glamorous"
+import styled from "react-emotion"
 import Embed from "../components/Embed"
 import PrismicRichText from "../components/PrismicRichText"
 import Link, { pageToLink } from "../components/Link"
@@ -22,7 +22,7 @@ export const gridTemplateAreas = responsiveStyle({
   prop: "gridTemplateAreas",
 })
 
-const Grid = g.div(
+const Grid = styled.div(
   ({ width = "100%", height }) => ({
     width,
     height,
@@ -38,7 +38,7 @@ const Grid = g.div(
   gridGap,
 )
 
-const GridItem = g(Panel)(({ gridArea }) => ({
+const GridItem = styled(Panel)(({ gridArea }) => ({
   display: "none",
   "@supports (display: grid)": {
     display: "flex",

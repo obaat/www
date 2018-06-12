@@ -1,24 +1,16 @@
 import React from "react"
-import g from "glamorous"
+import styled from "react-emotion"
 import Button from "../../components/Button"
 import Link from "../../components/Link"
-import { ArrowRight } from "../../components/SvgIcons"
+import { withProps } from "recompose"
 import ApplyNow from "../../components/ApplyNow"
-import {
-  getByUID,
-  getByIDs,
-  getSingleton,
-  getByType,
-  types,
-} from "../../utils/api"
+import { getByUID, getByIDs, types } from "../../utils/api"
 
 import { pageWithTitle } from "../../hoc/page"
 import PrismicRichText from "../../components/PrismicRichText"
 import SlideShow from "../../components/SlideShow"
 import SidebarHeader from "../../components/SidebarHeader"
-import PrismicSlice, {
-  renderers as sliceRenderers,
-} from "../../components/PrismicSlice"
+import PrismicSlice from "../../components/PrismicSlice"
 import {
   Absolute,
   Relative,
@@ -26,23 +18,21 @@ import {
   Flex,
   Box,
   ButtonOutline,
-  ButtonTransparent,
-  Heading,
   Subhead,
-  Border,
-  H6,
 } from "../../ui"
 
-const Overlay = g(Absolute)({
-  pointerEvents: "none",
-  background: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5))",
-}).withProps({
+const Overlay = withProps({
   top: true,
   bottom: true,
   left: true,
   right: true,
   p: 2,
-})
+})(
+  styled(Absolute)({
+    pointerEvents: "none",
+    background: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5))",
+  }),
+)
 
 const Section = ({ title, id, ...props }) =>
   props.source && (
@@ -56,7 +46,7 @@ const Section = ({ title, id, ...props }) =>
 const Location = ({ uid, data }) => (
   <Relative mb={2}>
     <SlideShow hidePaging controlSize={18}>
-      {data.image_gallery.map(({ image, description }, i) => (
+      {data.image_gallery.map(({ image }, i) => (
         <BackgroundImage src={image.url} key={i} />
       ))}
     </SlideShow>

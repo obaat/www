@@ -1,5 +1,5 @@
 import React from "react"
-import g from "glamorous"
+import styled from "react-emotion"
 import get from "lodash/get"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
@@ -9,17 +9,20 @@ import { Flex, Relative, Absolute, Box, Border, BackgroundImage } from "../ui"
 import { ArrowRight } from "../components/SvgIcons"
 import { HumanDate } from "../utils/date"
 import SidebarHeader from "../components/SidebarHeader"
+import { withProps } from "recompose"
 
-const Overlay = g(Absolute)({
-  pointerEvents: "none",
-  background: "linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2))",
-}).withProps({
+const Overlay = withProps({
   top: true,
   bottom: true,
   left: true,
   right: true,
   p: 2,
-})
+})(
+  styled(Absolute)({
+    pointerEvents: "none",
+    background: "linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2))",
+  }),
+)
 
 const Event = ({ uid, data }) => (
   <Relative mb={2}>

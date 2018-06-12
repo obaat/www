@@ -1,5 +1,5 @@
 import React from "react"
-import g from "glamorous"
+import styled from "react-emotion"
 import { withRouter } from "react-static"
 import { ArrowDown as IconArrowDown, ArrowUp as IconArrowUp } from "./SvgIcons"
 import { withProps } from "recompose"
@@ -7,23 +7,23 @@ import isNil from "lodash/isNil"
 
 import { Flex, Box, Panel, PanelHeader, Heading } from "../ui"
 
-const AccordionContainer = g(Panel)({
+const AccordionContainer = styled(Panel)({
   borderBottom: "1px solid #ccc",
   borderColor: "#fff",
 })
 
-const AccordionHeader = g(Box)({})
+const AccordionHeader = styled(Box)({})
 
-const AccordionBody = g(Box)({
+const AccordionBody = styled(Box)({
   borderTop: "2px solid #fff",
 })
 
-const ArrowDown = g(IconArrowDown)({
+const ArrowDown = styled(IconArrowDown)({
   float: "right",
   marginTop: "6px",
 })
 
-const ArrowUp = g(IconArrowUp)({
+const ArrowUp = styled(IconArrowUp)({
   float: "right",
   marginTop: "6px",
 })

@@ -1,6 +1,5 @@
 import React, { Component } from "react"
-import g from "glamorous"
-import { css } from "glamor"
+import styled from "react-emotion"
 import { get } from "lodash"
 import {
   Link as RawLink,
@@ -63,7 +62,7 @@ const menuItems = [
   },
 ]
 
-const Link = g(RawLink)(
+const Link = styled(RawLink)(
   {
     textTransform: "uppercase",
     textDecoration: "none",
@@ -82,7 +81,7 @@ const Link = g(RawLink)(
 
 const LinkLike = Link.withComponent("div")
 
-const MenuContainer = g(Box)({
+const MenuContainer = styled(Box)({
   borderLeft: "1px solid transparent",
   borderRight: "1px solid transparent",
   borderTop: "1px solid transparent",
@@ -104,13 +103,13 @@ export const MenuItem = ({ items, onMouseOver, href, children, ...props }) => {
   return href ? <Link to={href}>{item}</Link> : <LinkLike>{item}</LinkLike>
 }
 
-const SelectedMenuItem = g(MenuItem)({
+const SelectedMenuItem = styled(MenuItem)({
   borderLeft: "1px solid rgba(0,0,0,0.2)",
   borderRight: "1px solid rgba(0,0,0,0.2)",
   borderTop: "1px solid rgba(0,0,0,0.2)",
 })
 
-export const SubMenuItem = g(MenuItem)(({ last }) => ({
+export const SubMenuItem = styled(MenuItem)(({ last }) => ({
   cursor: "pointer",
   borderBottom: last ? "" : "1px dotted #ccc",
   ":hover": {
@@ -118,7 +117,7 @@ export const SubMenuItem = g(MenuItem)(({ last }) => ({
   },
 }))
 
-export const OverlayMenu = g.div({
+export const OverlayMenu = styled.div({
   backgroundColor: "#fff",
   color: "#000",
   position: "absolute",
@@ -159,9 +158,9 @@ export const SecondaryMenu = enhanceWithClickOutside(
   },
 )
 
-const MobileTitle = g(Box)({})
+const MobileTitle = styled(Box)({})
 
-const MobileItem = g(Box)({})
+const MobileItem = styled(Box)({})
 
 const MobileMenu = ({ items, onClose }) => (
   <Fixed

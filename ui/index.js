@@ -1,5 +1,5 @@
 import { defaultTraits } from "./hoc"
-import g from "glamorous"
+import styled from "react-emotion"
 import components from "./component-configuration"
 import { Flex, Box } from "./Grid"
 import { compose, defaultProps } from "recompose"
@@ -42,7 +42,7 @@ const toComponent = (generatedComponents, config, all) => {
     styles,
   } = getMergedConfig(config)
 
-  const C = typeof type === "string" ? g[type] : g(type)
+  const C = styled(type)
 
   if (!C) {
     throw new Error(`source component for ${displayName} not found`)

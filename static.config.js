@@ -1,7 +1,6 @@
 /* eslint-disable react/no-danger */
 import React, { Component } from "react"
-import { renderStaticOptimized } from "glamor/server"
-import mapValues from "lodash/mapValues"
+import { extractCritical } from "emotion-server"
 import { getByType, types } from "./utils/api"
 import { data } from "./src/Routes"
 import { map } from "asyncro"
@@ -33,9 +32,8 @@ export default {
   },
 
   renderToHtml: async (render, Comp, meta) => {
-    const html = render(<Comp />)
-    const { css } = renderStaticOptimized(() => html)
-    meta.glamStyles = css
+    const { html, ids, css } = extractCritical(render(<Comp />))
+    meta.css = css
     return html
   },
   siteRoot: "https://www.onebrick.org.uk",
@@ -51,9 +49,7 @@ export default {
               content="width=device-width, initial-scale=1"
             />
             <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
-            <style
-              dangerouslySetInnerHTML={{ __html: renderMeta.glamStyles }}
-            />
+            <style dangerouslySetInnerHTML={{ __html: renderMeta.css }} />
           </Head>
           <Body>{children}</Body>
           <link

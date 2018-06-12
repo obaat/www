@@ -1,7 +1,5 @@
 import React, { Component } from "react"
-import g from "glamorous"
-import { css } from "glamor"
-import { overlay } from "../styleHelpers"
+import styled from "react-emotion"
 import range from "lodash/range"
 import isNil from "lodash/isNil"
 import { withProps } from "recompose"
@@ -13,23 +11,25 @@ import {
   Magnifier,
   Undo1 as Undo,
 } from "../components/SvgIcons"
-import { Motion, spring } from "react-motion"
+import { Motion } from "react-motion"
 import keycode from "keycode"
 
 const PRELOAD_MAX = 3
 
-const Fullscreen = g(Fixed)({
-  backgroundColor: "rgba(0,0,0, 0.9)",
-  height: "100VH",
-  zIndex: 999999,
-}).withProps({
+const Fullscreen = withProps({
   top: true,
   bottom: true,
   left: true,
   right: true,
-})
+})(
+  styled(Fixed)({
+    backgroundColor: "rgba(0,0,0, 0.9)",
+    height: "100VH",
+    zIndex: 999999,
+  }),
+)
 
-const AbsMiddle = g(Flex)(({ direction }) => ({
+const AbsMiddle = styled(Flex)(({ direction }) => ({
   position: "absolute",
   top: 0,
   bottom: 0,
@@ -114,20 +114,20 @@ const Paging = ({ total, page, onPageClick }) => {
   )
 }
 
-const CarouselContainer = g.div({
+const CarouselContainer = styled.div({
   overflow: "hidden",
   position: "relative",
   width: "100%",
 })
 
-const Carousel = g(Flex)({
+const Carousel = styled(Flex)({
   width: "100%",
   margin: "0",
   padding: "0",
   transition: "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)",
 })
 
-const CarouselSeat = g.section({
+const CarouselSeat = styled.section({
   position: "relative",
   flex: "1 0 100%",
 })
@@ -229,7 +229,7 @@ export default class SlideShow extends Component {
     this.setSlide(index)
   }
 
-  toggleZoom = index => e => {
+  toggleZoom = index => () => {
     this.pause()
     this.setState({
       selectedIndex: isNil(index) ? this.state.selectedIndex : index,
@@ -239,16 +239,7 @@ export default class SlideShow extends Component {
 
   renderZoomed = children => {
     const { selectedIndex } = this.state
-    const {
-      controlSize = 48,
-      index,
-      hidePaging,
-      hideZoom,
-      hideArrows,
-      controlColor = "#fff",
-      vertical,
-      px = 2,
-    } = this.props
+    const { controlSize = 48, controlColor = "#fff", px = 2 } = this.props
     return (
       <Fullscreen onClick={this.toggleZoom()} p={2}>
         <Relative
@@ -298,7 +289,7 @@ export default class SlideShow extends Component {
   }
 
   renderSlideShow = children => {
-    const { selectedIndex, zoom } = this.state
+    const { selectedIndex } = this.state
     const {
       controlSize = 48,
       index,

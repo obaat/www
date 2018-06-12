@@ -1,5 +1,5 @@
 import React from "react"
-import g from "glamorous"
+import styled from "react-emotion"
 import { color } from "styled-system"
 import theme from "../theme"
 import get from "lodash/get"
@@ -9,28 +9,19 @@ import { Link } from "react-static"
 import CountUp, { startAnimation } from "react-countup"
 import VisibilitySensor from "react-visibility-sensor"
 import NewsMasonry from "../components/NewsMasonry"
-import Container from "../components/Container"
+import { withProps } from "recompose"
 
 import Button from "../components/Button"
 import page from "../hoc/page"
-import { getByType, getByIDs, getSingleton, types } from "../utils/api"
+import { getByIDs, getSingleton, types } from "../utils/api"
 import PrismicRichText from "../components/PrismicRichText"
 import {
   Flex,
   Heading,
-  Relative,
   Absolute,
-  Subhead,
   Box,
-  H3,
-  H4,
   H5,
-  H6,
   Text,
-  SubHead,
-  Banner,
-  ButtonOutline,
-  Measure,
   BackgroundImage,
   ButtonCircle,
   ButtonCircleOutline,
@@ -38,7 +29,6 @@ import {
 import SlideShow from "../components/SlideShow"
 import Statement from "../components/Statement"
 import hoc from "../ui/hoc"
-import { menuHeightDocked, themeCycle as sideColors } from "../utils/constants"
 import Icons from "../components/SvgIcons"
 import srcTheme from "../theme"
 import hexRgb from "hex-rgb"
@@ -70,13 +60,15 @@ const stats = [
   },
 ]
 
-const LeadButton = g(Button)({
-  minWidth: "250px",
-}).withProps({
+const LeadButton = withProps({
   py: [1, 1, 1, 1, 2],
   palette: "brick",
   fontSize: [2, 2, 2, 2, 3],
-})
+})(
+  styled(Button)({
+    minWidth: "250px",
+  }),
+)
 
 const mapping = {
   volunteering_page: () => "/volunteering",
@@ -98,7 +90,6 @@ const toLocalRelativeUrl = ({ type, ...props }) => {
 
 const ActionButton = ({ prismicUrl, as, href, ...props }) => {
   const resolved = href ? href : toRelativeUrl(prismicUrl)
-  const local = href ? href : toLocalRelativeUrl(prismicUrl)
   return (
     <Link to={resolved}>
       <LeadButton {...props} as={as || ButtonCircle} />
@@ -106,22 +97,24 @@ const ActionButton = ({ prismicUrl, as, href, ...props }) => {
   )
 }
 
-const Panel = g(Flex)(
-  {
-    textAlign: "center",
-    justifyContent: "center",
-    flexWrap: "wrap",
-  },
-  color,
-).withProps({
+const Panel = withProps({
   align: "center",
-})
+})(
+  styled(Flex)(
+    {
+      textAlign: "center",
+      justifyContent: "center",
+      flexWrap: "wrap",
+    },
+    color,
+  ),
+)
 
 const BOX_WIDTH = [1, 1, 1, 1200]
 
 const transitionSpeed = 7 * 1000
 
-const Header = g(PrismicRichText)({
+const Header = styled(PrismicRichText)({
   backgroundColor: "rgba(0,0,0,0.3)",
   "@media screen and (min-width: 60em)": {
     backgroundColor: "transparent",
@@ -141,7 +134,7 @@ class IndexPage extends React.Component {
     isVisible && this.counters.forEach(a => a && startAnimation(a))
   }
 
-  setTypingDoneFor = i => e =>
+  setTypingDoneFor = i => () =>
     this.setState({ visible: { ...this.state.visible, [i]: true } })
 
   setVisibleSlideIndex = idx => this.setState({ visibleSlide: idx })
@@ -149,9 +142,9 @@ class IndexPage extends React.Component {
   render() {
     const { content, statements, news, newsArticles } = this.props
     const { visibleSlide } = this.state
-    const { hero, mission, mission_title } = content
+    const { hero, mission } = content
     const chunkedStatements = chunk(get(statements, "results", []), 2)
-    const { image, lead, strapline, button_text, url } = hero[visibleSlide]
+    const { image } = hero[visibleSlide]
     return (
       <div>
         <Helmet title="One Brick at a Time" />
@@ -168,7 +161,7 @@ class IndexPage extends React.Component {
               autoplaySpeed={transitionSpeed}
               onChange={this.setVisibleSlideIndex}
             >
-              {hero.map(({ image, lead, strapline, button_text, url }, i) => (
+              {hero.map(({ image, lead, strapline }, i) => (
                 <BackgroundImage
                   style={{ position: "relative", textAlign: "left" }}
                   ratio={[1, 1 / 1.5, 1 / 2.5, 1 / 2.5]}

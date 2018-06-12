@@ -1,6 +1,6 @@
 import React from "react"
 import { Flex, Box } from "../ui"
-import g from "glamorous"
+import styled from "react-emotion"
 import mapValues from "lodash/mapValues"
 import hoc from "../ui/hoc"
 import map from "lodash/map"
@@ -48,8 +48,8 @@ const ourTypes = {
   //[Elements.hyperlink]:  ,
   // headingasdiv: HeadingAsDiv,
   small: Small,
-  [Elements.strong]: g.strong({ fontWeight: 700 }),
-  [Elements.em]: g.em({ fontStyle: "italic" }),
+  [Elements.strong]: styled.strong({ fontWeight: 700 }),
+  [Elements.em]: styled.em({ fontStyle: "italic" }),
   [Elements.hyperlink]: Link,
 }
 
@@ -63,7 +63,7 @@ const linkResolver = link => {
   }
 }
 
-const span = g.span({})
+const span = styled.span({})
 
 const buffer = []
 

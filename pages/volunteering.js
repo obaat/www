@@ -1,56 +1,22 @@
 import React from "react"
-import Button from "../components/Button"
 import ApplyNow from "../components/ApplyNow"
-import g from "glamorous"
+import styled from "react-emotion"
 import Link from "../components/Link"
-import { Switch, Route, withRouteData, withSiteData } from "react-static"
+import { Switch, Route, withRouteData } from "react-static"
 import get from "lodash/get"
 import VolunteeringOpp, {
   data as oppData,
 } from "./parts/volunteering_opportunity"
 import { ArrowRight } from "../components/SvgIcons"
-import {
-  getByUID,
-  getByIDs,
-  getSingleton,
-  getByType,
-  types,
-} from "../utils/api"
+import { getByIDs, getSingleton, getByType, types } from "../utils/api"
 
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
-import SlideShow from "../components/SlideShow"
-import Accordion, { AccordionSection } from "../components/Accordion"
+import Accordion from "../components/Accordion"
 import SidebarHeader from "../components/SidebarHeader"
-import BreadCrumbs from "../components/Breadcrumbs"
 import Quotes from "../components/SidebarQuote"
-import PrismicSlice, {
-  renderers as sliceRenderers,
-} from "../components/PrismicSlice"
-import {
-  Absolute,
-  Relative,
-  BackgroundImage,
-  Flex,
-  Box,
-  ButtonOutline,
-  ButtonTransparent,
-  Heading,
-  Subhead,
-  Border,
-  H6,
-} from "../ui"
-
-const Overlay = g(Absolute)({
-  pointerEvents: "none",
-  background: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5))",
-}).withProps({
-  top: true,
-  bottom: true,
-  left: true,
-  right: true,
-  p: 2,
-})
+import { renderers as sliceRenderers } from "../components/PrismicSlice"
+import { Absolute, Flex, Box, Subhead, H6 } from "../ui"
 
 const Section = ({ title, id, ...props }) =>
   props.source && (
@@ -122,7 +88,7 @@ const Volunteering = ({ content, volunteering, additionalData }) => {
   )
 }
 
-export const data = async ({ query }) => {
+export const data = async () => {
   const res = await getSingleton(types.VOLUNTEERING_PAGE_CONTENT)
   const volunteering = await getByType(types.VOLUNTEERING)
   const quotes = res.data.body.find(s => s.slice_type === "quotes")

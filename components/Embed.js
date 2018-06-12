@@ -1,8 +1,9 @@
 import React from "react"
-import g from "glamorous"
+import styled from "react-emotion"
+import withProps from "recompose/withProps"
 
-const Container = g
-  .iframe(({ width = "100%", height = "100%" }) => ({
+const Container = withProps({ allowFullScreen: true })(
+  styled.iframe(({ width = "100%", height = "100%" }) => ({
     position: width === "100%" ? "absolute" : "relative",
     width,
     height,
@@ -11,8 +12,8 @@ const Container = g
     left: 0,
     border: 0,
     backgroundColor: "#000",
-  }))
-  .withProps({ allowFullScreen: true })
+  })),
+)
 
 const Embed = ({
   type,

@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { getByType, types } from "../utils/api"
-import g from "glamorous"
+import styled from "react-emotion"
 import Helmet from "react-helmet"
-import { ThemeProvider } from "glamorous"
+import { ThemeProvider } from "emotion-theming"
 // import { loadGetInitialProps } from "next/dist/lib/utils"
 import { menuHeightScrolled } from "../utils/constants"
 import configureProgressBar from "../utils/routing"
@@ -12,7 +12,7 @@ import Header from "../components/Header"
 import { withRouter } from "react-static"
 import theme from "../theme"
 
-const Container = g.div({
+const Container = styled.div({
   fontFamily: theme.font.heading,
   lineHeight: "1.7em",
   color: theme.colors.black[0],

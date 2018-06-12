@@ -1,11 +1,11 @@
 import React from "react"
-import g from "glamorous"
+import styled from "react-emotion"
 import { Flex, Box, Button, Relative, Absolute } from "../ui"
 import * as SvgIcons from "./SvgIcons"
 import memoize from "lodash/memoize"
 
 const createButton = memoize(source =>
-  g(source, { displayName: "Button" })({
+  styled(source, { displayName: "Button" })({
     cursor: "pointer",
   }),
 )

@@ -1,7 +1,7 @@
 import React from "react"
 import { Formik, Form } from "formik"
 import BlockUi from "react-block-ui"
-import g from "glamorous"
+import styled from "react-emotion"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
 import get from "lodash/get"
 import map from "lodash/map"

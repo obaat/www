@@ -6,7 +6,7 @@ import { Element, scroller } from "react-scroll"
 import { FilePdf } from "../components/SvgIcons"
 import { Flex, Border, Link, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 import { FullHumanDate } from "../utils/date"
-import g from "glamorous"
+import styled from "react-emotion"
 
 export const UnknownRenderer = ({ slice_type }) => (
   <div> Unknown slice: {slice_type}</div>
@@ -31,7 +31,7 @@ const Video = ({ items = [] }) => {
   )
 }
 
-const Paper = g.div({
+const Paper = styled.div({
   background: "#fff",
   boxShadow: "0 0 10px rgba(0,0,0,0.3)",
   padding: "24px",

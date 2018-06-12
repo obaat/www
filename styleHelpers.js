@@ -1,5 +1,5 @@
 import { space, color, width, fontSize } from "styled-system"
-import g from "glamorous"
+import styled from "react-emotion"
 import get from "lodash/get"
 
 export { space, color, width, fontSize }

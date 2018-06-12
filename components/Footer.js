@@ -1,5 +1,5 @@
 import React from "react"
-import g from "glamorous"
+import styled from "react-emotion"
 import Map from "../components/GoogleMap"
 import mapDark from "../components/mapDark.json"
 import Social from "./Social"

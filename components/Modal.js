@@ -1,17 +1,17 @@
-import g from "glamorous"
+import styled from "react-emotion"
 import { space, width } from "styled-system"
 import React, { Component } from "react"
 import X from "./SvgIcons"
 import { show, overlay } from "../styleHelpers"
 
-const ModalIcon = g(X)({
+const ModalIcon = styled(X)({
   background: "none",
   position: "absolute",
   right: 0,
   top: 0,
 })
 
-const ModalWrapper = g.div(
+const ModalWrapper = styled.div(
   overlay(0),
   {
     alignItems: "center",
@@ -24,11 +24,11 @@ const ModalWrapper = g.div(
   show,
 )
 
-const ModalBackground = g.div(overlay(0), {
+const ModalBackground = styled.div(overlay(0), {
   backgroundColor: "rgba(0,0,0, 0.6)",
 })
 
-const ModalContent = g.div(
+const ModalContent = styled.div(
   {
     margin: "0 auto",
     maxHeight: "calc(100vh - 15px)",

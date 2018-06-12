@@ -1,16 +1,13 @@
 import React, { Component } from "react"
-import g from "glamorous"
+import styled, { keyframes } from "react-emotion"
 import Donate from "./Donate"
 import { animation } from "polished"
-import { css } from "glamor"
 import { Flex, Box } from "../ui"
 import { menuHeightDocked, menuHeightScrolled } from "../utils/constants"
-import Menu, { MenuItem, SecondaryMenu } from "./Menu"
+import Menu from "./Menu"
 import { Link, withSiteData } from "react-static"
 import LogoIcon from "../svg/logo.svg"
 import withProps from "recompose/withProps"
-import { Home } from "./SvgIcons"
-import theme from "../theme"
 
 var canUseDOM = !!(
   typeof window !== "undefined" &&
@@ -18,33 +15,35 @@ var canUseDOM = !!(
   window.document.createElement
 )
 
-const Logo = g(LogoIcon, {
-  rootEl: "svg",
-  filterProps: ["docked"],
-})(({ docked }) => ({
-  marginTop: docked && "30px",
-  display: "block",
-  // backgroundColor: docked && "#fff",
-  transition: "height 0.15s, width 0.15s, margin-top 0.15s",
-  "> g.one": {
-    fill: docked ? "#fff" : "#263e50",
-  },
-  "> g.brick": {
-    fill: "#eb5d3a",
-  },
-  "> g.at_a_time": {
-    fill: docked ? "#fff" : "#263e50",
-  },
-})).withProps(({ docked }) => ({
+const Logo = withProps(({ docked }) => ({
   height: docked ? "65px" : "44px",
   width: docked ? "300px" : "170px",
-}))
+}))(
+  styled(LogoIcon, {
+    rootEl: "svg",
+    filterProps: ["docked"],
+  })(({ docked }) => ({
+    marginTop: docked && "30px",
+    display: "block",
+    // backgroundColor: docked && "#fff",
+    transition: "height 0.15s, width 0.15s, margin-top 0.15s",
+    "> g.one": {
+      fill: docked ? "#fff" : "#263e50",
+    },
+    "> g.brick": {
+      fill: "#eb5d3a",
+    },
+    "> g.at_a_time": {
+      fill: docked ? "#fff" : "#263e50",
+    },
+  })),
+)
 
 const dockedBackground =
   "linear-gradient(to bottom, rgba(0,0,0,0.5) 20%,rgba(0,0,0,0) 100%)"
 const undockedColor = "#fff"
 
-const menuScrolled = css.keyframes({
+const menuScrolled = keyframes({
   from: {
     background: dockedBackground,
     color: "#fff",
@@ -53,7 +52,7 @@ const menuScrolled = css.keyframes({
   to: { background: undockedColor, color: "#000", height: menuHeightScrolled },
 })
 
-const menuDocked = css.keyframes({
+const menuDocked = keyframes({
   from: {
     backgroundColor: undockedColor,
     color: "#000",
@@ -66,7 +65,7 @@ const menuDocked = css.keyframes({
   },
 })
 
-const Fixed = g.div({
+const Fixed = styled.div({
   position: "fixed",
   top: 0,
   left: 0,
@@ -90,7 +89,7 @@ const scrolled = ({ scrolled }) =>
         ...animation([menuDocked, "0.2s"]),
       }
 
-const HeaderContainer = g(Flex)(
+const HeaderContainer = styled(Flex)(
   {
     alignItems: "center",
     verticalAlign: "top",
@@ -120,7 +119,7 @@ class Header extends Component {
     window.removeEventListener("scroll", this.handleScroll)
   }
 
-  handleScroll = event => {
+  handleScroll = () => {
     this.setIsScrolled()
   }
 

@@ -17,6 +17,8 @@
   },
   presets: ["flow"],
   plugins: [
+    "macros",
+    "emotion",
     [
       "inline-react-svg",
       {
@@ -34,7 +36,6 @@
         },
       },
     ],
-    "macros",
     ["transform-define", "./config.js"],
   ],
 }

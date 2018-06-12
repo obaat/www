@@ -1,5 +1,5 @@
 import React from "react"
-import g from "glamorous"
+import styled from "react-emotion"
 import { Home, ArrowRight } from "./SvgIcons"
 import { Flex, Box, H6, Text, Link } from "../ui"
 

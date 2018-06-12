@@ -1,6 +1,6 @@
 import React from "react"
 import { getByType, getSingleton, getByIDs, types } from "../utils/api"
-import g from "glamorous"
+import styled from "react-emotion"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Switch, Route, withRouteData } from "react-static"
@@ -12,7 +12,7 @@ import BlogPost, {
 } from "./parts/blog_post"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 
-const PreviewPost = g(Post)({
+const PreviewPost = styled(Post)({
   maxHeight: "200px",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -40,7 +40,7 @@ const LLink = ({ post, className }) => (
   </Link>
 )
 
-const FullPost = g(LLink)({
+const FullPost = styled(LLink)({
   marginBottom: "20px",
   display: "block",
 })

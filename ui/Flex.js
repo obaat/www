@@ -1,6 +1,6 @@
 import { space, width, responsiveStyle } from "styled-system"
 import Box from "./Box"
-import g from "glamorous"
+import styled from "react-emotion"
 
 export const wrap = responsiveStyle({
   cssProperty: "flexWrap",
@@ -24,7 +24,7 @@ export const justify = responsiveStyle({
 
 const column = props => (props.column ? { flexDirection: "column" } : null)
 
-export default g(Box, { displayName: "Flex" })(
+export default styled(Box, { displayName: "Flex" })(
   ({ inline }) => ({
     display: inline ? "inline-flex" : "flex",
   }),

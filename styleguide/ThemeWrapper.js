@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { ThemeProvider } from "glamorous"
+import { ThemeProvider } from "emotion-theming"
 import theme from "../theme"
 import { MemoryRouter as Router } from "react-router-dom"
 
