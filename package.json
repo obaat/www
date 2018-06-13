@@ -24,7 +24,6 @@
     "flow-bin": "^0.74.0",
     "formik": "^0.11.11",
     "hello-color": "^1.0.1",
-    "hex-rgb": "^3.0.0",
     "hex2rgb": "^2.2.0",
     "humanize-url": "^1.0.1",
     "isomorphic-unfetch": "^2.0.0",

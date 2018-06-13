@@ -1,14 +1,8 @@
 import React from "react"
-import { Box, Absolute, BackgroundImage } from "../ui"
 import get from "lodash/get"
 import styled from "react-emotion"
-import Embed from "../components/Embed"
 import PrismicRichText from "../components/PrismicRichText"
 import Link, { pageToLink } from "../components/Link"
-import { themeCycle } from "../utils/constants"
-import srcTheme from "../theme"
-import hexRgb from "hex-rgb"
-import { Small } from "../ui"
 import Panel from "../components/Panel"
 import {
   gridGap,
