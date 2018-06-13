@@ -2,7 +2,7 @@ import React from "react"
 import get from "lodash/get"
 import styled from "react-emotion"
 import PrismicRichText from "../components/PrismicRichText"
-import Link, { pageToLink } from "../components/Link"
+import { pageToLink } from "../components/Link"
 import Panel from "../components/Panel"
 import {
   gridGap,

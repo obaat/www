@@ -31,8 +31,6 @@ import Statement from "../components/Statement"
 import hoc from "../ui/hoc"
 import Icons from "../components/SvgIcons"
 import srcTheme from "../theme"
-import hexRgb from "hex-rgb"
-const bg = hexRgb(srcTheme.colors.gray2[0], { format: "array" })
 
 const Count = hoc()(CountUp)
 
@@ -194,7 +192,7 @@ class IndexPage extends React.Component {
                       bold={500}
                       fontSize={[16, 16, 16, 24]}
                       color="black"
-                      bg={`rgba(${bg[0]},${bg[1]},${bg[2]},0.8)`}
+                      bg={`${srcTheme.colors.gray2[0]}dd`}
                       xmb={0}
                       pt={2}
                       px={2}
