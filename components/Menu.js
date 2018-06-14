@@ -35,7 +35,7 @@ const aboutItems = [
 const whatItems = [
   { title: "Our Mission", href: "/mission" },
   { title: "Completed Projects", href: "/projects" },
-  { title: "Upcoming Projects", href: "/projects/planned" },
+  { title: "Current Projects", href: "/projects/planned" },
 ]
 
 const menuItems = [
