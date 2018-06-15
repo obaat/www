@@ -82,7 +82,7 @@
     "import-all.macro": "^2.0.3",
     "import-index-generator": "^0.2.1",
     "prettier": "^1.13.5",
-    "react-hot-loader": "^4.3.2",
+    "react-hot-loader": "^4.3.3",
     "react-styleguidist": "7.0.17",
     "serve": "^8.2.0",
     "webpack-bundle-analyzer": "^2.13.1"
