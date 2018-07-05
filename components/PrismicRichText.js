@@ -140,7 +140,7 @@ const PrismicRichText = ({ source, mb, mt, ...props }) => {
   return (
     <Box mb={mb} mt={mt}>
       {serializedChildren}
-      {buffer && renderBuffer(buffer)}
+      {buffer.length > 0 && renderBuffer(buffer)}
     </Box>
   )
 }

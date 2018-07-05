@@ -294,7 +294,7 @@ const done = { Component: Done, title: "Complete" }
 
 const FormWizard = props => (
   <Counter initial={0}>
-    {({ count, inc }) => {
+    {({ count, set, inc }) => {
       const { Component, validation } = pages[count] || done
       const next = (values, actions) => {
         inc()
@@ -303,13 +303,14 @@ const FormWizard = props => (
       const onSubmit = pages[count + 1]
         ? next
         : submit(success => {
-            success &&
+            if (success) {
+              inc()
               ga.event({
                 category: "Request",
                 action: "Applied for volunteer position",
                 label: "new_volunteer",
               })
-            success && setIndex(count + 1)
+            }
           })
       const steps = pages.concat(done)
       return (
@@ -326,7 +327,7 @@ const FormWizard = props => (
                       <WizardStep
                         key={i}
                         last={i === steps.length - 1}
-                        onClick={() => count > i && setIndex(i)}
+                        onClick={() => count > i && set(i)}
                         w={1 / steps.length}
                         i={i}
                         active={count === i}
