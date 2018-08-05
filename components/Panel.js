@@ -5,25 +5,12 @@ import { withRouter } from "react-static"
 import { clickable } from "../styleHelpers"
 import { withProps } from "recompose"
 
-const PanelContainer = styled(Flex)(
-  {
-    borderRadius: 12,
-    color: "#fff",
-    overflow: "hidden",
-    textAlign: "left",
-    backgroundColor: "#000",
-    height: 300,
-    position: "relative",
-    flexDirection: "column",
-  },
-  clickable,
-)
-
 const Image = styled(Box)(({ src }) => ({
   flex: 2,
   backgroundImage: src ? `url(${src})` : "none",
   backgroundSize: "cover",
   backgroundPosition: "center",
+  transition: "all 0.3s",
 }))
 
 const Header = withProps({
@@ -34,18 +21,38 @@ const Header = withProps({
     top,
     bottom,
     left: 25,
+    transition: "all 0.3s",
   })),
 )
 
-const Body = withProps({
-  px: 2,
-  pt: 1,
-})(
-  styled(Box)({
+const Body = styled(Box)({
+  backgroundColor: "#000",
+  height: "200px",
+  color: "#efe",
+  zIndex: 1,
+  transition: "all 0.3s",
+})
+
+const PanelContainer = styled(Flex)(
+  {
+    borderRadius: 12,
+    color: "#fff",
+    overflow: "hidden",
+    textAlign: "left",
     backgroundColor: "#000",
-    height: "200px",
-    color: "#efe",
-  }),
+    height: 300,
+    position: "relative",
+    flexDirection: "column",
+    ":hover": {
+      [Image]: {
+        transform: "scale(1.05)",
+      },
+      [Body]: {
+        transform: "translateY(10px)",
+      },
+    },
+  },
+  clickable,
 )
 
 class Panel extends React.Component {
@@ -63,7 +70,7 @@ class Panel extends React.Component {
   }
 }
 
-Panel.Body = Body
+Panel.Body = withProps({ px: 2, py: 2 })(Body)
 Panel.Header = Header
 Panel.Image = Image
 export default withRouter(Panel)
