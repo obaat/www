@@ -17,10 +17,12 @@ const pageComponents = map(_pages, (v, k) => ({
   ...v,
 }))
 
-export const data = pageComponents.map(p => ({
-  getData: p.data,
-  ...p,
-}))
+export const data = pageComponents
+  .filter(p => p.data)
+  .map(p => ({
+    getData: p.data,
+    ...p,
+  }))
 
 export const pages = pageComponents.map(p => ({
   component: p.routes || withRouteData(p.default),
@@ -30,7 +32,9 @@ export const pages = pageComponents.map(p => ({
 
 export default () => (
   <Switch>
-    {pages.map(props => <Route key={props.path} {...props} />)}
+    {pages.map(props => (
+      <Route key={props.path} {...props} />
+    ))}
     <Route component={NotFound} />
   </Switch>
 )

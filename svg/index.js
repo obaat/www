@@ -25,10 +25,12 @@ import * as i22 from './quote_close.svg'
 import * as i23 from './quote_open.svg'
 import * as i24 from './rocket.svg'
 import * as i25 from './school.svg'
-import * as i26 from './symbol-pound.svg'
-import * as i27 from './undo_1.svg'
-import * as i28 from './undo_2.svg'
-import * as i29 from './user.svg'
-import * as i30 from './x.svg'
-export default [{ filename: 'arrow_down.svg', exported: i0 }, { filename: 'arrow_left.svg', exported: i1 }, { filename: 'arrow_next_stage.svg', exported: i2 }, { filename: 'arrow_right.svg', exported: i3 }, { filename: 'arrow_up.svg', exported: i4 }, { filename: 'building.svg', exported: i5 }, { filename: 'checkbox.svg', exported: i6 }, { filename: 'exclamation_square.svg', exported: i7 }, { filename: 'file.svg', exported: i8 }, { filename: 'file_generic.svg', exported: i9 }, { filename: 'file_pdf.svg', exported: i10 }, { filename: 'flag-finish.svg', exported: i11 }, { filename: 'head_cog.svg', exported: i12 }, { filename: 'heart_filled.svg', exported: i13 }, { filename: 'home.svg', exported: i14 }, { filename: 'home_heart.svg', exported: i15 }, { filename: 'logo.svg', exported: i16 }, { filename: 'magnifier.svg', exported: i17 }, { filename: 'map.svg', exported: i18 }, { filename: 'menu.svg', exported: i19 }, { filename: 'paper_creatures.svg', exported: i20 }, { filename: 'question_in_bubble.svg', exported: i21 }, { filename: 'quote_close.svg', exported: i22 }, { filename: 'quote_open.svg', exported: i23 }, { filename: 'rocket.svg', exported: i24 }, { filename: 'school.svg', exported: i25 }, { filename: 'symbol-pound.svg', exported: i26 }, { filename: 'undo_1.svg', exported: i27 }, { filename: 'undo_2.svg', exported: i28 }, { filename: 'user.svg', exported: i29 }, { filename: 'x.svg', exported: i30 }]
+import * as i26 from './share.svg'
+import * as i27 from './symbol-pound.svg'
+import * as i28 from './tick-in-circle.svg'
+import * as i29 from './undo_1.svg'
+import * as i30 from './undo_2.svg'
+import * as i31 from './user.svg'
+import * as i32 from './x.svg'
+export default [{ filename: 'arrow_down.svg', exported: i0 }, { filename: 'arrow_left.svg', exported: i1 }, { filename: 'arrow_next_stage.svg', exported: i2 }, { filename: 'arrow_right.svg', exported: i3 }, { filename: 'arrow_up.svg', exported: i4 }, { filename: 'building.svg', exported: i5 }, { filename: 'checkbox.svg', exported: i6 }, { filename: 'exclamation_square.svg', exported: i7 }, { filename: 'file.svg', exported: i8 }, { filename: 'file_generic.svg', exported: i9 }, { filename: 'file_pdf.svg', exported: i10 }, { filename: 'flag-finish.svg', exported: i11 }, { filename: 'head_cog.svg', exported: i12 }, { filename: 'heart_filled.svg', exported: i13 }, { filename: 'home.svg', exported: i14 }, { filename: 'home_heart.svg', exported: i15 }, { filename: 'logo.svg', exported: i16 }, { filename: 'magnifier.svg', exported: i17 }, { filename: 'map.svg', exported: i18 }, { filename: 'menu.svg', exported: i19 }, { filename: 'paper_creatures.svg', exported: i20 }, { filename: 'question_in_bubble.svg', exported: i21 }, { filename: 'quote_close.svg', exported: i22 }, { filename: 'quote_open.svg', exported: i23 }, { filename: 'rocket.svg', exported: i24 }, { filename: 'school.svg', exported: i25 }, { filename: 'share.svg', exported: i26 }, { filename: 'symbol-pound.svg', exported: i27 }, { filename: 'tick-in-circle.svg', exported: i28 }, { filename: 'undo_1.svg', exported: i29 }, { filename: 'undo_2.svg', exported: i30 }, { filename: 'user.svg', exported: i31 }, { filename: 'x.svg', exported: i32 }]
 import React from "react"

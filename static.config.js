@@ -48,6 +48,10 @@ export default {
               name="viewport"
               content="width=device-width, initial-scale=1"
             />
+            <script
+              src="https://widgets.allocate.co.uk/stage/v1.js"
+              async="async"
+            />
             <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
             <style dangerouslySetInnerHTML={{ __html: renderMeta.css }} />
           </Head>

@@ -32,7 +32,6 @@ export default ComposedComponent =>
       }
 
       render() {
-        const { volunteering } = this.props
         return (
           <ThemeProvider theme={theme}>
             <Container>

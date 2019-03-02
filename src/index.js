@@ -1,6 +1,5 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { AppContainer } from "react-hot-loader"
 
 // Your top level component
 import App from "./App"
@@ -10,6 +9,12 @@ export default App
 
 // Render your app
 if (typeof document !== "undefined") {
+  ;(function(i, a) {
+    i[a] = i[a] || { _upa: [] }
+    i[a].on = function(e, v) {
+      i[a]._upa.push([e, v])
+    }
+  })(window, "allocate")
   const renderMethod = module.hot
     ? ReactDOM.render
     : ReactDOM.hydrate || ReactDOM.render

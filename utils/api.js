@@ -25,6 +25,7 @@ const types = {
   ABOUT_PAGE_CONTENT: "about_page",
   SHOP_PAGE_CONTENT: "shop_page",
   SPREAD_THE_WORD_PAGE_CONTENT: "spread_the_word",
+  ECOLODGE: "ecolodge",
   NEWS: "news",
   MISSION_PAGE_CONTENT: "thechallenge_page",
 }

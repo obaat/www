@@ -1,7 +1,6 @@
 import React from "react"
-import styled from "react-emotion"
 import { Home, ArrowRight } from "./SvgIcons"
-import { Flex, Box, H6, Text, Link } from "../ui"
+import { Flex, Box, Text, Link } from "../ui"
 
 const LinkCrumb = ({ to, children, ...props }) =>
   to ? (
@@ -19,7 +18,7 @@ const BreadCrumbs = ({ route }) => (
     <LinkCrumb to="/">
       <Home palette="black" size={13} />
     </LinkCrumb>
-    {route.map(({ title, href }, i) => [
+    {route.map(({ title, href }) => [
       <Box px={1} key="arrow">
         <ArrowRight size={8} palette="black" />
       </Box>,

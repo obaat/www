@@ -6,10 +6,9 @@ import keyBy from "lodash/keyBy"
 import camelCase from "lodash/camelCase"
 import upperFirst from "lodash/upperFirst"
 import { withPalette } from "../ui/component-configuration"
-import { omitProps } from "../utils"
 
 const icons = keyBy(rawicons, v => {
-  const [file, ext] = v.filename.split(".")
+  const [file] = v.filename.split(".")
   return upperFirst(camelCase(file))
 })
 

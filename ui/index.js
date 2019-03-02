@@ -2,7 +2,7 @@ import { defaultTraits } from "./hoc"
 import styled from "react-emotion"
 import components from "./component-configuration"
 import { Flex, Box } from "./Grid"
-import { compose, defaultProps } from "recompose"
+import { defaultProps } from "recompose"
 import omit from "lodash/omit"
 
 const findParentFor = siblings => node =>

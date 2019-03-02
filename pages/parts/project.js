@@ -4,51 +4,29 @@ import { HumanDate, FullHumanDate } from "../../utils/date"
 import isFuture from "date-fns/is_future"
 import { Element, scroller } from "react-scroll"
 import { Apply, data as applyData } from "../apply"
-import orderBy from "lodash/orderBy"
 import compact from "lodash/compact"
-import {
-  getByUID,
-  getByIDs,
-  getSingleton,
-  getByType,
-  types,
-} from "../../utils/api"
+import { getByUID, getByIDs, types } from "../../utils/api"
 
 import SidebarHeader from "../../components/SidebarHeader"
 import PrismicRichText from "../../components/PrismicRichText"
 import PrismicSlice from "../../components/PrismicSlice"
-import SlideShow from "../../components/SlideShow"
 import {
   FlagFinish,
   Rocket,
   SymbolPound,
   QuestionInBubble,
 } from "../../components/SvgIcons"
-import {
-  Absolute,
-  Subhead,
-  Relative,
-  Text,
-  BackgroundImage,
-  Flex,
-  Box,
-  Image,
-  Button,
-} from "../../ui"
+import { Subhead, Flex, Box, Image, Button } from "../../ui"
 import Map from "../../components/GoogleMap"
 import Link from "../../components/Link"
 
-const HeadlinePartner = ({
-  data: { title, description, logo, website },
-  uid,
-}) => (
+const HeadlinePartner = ({ data: { title, description, logo } }) => (
   <Flex w={1} mb={2}>
-    {logo &&
-      logo.url && (
-        <Box w={1 / 3} pr={3}>
-          <Image src={logo.url} />
-        </Box>
-      )}
+    {logo && logo.url && (
+      <Box w={1 / 3} pr={3}>
+        <Image src={logo.url} />
+      </Box>
+    )}
     <Box w={2 / 3}>
       <PrismicRichText
         mb={0}
@@ -62,7 +40,7 @@ const HeadlinePartner = ({
   </Flex>
 )
 
-const Partner = ({ data: { title, description, logo, website }, uid }) => {
+const Partner = ({ data: { title, logo, website }, uid }) => {
   const content = (
     <div>
       {logo && logo.url ? (
@@ -101,7 +79,7 @@ const toSection = (props, i) => (
   </Box>
 )
 
-const toNav = ({ items }, i) => (
+const toNav = ({ items }) => (
   <Box>
     {items.map(({ title, date }, i) => (
       <Box key={i}>
@@ -139,27 +117,24 @@ const Project = class Project extends Component {
     return (
       <Flex wrap="wrap">
         <Box w={[1, 1, 1, 2 / 3]}>
-          {plannedOrCurrent &&
-            partners &&
-            partners.length > 0 && (
-              <Box w={1}>
-                {partners.map((props, i) => (
-                  <HeadlinePartner {...props} uid={i} key={i} />
-                ))}
-              </Box>
-            )}
+          {plannedOrCurrent && partners && partners.length > 0 && (
+            <Box w={1}>
+              {partners.map((props, i) => (
+                <HeadlinePartner {...props} uid={i} key={i} />
+              ))}
+            </Box>
+          )}
           <PrismicRichText source={content.description} />
           {mainSections}
         </Box>
         <Box w={[1, 1, 1, 1 / 3]} pl={3}>
-          {!plannedOrCurrent &&
-            content.date_completed && (
-              <Box mb={2}>
-                <SidebarHeader>
-                  Completed <HumanDate iso={content.date_completed} />
-                </SidebarHeader>
-              </Box>
-            )}
+          {!plannedOrCurrent && content.date_completed && (
+            <Box mb={2}>
+              <SidebarHeader>
+                Completed <HumanDate iso={content.date_completed} />
+              </SidebarHeader>
+            </Box>
+          )}
           {plannedOrCurrent && (
             <Box>
               <Flex wrap="wrap" mb={2}>
@@ -218,26 +193,22 @@ const Project = class Project extends Component {
             </Box>
           )}
           {sideSections}
-          {!plannedOrCurrent &&
-            content.location &&
-            content.location.latitude && (
-              <Box mb={2}>
-                <SidebarHeader>Location</SidebarHeader>
-                <Map center={content.location} zoom={9} />
-              </Box>
-            )}
-          {!plannedOrCurrent &&
-            partners &&
-            partners.length > 0 && (
-              <div>
-                <SidebarHeader>Partners</SidebarHeader>
-                <Flex wrap="wrap">
-                  {partners.map((props, i) => (
-                    <Partner {...props} uid={i} key={i} />
-                  ))}
-                </Flex>
-              </div>
-            )}
+          {!plannedOrCurrent && content.location && content.location.latitude && (
+            <Box mb={2}>
+              <SidebarHeader>Location</SidebarHeader>
+              <Map center={content.location} zoom={9} />
+            </Box>
+          )}
+          {!plannedOrCurrent && partners && partners.length > 0 && (
+            <div>
+              <SidebarHeader>Partners</SidebarHeader>
+              <Flex wrap="wrap">
+                {partners.map((props, i) => (
+                  <Partner {...props} uid={i} key={i} />
+                ))}
+              </Flex>
+            </div>
+          )}
         </Box>
         {plannedOrCurrent && (
           <Element name="apply">

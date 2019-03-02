@@ -4,29 +4,13 @@ import { pageWithTitle } from "../hoc/page"
 import { HumanDate } from "../utils/date"
 import Project, { data as projectData } from "./parts/project"
 
-import {
-  getByUID,
-  getByIDs,
-  getSingleton,
-  getByType,
-  types,
-} from "../utils/api"
+import { getByIDs, getSingleton, getByType, types } from "../utils/api"
 
 import PrismicRichText from "../components/PrismicRichText"
-import PrismicSlice from "../components/PrismicSlice"
-import {
-  Absolute,
-  Relative,
-  Text,
-  BackgroundImage,
-  Flex,
-  Box,
-  Image,
-} from "../ui"
-import Map from "../components/GoogleMap"
+import { Absolute, Relative, Text, BackgroundImage, Flex, Box } from "../ui"
 import get from "lodash/get"
 
-const ProjectPreview = ({ uid, data, slug }) => (
+const ProjectPreview = ({ uid, data }) => (
   <Box w={[1, 1, 1, 1 / 3]} p={1} color="#fff">
     <Relative>
       <Link to={`/projects/${uid}`}>

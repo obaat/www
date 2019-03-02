@@ -1,11 +1,11 @@
 import React from "react"
-import { getSingleton, getByIDs, types } from "../utils/api"
+import { getSingleton, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
-import { QuoteOpen, QuoteClose } from "../components/SvgIcons"
-import { Absolute, Relative, Flex, Box, Border, BackgroundImage } from "../ui"
+import { QuoteOpen } from "../components/SvgIcons"
+import { Absolute, Relative, Flex, Box, Border } from "../ui"
 
-const Mission = ({ members = [], content = {} }) => (
+const Mission = ({ content = {} }) => (
   <Flex>
     <Box w={[1, 1, 1, 2 / 3]} pr={3}>
       <PrismicRichText source={content.description} />
