@@ -1,6 +1,6 @@
 import React from "react"
 import get from "lodash/get"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import PrismicRichText from "../components/PrismicRichText"
 import { pageToLink } from "../components/Link"
 import Panel from "../components/Panel"
@@ -9,10 +9,10 @@ import {
   gridTemplateColumns,
   gridTemplateRows,
   gridAutoRows,
-  responsiveStyle,
+  style,
 } from "styled-system"
 
-export const gridTemplateAreas = responsiveStyle({
+export const gridTemplateAreas = style({
   prop: "gridTemplateAreas",
 })
 
@@ -90,12 +90,11 @@ const NewsMasonry = ({ source, data }) => {
                   <GridItem gridArea={key} key={key} to={to}>
                     {backgroundImage && <Panel.Image src={backgroundImage} />}
                     {title && <Panel.Header bottom={0}>{title}</Panel.Header>}
-                    {item.description &&
-                      item.description.length > 0 && (
-                        <Panel.Body>
-                          <PrismicRichText source={item.description} />
-                        </Panel.Body>
-                      )}
+                    {item.description && item.description.length > 0 && (
+                      <Panel.Body>
+                        <PrismicRichText source={item.description} />
+                      </Panel.Body>
+                    )}
                   </GridItem>
                 )
               })}

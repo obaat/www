@@ -1,11 +1,11 @@
 /* eslint-disable react/no-danger */
 import React, { Component } from "react"
-import { extractCritical } from "emotion-server"
 import { getByType, types } from "./utils/api"
 import { data } from "./src/Routes"
 import { map } from "asyncro"
 
 export default {
+  plugins: ["react-static-plugin-emotion", "react-static-plugin-react-router"],
   getSiteData: async () => {
     const volunteering = await getByType(types.VOLUNTEERING)
     const whatwedo = await getByType(types.WHAT_WE_DO_PAGE)
@@ -25,17 +25,12 @@ export default {
     return [
       ...routes,
       {
-        is404: true,
+        path: "404",
         component: "components/404",
       },
     ]
   },
 
-  renderToHtml: async (render, Comp, meta) => {
-    const { html, ids, css } = extractCritical(render(<Comp />))
-    meta.css = css
-    return html
-  },
   siteRoot: "https://www.onebrick.org.uk",
   Document: class CustomDocument extends Component {
     render() {

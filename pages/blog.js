@@ -1,9 +1,10 @@
 import React from "react"
 import { getByType, getSingleton, getByIDs, types } from "../utils/api"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
-import { Switch, Route, withRouteData } from "react-static"
+import { withRouteData } from "react-static"
+import { Switch } from "react-router"
 import Link from "../components/Link"
 import { ArrowRight } from "../components/SvgIcons"
 import BlogPost, {

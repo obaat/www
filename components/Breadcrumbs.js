@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { Home, ArrowRight } from "./SvgIcons"
 import { Flex, Box, H6, Text, Link } from "../ui"
 

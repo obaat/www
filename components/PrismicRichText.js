@@ -1,6 +1,6 @@
 import React from "react"
 import { Box } from "../ui"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import Link from "./Link"
 import { serialize, Elements } from "prismic-richtext"
 import Embed from "./Embed"

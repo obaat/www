@@ -1,10 +1,9 @@
 import React from "react"
 import { getByUID, getByType, types } from "../utils/api"
 import { pageWithTitle } from "./page"
-import PrismicRichText from "../components/PrismicRichText"
-import withHeader from "./withHeader"
-import { Flex, Box, Border, BackgroundImage } from "../ui"
-import { Switch, Route, Link, withRouteData } from "react-static"
+import { Flex, Box } from "../ui"
+import { withRouteData } from "react-static"
+import { Switch, Route } from "react-router"
 import PrismicSlice from "../components/PrismicSlice"
 
 const Page = withRouteData(

@@ -1,24 +1,24 @@
-import { space, width, responsiveStyle } from "styled-system"
+import { space, width, style } from "styled-system"
 import hoc from "./hoc"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 
-export const flex = responsiveStyle({
+export const flex = style({
   prop: "flex",
 })
-export const align = responsiveStyle({
+export const align = style({
   cssProperty: "textAlign",
   prop: "align",
 })
-export const alignSelf = responsiveStyle({
+export const alignSelf = style({
   prop: "alignSelf",
 })
 
-export const grow = responsiveStyle({
+export const grow = style({
   cssProperty: "flexGrow",
   prop: "grow",
 })
 
-export const order = responsiveStyle({
+export const order = style({
   prop: "order",
 })
 

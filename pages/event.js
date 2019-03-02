@@ -4,7 +4,8 @@ import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
 import PrismicSlice from "../components/PrismicSlice"
-import { Switch, Route, Link, withRouteData } from "react-static"
+import { withRouteData } from "react-static"
+import { Switch } from "react-router"
 
 const Event = ({ content = {} }) => {
   const sections = content.body.map((props, i) => (

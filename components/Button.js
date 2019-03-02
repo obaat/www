@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { Flex, Box, Button, Relative, Absolute } from "../ui"
 import * as SvgIcons from "./SvgIcons"
 import memoize from "lodash/memoize"

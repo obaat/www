@@ -3,7 +3,8 @@ import { getByUID, getByType, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Flex, Box, Border, BackgroundImage } from "../ui"
-import { Switch, Route, Link, withRouteData } from "react-static"
+import { withRouteData } from "react-static"
+import { Switch } from "react-router"
 import PrismicSlice from "../components/PrismicSlice"
 
 const Gallery = ({ content = {} }) => {

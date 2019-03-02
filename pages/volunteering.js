@@ -1,8 +1,8 @@
 import React from "react"
 import ApplyNow from "../components/ApplyNow"
-import styled from "react-emotion"
 import Link from "../components/Link"
-import { Switch, Route, withRouteData } from "react-static"
+import { withRouteData } from "react-static"
+import { Switch } from "react-router"
 import get from "lodash/get"
 import VolunteeringOpp, {
   data as oppData,
@@ -79,7 +79,9 @@ const Volunteering = ({ content, volunteering, additionalData }) => {
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
         <SidebarHeader>Available Placements</SidebarHeader>
-        {volunteering.map((props, i) => <Opportunity key={i} {...props} />)}
+        {volunteering.map((props, i) => (
+          <Opportunity key={i} {...props} />
+        ))}
         <H6 mt={2}>Volunteer Experiences</H6>
         {quotes && <Quotes items={quotes.items} data={additionalData} />}
         <ApplyNow w={1} />

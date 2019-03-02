@@ -1,13 +1,7 @@
-import {
-  space,
-  color as ssColor,
-  width,
-  fontSize,
-  responsiveStyle,
-} from "styled-system"
+import { space, color as ssColor, width, fontSize, style } from "styled-system"
 import get from "lodash/get"
 import isNil from "lodash/isNil"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 
 export const clickable = ({ onClick }) =>
   onClick ? { cursor: "pointer" } : undefined
@@ -30,7 +24,7 @@ const palette = ({ palette, theme, invert }) => {
   }
 }
 
-const display = responsiveStyle({
+const display = style({
   prop: "display",
 })
 

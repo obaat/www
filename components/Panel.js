@@ -1,7 +1,7 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { Flex, Box, Subhead } from "../ui"
-import { withRouter } from "react-static"
+import { withRouter } from "react-router"
 import { clickable } from "../styleHelpers"
 import { withProps } from "recompose"
 

@@ -1,23 +1,23 @@
-import { space, width, responsiveStyle } from "styled-system"
+import { style } from "styled-system"
 import Box from "./Box"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 
-export const wrap = responsiveStyle({
+export const wrap = style({
   cssProperty: "flexWrap",
   prop: "wrap",
 })
 
-export const direction = responsiveStyle({
+export const direction = style({
   cssProperty: "flexDirection",
   prop: "direction",
 })
 
-export const align = responsiveStyle({
+export const align = style({
   cssProperty: "alignItems",
   prop: "align",
 })
 
-export const justify = responsiveStyle({
+export const justify = style({
   cssProperty: "justifyContent",
   prop: "justify",
 })

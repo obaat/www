@@ -6,7 +6,7 @@ import { Element, scroller } from "react-scroll"
 import { FilePdf } from "../components/SvgIcons"
 import { Flex, Border, Link, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 import { FullHumanDate } from "../utils/date"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 
 export const UnknownRenderer = ({ slice_type }) => (
   <div> Unknown slice: {slice_type}</div>

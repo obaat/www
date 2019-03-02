@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import range from "lodash/range"
 import isNil from "lodash/isNil"
 import { withProps } from "recompose"
@@ -319,29 +319,26 @@ export default class SlideShow extends Component {
             </Carousel>
           )}
         </Motion>
-        {!hideArrows &&
-          this.totalSlides() > 1 &&
-          selectedIndex > 0 && (
-            <Arrow
-              direction="left"
-              controlSize={controlSize}
-              color={controlColor}
-              page={selectedIndex}
-              onPageClick={this.onPageClick}
-              px={px}
-            />
-          )}
-        {!hideArrows &&
-          selectedIndex < this.totalSlides() - 1 && (
-            <Arrow
-              direction="right"
-              controlSize={controlSize}
-              color={controlColor}
-              page={selectedIndex}
-              onPageClick={this.onPageClick}
-              px={px}
-            />
-          )}
+        {!hideArrows && this.totalSlides() > 1 && selectedIndex > 0 && (
+          <Arrow
+            direction="left"
+            controlSize={controlSize}
+            color={controlColor}
+            page={selectedIndex}
+            onPageClick={this.onPageClick}
+            px={px}
+          />
+        )}
+        {!hideArrows && selectedIndex < this.totalSlides() - 1 && (
+          <Arrow
+            direction="right"
+            controlSize={controlSize}
+            color={controlColor}
+            page={selectedIndex}
+            onPageClick={this.onPageClick}
+            px={px}
+          />
+        )}
         {!hideArrows &&
           this.totalSlides() > 1 &&
           selectedIndex === this.totalSlides() - 1 && (
@@ -352,14 +349,13 @@ export default class SlideShow extends Component {
               px={px}
             />
           )}
-        {!hidePaging &&
-          this.totalSlides() > 1 && (
-            <Paging
-              total={this.totalSlides()}
-              page={selectedIndex}
-              onPageClick={this.onPageClick}
-            />
-          )}
+        {!hidePaging && this.totalSlides() > 1 && (
+          <Paging
+            total={this.totalSlides()}
+            page={selectedIndex}
+            onPageClick={this.onPageClick}
+          />
+        )}
         {!hideZoom && (
           <Zoom
             onClick={this.toggleZoom()}
@@ -409,7 +405,7 @@ export default class SlideShow extends Component {
     return zoom
       ? this.renderZoomed(children)
       : inline
-        ? this.renderInline(children)
-        : this.renderSlideShow(children)
+      ? this.renderInline(children)
+      : this.renderSlideShow(children)
   }
 }

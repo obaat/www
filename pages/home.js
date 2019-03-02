@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { color } from "styled-system"
 import theme from "../theme"
 import get from "lodash/get"
@@ -122,11 +122,12 @@ const Header = styled(PrismicRichText)({
 })
 
 class IndexPage extends React.Component {
-  counters = []
   state = {
     visible: {},
     visibleSlide: 0,
   }
+
+  counters = []
 
   onVisible = isVisible => {
     isVisible && this.counters.forEach(a => a && startAnimation(a))
@@ -147,10 +148,9 @@ class IndexPage extends React.Component {
       <div>
         <Helmet title="One Brick at a Time" />
 
-        {image &&
-          image.url && (
-            <Helmet meta={[{ property: "og:image", content: image.url }]} />
-          )}
+        {image && image.url && (
+          <Helmet meta={[{ property: "og:image", content: image.url }]} />
+        )}
         <Panel p={0} direction="row">
           <Box w={1}>
             <SlideShow
@@ -225,15 +225,13 @@ class IndexPage extends React.Component {
             </ActionButton>
           </Box>
         </Panel>
-        {news &&
-          news.body &&
-          news.body.length > 0 && (
-            <Panel pt={1} pb={4} direction="row" palette="gray2" invert>
-              <Box align="center" w={[1, 1, 1, "80%"]}>
-                <NewsMasonry source={news} data={newsArticles} />
-              </Box>
-            </Panel>
-          )}
+        {news && news.body && news.body.length > 0 && (
+          <Panel pt={1} pb={4} direction="row" palette="gray2" invert>
+            <Box align="center" w={[1, 1, 1, "80%"]}>
+              <NewsMasonry source={news} data={newsArticles} />
+            </Box>
+          </Panel>
+        )}
 
         <Panel py={4} direction="row" palette="gray9" align="flex-start" invert>
           <VisibilitySensor onChange={this.onVisible} />

@@ -1,6 +1,6 @@
 import React from "react"
-import styled from "react-emotion"
-import { withRouter } from "react-static"
+import styled from "@emotion/styled"
+import { withRouter } from "react-router"
 import { ArrowDown as IconArrowDown, ArrowUp as IconArrowUp } from "./SvgIcons"
 import { withProps } from "recompose"
 import isNil from "lodash/isNil"

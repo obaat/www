@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import Button from "../../components/Button"
 import Link from "../../components/Link"
 import { withProps } from "recompose"
@@ -100,11 +100,12 @@ const VolunteeringOpportunity = ({ content, locations }) => {
         {mainSlices}
       </Box>
       <Box w={[1, 1, 1, 1 / 3]} px={2} pt={2}>
-        {locations.results &&
-          locations.results.length > 0 && (
-            <SidebarHeader>Available Locations</SidebarHeader>
-          )}
-        {locations.results.map((props, i) => <Location key={i} {...props} />)}
+        {locations.results && locations.results.length > 0 && (
+          <SidebarHeader>Available Locations</SidebarHeader>
+        )}
+        {locations.results.map((props, i) => (
+          <Location key={i} {...props} />
+        ))}
         {sidebarSlices}
         <ApplyNow w={1} />
       </Box>

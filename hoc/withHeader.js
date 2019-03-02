@@ -4,7 +4,7 @@ import Helmet from "react-helmet"
 import PageTitle from "../components/PageTitle"
 import ApplyNow from "../components/ApplyNow"
 import get from "lodash/get"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import BreadCrumbs from "../components/Breadcrumbs"
 import { Absolute, Heading } from "../ui"
 

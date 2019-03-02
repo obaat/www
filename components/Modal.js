@@ -1,4 +1,4 @@
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { space, width } from "styled-system"
 import React, { Component } from "react"
 import X from "./SvgIcons"

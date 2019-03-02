@@ -1,5 +1,6 @@
 import React from "react"
-import { Switch, Route, Link, withRouteData } from "react-static"
+import { withRouteData } from "react-static"
+import { Link, Switch } from "react-router"
 import { pageWithTitle } from "../hoc/page"
 import { HumanDate } from "../utils/date"
 import Project, { data as projectData } from "./parts/project"

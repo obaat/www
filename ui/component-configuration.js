@@ -1,21 +1,13 @@
-import React from "react"
 import { Flex, Box } from "./Grid"
 import get from "lodash/get"
-import toArray from "lodash/toArray"
 import { Link } from "react-static"
-import {
-  space,
-  color as ssColor,
-  width,
-  fontSize,
-  responsiveStyle,
-} from "styled-system"
+import { space, color as ssColor, width, fontSize, style } from "styled-system"
 import { bool, string, number, oneOf, oneOfType } from "prop-types"
 import { Field as RawField } from "formik"
 import isNil from "lodash/isNil"
 import { SocialIcon } from "react-social-icons"
 const numberOrString = oneOfType([number, string])
-const ratio = responsiveStyle({
+const ratio = style({
   cssProperty: "paddingBottom",
   prop: "ratio",
 })

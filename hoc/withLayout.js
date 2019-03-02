@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { getByType, types } from "../utils/api"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import Helmet from "react-helmet"
 import { ThemeProvider } from "emotion-theming"
 // import { loadGetInitialProps } from "next/dist/lib/utils"
@@ -9,7 +9,7 @@ import { menuHeightScrolled } from "../utils/constants"
 import configureProgressBar from "../utils/routing"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
-import { withRouter } from "react-static"
+import { withRouter } from "react-router"
 import theme from "../theme"
 
 const Container = styled.div({
