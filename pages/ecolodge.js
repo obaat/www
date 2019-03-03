@@ -34,8 +34,8 @@ const ProjectChoice = ({
   return (
     <Relative>
       {selected ? (
-        <Absolute right top px={19} py={19}>
-          <TickInCircle size={24} color={theme.colors.primary[0]} />
+        <Absolute right top px={22} py={22}>
+          <TickInCircle size={38} color={theme.colors.primary[0]} />
         </Absolute>
       ) : null}
       <Border
@@ -66,10 +66,11 @@ const ProjectChoice = ({
                   )}
                 </Text>
               </Box>
-              <Box width="40px">
+              <Box width="60px">
                 {percentage !== null ? (
                   <CircularProgressbar
                     percentage={percentage}
+                    text={selected ? "" : `${parseInt(percentage, 10)}%`}
                     initialAnimation
                     background
                     backgroundPadding={6}
@@ -79,6 +80,12 @@ const ProjectChoice = ({
                       },
                       path: {
                         stroke: theme.colors.primary[0],
+                      },
+                      text: {
+                        // Text color
+                        fill: theme.colors.primary[0],
+                        // Text size
+                        fontSize: "24px",
                       },
                     }}
                   />
@@ -147,13 +154,16 @@ const EcoLodge = ({ content = {}, projects = [] }) => {
           data-allocate-target="https://test-allocate-next.allocate.co.uk/"
           data-allocate-secure-target="http://localhost:4001/ecolodge"
           data-allocate-payment-disabled="false"
+          data-allocate-palette={`#fff,${theme.colors.tertiary[0]},${
+            theme.colors.primary[0]
+          }`}
           className="_allocate"
           data-allocate-widget="booking"
         />
       </Box>
       <Box w={[1, 1, 1, 1 / 3]}>
         <Box style={{ position: "sticky", top: 200 }}>
-          <UI.H6>Choose a project that your stay will help fund</UI.H6>
+          <UI.H6>Choose the project that your stay will help</UI.H6>
           <Text>
             Profits from your stay are re-invested directly into the local
             community. You can decide which project to invest in below
@@ -164,7 +174,7 @@ const EcoLodge = ({ content = {}, projects = [] }) => {
               key={project.uid}
               addOnSelected={totalCost}
               onSelect={() => selectProject(project.uid)}
-              selected={selectedProject == project.uid}
+              selected={selectedProject === project.uid}
             />
           ))}
           <Box mb={2}>

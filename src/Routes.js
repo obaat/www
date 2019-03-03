@@ -1,20 +1,12 @@
 import React from "react"
-import {
-  Route,
-  Switch,
-  NotFoundRoute,
-  Redirect,
-  withRouteData,
-} from "react-static"
-import importAll from "import-all.macro"
+import { Route, Switch, withRouteData } from "react-static"
 import path from "path"
-import map from "lodash/map"
 import NotFound from "../components/404"
-const _pages = importAll.sync("../pages/*.js")
+import _pages from "../pages/"
 
-const pageComponents = map(_pages, (v, k) => ({
-  path: v.path ? v.path : "/" + path.basename(k, ".js"),
-  ...v,
+const pageComponents = _pages.map(({ filename, exported }) => ({
+  path: exported.path ? exported.path : `/${path.basename(filename, ".js")}`,
+  ...exported,
 }))
 
 export const data = pageComponents
@@ -26,7 +18,7 @@ export const data = pageComponents
 
 export const pages = pageComponents.map(p => ({
   component: p.routes || withRouteData(p.default),
-  exact: p.routes ? false : true,
+  exact: !p.routes,
   ...p,
 }))
 
