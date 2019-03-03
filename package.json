@@ -2,13 +2,13 @@
   "name": "obaat",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "sh scripts/createDefaultConfig.sh && iigen svg/ svg/index.js svg && echo 'import React from \"react\"' >> svg/index.js",
+    "postinstall": "sh scripts/createDefaultConfig.sh && iigen src/svg/ src/svg/index.js svg && echo 'import React from \"react\"' >> src/svg/index.js",
     "dev": "PORT=4001 react-static start",
     "build": "react-static build",
     "export": "react-static build",
     "serve": "serve dist -p 3000",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src"
+    "lint": "eslint ."
   },
   "author": "",
   "license": "ISC",

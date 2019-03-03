@@ -1,8 +1,8 @@
 import React from "react"
 import { Route, Switch, withRouteData } from "react-static"
 import path from "path"
-import NotFound from "../components/404"
-import _pages from "../pages/"
+import NotFound from "./components/404"
+import _pages from "./pages/"
 
 const pageComponents = _pages.map(({ filename, exported }) => ({
   path: exported.path ? exported.path : `/${path.basename(filename, ".js")}`,

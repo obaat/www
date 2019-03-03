@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import React, { Component } from "react"
 import { extractCritical } from "emotion-server"
-import { getByType, types } from "./utils/api"
+import { getByType, types } from "./src/utils/api"
 import { data } from "./src/Routes"
 import { map } from "asyncro"
 
@@ -32,7 +32,7 @@ export default {
   },
 
   renderToHtml: async (render, Comp, meta) => {
-    const { html, ids, css } = extractCritical(render(<Comp />))
+    const { html, css } = extractCritical(render(<Comp />))
     meta.css = css
     return html
   },
