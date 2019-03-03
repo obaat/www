@@ -13,10 +13,10 @@ const Gallery = ({ content = {} }) => {
   ))
   return (
     <Flex wrap="wrap">
-      <Box w={1}>
+      <Box width={1}>
         <PrismicRichText source={content.description} />
       </Box>
-      <Box w={1}>{galleries}</Box>
+      <Box width={1}>{galleries}</Box>
     </Flex>
   )
 }

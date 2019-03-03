@@ -68,7 +68,7 @@ const Location = ({ uid, data }) => (
           invert
           icon="ArrowRight"
           iconSize={12}
-          w={1}
+          width={1}
           py={1}
           as={ButtonOutline}
         >
@@ -91,7 +91,7 @@ const VolunteeringOpportunity = ({ content, locations }) => {
     .map((props, i) => <PrismicSlice key={i} {...props} />)
   return (
     <Flex>
-      <Box w={[1, 1, 1, 2 / 3]} pr={3}>
+      <Box width={[1, 1, 1, 2 / 3]} pr={3}>
         <Section
           id="about"
           title="About the Programme"
@@ -99,14 +99,15 @@ const VolunteeringOpportunity = ({ content, locations }) => {
         />
         {mainSlices}
       </Box>
-      <Box w={[1, 1, 1, 1 / 3]} px={2} pt={2}>
-        {locations.results &&
-          locations.results.length > 0 && (
-            <SidebarHeader>Available Locations</SidebarHeader>
-          )}
-        {locations.results.map((props, i) => <Location key={i} {...props} />)}
+      <Box width={[1, 1, 1, 1 / 3]} px={2} pt={2}>
+        {locations.results && locations.results.length > 0 && (
+          <SidebarHeader>Available Locations</SidebarHeader>
+        )}
+        {locations.results.map((props, i) => (
+          <Location key={i} {...props} />
+        ))}
         {sidebarSlices}
-        <ApplyNow w={1} />
+        <ApplyNow width={1} />
       </Box>
     </Flex>
   )

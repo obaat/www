@@ -11,7 +11,7 @@ const Page = withRouteData(
     const sections = body.map((props, i) => <PrismicSlice key={i} {...props} />)
     return (
       <Flex wrap="wrap">
-        <Box w={1}>{sections}</Box>
+        <Box width={1}>{sections}</Box>
       </Flex>
     )
   }),

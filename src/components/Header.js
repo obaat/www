@@ -135,7 +135,13 @@ class Header extends Component {
     return (
       <div>
         <Fixed>
-          <HeaderContainer inline wrap="wrap" w={1} px={3} scrolled={scrolled}>
+          <HeaderContainer
+            inline
+            wrap="wrap"
+            width={1}
+            px={3}
+            scrolled={scrolled}
+          >
             <Box>
               <Link to="/">
                 <Logo docked={!scrolled} size={20} />

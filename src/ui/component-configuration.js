@@ -1,24 +1,19 @@
-import React from "react"
 import { Flex, Box } from "./Grid"
 import get from "lodash/get"
-import toArray from "lodash/toArray"
 import { Link } from "react-static"
-import {
-  space,
-  color as ssColor,
-  width,
-  fontSize,
-  responsiveStyle,
-} from "styled-system"
+import { space, color as ssColor, width, fontSize, style } from "styled-system"
 import { bool, string, number, oneOf, oneOfType } from "prop-types"
 import { Field as RawField } from "formik"
 import isNil from "lodash/isNil"
 import { SocialIcon } from "react-social-icons"
 const numberOrString = oneOfType([number, string])
-const ratio = responsiveStyle({
+
+const ratio = style({
   cssProperty: "paddingBottom",
+  transformValue: r => r * 100 + "%",
   prop: "ratio",
 })
+
 const theme = ({ theme, palette, invert }) =>
   get(
     theme,
@@ -215,7 +210,7 @@ const components = [
     name: "NavLink",
     type: "a",
     props: {
-      f: 1,
+      fontSize: 1,
       p: 2,
     },
     style: props => ({
@@ -481,7 +476,7 @@ const components = [
       fontSize: "inherit",
       p: 1,
       m: 0,
-      w: 1,
+      width: 1,
       mb: 1,
       color: "inherit",
       bg: "transparent",
@@ -515,7 +510,7 @@ const components = [
       p: 1,
       m: 0,
       mb: 1,
-      w: 1,
+      width: 1,
       color: "inherit",
       bg: "transparent",
       type: "textarea",
@@ -558,7 +553,7 @@ const components = [
     name: "Slider",
     type: "input",
     props: {
-      w: 1,
+      width: 1,
       mt: 2,
       mb: 2,
       ml: 0,
@@ -615,8 +610,10 @@ const components = [
   {
     name: "BackgroundImage",
     type: "div",
+    traits: [ratio, ssColor],
     props: {
-      w: 1,
+      width: 1,
+      ratio: 3 / 4,
       // ratio: 3/4 // How does styled-components handle this??
       // Fix this once non-whitelisted styled-components is out
     },
@@ -626,10 +623,6 @@ const components = [
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: 0,
-
-        ...(Array.isArray(props.ratio)
-          ? ratio({ ratio: props.ratio.map(r => r * 100 + "%") })
-          : { paddingBottom: (props.ratio || 3 / 4) * 100 + "%" }),
       }
     },
     propTypes: {
@@ -794,7 +787,7 @@ const components = [
     name: "Progress",
     type: "progress",
     props: {
-      w: 1,
+      width: 1,
       m: 0,
       bg: "gray2",
     },
@@ -936,7 +929,7 @@ const components = [
     name: "TabItem",
     type: "a",
     props: {
-      f: 1,
+      fontSize: 1,
       mr: 3,
       pt: 2,
       pb: 2,
@@ -1170,7 +1163,7 @@ const components = [
     name: "CarouselSlide",
     type: "div",
     props: {
-      w: 1,
+      width: 1,
       p: 3,
     },
     style: {
@@ -1293,7 +1286,7 @@ const components = [
     type: "ButtonTransparent",
     props: {
       p: 0,
-      f: 3,
+      fontSize: 3,
       children: "×",
     },
     style: props => ({
@@ -1307,7 +1300,7 @@ const components = [
     name: "Star",
     type: "div",
     props: {
-      f: 3,
+      fontSize: 3,
       color: "yellow",
       children: "★",
     },

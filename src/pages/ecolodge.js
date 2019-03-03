@@ -160,7 +160,7 @@ const EcoLodge = ({ content = {}, projects = [] }) => {
 
   return (
     <Flex>
-      <Box w={[1, 1, 1, 2 / 3]} pr={3}>
+      <Box width={[1, 1, 1, 2 / 3]} pr={3}>
         <PrismicRichText source={content.description} />
         <div
           data-allocate-target="https://test-allocate-next.allocate.co.uk/"
@@ -172,7 +172,7 @@ const EcoLodge = ({ content = {}, projects = [] }) => {
           data-allocate-widget="booking"
         />
       </Box>
-      <Box w={[1, 1, 1, 1 / 3]}>
+      <Box width={[1, 1, 1, 1 / 3]}>
         <Box style={{ position: "sticky", top: 200 }}>
           <UI.H6>Choose the project that your stay will help</UI.H6>
           <Text>

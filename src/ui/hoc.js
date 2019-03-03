@@ -1,10 +1,4 @@
-import {
-  space,
-  color as ssColor,
-  width,
-  fontSize,
-  responsiveStyle,
-} from "styled-system"
+import { space, color as ssColor, width, fontSize, style } from "styled-system"
 import get from "lodash/get"
 import styled from "@emotion/styled"
 
@@ -29,7 +23,7 @@ const palette = ({ palette, theme, invert }) => {
   }
 }
 
-const display = responsiveStyle({
+const display = style({
   prop: "display",
 })
 

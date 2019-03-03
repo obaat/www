@@ -58,10 +58,10 @@ const Event = ({ uid, data }) => (
 const Spread = ({ events, content = {} }) => {
   return (
     <Flex>
-      <Box w={[1, 1, 1, 2 / 3]} pr={3}>
+      <Box width={[1, 1, 1, 2 / 3]} pr={3}>
         <PrismicRichText source={content.description} />
       </Box>
-      <Box w={[1, 1, 1, 1 / 3]} px={3}>
+      <Box width={[1, 1, 1, 1 / 3]} px={3}>
         <SidebarHeader>Events</SidebarHeader>
         {events &&
           events.results &&

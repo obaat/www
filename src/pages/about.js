@@ -7,19 +7,19 @@ import { Flex, Box, Border, BackgroundImage } from "../ui"
 const About = ({ content = {} }) => {
   return (
     <Flex wrap="wrap">
-      <Box w={1}>
+      <Box width={1}>
         {content.section.map((section, i) => (
           <Border bottom borderColor="gray4" key={i} mb={4}>
             <Flex wrap="wrap">
               <Box
-                w={[1, 1, 0.45, 0.45]}
+                width={[1, 1, 0.45, 0.45]}
                 pr={i % 2 ? 4 : 0}
                 pl={i % 4 ? 0 : 4}
                 mt={50}
               >
                 <BackgroundImage ratio={2 / 3} src={section.image.url} />
               </Box>
-              <Box w={[1, 1, 0.55, 0.55]} order={i % 2 ? 1 : -1} mb={2}>
+              <Box width={[1, 1, 0.55, 0.55]} order={i % 2 ? 1 : -1} mb={2}>
                 <PrismicRichText source={section.title} forceType="heading6" />
                 <PrismicRichText source={section.description} />
               </Box>

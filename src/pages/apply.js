@@ -119,10 +119,10 @@ const AboutVolunteering = ({ opportunities }) => (
     />
     <Label>How long would you like to volunteer?</Label>
     <Flex>
-      <Box w={1 / 2} mr={1}>
+      <Box width={1 / 2} mr={1}>
         <RangeDropdown end={12} name="periodInteger" />
       </Box>
-      <Box w={1 / 2} mr={1}>
+      <Box width={1 / 2} mr={1}>
         <Select
           name="periodUnit"
           options={[
@@ -134,17 +134,17 @@ const AboutVolunteering = ({ opportunities }) => (
       </Box>
     </Flex>
     <Label>When can you start?</Label>
-    <Flex w={1}>
-      <Box w={1 / 3} mr={1}>
+    <Flex width={1}>
+      <Box width={1 / 3} mr={1}>
         <RangeDropdown end={31} name="startDay" />
       </Box>
-      <Box w={1 / 3} mr={1}>
+      <Box width={1 / 3} mr={1}>
         <Select
           options={months.abbr.map(value => ({ value }))}
           name="startMonth"
         />
       </Box>
-      <Box w={1 / 3}>
+      <Box width={1 / 3}>
         <RangeDropdown start={curYear} end={curYear + 2} name="startYear" />
       </Box>
     </Flex>
@@ -160,33 +160,33 @@ const AboutYou = () => (
     <Label>E-mail</Label>
     <Input type="email" name="email" placeholder="elizabeth@example.com" />
     <Flex>
-      <Box w={1 / 2} mr={1}>
+      <Box width={1 / 2} mr={1}>
         <Label>First Name</Label>
         <Input name="firstName" placeholder="Elizabeth" />
       </Box>
-      <Box w={1 / 2}>
+      <Box width={1 / 2}>
         <Label>Last Name</Label>
         <Input name="lastName" placeholder="El" />
       </Box>
     </Flex>
     <Flex>
-      <Box w={1 / 2} mr={1}>
+      <Box width={1 / 2} mr={1}>
         <Label>Contact Telephone</Label>
         <Input type="tel" name="phone" placeholder="+44 0700 000000" />
       </Box>
-      <Box w={1 / 2}>
+      <Box width={1 / 2}>
         <Label>Date of Birth</Label>
-        <Flex w={1}>
-          <Box w={1 / 3} mr={1}>
+        <Flex width={1}>
+          <Box width={1 / 3} mr={1}>
             <RangeDropdown end={31} name="dobDay" />
           </Box>
-          <Box w={1 / 3} mr={1}>
+          <Box width={1 / 3} mr={1}>
             <Select
               options={months.abbr.map(value => ({ value }))}
               name="dobMonth"
             />
           </Box>
-          <Box w={1 / 3}>
+          <Box width={1 / 3}>
             <RangeDropdown
               start={curYear}
               end={1900}
@@ -217,7 +217,7 @@ const Done = () => (
     <Checkbox palette="black" size={70} />
     <Box ml={2}>
       <H5 mb={1}>Thank you for your interest</H5>
-      <Box w={1}>We will get back to you shortly</Box>
+      <Box width={1}>We will get back to you shortly</Box>
     </Box>
   </Flex>
 )
@@ -264,7 +264,7 @@ const WizardStep = ({ title, i, last, active, done, ...props }) => {
 const Errors = ({ errors, touched }) => {
   if (!errors || !Object.keys(errors).length) return null
   return (
-    <Box w={1}>
+    <Box width={1}>
       {map(filter(errors, (_, id) => touched[id]), (v, k, i) => (
         <Flex
           key={`${k}-${i}`}
@@ -320,7 +320,7 @@ const FormWizard = props => (
                         key={i}
                         last={i === steps.length - 1}
                         onClick={() => count > i && set(i)}
-                        w={1 / steps.length}
+                        width={1 / steps.length}
                         i={i}
                         active={count === i}
                         done={count > i}
@@ -386,11 +386,11 @@ export const Apply = ({
 
   return (
     <Flex wrap="wrap">
-      <Box w={[1, 1, 1, 0.5]} pr={[0, 0, 0, 2]}>
+      <Box width={[1, 1, 1, 0.5]} pr={[0, 0, 0, 2]}>
         <PrismicRichText source={content.description} />
         <FormWizard opportunities={opportunities} />
       </Box>
-      <Box w={[1, 1, 1, 0.5]}>
+      <Box width={[1, 1, 1, 0.5]}>
         <Accordion items={accordionItems} />
         {quotes && <Quotes items={quotes.items} data={additionalData} />}
       </Box>

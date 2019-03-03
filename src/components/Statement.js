@@ -1,20 +1,19 @@
 import React from "react"
 import PrismicRichText from "../components/PrismicRichText"
 import Container from "../components/Container"
-import { QuoteOpen, QuoteClose } from "../components/SvgIcons"
+import { QuoteOpen } from "../components/SvgIcons"
 import { Flex, Box, Avatar } from "../ui"
 
-const Statement = ({ w, data: { description, avatar, name, role } }) => (
-  <Container maxWidth="600px" py={0} w={w}>
+const Statement = ({ w, data: { description, avatar, name } }) => (
+  <Container maxWidth="600px" py={0} width={w}>
     <Flex align="flex-start">
       <Box p={3} align="justify">
         <Flex align="center" mb={2}>
-          {avatar &&
-            avatar.url && (
-              <Box w={100}>
-                <Avatar size={70} src={avatar.url} />
-              </Box>
-            )}
+          {avatar && avatar.url && (
+            <Box width={100}>
+              <Avatar size={70} src={avatar.url} />
+            </Box>
+          )}
           <Box align="right">
             <PrismicRichText forceType="heading4" xmb={1} source={name} />
           </Box>

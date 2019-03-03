@@ -11,7 +11,7 @@ import { Absolute, Relative, Text, BackgroundImage, Flex, Box } from "../ui"
 import get from "lodash/get"
 
 const ProjectPreview = ({ uid, data }) => (
-  <Box w={[1, 1, 1, 1 / 3]} p={1} color="#fff">
+  <Box width={[1, 1, 1, 1 / 3]} p={1} color="#fff">
     <Relative>
       <Link to={`/projects/${uid}`}>
         <BackgroundImage

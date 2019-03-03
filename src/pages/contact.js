@@ -7,7 +7,7 @@ import { Flex, Box } from "../ui"
 const Contact = ({ content = {} }) => {
   return (
     <Flex wrap="wrap">
-      <Box w={1}>
+      <Box width={1}>
         <PrismicRichText source={content.description} />
       </Box>
     </Flex>

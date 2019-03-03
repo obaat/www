@@ -15,7 +15,7 @@ export default ({ w }) => (
       iconSize={20}
       style={{ marginBottom: "-90px" }}
       as={ButtonOutlineFilled}
-      w={w}
+      width={w}
     >
       Apply Now
     </Button>

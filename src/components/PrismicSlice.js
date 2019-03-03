@@ -18,7 +18,11 @@ const Video = ({ items = [] }) => {
       {items.map(({ description, content, embed }, i) => (
         <Box mb={2} key={i}>
           {description && (
-            <PrismicRichText w={1} forceType="heading5" source={description} />
+            <PrismicRichText
+              width={1}
+              forceType="heading5"
+              source={description}
+            />
           )}
           <Embed
             {...embed || content}
@@ -69,10 +73,10 @@ const BlogEntries = ({ primary, items }) => (
       <Paper key={i}>
         <Element name={title[0].text}>
           <Flex wrap="wrap">
-            <Box mb={2} w={1}>
+            <Box mb={2} width={1}>
               {title && (
                 <PrismicRichText
-                  w={1}
+                  width={1}
                   xmb={0}
                   forceType="heading6"
                   source={title}
@@ -80,8 +84,8 @@ const BlogEntries = ({ primary, items }) => (
               )}
               {date && <FullHumanDate iso={date} />}
             </Box>
-            <Box w={1}>
-              <PrismicRichText w={1} source={description} />
+            <Box width={1}>
+              <PrismicRichText width={1} source={description} />
             </Box>
           </Flex>
         </Element>
@@ -98,10 +102,10 @@ const Text = ({ primary, items }) => {
 const Document = ({ primary, items }) => {
   return (
     <Flex>
-      <Box w={1 / 2}>
+      <Box width={1 / 2}>
         <PrismicRichText source={primary.description || primary.content} />
       </Box>
-      <Flex w={1 / 2} wrap="wrap">
+      <Flex width={1 / 2} wrap="wrap">
         {items.map(({ title, file: { kind, url } }, i) => (
           <Link key={i} to={url} target="_blank">
             <Flex align="center" justify="center" inline>
@@ -130,9 +134,9 @@ export const renderers = {
   faq: ({ items = [] }) => (
     <Box>
       {items.map(({ question, answer }, i) => (
-        <Box key={i} w={1}>
+        <Box key={i} width={1}>
           <Flex>
-            <Box w={1} mb={1}>
+            <Box width={1} mb={1}>
               <PrismicRichText
                 forceType="paragraph"
                 bold={900}
@@ -142,7 +146,7 @@ export const renderers = {
             </Box>
           </Flex>
           <Flex>
-            <Box w={1} pt="3px">
+            <Box width={1} pt="3px">
               <Border left borderWidth={2} mb={2} pl={2} borderColor="gray6">
                 <PrismicRichText
                   forceType="paragraph"
@@ -162,7 +166,7 @@ export const renderers = {
       <tbody>
         {items.map(({ column_1, column_2 }, i) => (
           <Tr key={i} mb={1} cellpadding={0} cellspacing={0}>
-            <Td w={1 / 2}>
+            <Td width={1 / 2}>
               <Border top borderColor="gray4" borderWidth={i > 0 ? 1 : 0}>
                 <PrismicRichText mt={i > 0 ? 2 : 0} source={column_1} />
               </Border>

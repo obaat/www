@@ -134,7 +134,7 @@ class IndexPage extends React.Component {
           <Helmet meta={[{ property: "og:image", content: image.url }]} />
         )}
         <Panel p={0} direction="row">
-          <Box w={1}>
+          <Box width={1}>
             <SlideShow
               autoplay
               hideZoom
@@ -156,7 +156,7 @@ class IndexPage extends React.Component {
                     my={[0, 0, 4, 4]}
                   >
                     <Header
-                      w={[1, 1, 1, 2 / 3]}
+                      width={[1, 1, 1, 2 / 3]}
                       source={lead}
                       forceType="headingasdiv"
                       fontSize="4.5vw"
@@ -168,7 +168,7 @@ class IndexPage extends React.Component {
                       mb={[0, 0, 2, 2]}
                     />
                     <PrismicRichText
-                      w={[1, 1, 1, 2 / 3]}
+                      width={[1, 1, 1, 2 / 3]}
                       source={strapline}
                       forceType="headingasdiv"
                       bold={500}
@@ -187,7 +187,7 @@ class IndexPage extends React.Component {
           </Box>
         </Panel>
         <Panel py={4} palette="gray2" invert>
-          <Box px={2} py={2} w={[1, 1, 1, 900]} align="center">
+          <Box px={2} py={2} width={[1, 1, 1, 900]} align="center">
             <PrismicRichText
               style={{ lineHeight: 1.7 }}
               xmb={0}
@@ -196,7 +196,7 @@ class IndexPage extends React.Component {
               forceType="heading6"
             />
           </Box>
-          <Box w={1} mt={2}>
+          <Box width={1} mt={2}>
             <ActionButton
               palette="gray9"
               invert
@@ -209,18 +209,18 @@ class IndexPage extends React.Component {
         </Panel>
         {news && news.body && news.body.length > 0 && (
           <Panel pt={1} pb={4} direction="row" palette="gray2" invert>
-            <Box align="center" w={[1, 1, 1, "80%"]}>
+            <Box align="center" width={[1, 1, 1, "80%"]}>
               <NewsMasonry source={news} data={newsArticles} />
             </Box>
           </Panel>
         )}
 
         <Panel py={4} direction="row" palette="gray9" align="flex-start" invert>
-          <Flex justify="center" wrap="wrap" w={BOX_WIDTH}>
+          <Flex justify="center" wrap="wrap" width={BOX_WIDTH}>
             {stats.map(({ title, icon: Icon, value, postfix }) => (
               <Flex
                 p={3}
-                w={[1, 1, 1 / 2, 1 / 4]}
+                width={[1, 1, 1 / 2, 1 / 4]}
                 key={title}
                 align="center"
                 direction="column"
@@ -238,7 +238,7 @@ class IndexPage extends React.Component {
                             isVisible && start()
                           }}
                         >
-                          <Box f={6} mb={2} ref={countUpRef} />
+                          <Box fontSize={6} mb={2} ref={countUpRef} />
                         </VisibilitySensor>
                       </span>
                     )}
@@ -251,7 +251,7 @@ class IndexPage extends React.Component {
               </Flex>
             ))}
           </Flex>
-          <Box w={1}>
+          <Box width={1}>
             <ActionButton
               palette="gray9"
               href="/projects"
@@ -262,7 +262,7 @@ class IndexPage extends React.Component {
           </Box>
         </Panel>
         <Panel py={4} direction="row" palette="gray2" invert>
-          <Box align="center" w={BOX_WIDTH}>
+          <Box align="center" width={BOX_WIDTH}>
             <SlideShow
               autoplay
               controlColor={theme.colors.gray1[1]}
@@ -272,20 +272,20 @@ class IndexPage extends React.Component {
               {chunkedStatements.map((statements, i) => (
                 <Flex key={i} wrap="wrap" justify="center" mx={3}>
                   {statements.map((props, i) => (
-                    <Statement w={[1, 1, 1, 1 / 2]} key={i} {...props} />
+                    <Statement width={[1, 1, 1, 1 / 2]} key={i} {...props} />
                   ))}
                 </Flex>
               ))}
             </SlideShow>
           </Box>
-          <Box w={1}>
+          <Box width={1}>
             <ActionButton palette="gray9" invert href="/volunteering">
               Learn More About Volunteering
             </ActionButton>
           </Box>
         </Panel>
         <Panel py={4} direction="row" palette="cyan6" invert>
-          <Box w={BOX_WIDTH} mx={1}>
+          <Box width={BOX_WIDTH} mx={1}>
             <Heading
               fontSize={[24, 24, 24, 35]}
               bold={300}

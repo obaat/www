@@ -40,7 +40,7 @@ export default class Modal extends Component {
   render() {
     const { canClose } = this.props
     return (
-      <ModalWrapper show={this.props.isOpen}>
+      <ModalWrapper showidth={this.props.isOpen}>
         <ModalBackground onClick={this.props.onRequestClose} />
         <ModalContent>
           {canClose && (

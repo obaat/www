@@ -1,7 +1,7 @@
 import React from "react"
 import SlideShow from "../components/SlideShow"
 import PrismicRichText from "../components/PrismicRichText"
-import { Flex, Box, Border, Avatar } from "../ui"
+import { Flex, Border, Avatar } from "../ui"
 
 const SidebarQuote = ({ data, items = [] }) => {
   const filled = items.map(({ quote: { id } }) =>
@@ -19,24 +19,25 @@ const SidebarQuote = ({ data, items = [] }) => {
       hidePaging
       autoplay
     >
-      {filled.map(({ data: { avatar, description, name, role } }, i) => (
+      {filled.map(({ data: { avatar, description, name } }, i) => (
         <Flex key={i} py={2} px={1} wrap="wrap">
-          <Border left borderWidth={3} borderColor="cyan5" px={2} w={1}>
+          <Border left borderWidth={3} borderColor="cyan5" px={2} width={1}>
             <PrismicRichText
               forceType="paragraph"
               xmb={0}
               source={description}
             />
           </Border>
-          <Flex align="center" justify="flex-end" w={1} mt={2} mr={2}>
+          <Flex align="center" justify="flex-end" width={1} mt={2} mr={2}>
             <PrismicRichText
               bold={700}
               xmb={0}
               forceType="paragraph"
               source={name}
             />
-            {avatar &&
-              avatar.url && <Avatar ml={2} size={50} src={avatar.url} />}
+            {avatar && avatar.url && (
+              <Avatar ml={2} size={50} src={avatar.url} />
+            )}
           </Flex>
         </Flex>
       ))}

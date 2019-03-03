@@ -8,12 +8,12 @@ import { PaperCreatures } from "./SvgIcons"
 export default () => (
   <div>
     <Flex palette="gray9" wrap="wrap" invert>
-      <Box w={[1, 1, 1, 1 / 4]} p={3}>
+      <Box width={[1, 1, 1, 1 / 4]} p={3}>
         <Text>Become part of our story</Text>
         <Social />
       </Box>
 
-      <Box w={[1, 1, 1, 1 / 4]} p={3}>
+      <Box width={[1, 1, 1, 1 / 4]} p={3}>
         <address>
           OBAAT UK
           <br />
@@ -28,7 +28,7 @@ export default () => (
           <br />
         </address>
       </Box>
-      <Box w={[1, 1, 1, 1 / 4]} p={3}>
+      <Box width={[1, 1, 1, 1 / 4]} p={3}>
         <address>
           OBAAT Uganda
           <br />
@@ -44,7 +44,7 @@ export default () => (
           <br />
         </address>
       </Box>
-      <Box w={[1, 1, 1, 1 / 4]} p={3}>
+      <Box width={[1, 1, 1, 1 / 4]} p={3}>
         <Map
           zoom={12}
           center={{ lat: 0.670188, lng: 30.287467 }}
@@ -53,7 +53,7 @@ export default () => (
       </Box>
     </Flex>
     <Flex palette="gray9" invert>
-      <Border w={1} top borderColor="gray6" px={3} pt={2} pb={0}>
+      <Border width={1} top borderColor="gray6" px={3} pt={2} pb={0}>
         <Link url="http://papercreatures.com">
           <Box>
             <PaperCreatures viewBox="80 80 250 250" size={60} />

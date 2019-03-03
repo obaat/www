@@ -47,7 +47,7 @@ const FullPost = styled(LLink)({
 
 const Blog = pageWithTitle()(({ content = {}, posts = [] }) => (
   <Flex>
-    <Box w={[1, 1, 1, 1]} pr={3}>
+    <Box width={[1, 1, 1, 1]} pr={3}>
       <PrismicRichText source={content.description} />
       {posts.map((post, i) => (
         <div key={i}>

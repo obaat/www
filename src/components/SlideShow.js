@@ -103,7 +103,7 @@ const Paging = ({ total, page, onPageClick }) => {
         {range(showPages).map(i => (
           <DotButton
             color="rgba(255,255,255,0.8)"
-            w={1}
+            width={1}
             key={i}
             active={i === page}
             onClick={() => onPageClick(i)}
@@ -243,7 +243,7 @@ export default class SlideShow extends Component {
     return (
       <Fullscreen onClick={this.toggleZoom()} p={2}>
         <Relative
-          w={[1, 1, 1, "70%"]}
+          width={[1, 1, 1, "70%"]}
           style={{ margin: "0 auto", overflow: "hidden" }}
           onClick={e => e.stopPropagation()}
           bg="#fff"
@@ -375,7 +375,7 @@ export default class SlideShow extends Component {
             key={i}
             style={{ position: "relative" }}
             p={1}
-            w={[1, 1, 1, 1 / 3]}
+            width={[1, 1, 1, 1 / 3]}
           >
             {c}
             {!hideZoom && (

@@ -7,10 +7,10 @@ import { Absolute, Relative, Flex, Box, Border } from "../ui"
 
 const Mission = ({ content = {} }) => (
   <Flex>
-    <Box w={[1, 1, 1, 2 / 3]} pr={3}>
+    <Box width={[1, 1, 1, 2 / 3]} pr={3}>
       <PrismicRichText source={content.description} />
     </Box>
-    <Box w={[1, 1, 1, 1 / 3]}>
+    <Box width={[1, 1, 1, 1 / 3]}>
       <Relative>
         <Absolute top left={-43}>
           <QuoteOpen palette="base" size={32} />

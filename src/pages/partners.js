@@ -11,12 +11,12 @@ const Partner = ({ data: { title, description, logo, website }, uid, odd }) => (
     <a id={uid} />
     <Flex>
       {logo && (
-        <Box w={1 / 5} mb={3} order={odd ? 2 : 1}>
+        <Box width={1 / 5} mb={3} order={odd ? 2 : 1}>
           <Image src={logo.url} />
         </Box>
       )}
       <Box
-        w={4 / 5}
+        width={4 / 5}
         pl={odd ? 0 : 3}
         pr={odd ? 3 : 0}
         order={odd ? 1 : 2}

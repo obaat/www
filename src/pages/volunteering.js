@@ -69,21 +69,21 @@ const Volunteering = ({ content, volunteering, additionalData }) => {
 
   return (
     <Flex wrap="wrap">
-      <Box w={[1, 1, 1, 2 / 3]} pr={[0, 0, 0, 3]}>
+      <Box width={[1, 1, 1, 2 / 3]} pr={[0, 0, 0, 3]}>
         <Section id="description" source={content.description} mb={3} />
         <Accordion
           items={accordionItems}
           initialOpen={accordionItems[accordionItems.length - 1].id}
         />
       </Box>
-      <Box w={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
+      <Box width={[1, 1, 1, 1 / 3]} px={[0, 0, 0, 3]}>
         <SidebarHeader>Available Placements</SidebarHeader>
         {volunteering.map((props, i) => (
           <Opportunity key={i} {...props} />
         ))}
         <H6 mt={2}>Volunteer Experiences</H6>
         {quotes && <Quotes items={quotes.items} data={additionalData} />}
-        <ApplyNow w={1} />
+        <ApplyNow width={1} />
       </Box>
     </Flex>
   )

@@ -9,14 +9,14 @@ import { Flex, Box, BackgroundImage } from "../ui"
 const Location = ({ content = {} }) => {
   return (
     <Flex wrap="wrap">
-      <Box w={[1, 1, 1, 1 / 2]}>
+      <Box width={[1, 1, 1, 1 / 2]}>
         <SlideShow autoplay controlSize={24}>
           {content.image_gallery.map(({ image }, i) => (
             <BackgroundImage src={image.url} key={i} />
           ))}
         </SlideShow>
       </Box>
-      <Box w={[1, 1, 1, 1 / 2]} pl={[0, 0, 0, 3]}>
+      <Box width={[1, 1, 1, 1 / 2]} pl={[0, 0, 0, 3]}>
         <PrismicRichText source={content.description} />
       </Box>
     </Flex>

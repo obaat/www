@@ -21,13 +21,13 @@ import Map from "../../components/GoogleMap"
 import Link from "../../components/Link"
 
 const HeadlinePartner = ({ data: { title, description, logo } }) => (
-  <Flex w={1} mb={2}>
+  <Flex width={1} mb={2}>
     {logo && logo.url && (
-      <Box w={1 / 3} pr={3}>
+      <Box width={1 / 3} pr={3}>
         <Image src={logo.url} />
       </Box>
     )}
-    <Box w={2 / 3}>
+    <Box width={2 / 3}>
       <PrismicRichText
         mb={0}
         pt={2}
@@ -61,7 +61,7 @@ const Partner = ({ data: { title, logo, website }, uid }) => {
   )
 
   return (
-    <Box w={1 / 2} mb={3} key={uid}>
+    <Box width={1 / 2} mb={3} key={uid}>
       {website && website.url ? (
         <Link target="_blank" to={website.url}>
           {content}
@@ -116,9 +116,9 @@ const Project = class Project extends Component {
       .map(toSection)
     return (
       <Flex wrap="wrap">
-        <Box w={[1, 1, 1, 2 / 3]}>
+        <Box width={[1, 1, 1, 2 / 3]}>
           {plannedOrCurrent && partners && partners.length > 0 && (
-            <Box w={1}>
+            <Box width={1}>
               {partners.map((props, i) => (
                 <HeadlinePartner {...props} uid={i} key={i} />
               ))}
@@ -127,7 +127,7 @@ const Project = class Project extends Component {
           <PrismicRichText source={content.description} />
           {mainSections}
         </Box>
-        <Box w={[1, 1, 1, 1 / 3]} pl={3}>
+        <Box width={[1, 1, 1, 1 / 3]} pl={3}>
           {!plannedOrCurrent && content.date_completed && (
             <Box mb={2}>
               <SidebarHeader>
@@ -138,7 +138,7 @@ const Project = class Project extends Component {
           {plannedOrCurrent && (
             <Box>
               <Flex wrap="wrap" mb={2}>
-                <Box w={35}>
+                <Box width={35}>
                   <Rocket size={24} palette="brick" />
                 </Box>
                 <Box bold={500}>
@@ -146,11 +146,11 @@ const Project = class Project extends Component {
                 </Box>
               </Flex>
               <Flex wrap="wrap">
-                <Box w={35} />
+                <Box width={35} />
                 <Box>{diaryNav}</Box>
               </Flex>
               <Flex wrap="wrap" mt={2} mb={2}>
-                <Box w={35}>
+                <Box width={35}>
                   <FlagFinish size={24} palette="brick" />
                 </Box>
                 <Box bold={500}>
@@ -159,7 +159,7 @@ const Project = class Project extends Component {
               </Flex>
               {planned && (
                 <Flex wrap="wrap" mb={2}>
-                  <Box w={35}>
+                  <Box width={35}>
                     <SymbolPound size={24} palette="brick" />
                   </Box>
                   <Box>
@@ -174,9 +174,9 @@ const Project = class Project extends Component {
                   </Box>
                 </Flex>
               )}
-              <Box w={1} pb={2}>
+              <Box width={1} pb={2}>
                 <Button
-                  w={1}
+                  width={1}
                   palette="brick"
                   invert
                   onClick={() =>
@@ -212,7 +212,7 @@ const Project = class Project extends Component {
         </Box>
         {plannedOrCurrent && (
           <Element name="apply">
-            <Box w={1}>
+            <Box width={1}>
               <Apply {...applyData} />
             </Box>
           </Element>
