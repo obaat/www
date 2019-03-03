@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import Helmet from "react-helmet"
 import { backgroundImageCover } from "../styleHelpers"
 import { Flex } from "../ui"

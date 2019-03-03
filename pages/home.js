@@ -1,12 +1,12 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { color } from "styled-system"
 import theme from "../theme"
 import get from "lodash/get"
 import chunk from "lodash/chunk"
 import Helmet from "react-helmet"
 import { Link } from "react-static"
-import CountUp, { startAnimation } from "react-countup"
+import Count from "react-countup"
 import VisibilitySensor from "react-visibility-sensor"
 import NewsMasonry from "../components/NewsMasonry"
 import { withProps } from "recompose"
@@ -28,11 +28,8 @@ import {
 } from "../ui"
 import SlideShow from "../components/SlideShow"
 import Statement from "../components/Statement"
-import hoc from "../ui/hoc"
 import Icons from "../components/SvgIcons"
 import srcTheme from "../theme"
-
-const Count = hoc()(CountUp)
 
 const stats = [
   {
@@ -73,17 +70,8 @@ const mapping = {
   volunteer_opportunity: ({ uid }) => `/volunteering/${uid}`,
 }
 
-const mappingLocal = {
-  volunteering_page: () => "/volunteering",
-  volunteer_opportunity: ({ uid }) => `/volunteering?id=${uid}`,
-}
-
 const toRelativeUrl = ({ type, ...props }) => {
   return (mapping[type] || (() => "unknown"))(props)
-}
-
-const toLocalRelativeUrl = ({ type, ...props }) => {
-  return (mappingLocal[type] || (() => "unknown"))(props)
 }
 
 const ActionButton = ({ prismicUrl, as, href, ...props }) => {
@@ -122,14 +110,9 @@ const Header = styled(PrismicRichText)({
 })
 
 class IndexPage extends React.Component {
-  counters = []
   state = {
     visible: {},
     visibleSlide: 0,
-  }
-
-  onVisible = isVisible => {
-    isVisible && this.counters.forEach(a => a && startAnimation(a))
   }
 
   setTypingDoneFor = i => () =>
@@ -147,10 +130,9 @@ class IndexPage extends React.Component {
       <div>
         <Helmet title="One Brick at a Time" />
 
-        {image &&
-          image.url && (
-            <Helmet meta={[{ property: "og:image", content: image.url }]} />
-          )}
+        {image && image.url && (
+          <Helmet meta={[{ property: "og:image", content: image.url }]} />
+        )}
         <Panel p={0} direction="row">
           <Box w={1}>
             <SlideShow
@@ -225,19 +207,16 @@ class IndexPage extends React.Component {
             </ActionButton>
           </Box>
         </Panel>
-        {news &&
-          news.body &&
-          news.body.length > 0 && (
-            <Panel pt={1} pb={4} direction="row" palette="gray2" invert>
-              <Box align="center" w={[1, 1, 1, "80%"]}>
-                <NewsMasonry source={news} data={newsArticles} />
-              </Box>
-            </Panel>
-          )}
+        {news && news.body && news.body.length > 0 && (
+          <Panel pt={1} pb={4} direction="row" palette="gray2" invert>
+            <Box align="center" w={[1, 1, 1, "80%"]}>
+              <NewsMasonry source={news} data={newsArticles} />
+            </Box>
+          </Panel>
+        )}
 
         <Panel py={4} direction="row" palette="gray9" align="flex-start" invert>
-          <VisibilitySensor onChange={this.onVisible} />
-          <Flex w={1} justify="center" wrap="wrap" w={BOX_WIDTH}>
+          <Flex justify="center" wrap="wrap" w={BOX_WIDTH}>
             {stats.map(({ title, icon: Icon, value, postfix }) => (
               <Flex
                 p={3}
@@ -250,14 +229,20 @@ class IndexPage extends React.Component {
                   <Icon palette="cyan5" size={50} />
                 </Box>
                 <Box mt={3}>
-                  <Count
-                    innerRef={c => this.counters.push(c)}
-                    start={0}
-                    end={value}
-                    f={50}
-                    duration={2.75}
-                    useEasing={true}
-                  />
+                  <Count start={0} end={value} duration={2.75} useEasing={true}>
+                    {({ countUpRef, start }) => (
+                      <span>
+                        <VisibilitySensor
+                          onChange={isVisible => {
+                            console.log(isVisible)
+                            isVisible && start()
+                          }}
+                        >
+                          <Box f={6} mb={2} ref={countUpRef} />
+                        </VisibilitySensor>
+                      </span>
+                    )}
+                  </Count>
                 </Box>
                 <H5 mt={1} mb={1} bold={200}>
                   {title}

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { get } from "lodash"
 import {
   Link as RawLink,
@@ -135,7 +135,7 @@ export const SecondaryMenu = enhanceWithClickOutside(
     render() {
       const { children, onMouseOut, items, className } = this.props
       return (
-        <Box>
+        <Box className={className}>
           {children}
           <Relative>
             <OverlayMenu onMouseLeave={onMouseOut}>
@@ -191,11 +191,10 @@ const MobileMenu = ({ items, onClose }) => (
 )
 
 const Menu = ({ hideMenu = false, ...props }) => {
-  const _menuItems = menuItems.map(
-    i =>
-      i.getChildren
-        ? { ...i, items: (i.items || []).concat(i.getChildren(props)) }
-        : i,
+  const _menuItems = menuItems.map(i =>
+    i.getChildren
+      ? { ...i, items: (i.items || []).concat(i.getChildren(props)) }
+      : i,
   )
   if (hideMenu) {
     return null

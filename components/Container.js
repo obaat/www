@@ -1,4 +1,4 @@
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import withProps from "recompose/withProps"
 import { Box } from "../ui"
 

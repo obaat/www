@@ -1,6 +1,6 @@
-import { space, width, responsiveStyle } from "styled-system"
+import { responsiveStyle } from "styled-system"
 import hoc from "./hoc"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 
 export const flex = responsiveStyle({
   prop: "flex",

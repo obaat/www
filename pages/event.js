@@ -2,9 +2,8 @@ import React from "react"
 import { types, getByUID, getByType } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
-import { Flex, Box, Border, BackgroundImage } from "../ui"
 import PrismicSlice from "../components/PrismicSlice"
-import { Switch, Route, Link, withRouteData } from "react-static"
+import { Switch, Route, withRouteData } from "react-static"
 
 const Event = ({ content = {} }) => {
   const sections = content.body.map((props, i) => (
@@ -26,7 +25,7 @@ export const data = uid => async () => {
 const _Event = pageWithTitle()(Event)
 export default _Event
 
-export const children = async (...args) => {
+export const children = async () => {
   const events = await getByType(types.EVENT)
   const pages = events.results.map(({ uid }) => ({
     path: "/" + uid,

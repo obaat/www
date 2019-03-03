@@ -1,11 +1,10 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { withRouter } from "react-static"
 import { ArrowDown as IconArrowDown, ArrowUp as IconArrowUp } from "./SvgIcons"
 import { withProps } from "recompose"
-import isNil from "lodash/isNil"
 
-import { Flex, Box, Panel, PanelHeader, Heading } from "../ui"
+import { Box, Panel } from "../ui"
 
 const AccordionContainer = styled(Panel)({
   borderBottom: "1px solid #ccc",
@@ -58,7 +57,7 @@ const AccordionSection = ({ open, setOpen, title, id, description }) => {
 
 const oneOpen = withProps(({ history, location, initialOpen }) => {
   return {
-    setOpen: id => e => {
+    setOpen: id => () => {
       if (location.hash === "#" + id) {
         history.replace({ hash: "" })
       } else {

@@ -1,15 +1,9 @@
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { space, width } from "styled-system"
 import React, { Component } from "react"
+import { Box } from "../ui"
 import X from "./SvgIcons"
 import { show, overlay } from "../styleHelpers"
-
-const ModalIcon = styled(X)({
-  background: "none",
-  position: "absolute",
-  right: 0,
-  top: 0,
-})
 
 const ModalWrapper = styled.div(
   overlay(0),

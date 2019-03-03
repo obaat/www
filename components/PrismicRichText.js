@@ -1,6 +1,6 @@
 import React from "react"
 import { Box } from "../ui"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import Link from "./Link"
 import { serialize, Elements } from "prismic-richtext"
 import Embed from "./Embed"
@@ -20,10 +20,8 @@ import {
   Ol,
   Pre,
   Ul,
-  HeadingAsDiv,
   Image,
 } from "../ui"
-import { flattenProp } from "recompose"
 
 const ourTypes = {
   [Elements.heading1]: Heading,
@@ -50,14 +48,6 @@ const ourTypes = {
 }
 
 const unknown = type => () => <div>RichText? {type} </div>
-
-const linkResolver = link => {
-  if (link.link_type === "Document") {
-    return "???"
-  } else {
-    return link.url
-  }
-}
 
 const span = styled.span({})
 

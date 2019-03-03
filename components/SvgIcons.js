@@ -1,5 +1,5 @@
 import rawicons from "../svg"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import mapValues from "lodash/mapValues"
 import { withProps, compose } from "recompose"
 import keyBy from "lodash/keyBy"

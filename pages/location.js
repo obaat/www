@@ -1,18 +1,17 @@
 import React from "react"
 import { getByUID, getByType, types } from "../utils/api"
-import { Switch, Route, Link, withRouteData } from "react-static"
-import ApplyNow from "../components/ApplyNow"
+import { Switch, Route, withRouteData } from "react-static"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import SlideShow from "../components/SlideShow"
-import { Flex, Box, BackgroundImage, Heading } from "../ui"
+import { Flex, Box, BackgroundImage } from "../ui"
 
 const Location = ({ content = {} }) => {
   return (
     <Flex wrap="wrap">
       <Box w={[1, 1, 1, 1 / 2]}>
         <SlideShow autoplay controlSize={24}>
-          {content.image_gallery.map(({ image, description }, i) => (
+          {content.image_gallery.map(({ image }, i) => (
             <BackgroundImage src={image.url} key={i} />
           ))}
         </SlideShow>
@@ -31,7 +30,7 @@ export const data = uid => async () => {
   return { content: location.data }
 }
 
-export const children = async (...args) => {
+export const children = async () => {
   const events = await getByType(types.VOLUNTEERING_OPPORTUNITY_LOCATION)
   const pages = events.results.map(({ uid }) => ({
     path: "/" + uid,

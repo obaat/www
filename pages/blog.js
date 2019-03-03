@@ -1,6 +1,6 @@
 import React from "react"
-import { getByType, getSingleton, getByIDs, types } from "../utils/api"
-import styled from "react-emotion"
+import { getByType, getSingleton, types } from "../utils/api"
+import styled from "@emotion/styled"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Switch, Route, withRouteData } from "react-static"
@@ -10,7 +10,7 @@ import BlogPost, {
   data as blogPostData,
   BlogPostClean as Post,
 } from "./parts/blog_post"
-import { Flex, Box, Border, BackgroundImage } from "../ui"
+import { Flex, Box } from "../ui"
 
 const PreviewPost = styled(Post)({
   maxHeight: "200px",

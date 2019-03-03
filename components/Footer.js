@@ -1,20 +1,9 @@
 import React from "react"
-import styled from "react-emotion"
 import Map from "../components/GoogleMap"
-import mapDark from "../components/mapDark.json"
 import Social from "./Social"
 import Link from "./Link"
-import { Flex, Border, Box, H6, Text } from "../ui"
+import { Flex, Border, Box, Text } from "../ui"
 import { PaperCreatures } from "./SvgIcons"
-
-const w = [1, 1, 1, 1 / 3]
-
-const social = [
-  { url: "https://facebook.com/onebrickngo/", network: "facebook" },
-  { url: "https://instagram.com/onebrickngo/", network: "instagram" },
-  { url: "https://twitter.com/onebrickngo/", network: "twitter" },
-  { url: "mailto:enquirires@onebrick.org.uk", network: "email" },
-]
 
 export default () => (
   <div>
@@ -26,22 +15,33 @@ export default () => (
 
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <address>
-          OBAAT UK<br />
+          OBAAT UK
+          <br />
           Liverpool Hope University <br />
-          Taggart Avenue<br />
-          Liverpool, L16 9JD<br />
-          United Kingdom<br />
-          NGO number 1155099<br />
+          Taggart Avenue
+          <br />
+          Liverpool, L16 9JD
+          <br />
+          United Kingdom
+          <br />
+          NGO number 1155099
+          <br />
         </address>
       </Box>
       <Box w={[1, 1, 1, 1 / 4]} p={3}>
         <address>
-          OBAAT Uganda<br />
-          Bankside Road<br />
-          Njara-Mukasenyi<br />
-          P. O. BOX 349<br />
-          Fort Portal, Uganda<br />
-          NGO number 11726<br />
+          OBAAT Uganda
+          <br />
+          Bankside Road
+          <br />
+          Njara-Mukasenyi
+          <br />
+          P. O. BOX 349
+          <br />
+          Fort Portal, Uganda
+          <br />
+          NGO number 11726
+          <br />
         </address>
       </Box>
       <Box w={[1, 1, 1, 1 / 4]} p={3}>

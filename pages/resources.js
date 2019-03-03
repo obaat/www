@@ -2,8 +2,6 @@ import React from "react"
 import { getSingleton, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
-import PageTitle from "../components/PageTitle"
-import Container from "../components/Container"
 import PrismicSlice from "../components/PrismicSlice"
 
 const Resources = ({ members = [], content = {} }) => {

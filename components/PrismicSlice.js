@@ -2,11 +2,11 @@ import React from "react"
 import Embed from "../components/Embed"
 import SlideShow from "../components/SlideShow"
 import PrismicRichText from "../components/PrismicRichText"
-import { Element, scroller } from "react-scroll"
+import { Element } from "react-scroll"
 import { FilePdf } from "../components/SvgIcons"
 import { Flex, Border, Link, BackgroundImage, Box, Table, Tr, Td } from "../ui"
 import { FullHumanDate } from "../utils/date"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 
 export const UnknownRenderer = ({ slice_type }) => (
   <div> Unknown slice: {slice_type}</div>
@@ -62,8 +62,6 @@ const Paper = styled.div({
     transform: "rotate(1.4deg)",
   },
 })
-
-const titleToHash = title => title[0].text.toLowerCase().replace(/ /g, "_")
 
 const BlogEntries = ({ primary, items }) => (
   <div>

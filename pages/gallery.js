@@ -2,8 +2,8 @@ import React from "react"
 import { getByUID, getByType, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
-import { Flex, Box, Border, BackgroundImage } from "../ui"
-import { Switch, Route, Link, withRouteData } from "react-static"
+import { Flex, Box } from "../ui"
+import { Switch, Route, withRouteData } from "react-static"
 import PrismicSlice from "../components/PrismicSlice"
 
 const Gallery = ({ content = {} }) => {
@@ -26,7 +26,7 @@ export const data = id => async () => {
   return { content: res.data }
 }
 
-export const children = async (...args) => {
+export const children = async () => {
   const galleries = await getByType(types.GALLERY)
   const pages = galleries.results.map(({ uid }) => ({
     path: "/" + uid,

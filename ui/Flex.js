@@ -1,6 +1,6 @@
-import { space, width, responsiveStyle } from "styled-system"
+import { responsiveStyle } from "styled-system"
 import Box from "./Box"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 
 export const wrap = responsiveStyle({
   cssProperty: "flexWrap",

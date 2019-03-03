@@ -4,13 +4,8 @@ import Helmet from "react-helmet"
 import PageTitle from "../components/PageTitle"
 import ApplyNow from "../components/ApplyNow"
 import get from "lodash/get"
-import styled from "react-emotion"
 import BreadCrumbs from "../components/Breadcrumbs"
-import { Absolute, Heading } from "../ui"
-
-const Title = styled(Heading)({
-  color: "#000",
-})
+import { Absolute } from "../ui"
 
 export default (config = {}) => ComposedComponent =>
   class WithPageTitle extends Component {

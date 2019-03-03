@@ -5,6 +5,8 @@
     "emotion/jsx-import": "error",
     "emotion/no-vanilla": "error",
     "emotion/import-from-emotion": "error",
-    "emotion/styled-import": "error"
+    "emotion/styled-import": "error",
+    "jsx-a11y/anchor-has-content": 0,
+    "jsx-a11y/anchor-is-valid": 0
   }
 }

@@ -1,5 +1,5 @@
 import { defaultTraits } from "./hoc"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import components from "./component-configuration"
 import { Flex, Box } from "./Grid"
 import { defaultProps } from "recompose"

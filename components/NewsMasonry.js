@@ -1,6 +1,6 @@
 import React from "react"
 import get from "lodash/get"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import PrismicRichText from "../components/PrismicRichText"
 import { pageToLink } from "../components/Link"
 import Panel from "../components/Panel"

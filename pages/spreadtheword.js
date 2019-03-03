@@ -1,11 +1,11 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import get from "lodash/get"
-import { getSingleton, getByType, getByIDs, types } from "../utils/api"
+import { getSingleton, getByType, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
 import { Link } from "react-static"
-import { Flex, Relative, Absolute, Box, Border, BackgroundImage } from "../ui"
+import { Flex, Relative, Absolute, Box, BackgroundImage } from "../ui"
 import { ArrowRight } from "../components/SvgIcons"
 import { HumanDate } from "../utils/date"
 import SidebarHeader from "../components/SidebarHeader"
@@ -55,41 +55,6 @@ const Event = ({ uid, data }) => (
   </Relative>
 )
 
-const Location = ({ uid, data }) => (
-  <Relative mb={2}>
-    <SlideShow hidePaging controlSize={18}>
-      {data.image_gallery.map(({ image, description }, i) => (
-        <BackgroundImage src={image.url} key={i} />
-      ))}
-    </SlideShow>
-    <Overlay>
-      {data.title && (
-        <PrismicRichText
-          forceType="heading5"
-          color="#fff"
-          source={data.title}
-        />
-      )}
-    </Overlay>
-    <Absolute bottom right p={1}>
-      <Link to={`/location/${uid}`}>
-        <Button
-          palette="normal"
-          color="#fff"
-          bg="rgba(0,0,0,0.3)"
-          invert
-          icon="ArrowRight"
-          iconSize={12}
-          w={1}
-          py={1}
-          as={ButtonOutline}
-        >
-          More
-        </Button>
-      </Link>
-    </Absolute>
-  </Relative>
-)
 const Spread = ({ events, content = {} }) => {
   return (
     <Flex>

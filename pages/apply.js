@@ -1,7 +1,6 @@
 import React from "react"
-import { Formik, Form } from "formik"
+import { Formik } from "formik"
 import BlockUi from "react-block-ui"
-import styled from "react-emotion"
 import { getSingleton, getByType, getByIDs, types } from "../utils/api"
 import get from "lodash/get"
 import map from "lodash/map"
@@ -21,26 +20,19 @@ import {
   Checkbox,
 } from "../components/SvgIcons"
 import Quotes from "../components/SidebarQuote"
-import Accordion, { AccordionSection } from "../components/Accordion"
+import Accordion from "../components/Accordion"
 import months from "months"
-import PrismicSlice, {
-  renderers as sliceRenderers,
-} from "../components/PrismicSlice"
+import { renderers as sliceRenderers } from "../components/PrismicSlice"
 import {
   Flex,
   Select as UISelect,
-  Option,
   Box,
   Input,
   Textarea,
-  Small,
-  Subhead,
   H5,
   Label,
 } from "../ui"
 import Button from "../components/Button"
-import SidebarHeader from "../components/SidebarHeader"
-import Link from "../components/Link"
 
 const curYear = new Date().getFullYear()
 
@@ -163,7 +155,7 @@ const AboutVolunteering = ({ opportunities }) => (
   </div>
 )
 
-const AboutYou = props => (
+const AboutYou = () => (
   <div>
     <Label>E-mail</Label>
     <Input type="email" name="email" placeholder="elizabeth@example.com" />
@@ -220,7 +212,7 @@ const aboutValidation = object().shape({
   // dob_year: Yup.number().required("DOB required"),
 })
 
-const Done = props => (
+const Done = () => (
   <Flex wrap="wrap" justify="center">
     <Checkbox palette="black" size={70} />
     <Box ml={2}>
@@ -372,7 +364,7 @@ const renderSliceToAccordion = ({ slice_type, items, primary }, i) => {
   const title = primary.title && (
     <PrismicRichText forceType="paragraph" bold={300} source={primary.title} />
   )
-  const Component = sliceRenderers[slice_type] || Unknown
+  const Component = sliceRenderers[slice_type]
   const id = get(primary, "title[0].text", `s-${i}`)
   return {
     id,

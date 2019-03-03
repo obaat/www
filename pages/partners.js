@@ -2,7 +2,7 @@ import React from "react"
 import { getSingleton, getByIDs, types } from "../utils/api"
 import { pageWithTitle } from "../hoc/page"
 import PrismicRichText from "../components/PrismicRichText"
-import { Flex, Box, Border, Image, BackgroundImage } from "../ui"
+import { Flex, Box, Border, Image } from "../ui"
 import Link from "../components/Link"
 import humanizeUrl from "humanize-url"
 
@@ -36,10 +36,12 @@ const Partner = ({ data: { title, description, logo, website }, uid, odd }) => (
   </div>
 )
 
-const Partnerships = ({ partners = [], content = {} }) => {
+const Partnerships = ({ partners = [] }) => {
   return (
     <div>
-      {partners.map((props, i) => <Partner {...props} uid={i} key={i} />)}
+      {partners.map((props, i) => (
+        <Partner {...props} uid={i} key={i} />
+      ))}
     </div>
   )
 }

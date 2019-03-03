@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "react-emotion"
+import styled from "@emotion/styled"
 import { Flex, Box, Subhead } from "../ui"
 import { withRouter } from "react-static"
 import { clickable } from "../styleHelpers"

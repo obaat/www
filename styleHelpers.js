@@ -1,7 +1,4 @@
 import { space, color, width, fontSize } from "styled-system"
-import styled from "react-emotion"
-import get from "lodash/get"
-
 export { space, color, width, fontSize }
 
 export const clickable = ({ onClick }) =>
