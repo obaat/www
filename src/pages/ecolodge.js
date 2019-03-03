@@ -4,6 +4,7 @@ import PrismicRichText from "../components/PrismicRichText"
 import { pageWithTitle } from "../hoc/page"
 import Link from "../components/Link"
 import { TickInCircle, Share } from "../components/SvgIcons"
+import { FormattedNumber } from "react-intl"
 import {
   Absolute,
   Relative,
@@ -61,7 +62,20 @@ const ProjectChoice = ({
                     "Fully Funded"
                   ) : (
                     <span>
-                      Funded £{so_far} of £{data.funding_target}
+                      Funded{" "}
+                      <FormattedNumber
+                        style="currency"
+                        currency="GBP"
+                        minimumFractionDigits={0}
+                        value={so_far}
+                      />{" "}
+                      of{" "}
+                      <FormattedNumber
+                        style="currency"
+                        currency="GBP"
+                        minimumFractionDigits={0}
+                        value={data.funding_target}
+                      />
                     </span>
                   )}
                 </Text>
@@ -82,9 +96,7 @@ const ProjectChoice = ({
                         stroke: theme.colors.primary[0],
                       },
                       text: {
-                        // Text color
                         fill: theme.colors.primary[0],
-                        // Text size
                         fontSize: "24px",
                       },
                     }}
@@ -152,7 +164,6 @@ const EcoLodge = ({ content = {}, projects = [] }) => {
         <PrismicRichText source={content.description} />
         <div
           data-allocate-target="https://test-allocate-next.allocate.co.uk/"
-          data-allocate-secure-target="http://localhost:4001/ecolodge"
           data-allocate-payment-disabled="false"
           data-allocate-palette={`#fff,${theme.colors.tertiary[0]},${
             theme.colors.primary[0]
@@ -166,7 +177,25 @@ const EcoLodge = ({ content = {}, projects = [] }) => {
           <UI.H6>Choose the project that your stay will help</UI.H6>
           <Text>
             Profits from your stay are re-invested directly into the local
-            community. You can decide which project to invest in below
+            community.{" "}
+            {totalCost ? (
+              <span>
+                <strong>
+                  <FormattedNumber
+                    style="currency"
+                    currency="GBP"
+                    minimumFractionDigits={0}
+                    value={totalCost}
+                  />
+                </strong>{" "}
+                from your stay will go to your chosen project
+              </span>
+            ) : (
+              <span>
+                Once you have chosen a stay you can see how much will go to this
+                project
+              </span>
+            )}
           </Text>
           {projects.map(project => (
             <ProjectChoice
@@ -177,16 +206,7 @@ const EcoLodge = ({ content = {}, projects = [] }) => {
               selected={selectedProject === project.uid}
             />
           ))}
-          <Box mb={2}>
-            {totalCost ? (
-              <span>Your stay for £{totalCost} will pay for the following</span>
-            ) : (
-              <span>
-                Once you have chosen a stay you can see how much will go to this
-                project
-              </span>
-            )}
-          </Box>
+          <Box mb={2} />
         </Box>
       </Box>
     </Flex>
