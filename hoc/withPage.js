@@ -41,5 +41,6 @@ const routes = ({ match }) => (
 
 export default type => ({
   routes,
+  data,
   children: children(type),
 })

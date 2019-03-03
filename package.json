@@ -41,7 +41,7 @@
     "path": "^0.12.7",
     "polished": "^3.0.3",
     "prismic-dom": "^2.1.0",
-    "prismic-javascript": "^1.5.0",
+    "prismic-javascript": "^2.0.1",
     "prismic-richtext": "0.4.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
